@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SBS 아카데미 | 맞춤 GAP 분석</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #0052CC;
+      --accent: #FF5630;
+      --bg: #F4F5F7;
+      --surface: #FFFFFF;
+      --text: #172B4D;
+      --text-sub: #6B778C;
+      --border: #DFE1E6;
+      --success: #00875A;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    header .logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+    }
+    header .subtitle {
+      font-size: 13px;
+      opacity: .75;
+      margin-top: 2px;
+    }
+    header .badge {
+      margin-left: auto;
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── STEP INDICATOR ── */
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 36px;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .step-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      background: var(--border);
+      color: var(--text-sub);
+      transition: all .3s;
+      flex-shrink: 0;
+    }
+    .step.active .step-num { background: var(--primary); color: white; }
+    .step.done .step-num { background: var(--success); color: white; }
+    .step-label { font-size: 13px; color: var(--text-sub); font-weight: 500; }
+    .step.active .step-label { color: var(--primary); font-weight: 700; }
+    .step-line { flex: 1; height: 2px; background: var(--border); margin: 0 8px; }
+    .step-line.done { background: var(--success); }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-title .icon {
+      width: 32px; height: 32px;
+      background: #E3F2FD;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 24px;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 13px; font-weight: 600; color: var(--text); }
+    label span { color: var(--accent); }
+
+    input[type="text"], input[type="number"], select, textarea {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--text);
+      background: white;
+      transition: border-color .2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+    }
+
+    /* ── GOAL TYPE SELECTOR ── */
+    .goal-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 0;
+    }
+    .goal-btn {
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: all .2s;
+      background: white;
+    }
+    .goal-btn:hover { border-color: var(--primary); }
+    .goal-btn.selected { border-color: var(--primary); background: #EBF2FF; }
+    .goal-btn .goal-icon { font-size: 28px; margin-bottom: 8px; }
+    .goal-btn .goal-name { font-size: 15px; font-weight: 700; }
+    .goal-btn .goal-desc { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+
+    /* ── TRACK SELECTOR ── */
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .track-btn {
+      padding: 14px 10px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: all .2s;
+      background: white;
+    }
+    .track-btn:hover { border-color: var(--primary); }
+    .track-btn.selected { border-color: var(--primary); background: #EBF2FF; }
+    .track-btn .track-icon { font-size: 22px; margin-bottom: 6px; }
+    .track-btn .track-name { font-size: 13px; font-weight: 700; }
+
+    /* ── SKILL LEVEL ── */
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-row:last-child { border-bottom: none; }
+    .skill-name {
+      font-size: 14px;
+      font-weight: 600;
+      width: 120px;
+      flex-shrink: 0;
+    }
+    .skill-levels {
+      display: flex;
+      gap: 6px;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+    .level-btn {
+      padding: 6px 10px;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .2s;
+      background: white;
+      color: var(--text-sub);
+      white-space: nowrap;
+    }
+    .level-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .level-btn.selected { background: var(--primary); border-color: var(--primary); color: white; font-weight: 600; }
+
+    /* ── HIDDEN SECTIONS ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── ANALYZE BUTTON ── */
+    .btn-analyze {
+      width: 100%;
+      padding: 18px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-analyze:hover { background: #003FA3; }
+    .btn-analyze:active { transform: scale(.99); }
+    .btn-analyze:disabled { background: var(--border); color: var(--text-sub); cursor: not-allowed; }
+
+    /* ── LOADING ── */
+    #loading {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .spinner {
+      width: 48px; height: 48px;
+      border: 4px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-size: 15px; color: var(--text-sub); }
+    .loading-sub { font-size: 13px; color: var(--text-sub); margin-top: 8px; opacity: .7; }
+
+    /* ── RESULT ── */
+    #result { display: none; }
+
+    .result-header {
+      background: linear-gradient(135deg, var(--primary), #0041A3);
+      color: white;
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .result-header h2 {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .result-header p { opacity: .8; font-size: 14px; }
+
+    .result-section {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+    .result-section h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--bg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .result-section h3 .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag-strong { background: #E3F9E5; color: var(--success); }
+    .tag-weak { background: #FFF0EB; color: var(--accent); }
+    .tag-course { background: #EBF2FF; color: var(--primary); }
+
+    .course-timeline { display: flex; flex-direction: column; gap: 0; }
+    .course-item {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .course-item:last-child { border-bottom: none; }
+    .course-order {
+      width: 28px; height: 28px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .course-info { flex: 1; }
+    .course-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .course-reason { font-size: 12px; color: var(--text-sub); }
+    .course-duration {
+      font-size: 12px; font-weight: 700;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .duration-box {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+    .duration-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .duration-label { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
+
+    .info-box {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+
+    .coverage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .coverage-box { border-radius: 10px; padding: 16px; }
+    .coverage-box.can { background: #E3F9E5; }
+    .coverage-box.cannot { background: #FFF0EB; }
+    .coverage-box h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+    .coverage-box.can h4 { color: var(--success); }
+    .coverage-box.cannot h4 { color: var(--accent); }
+    .coverage-box ul { list-style: none; }
+    .coverage-box ul li { font-size: 13px; padding: 3px 0; }
+    .coverage-box ul li::before { content: "• "; }
+
+    .recommendation-box {
+      background: linear-gradient(135deg, #EBF2FF, #E3F2FD);
+      border-radius: 10px;
+      padding: 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+      border-left: 4px solid var(--primary);
+    }
+
+    /* ── PDF BUTTON ── */
+    .btn-pdf {
+      width: 100%;
+      padding: 16px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: background .2s;
+    }
+    .btn-pdf:hover { background: #DE350B; }
+
+    .btn-reset {
+      width: 100%;
+      padding: 14px;
+      background: white;
+      color: var(--text-sub);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all .2s;
+    }
+    .btn-reset:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ── API KEY MODAL ── */
+    #apiModal {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+    .modal-box {
+      background: white;
+      border-radius: 16px;
+      padding: 36px;
+      width: 460px;
+      max-width: 90vw;
+    }
+    .modal-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .modal-box p { font-size: 13px; color: var(--text-sub); margin-bottom: 20px; line-height: 1.6; }
+    .modal-box input {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .btn-modal {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .track-grid { grid-template-columns: repeat(2, 1fr); }
+      .goal-selector { grid-template-columns: 1fr; }
+      .coverage-grid { grid-template-columns: 1fr; }
+      header { padding: 16px 20px; }
+      main { padding: 0 16px 60px; }
+    }
+
+    /* ── 인쇄용 CSS ── */
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: white; }
+      header, .steps, #sec1, #sec2, #sec3, #loading,
+      #apiModal, .btn-pdf, .btn-reset { display: none !important; }
+      #result { display: block !important; }
+      main { max-width: 100%; margin: 0; padding: 0; }
+      .result-header {
+        background: #0052CC !important;
+        color: white !important;
+        border-radius: 0;
+        padding: 20px 28px;
+        margin-bottom: 0;
+      }
+      .result-header h2 { font-size: 18px; font-weight: 900; }
+      .result-header p { font-size: 12px; opacity: .8; margin-top: 4px; }
+      .result-section {
+        border: 1px solid #DFE1E6;
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin: 10px 20px;
+        page-break-inside: avoid;
+        box-shadow: none;
+      }
+      .result-section h3 { font-size: 13px; font-weight: 700; margin-bottom: 12px; padding-bottom: 8px; }
+      .info-box { background: #F4F5F7 !important; font-size: 12px; line-height: 1.7; padding: 10px 14px; }
+      .course-item { padding: 8px 0; }
+      .course-name { font-size: 12px; }
+      .course-reason { font-size: 11px; }
+      .course-duration { font-size: 11px; font-weight: 700; }
+      .course-order { width: 22px; height: 22px; font-size: 11px; background: #0052CC !important; color: white !important; }
+      .duration-box { background: #F4F5F7 !important; padding: 12px; }
+      .duration-num { font-size: 32px; color: #0052CC !important; }
+      .duration-label { font-size: 11px; }
+      .tag { font-size: 11px; padding: 3px 8px; }
+      .tag-strong { background: #E3F9E5 !important; color: #00875A !important; }
+      .tag-weak { background: #FFF0EB !important; color: #FF5630 !important; }
+      .coverage-grid { grid-template-columns: 1fr 1fr; }
+      .coverage-box.can { background: #E3F9E5 !important; }
+      .coverage-box.cannot { background: #FFF0EB !important; }
+      .coverage-box h4 { font-size: 12px; }
+      .coverage-box ul li { font-size: 11px; }
+      .recommendation-box { background: #EBF2FF !important; font-size: 12px; border-left: 4px solid #0052CC !important; padding: 14px; }
+      .print-footer { display: block !important; text-align: center; padding: 14px; font-size: 10px; color: #6B778C; border-top: 1px solid #DFE1E6; margin: 12px 20px 0; }
+      .result-section:nth-child(5) { page-break-before: always; }
+    }
+    .print-footer { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- API KEY MODAL -->
+<div id="apiModal">
+  <div class="modal-box">
+    <h3>🔑 Gemini API 키 설정</h3>
+    <p>Gemini API 키를 입력하세요.<br/>키는 이 브라우저 세션에만 저장되며 외부로 전송되지 않습니다.</p>
+    <input type="text" id="apiKeyInput" placeholder="AIza..." />
+    <button class="btn-modal" onclick="saveApiKey()">저장하고 시작하기</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="logo-text">SBS ACADEMY</div>
+    <div class="subtitle">컴퓨터아트학원 수원점 · 031-546-3644</div>
+  </div>
+  <div class="badge">AI 상담 시스템</div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- STEP INDICATOR -->
+  <div class="steps">
+    <div class="step active" id="step1">
+      <div class="step-num">1</div>
+      <div class="step-label">기본 정보</div>
+    </div>
+    <div class="step-line" id="line1"></div>
+    <div class="step" id="step2">
+      <div class="step-num">2</div>
+      <div class="step-label">목표 설정</div>
+    </div>
+    <div class="step-line" id="line2"></div>
+    <div class="step" id="step3">
+      <div class="step-num">3</div>
+      <div class="step-label">현재 수준</div>
+    </div>
+    <div class="step-line" id="line3"></div>
+    <div class="step" id="step4">
+      <div class="step-num">4</div>
+      <div class="step-label">GAP 분석</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: 기본 정보 -->
+  <div class="section active" id="sec1">
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">👤</div>
+        기본 정보 입력
+      </div>
+      <div class="card-desc">상담 고객의 기본 정보를 입력해주세요.</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>이름 <span>*</span></label>
+          <input type="text" id="name" placeholder="홍길동" />
+        </div>
+        <div class="form-group">
+          <label>나이 <span>*</span></label>
+          <input type="number" id="age" placeholder="25" min="15" max="70" />
+        </div>
+        <div class="form-group">
+          <label>배경 <span>*</span></label>
+          <select id="background">
+            <option value="">선택해주세요</option>
+            <option value="non_major">비전공자</option>
+            <option value="major">전공자 / 관련학과</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>투자 가능 기간</label>
+          <input type="number" id="availableMonths" placeholder="예: 12" min="1" max="36" />
+        </div>
+        <div class="form-group full">
+          <label>주당 투자 가능 시간</label>
+          <select id="hoursPerWeek">
+            <option value="">선택해주세요</option>
+            <option value="10">주 10시간 이하 (파트타임)</option>
+            <option value="20">주 20시간 내외 (반일)</option>
+            <option value="30">주 30시간 이상 (풀타임)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-analyze" style="margin-top:24px" onclick="goToStep2()">다음 단계 →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 목표 설정 -->
+  <div class="section" id="sec2">
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">🎯</div>
+        목표 설정
+      </div>
+      <div class="card-desc">고객의 방문 목적을 선택해주세요.</div>
+
+      <label style="margin-bottom:12px; display:block">목표 유형 <span style="color:var(--accent)">*</span></label>
+      <div class="goal-selector" style="margin-bottom:24px">
+        <div class="goal-btn" onclick="selectGoal('employment')" id="goal_employment">
+          <div class="goal-icon">💼</div>
+          <div class="goal-name">취업 준비</div>
+          <div class="goal-desc">포트폴리오 제작 + 취업까지</div>
+        </div>
+        <div class="goal-btn" onclick="selectGoal('certification')" id="goal_certification">
+          <div class="goal-icon">📜</div>
+          <div class="goal-name">자격증 취득</div>
+          <div class="goal-desc">특정 자격증 집중 준비</div>
+        </div>
+      </div>
+
+      <label style="margin-bottom:12px; display:block">희망 트랙 <span style="color:var(--accent)">*</span></label>
+      <div class="track-grid" id="trackGrid">
+        <div class="track-btn" onclick="selectTrack('motion')" id="track_motion">
+          <div class="track-icon">🎬</div>
+          <div class="track-name">모션/영상</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('interior')" id="track_interior">
+          <div class="track-icon">🏠</div>
+          <div class="track-name">건축/인테리어</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('visual_editing')" id="track_visual_editing">
+          <div class="track-icon">🎨</div>
+          <div class="track-name">시각/편집디자인</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('web')" id="track_web">
+          <div class="track-icon">🌐</div>
+          <div class="track-name">웹디자인</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('cg_maya')" id="track_cg_maya">
+          <div class="track-icon">🤖</div>
+          <div class="track-name">CG/마야</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('it_programming')" id="track_it_programming">
+          <div class="track-icon">💻</div>
+          <div class="track-name">IT/프로그래밍</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('ai')" id="track_ai">
+          <div class="track-icon">✨</div>
+          <div class="track-name">AI</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('artwork')" id="track_artwork">
+          <div class="track-icon">🖌️</div>
+          <div class="track-name">아트웍</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('certification')" id="track_certification">
+          <div class="track-icon">📋</div>
+          <div class="track-name">자격증 과정</div>
+        </div>
+      </div>
+
+      <div id="jobField" style="display:none; margin-top:20px">
+        <div class="form-group">
+          <label>희망 직업 (선택)</label>
+          <input type="text" id="desiredJob" placeholder="예: 모션그래퍼, 웹 디자이너, 미정" />
+        </div>
+      </div>
+
+      <div id="certField" style="display:none; margin-top:20px">
+        <div class="form-group">
+          <label>목표 자격증 <span style="color:var(--accent)">*</span></label>
+          <input type="text" id="targetCert" placeholder="예: GTQ 1급, 컴활 1급" />
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:24px">
+        <button class="btn-reset" onclick="goToStep1()" style="width:auto; padding:14px 24px">← 이전</button>
+        <button class="btn-analyze" onclick="goToStep3()">다음 단계 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 현재 수준 -->
+  <div class="section" id="sec3">
+    <div class="card">
+      <div class="card-title">
+        <div class="icon">📊</div>
+        현재 수준 체크
+      </div>
+      <div class="card-desc">각 툴의 경험 수준을 선택해주세요. 없으면 '없음'을 선택하세요.</div>
+      <div id="skillCheckArea"></div>
+      <div style="display:flex; gap:10px; margin-top:24px">
+        <button class="btn-reset" onclick="goToStep2()" style="width:auto; padding:14px 24px">← 이전</button>
+        <button class="btn-analyze" onclick="runAnalysis()">🔍 GAP 분석 시작</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">AI가 GAP 분석 중입니다...</div>
+    <div class="loading-sub">Gemini가 커리큘럼 데이터를 기반으로 분석하고 있어요</div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result">
+    <div class="result-header">
+      <h2 id="resultTitle">GAP 분석 결과</h2>
+      <p id="resultSubtitle"></p>
+    </div>
+
+    <div class="result-section">
+      <h3><div class="dot"></div>현재 수준 진단</h3>
+      <div class="info-box" id="currentLevelSummary"></div>
+    </div>
+
+    <div class="result-section">
+      <h3><div class="dot"></div>GAP 분석</h3>
+      <div class="info-box" id="gapDescription" style="margin-bottom:16px"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--success); margin-bottom:8px">✅ 강점</div>
+          <div class="tag-list" id="strongPoints"></div>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:8px">⚠️ 보완 필요</div>
+          <div class="tag-list" id="weakPoints"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <h3><div class="dot"></div>추천 수업 로드맵</h3>
+      <div class="course-timeline" id="courseTimeline"></div>
+    </div>
+
+    <div class="result-section">
+      <h3><div class="dot"></div>예상 소요 기간</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+        <div class="duration-box">
+          <div class="duration-num" id="durationMin">-</div>
+          <div class="duration-label">최소 개월</div>
+        </div>
+        <div class="duration-box">
+          <div class="duration-num" id="durationMax">-</div>
+          <div class="duration-label">최대 개월</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-section">
+      <h3><div class="dot"></div>목표 달성 가이드</h3>
+      <div class="info-box" id="goalGuide"></div>
+    </div>
+
+    <div class="result-section">
+      <h3><div class="dot"></div>학원 수강 안내</h3>
+      <div class="coverage-grid" style="margin-bottom:16px">
+        <div class="coverage-box can">
+          <h4>✅ 학원에서 준비 가능</h4>
+          <ul id="coverableList"></ul>
+        </div>
+        <div class="coverage-box cannot">
+          <h4>📌 개인 자체 준비 필요</h4>
+          <ul id="notCoverableList"></ul>
+        </div>
+      </div>
+      <div class="recommendation-box" id="recommendationBox"></div>
+    </div>
+
+    <button class="btn-pdf" onclick="generatePDF()">📄 PDF로 저장하기 (Ctrl+P)</button>
+    <div class="print-footer" id="printFooter">SBS 아카데미 컴퓨터아트학원 수원점 | Tel. 031-546-3644 | 본 자료는 AI 상담 시스템을 통해 생성된 맞춤형 분석 결과입니다.</div>
+    <button class="btn-reset" onclick="resetAll()">🔄 새 상담 시작</button>
+  </div>
+
+</main>
+
+
+<script>
+
+// ── STATE ──
+let apiKey = '';
+let selectedGoal = '';
+let selectedTrack = '';
+let skillLevels = {};
+let analysisResult = null;
+
+const LEVEL_LABELS = ['없음', '독학/조금 경험', '학교/학원 수강', '자격증 보유', '실무 경험'];
+
+const TRACK_TOOLS = {
+  motion: ['포토샵', '일러스트', '프리미어프로', '애프터이펙트', '시네마4D'],
+  interior: ['포토샵', '일러스트', 'AutoCAD(캐드)', '스케치업', '3ds Max'],
+  visual_editing: ['포토샵', '일러스트', '인디자인'],
+  web: ['포토샵', '일러스트', 'HTML/CSS', 'JavaScript', 'Figma'],
+  cg_maya: ['포토샵', '일러스트', '마야', '애프터이펙트', 'ZBrush'],
+  it_programming: ['C언어', 'Java', 'Python'],
+  ai: ['ChatGPT', 'Midjourney', 'AI 영상 툴'],
+  artwork: ['포토샵', '일러스트', '디지털드로잉 툴'],
+  certification: ['포토샵', '일러스트', '엑셀', 'AutoCAD']
+};
+
+// ── API KEY ──
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) { alert('API 키를 입력해주세요.'); return; }
+  apiKey = key;
+  document.getElementById('apiModal').style.display = 'none';
+}
+
+// ── STEP NAVIGATION ──
+function showSection(n) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec' + n).classList.add('active');
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('result').style.display = 'none';
+  for (let i = 1; i <= 4; i++) {
+    const step = document.getElementById('step' + i);
+    step.classList.remove('active', 'done');
+    if (i < n) step.classList.add('done');
+    else if (i === n) step.classList.add('active');
+    if (i < 4) {
+      const line = document.getElementById('line' + i);
+      line.classList.toggle('done', i < n);
+    }
+  }
+}
+
+function goToStep1() { showSection(1); }
+function goToStep2() {
+  const name = document.getElementById('name').value.trim();
+  const age = document.getElementById('age').value;
+  const bg = document.getElementById('background').value;
+  if (!name || !age || !bg) { alert('이름, 나이, 배경을 입력해주세요.'); return; }
+  showSection(2);
+}
+function goToStep3() {
+  if (!selectedGoal) { alert('목표 유형을 선택해주세요.'); return; }
+  if (!selectedTrack) { alert('희망 트랙을 선택해주세요.'); return; }
+  buildSkillCheck();
+  showSection(3);
+}
+
+// ── GOAL & TRACK SELECT ──
+function selectGoal(g) {
+  selectedGoal = g;
+  document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('goal_' + g).classList.add('selected');
+  document.getElementById('jobField').style.display = (g === 'employment') ? 'block' : 'none';
+  document.getElementById('certField').style.display = (g === 'certification') ? 'block' : 'none';
+}
+function selectTrack(t) {
+  selectedTrack = t;
+  document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('track_' + t).classList.add('selected');
+}
+
+// ── SKILL CHECK BUILD ──
+function buildSkillCheck() {
+  const tools = TRACK_TOOLS[selectedTrack] || [];
+  const area = document.getElementById('skillCheckArea');
+  skillLevels = {};
+  area.innerHTML = tools.map(tool => `
+    <div class="skill-row">
+      <div class="skill-name">${tool}</div>
+      <div class="skill-levels" id="levels_${tool.replace(/[^a-zA-Z0-9가-힣]/g,'_')}">
+        ${LEVEL_LABELS.map((label, i) => `
+          <button class="level-btn ${i===0?'selected':''}"
+            onclick="selectLevel('${tool.replace(/[^a-zA-Z0-9가-힣]/g,'_')}', '${tool}', ${i}, this)">
+            ${label}
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  tools.forEach(t => { skillLevels[t] = 0; });
+}
+
+function selectLevel(id, tool, val, el) {
+  document.querySelectorAll(`#levels_${id} .level-btn`).forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  skillLevels[tool] = val;
+}
+
+// ── RUN ANALYSIS ──
+async function runAnalysis() {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('loading').style.display = 'block';
+
+  document.getElementById('step3').classList.remove('active');
+  document.getElementById('step3').classList.add('done');
+  document.getElementById('line3').classList.add('done');
+  document.getElementById('step4').classList.add('active');
+
+  const userInput = buildUserInput();
+  try {
+    const raw = await callGemini(userInput);
+    analysisResult = parseResult(raw);
+    renderResult(analysisResult);
+  } catch(e) {
+    document.getElementById('loading').style.display = 'none';
+    alert('분석 중 오류가 발생했습니다: ' + e.message);
+    showSection(3);
+  }
+}
+
+function buildUserInput() {
+  const skillStr = Object.entries(skillLevels)
+    .map(([tool, val]) => `${tool}: ${LEVEL_LABELS[val]} (${val}/4)`)
+    .join('\n');
+
+  return `
+[고객 정보]
+- 이름: ${document.getElementById('name').value}
+- 나이: ${document.getElementById('age').value}세
+- 배경: ${document.getElementById('background').value === 'major' ? '전공자/관련학과' : '비전공자'}
+- 목표 유형: ${selectedGoal === 'employment' ? '취업 준비' : '자격증 취득'}
+- 희망 트랙: ${selectedTrack}
+- 희망 직업: ${document.getElementById('desiredJob')?.value || '미정'}
+- 목표 자격증: ${document.getElementById('targetCert')?.value || '없음'}
+- 투자 가능 기간: ${document.getElementById('availableMonths').value || '미정'}개월
+- 주당 투자 시간: ${document.getElementById('hoursPerWeek').value || '미정'}시간
+
+[현재 툴 수준 (0=없음, 1=독학, 2=학교수강, 3=자격증, 4=실무)]
+${skillStr}
+`.trim();
+}
+
+// ── GEMINI API CALL ──
+async function callGemini(userInput) {
+  const systemPrompt = buildSystemPrompt();
+  const resp = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{ text: systemPrompt + '\n\n' + userInput }]
+        }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
+      })
+    }
+  );
+  if (!resp.ok) {
+    if (resp.status === 429) throw new Error('요청 한도 초과(429). 1~2분 후 다시 시도해주세요.');
+    if (resp.status === 404) throw new Error('모델을 찾을 수 없습니다(404). API 키를 확인해주세요.');
+    if (resp.status === 403) throw new Error('API 키가 유효하지 않습니다(403).');
+    throw new Error('API 호출 실패: ' + resp.status);
+  }
+  const data = await resp.json();
+  return data.candidates[0].content.parts[0].text;
+}
+
+function buildSystemPrompt() {
+  return `
+당신은 SBS 아카데미 컴퓨터아트학원 수원점의 전문 상담 AI입니다.
+아래 커리큘럼 데이터를 기반으로 고객의 GAP 분석 결과를 JSON 형식으로만 반환하세요.
+
+[규칙]
+1. 반드시 제공된 커리큘럼 데이터 안에서만 수업을 추천하세요
+2. 결과는 반드시 아래 JSON 형식으로만 반환하세요 (다른 텍스트 없이)
+3. 취업 트렌드는 현재 시장 기준으로 구체적으로 작성하세요
+4. 학원에서 커버 가능한 부분과 개인 준비 필요 부분을 명확히 구분하세요
+5. 예상 기간은 비전공자/전공자 구분에 맞게 제시하세요
+6. 모든 텍스트는 한국어로 작성하세요
+
+[커리큘럼 데이터 요약]
+- 공통기초: 포토샵 기초(1개월), 포토웍스(1개월), 일러스트 기초(1개월), 디테일일러스트(1개월)
+- 모션/영상: 프리미어(1개월), 애프터이펙트 1~3(각1개월), 시네마4D 1~5(각1개월), 모션포폴(최소2개월)
+- 건축/인테리어: 실내건축자격증(기능사3~4개월/산업기사4~5개월/기사5~6개월), 스케치업1~2(각1개월), 캐드1~2(각1개월), 맥스1~2(각1개월), BIM1~2(각1개월)
+- 시각/편집: 인포그래픽1~2(각1개월), 브랜딩1~2(각1개월), 패키지1~2(각1개월), 그래픽아트웍(1개월), 인디자인1~2(각1개월)
+- 웹디자인: 인포그래픽(2개월), 브랜딩(2개월), 웹퍼블리셔1~4(HTML/CSS/JS/jQuery 각1개월), UI/UX1~2(각1개월)
+- CG/마야: 마야1~9(각1개월), 애프터이펙트(3개월), Unreal(1개월)
+- IT/프로그래밍: C언어(2개월), Java(2개월), Python(2개월), AICE자격증(1개월), 백엔드JSP/DB(6개월)
+- AI: AI자격증(1개월), AI기초반(1개월), AI유튜브(1개월), AI영상편집(1개월)
+- 아트웍: 디지털드로잉(개인맞춤), AI아트웍(1개월)
+- AI크리에이터: 각 트랙별 심화 마지막 단계 (1개월)
+- 사무자격증: MOS/컴활2급/컴활1급(각1개월), 전산회계1급/전산세무2급(각2개월)
+
+[출력 JSON 형식]
+{
+  "customer_summary": { "name": "", "goal": "", "background": "" },
+  "current_level_summary": "현재 수준 요약",
+  "gap_analysis": {
+    "strong_points": ["강점1", "강점2"],
+    "weak_points": ["보완필요1", "보완필요2"],
+    "gap_description": "전체 GAP 설명"
+  },
+  "recommended_courses": [
+    { "order": 1, "course_name": "수업명", "duration_months": "기간", "reason": "이유" }
+  ],
+  "total_duration": { "min_months": 0, "max_months": 0 },
+  "goal_guide": "목표 달성을 위한 구체적인 가이드 (취업트렌드, 포트폴리오 요구사항, 자격증 준비 방법 등)",
+  "academy_coverage": {
+    "coverable": ["학원에서 준비 가능한 항목"],
+    "not_coverable": ["개인 자체 준비 필요 항목"],
+    "recommendation": "최종 안내 멘트"
+  }
+}
+`.trim();
+}
+
+// ── PARSE RESULT ──
+function parseResult(raw) {
+  try {
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (match) return JSON.parse(match[0]);
+    return JSON.parse(raw);
+  } catch(e) {
+    throw new Error('결과 파싱 실패. 다시 시도해주세요.');
+  }
+}
+
+// ── RENDER RESULT ──
+function renderResult(r) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  document.getElementById('resultTitle').textContent = `${r.customer_summary.name}님 GAP 분석 결과`;
+  document.getElementById('resultSubtitle').textContent = `${r.customer_summary.goal} · ${r.customer_summary.background}`;
+  document.getElementById('currentLevelSummary').textContent = r.current_level_summary;
+  document.getElementById('gapDescription').textContent = r.gap_analysis.gap_description;
+
+  document.getElementById('strongPoints').innerHTML =
+    (r.gap_analysis.strong_points || []).map(p => `<span class="tag tag-strong">${p}</span>`).join('');
+  document.getElementById('weakPoints').innerHTML =
+    (r.gap_analysis.weak_points || []).map(p => `<span class="tag tag-weak">${p}</span>`).join('');
+
+  document.getElementById('courseTimeline').innerHTML =
+    (r.recommended_courses || []).map(c => `
+      <div class="course-item">
+        <div class="course-order">${c.order}</div>
+        <div class="course-info">
+          <div class="course-name">${c.course_name}</div>
+          <div class="course-reason">${c.reason}</div>
+        </div>
+        <div class="course-duration">${c.duration_months}개월</div>
+      </div>
+    `).join('');
+
+  document.getElementById('durationMin').textContent = r.total_duration.min_months;
+  document.getElementById('durationMax').textContent = r.total_duration.max_months;
+  document.getElementById('goalGuide').textContent = r.goal_guide;
+
+  document.getElementById('coverableList').innerHTML =
+    (r.academy_coverage.coverable || []).map(i => `<li>${i}</li>`).join('');
+  document.getElementById('notCoverableList').innerHTML =
+    (r.academy_coverage.not_coverable || []).map(i => `<li>${i}</li>`).join('');
+  document.getElementById('recommendationBox').textContent = r.academy_coverage.recommendation;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── PDF ──
+function generatePDF() {
+  if (!analysisResult) return;
+  // 인쇄 대화상자 열기 (브라우저 내장 PDF 저장 기능 활용)
+  // 한글 완벽 지원, 별도 폰트 설치 불필요
+  window.print();
+}
+
+// ── RESET ──
+function resetAll() {
+  selectedGoal = '';
+  selectedTrack = '';
+  skillLevels = {};
+  analysisResult = null;
+  document.getElementById('result').style.display = 'none';
+  document.querySelectorAll('.goal-btn, .track-btn').forEach(b => b.classList.remove('selected'));
+  showSection(1);
+}
+</script>
+</body>
+</html>
