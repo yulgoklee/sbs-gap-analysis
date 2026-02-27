@@ -41,11 +41,7 @@
       font-size: 28px;
       letter-spacing: 2px;
     }
-    header .subtitle {
-      font-size: 13px;
-      opacity: .75;
-      margin-top: 2px;
-    }
+    header .subtitle { font-size: 13px; opacity: .75; margin-top: 2px; }
     header .badge {
       margin-left: auto;
       background: var(--accent);
@@ -58,34 +54,18 @@
     }
 
     /* ── MAIN LAYOUT ── */
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 24px 80px;
-    }
+    main { max-width: 900px; margin: 40px auto; padding: 0 24px 80px; }
 
     /* ── STEP INDICATOR ── */
-    .steps {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      margin-bottom: 36px;
-    }
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex: 1;
-    }
+    .steps { display: flex; align-items: center; gap: 0; margin-bottom: 36px; }
+    .step { display: flex; align-items: center; gap: 8px; flex: 1; }
     .step-num {
       width: 32px; height: 32px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 13px; font-weight: 700;
-      background: var(--border);
-      color: var(--text-sub);
-      transition: all .3s;
-      flex-shrink: 0;
+      background: var(--border); color: var(--text-sub);
+      transition: all .3s; flex-shrink: 0;
     }
     .step.active .step-num { background: var(--primary); color: white; }
     .step.done .step-num { background: var(--success); color: white; }
@@ -104,26 +84,14 @@
       box-shadow: 0 2px 8px rgba(0,0,0,.06);
     }
     .card-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 18px; font-weight: 700; color: var(--text);
+      margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
     }
     .card-title .icon {
-      width: 32px; height: 32px;
-      background: #E3F2FD;
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
+      width: 32px; height: 32px; background: #E3F2FD;
+      border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;
     }
-    .card-desc {
-      font-size: 13px;
-      color: var(--text-sub);
-      margin-bottom: 24px;
-    }
+    .card-desc { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; }
 
     /* ── FORM ELEMENTS ── */
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -131,37 +99,19 @@
     .form-group.full { grid-column: 1 / -1; }
     label { font-size: 13px; font-weight: 600; color: var(--text); }
     label span { color: var(--accent); }
-
     input[type="text"], input[type="number"], select, textarea {
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 14px;
-      font-family: 'Noto Sans KR', sans-serif;
-      color: var(--text);
-      background: white;
-      transition: border-color .2s;
-      outline: none;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; font-size: 14px;
+      font-family: 'Noto Sans KR', sans-serif; color: var(--text);
+      background: white; transition: border-color .2s; outline: none;
     }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--primary);
-    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); }
 
-    /* ── GOAL TYPE SELECTOR ── */
-    .goal-selector {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 0;
-    }
+    /* ── GOAL SELECTOR ── */
+    .goal-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0; }
     .goal-btn {
-      padding: 16px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-      text-align: center;
-      transition: all .2s;
-      background: white;
+      padding: 16px; border: 2px solid var(--border); border-radius: 10px;
+      cursor: pointer; text-align: center; transition: all .2s; background: white;
     }
     .goal-btn:hover { border-color: var(--primary); }
     .goal-btn.selected { border-color: var(--primary); background: #EBF2FF; }
@@ -170,19 +120,10 @@
     .goal-btn .goal-desc { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
 
     /* ── TRACK SELECTOR ── */
-    .track-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
+    .track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .track-btn {
-      padding: 14px 10px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-      text-align: center;
-      transition: all .2s;
-      background: white;
+      padding: 14px 10px; border: 2px solid var(--border); border-radius: 10px;
+      cursor: pointer; text-align: center; transition: all .2s; background: white;
     }
     .track-btn:hover { border-color: var(--primary); }
     .track-btn.selected { border-color: var(--primary); background: #EBF2FF; }
@@ -191,35 +132,16 @@
 
     /* ── SKILL LEVEL ── */
     .skill-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
     }
     .skill-row:last-child { border-bottom: none; }
-    .skill-name {
-      font-size: 14px;
-      font-weight: 600;
-      width: 120px;
-      flex-shrink: 0;
-    }
-    .skill-levels {
-      display: flex;
-      gap: 6px;
-      flex: 1;
-      flex-wrap: wrap;
-    }
+    .skill-name { font-size: 14px; font-weight: 600; width: 120px; flex-shrink: 0; }
+    .skill-levels { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
     .level-btn {
-      padding: 6px 10px;
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all .2s;
-      background: white;
-      color: var(--text-sub);
-      white-space: nowrap;
+      padding: 6px 10px; border: 1.5px solid var(--border);
+      border-radius: 20px; font-size: 12px; cursor: pointer;
+      transition: all .2s; background: white; color: var(--text-sub); white-space: nowrap;
     }
     .level-btn:hover { border-color: var(--primary); color: var(--primary); }
     .level-btn.selected { background: var(--primary); border-color: var(--primary); color: white; font-weight: 600; }
@@ -228,41 +150,37 @@
     .section { display: none; }
     .section.active { display: block; }
 
-    /* ── ANALYZE BUTTON ── */
+    /* ── BUTTONS ── */
     .btn-analyze {
-      width: 100%;
-      padding: 18px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 700;
-      font-family: 'Noto Sans KR', sans-serif;
-      cursor: pointer;
+      width: 100%; padding: 18px; background: var(--primary); color: white;
+      border: none; border-radius: 10px; font-size: 16px; font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
       transition: background .2s, transform .1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
     }
     .btn-analyze:hover { background: #003FA3; }
     .btn-analyze:active { transform: scale(.99); }
     .btn-analyze:disabled { background: var(--border); color: var(--text-sub); cursor: not-allowed; }
+    .btn-pdf {
+      width: 100%; padding: 16px; background: var(--accent); color: white;
+      border: none; border-radius: 10px; font-size: 15px; font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif; cursor: pointer; margin-top: 24px;
+      transition: background .2s;
+    }
+    .btn-pdf:hover { background: #DE350B; }
+    .btn-reset {
+      width: 100%; padding: 14px; background: white; color: var(--text-sub);
+      border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; font-weight: 600;
+      font-family: 'Noto Sans KR', sans-serif; cursor: pointer; margin-top: 10px; transition: all .2s;
+    }
+    .btn-reset:hover { border-color: var(--primary); color: var(--primary); }
 
     /* ── LOADING ── */
-    #loading {
-      display: none;
-      text-align: center;
-      padding: 60px 20px;
-    }
+    #loading { display: none; text-align: center; padding: 60px 20px; }
     .spinner {
-      width: 48px; height: 48px;
-      border: 4px solid var(--border);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 20px;
+      width: 48px; height: 48px; border: 4px solid var(--border);
+      border-top-color: var(--primary); border-radius: 50%;
+      animation: spin 1s linear infinite; margin: 0 auto 20px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     .loading-text { font-size: 15px; color: var(--text-sub); }
@@ -273,102 +191,113 @@
 
     .result-header {
       background: linear-gradient(135deg, var(--primary), #0041A3);
-      color: white;
-      border-radius: var(--radius);
-      padding: 32px;
-      margin-bottom: 24px;
+      color: white; border-radius: var(--radius); padding: 32px; margin-bottom: 24px;
     }
-    .result-header h2 {
-      font-size: 22px;
-      font-weight: 900;
-      margin-bottom: 6px;
-    }
+    .result-header h2 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
     .result-header p { opacity: .8; font-size: 14px; }
 
     .result-section {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin-bottom: 16px;
-      border: 1px solid var(--border);
+      background: var(--surface); border-radius: var(--radius);
+      padding: 28px; margin-bottom: 16px; border: 1px solid var(--border);
     }
     .result-section h3 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--bg);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 16px; font-weight: 700; margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 2px solid var(--bg);
+      display: flex; align-items: center; gap: 8px;
     }
-    .result-section h3 .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--primary);
-    }
+    .result-section h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
 
+    /* ── TAGS ── */
     .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
+    .tag { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
     .tag-strong { background: #E3F9E5; color: var(--success); }
     .tag-weak { background: #FFF0EB; color: var(--accent); }
     .tag-course { background: #EBF2FF; color: var(--primary); }
 
-    .course-timeline { display: flex; flex-direction: column; gap: 0; }
-    .course-item {
-      display: flex;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
+    /* ── INFO BOX ── */
+    .info-box {
+      background: var(--bg); border-radius: 10px; padding: 16px 20px;
+      font-size: 13px; line-height: 1.8; color: var(--text); white-space: pre-wrap;
     }
+
+    /* ── RADAR CHART ── */
+    .radar-wrapper {
+      display: flex; flex-direction: column; align-items: center;
+      margin-bottom: 24px;
+    }
+    .radar-legend {
+      display: flex; gap: 20px; margin-top: 8px; flex-wrap: wrap; justify-content: center;
+    }
+    .radar-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-sub); }
+    .radar-legend-line {
+      width: 24px; height: 3px; border-radius: 2px; flex-shrink: 0;
+    }
+    .radar-legend-line.target { background: #FF5630; }
+    .radar-legend-line.current { background: #0052CC; }
+
+    /* ── GAP COLUMNS ── */
+    .gap-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .gap-col-label { font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+
+    /* ── PORTFOLIO LINKS ── */
+    .portfolio-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .portfolio-link-card {
+      display: block; padding: 14px 16px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      text-decoration: none; color: inherit; transition: all .2s; background: white;
+    }
+    .portfolio-link-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0,82,204,0.12);
+      transform: translateY(-2px);
+    }
+    .portfolio-link-title { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+    .portfolio-link-desc { font-size: 12px; color: var(--text-sub); line-height: 1.4; }
+
+    /* ── COURSE TIMELINE ── */
+    .course-timeline { display: flex; flex-direction: column; gap: 0; }
+    .course-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
     .course-item:last-child { border-bottom: none; }
     .course-order {
-      width: 28px; height: 28px;
-      background: var(--primary);
-      color: white;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700;
-      flex-shrink: 0;
+      width: 28px; height: 28px; background: var(--primary); color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
     }
     .course-info { flex: 1; }
     .course-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
     .course-reason { font-size: 12px; color: var(--text-sub); }
-    .course-duration {
-      font-size: 12px; font-weight: 700;
-      color: var(--primary);
-      flex-shrink: 0;
-    }
+    .course-duration { font-size: 12px; font-weight: 700; color: var(--primary); flex-shrink: 0; }
 
-    .duration-box {
-      background: var(--bg);
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-    }
-    .duration-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      color: var(--primary);
-      line-height: 1;
-    }
+    /* ── DURATION BOX ── */
+    .duration-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .duration-box { background: var(--bg); border-radius: 10px; padding: 20px; text-align: center; }
+    .duration-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--primary); line-height: 1; }
     .duration-label { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
 
-    .info-box {
-      background: var(--bg);
-      border-radius: 10px;
-      padding: 16px 20px;
-      font-size: 13px;
-      line-height: 1.8;
-      color: var(--text);
-      white-space: pre-wrap;
+    /* ── MONTHLY PLANNER ── */
+    .planner-scroll { overflow-x: auto; padding-bottom: 8px; }
+    .planner-grid { display: flex; gap: 12px; min-width: max-content; }
+    .planner-card {
+      width: 155px; flex-shrink: 0;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 14px 12px; background: white;
+    }
+    .planner-month-badge {
+      font-size: 11px; font-weight: 700; color: white;
+      background: var(--primary); border-radius: 6px;
+      padding: 4px 8px; margin-bottom: 10px; text-align: center;
+    }
+    .planner-courses { display: flex; flex-direction: column; gap: 4px; }
+    .planner-course {
+      font-size: 11px; color: var(--text); padding: 4px 6px;
+      background: #EBF2FF; border-radius: 4px; font-weight: 500;
+    }
+    .planner-milestone {
+      font-size: 10px; color: var(--text-sub); margin-top: 8px;
+      padding-top: 8px; border-top: 1px solid var(--border); line-height: 1.4;
     }
 
+    /* ── COVERAGE ── */
     .coverage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .coverage-box { border-radius: 10px; padding: 16px; }
     .coverage-box.can { background: #E3F9E5; }
@@ -382,78 +311,23 @@
 
     .recommendation-box {
       background: linear-gradient(135deg, #EBF2FF, #E3F2FD);
-      border-radius: 10px;
-      padding: 20px;
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--text);
-      border-left: 4px solid var(--primary);
+      border-radius: 10px; padding: 20px; font-size: 14px;
+      line-height: 1.7; color: var(--text); border-left: 4px solid var(--primary);
     }
-
-    /* ── PDF BUTTON ── */
-    .btn-pdf {
-      width: 100%;
-      padding: 16px;
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'Noto Sans KR', sans-serif;
-      cursor: pointer;
-      margin-top: 24px;
-      transition: background .2s;
-    }
-    .btn-pdf:hover { background: #DE350B; }
-
-    .btn-reset {
-      width: 100%;
-      padding: 14px;
-      background: white;
-      color: var(--text-sub);
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: 'Noto Sans KR', sans-serif;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: all .2s;
-    }
-    .btn-reset:hover { border-color: var(--primary); color: var(--primary); }
 
     /* ── API KEY MODAL ── */
     #apiModal {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.5);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 1000;
+      position: fixed; inset: 0; background: rgba(0,0,0,.5);
+      display: flex; align-items: center; justify-content: center; z-index: 1000;
     }
-    .modal-box {
-      background: white;
-      border-radius: 16px;
-      padding: 36px;
-      width: 460px;
-      max-width: 90vw;
-    }
+    .modal-box { background: white; border-radius: 16px; padding: 36px; width: 460px; max-width: 90vw; }
     .modal-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .modal-box p { font-size: 13px; color: var(--text-sub); margin-bottom: 20px; line-height: 1.6; }
-    .modal-box input {
-      width: 100%;
-      margin-bottom: 16px;
-    }
+    .modal-box input { width: 100%; margin-bottom: 16px; }
     .btn-modal {
-      width: 100%;
-      padding: 14px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'Noto Sans KR', sans-serif;
-      cursor: pointer;
+      width: 100%; padding: 14px; background: var(--primary); color: white;
+      border: none; border-radius: 8px; font-size: 15px; font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
     }
 
     @media (max-width: 600px) {
@@ -461,6 +335,8 @@
       .track-grid { grid-template-columns: repeat(2, 1fr); }
       .goal-selector { grid-template-columns: 1fr; }
       .coverage-grid { grid-template-columns: 1fr; }
+      .gap-columns { grid-template-columns: 1fr; }
+      .duration-grid { grid-template-columns: 1fr; }
       header { padding: 16px 20px; }
       main { padding: 0 16px 60px; }
     }
@@ -473,44 +349,68 @@
       #apiModal, .btn-pdf, .btn-reset { display: none !important; }
       #result { display: block !important; }
       main { max-width: 100%; margin: 0; padding: 0; }
+
       .result-header {
-        background: #0052CC !important;
-        color: white !important;
-        border-radius: 0;
-        padding: 20px 28px;
-        margin-bottom: 0;
+        background: #0052CC !important; color: white !important;
+        border-radius: 0; padding: 20px 28px; margin-bottom: 0;
       }
-      .result-header h2 { font-size: 18px; font-weight: 900; }
+      .result-header h2 { font-size: 18px; }
       .result-header p { font-size: 12px; opacity: .8; margin-top: 4px; }
+
       .result-section {
-        border: 1px solid #DFE1E6;
-        border-radius: 8px;
-        padding: 16px 20px;
-        margin: 10px 20px;
-        page-break-inside: avoid;
-        box-shadow: none;
+        border: 1px solid #DFE1E6; border-radius: 8px;
+        padding: 14px 18px; margin: 10px 20px;
+        page-break-inside: avoid; box-shadow: none;
       }
-      .result-section h3 { font-size: 13px; font-weight: 700; margin-bottom: 12px; padding-bottom: 8px; }
-      .info-box { background: #F4F5F7 !important; font-size: 12px; line-height: 1.7; padding: 10px 14px; }
-      .course-item { padding: 8px 0; }
+      .result-section h3 { font-size: 13px; font-weight: 700; margin-bottom: 10px; padding-bottom: 8px; }
+
+      /* 레이더 차트 인쇄 */
+      .radar-wrapper svg { max-width: 320px !important; }
+
+      /* 포트폴리오 링크 인쇄 */
+      .portfolio-link-card {
+        border: 1px solid #DFE1E6 !important;
+        box-shadow: none !important; transform: none !important;
+      }
+      .portfolio-link-title { font-size: 11px; }
+      .portfolio-link-desc { font-size: 10px; }
+
+      /* 수업 로드맵 인쇄 */
+      .course-item { padding: 7px 0; }
       .course-name { font-size: 12px; }
       .course-reason { font-size: 11px; }
-      .course-duration { font-size: 11px; font-weight: 700; }
-      .course-order { width: 22px; height: 22px; font-size: 11px; background: #0052CC !important; color: white !important; }
+      .course-duration { font-size: 11px; }
+      .course-order { width: 22px; height: 22px; font-size: 10px; background: #0052CC !important; color: white !important; }
+
+      /* 기간 인쇄 */
       .duration-box { background: #F4F5F7 !important; padding: 12px; }
       .duration-num { font-size: 32px; color: #0052CC !important; }
       .duration-label { font-size: 11px; }
+
+      /* 태그 인쇄 */
       .tag { font-size: 11px; padding: 3px 8px; }
       .tag-strong { background: #E3F9E5 !important; color: #00875A !important; }
       .tag-weak { background: #FFF0EB !important; color: #FF5630 !important; }
+
+      /* 월별 플래너 인쇄 */
+      .planner-scroll { overflow-x: visible; }
+      .planner-grid { flex-wrap: wrap; min-width: auto; }
+      .planner-card { width: 120px; padding: 10px; }
+      .planner-month-badge { background: #0052CC !important; font-size: 10px; }
+      .planner-course { background: #EBF2FF !important; font-size: 10px; }
+      .planner-milestone { font-size: 9px; }
+
+      /* 커버리지 인쇄 */
       .coverage-grid { grid-template-columns: 1fr 1fr; }
       .coverage-box.can { background: #E3F9E5 !important; }
       .coverage-box.cannot { background: #FFF0EB !important; }
       .coverage-box h4 { font-size: 12px; }
       .coverage-box ul li { font-size: 11px; }
-      .recommendation-box { background: #EBF2FF !important; font-size: 12px; border-left: 4px solid #0052CC !important; padding: 14px; }
+      .recommendation-box { background: #EBF2FF !important; font-size: 12px; border-left: 4px solid #0052CC !important; padding: 12px; }
+
+      .info-box { background: #F4F5F7 !important; font-size: 12px; line-height: 1.7; padding: 10px 14px; }
       .print-footer { display: block !important; text-align: center; padding: 14px; font-size: 10px; color: #6B778C; border-top: 1px solid #DFE1E6; margin: 12px 20px 0; }
-      .result-section:nth-child(5) { page-break-before: always; }
+      .result-section:nth-child(6) { page-break-before: always; }
     }
     .print-footer { display: none; }
   </style>
@@ -533,7 +433,7 @@
     <div class="logo-text">SBS ACADEMY</div>
     <div class="subtitle">컴퓨터아트학원 수원점 · 031-546-3644</div>
   </div>
-  <div class="badge">AI 상담 시스템</div>
+  <div class="badge">AI 상담 시스템 v1.1</div>
 </header>
 
 <!-- MAIN -->
@@ -565,10 +465,7 @@
   <!-- SECTION 1: 기본 정보 -->
   <div class="section active" id="sec1">
     <div class="card">
-      <div class="card-title">
-        <div class="icon">👤</div>
-        기본 정보 입력
-      </div>
+      <div class="card-title"><div class="icon">👤</div>기본 정보 입력</div>
       <div class="card-desc">상담 고객의 기본 정보를 입력해주세요.</div>
       <div class="form-grid">
         <div class="form-group">
@@ -608,10 +505,7 @@
   <!-- SECTION 2: 목표 설정 -->
   <div class="section" id="sec2">
     <div class="card">
-      <div class="card-title">
-        <div class="icon">🎯</div>
-        목표 설정
-      </div>
+      <div class="card-title"><div class="icon">🎯</div>목표 설정</div>
       <div class="card-desc">고객의 방문 목적을 선택해주세요.</div>
 
       <label style="margin-bottom:12px; display:block">목표 유형 <span style="color:var(--accent)">*</span></label>
@@ -631,40 +525,31 @@
       <label style="margin-bottom:12px; display:block">희망 트랙 <span style="color:var(--accent)">*</span></label>
       <div class="track-grid" id="trackGrid">
         <div class="track-btn" onclick="selectTrack('motion')" id="track_motion">
-          <div class="track-icon">🎬</div>
-          <div class="track-name">모션/영상</div>
+          <div class="track-icon">🎬</div><div class="track-name">모션/영상</div>
         </div>
         <div class="track-btn" onclick="selectTrack('interior')" id="track_interior">
-          <div class="track-icon">🏠</div>
-          <div class="track-name">건축/인테리어</div>
+          <div class="track-icon">🏠</div><div class="track-name">건축/인테리어</div>
         </div>
         <div class="track-btn" onclick="selectTrack('visual_editing')" id="track_visual_editing">
-          <div class="track-icon">🎨</div>
-          <div class="track-name">시각/편집디자인</div>
+          <div class="track-icon">🎨</div><div class="track-name">시각/편집디자인</div>
         </div>
         <div class="track-btn" onclick="selectTrack('web')" id="track_web">
-          <div class="track-icon">🌐</div>
-          <div class="track-name">웹디자인</div>
+          <div class="track-icon">🌐</div><div class="track-name">웹디자인</div>
         </div>
         <div class="track-btn" onclick="selectTrack('cg_maya')" id="track_cg_maya">
-          <div class="track-icon">🤖</div>
-          <div class="track-name">CG/마야</div>
+          <div class="track-icon">🤖</div><div class="track-name">CG/마야</div>
         </div>
         <div class="track-btn" onclick="selectTrack('it_programming')" id="track_it_programming">
-          <div class="track-icon">💻</div>
-          <div class="track-name">IT/프로그래밍</div>
+          <div class="track-icon">💻</div><div class="track-name">IT/프로그래밍</div>
         </div>
         <div class="track-btn" onclick="selectTrack('ai')" id="track_ai">
-          <div class="track-icon">✨</div>
-          <div class="track-name">AI</div>
+          <div class="track-icon">✨</div><div class="track-name">AI</div>
         </div>
         <div class="track-btn" onclick="selectTrack('artwork')" id="track_artwork">
-          <div class="track-icon">🖌️</div>
-          <div class="track-name">아트웍</div>
+          <div class="track-icon">🖌️</div><div class="track-name">아트웍</div>
         </div>
         <div class="track-btn" onclick="selectTrack('certification')" id="track_certification">
-          <div class="track-icon">📋</div>
-          <div class="track-name">자격증 과정</div>
+          <div class="track-icon">📋</div><div class="track-name">자격증 과정</div>
         </div>
       </div>
 
@@ -674,7 +559,6 @@
           <input type="text" id="desiredJob" placeholder="예: 모션그래퍼, 웹 디자이너, 미정" />
         </div>
       </div>
-
       <div id="certField" style="display:none; margin-top:20px">
         <div class="form-group">
           <label>목표 자격증 <span style="color:var(--accent)">*</span></label>
@@ -692,10 +576,7 @@
   <!-- SECTION 3: 현재 수준 -->
   <div class="section" id="sec3">
     <div class="card">
-      <div class="card-title">
-        <div class="icon">📊</div>
-        현재 수준 체크
-      </div>
+      <div class="card-title"><div class="icon">📊</div>현재 수준 체크</div>
       <div class="card-desc">각 툴의 경험 수준을 선택해주세요. 없으면 '없음'을 선택하세요.</div>
       <div id="skillCheckArea"></div>
       <div style="display:flex; gap:10px; margin-top:24px">
@@ -709,44 +590,78 @@
   <div id="loading">
     <div class="spinner"></div>
     <div class="loading-text">AI가 GAP 분석 중입니다...</div>
-    <div class="loading-sub">Gemini가 커리큘럼 데이터를 기반으로 분석하고 있어요</div>
+    <div class="loading-sub">Gemini가 커리큘럼 · 취업시장 · 자격증 데이터를 종합 분석 중이에요</div>
   </div>
 
-  <!-- RESULT -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  RESULT                                    -->
+  <!-- ═══════════════════════════════════════════ -->
   <div id="result">
+
+    <!-- 헤더 -->
     <div class="result-header">
       <h2 id="resultTitle">GAP 분석 결과</h2>
       <p id="resultSubtitle"></p>
     </div>
 
+    <!-- 1. 현재 수준 진단 -->
     <div class="result-section">
       <h3><div class="dot"></div>현재 수준 진단</h3>
       <div class="info-box" id="currentLevelSummary"></div>
     </div>
 
+    <!-- 2. GAP 분석 (레이더 차트 + 강점/약점) -->
     <div class="result-section">
       <h3><div class="dot"></div>GAP 분석</h3>
+
+      <!-- 레이더 차트 -->
+      <div class="radar-wrapper">
+        <div id="radarChartContainer" style="width:100%; max-width:480px;"></div>
+        <div class="radar-legend">
+          <div class="radar-legend-item">
+            <div class="radar-legend-line target" style="border-top:2px dashed #FF5630; background:none; height:0;"></div>
+            <span id="radarLegendTarget">취업 목표 수준</span>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-line current"></div>
+            <span>현재 수준</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAP 설명 -->
       <div class="info-box" id="gapDescription" style="margin-bottom:16px"></div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+
+      <!-- 강점/보완 태그 -->
+      <div class="gap-columns">
         <div>
-          <div style="font-size:12px; font-weight:700; color:var(--success); margin-bottom:8px">✅ 강점</div>
+          <div class="gap-col-label" style="color:var(--success)">✅ 강점</div>
           <div class="tag-list" id="strongPoints"></div>
         </div>
         <div>
-          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:8px">⚠️ 보완 필요</div>
+          <div class="gap-col-label" style="color:var(--accent)">⚠️ 보완 필요</div>
           <div class="tag-list" id="weakPoints"></div>
         </div>
       </div>
     </div>
 
+    <!-- 3. 포트폴리오 참고 링크 (조건부) -->
+    <div class="result-section" id="portfolioSection" style="display:none">
+      <h3><div class="dot"></div>포트폴리오 참고 링크</h3>
+      <p style="font-size:12px; color:var(--text-sub); margin-bottom:12px">아래 사이트에서 해당 분야 우수 포트폴리오를 확인하고 방향을 잡아보세요.</p>
+      <div class="portfolio-links" id="portfolioLinks"></div>
+    </div>
+
+    <!-- 4. 추천 수업 로드맵 -->
     <div class="result-section">
       <h3><div class="dot"></div>추천 수업 로드맵</h3>
       <div class="course-timeline" id="courseTimeline"></div>
     </div>
 
+    <!-- 5. 예상 소요 기간 -->
     <div class="result-section">
       <h3><div class="dot"></div>예상 소요 기간</h3>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+      <div class="duration-grid">
         <div class="duration-box">
           <div class="duration-num" id="durationMin">-</div>
           <div class="duration-label">최소 개월</div>
@@ -756,13 +671,19 @@
           <div class="duration-label">최대 개월</div>
         </div>
       </div>
+      <div id="durationNote" style="margin-top:12px; font-size:12px; color:var(--text-sub); text-align:center;"></div>
     </div>
 
-    <div class="result-section">
-      <h3><div class="dot"></div>목표 달성 가이드</h3>
-      <div class="info-box" id="goalGuide"></div>
+    <!-- 6. 월별 학습 플래너 -->
+    <div class="result-section" id="monthlyPlannerSection" style="display:none">
+      <h3><div class="dot"></div>월별 학습 플래너</h3>
+      <p style="font-size:12px; color:var(--text-sub); margin-bottom:14px">좌우로 스크롤하여 전체 플랜을 확인하세요.</p>
+      <div class="planner-scroll">
+        <div class="planner-grid" id="monthlyPlannerGrid"></div>
+      </div>
     </div>
 
+    <!-- 7. 학원 수강 안내 -->
     <div class="result-section">
       <h3><div class="dot"></div>학원 수강 안내</h3>
       <div class="coverage-grid" style="margin-bottom:16px">
@@ -779,16 +700,17 @@
     </div>
 
     <button class="btn-pdf" onclick="generatePDF()">📄 PDF로 저장하기 (Ctrl+P)</button>
-    <div class="print-footer" id="printFooter">SBS 아카데미 컴퓨터아트학원 수원점 | Tel. 031-546-3644 | 본 자료는 AI 상담 시스템을 통해 생성된 맞춤형 분석 결과입니다.</div>
+    <div class="print-footer">SBS 아카데미 컴퓨터아트학원 수원점 | Tel. 031-546-3644 | 본 자료는 AI 상담 시스템을 통해 생성된 맞춤형 분석 결과입니다.</div>
     <button class="btn-reset" onclick="resetAll()">🔄 새 상담 시작</button>
-  </div>
+  </div><!-- /result -->
 
 </main>
 
-
 <script>
 
-// ── STATE ──
+// ═══════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════
 let apiKey = '';
 let selectedGoal = '';
 let selectedTrack = '';
@@ -798,18 +720,114 @@ let analysisResult = null;
 const LEVEL_LABELS = ['없음', '독학/조금 경험', '학교/학원 수강', '자격증 보유', '실무 경험'];
 
 const TRACK_TOOLS = {
-  motion: ['포토샵', '일러스트', '프리미어프로', '애프터이펙트', '시네마4D'],
-  interior: ['포토샵', '일러스트', 'AutoCAD(캐드)', '스케치업', '3ds Max'],
-  visual_editing: ['포토샵', '일러스트', '인디자인'],
-  web: ['포토샵', '일러스트', 'HTML/CSS', 'JavaScript', 'Figma'],
-  cg_maya: ['포토샵', '일러스트', '마야', '애프터이펙트', 'ZBrush'],
-  it_programming: ['C언어', 'Java', 'Python'],
-  ai: ['ChatGPT', 'Midjourney', 'AI 영상 툴'],
-  artwork: ['포토샵', '일러스트', '디지털드로잉 툴'],
-  certification: ['포토샵', '일러스트', '엑셀', 'AutoCAD']
+  motion:          ['포토샵', '일러스트', '프리미어프로', '애프터이펙트', '시네마4D'],
+  interior:        ['포토샵', '일러스트', 'AutoCAD(캐드)', '스케치업', '3ds Max'],
+  visual_editing:  ['포토샵', '일러스트', '인디자인'],
+  web:             ['포토샵', '일러스트', 'HTML/CSS', 'JavaScript', 'Figma'],
+  cg_maya:         ['포토샵', '일러스트', '마야', '애프터이펙트', 'ZBrush'],
+  it_programming:  ['C언어', 'Java', 'Python'],
+  ai:              ['ChatGPT', 'Midjourney', 'AI 영상 툴'],
+  artwork:         ['포토샵', '일러스트', '디지털드로잉 툴'],
+  certification:   ['포토샵', '일러스트', '엑셀', 'AutoCAD']
 };
 
-// ── API KEY ──
+// ── 트랙별 레이더 차트 설정 ──
+const TRACK_RADAR_CONFIG = {
+  motion: {
+    axes: ['영상 기획력', '편집(프리미어)', '모션그래픽(AE)', '3D(시네마4D)', '포트폴리오', '트렌드 이해'],
+    employment_target: [3, 5, 4, 3, 5, 3],
+    cert_target:       [2, 4, 4, 2, 3, 2]
+  },
+  interior: {
+    axes: ['공간 기획력', '2D도면(CAD)', '3D모델링', '렌더링(Max)', '포트폴리오', '자격증 보유'],
+    employment_target: [3, 5, 5, 4, 4, 3],
+    cert_target:       [2, 5, 2, 2, 2, 5]
+  },
+  visual_editing: {
+    axes: ['브랜딩 기획력', '포토샵', '일러스트', '인디자인', '포트폴리오', '편집 감각'],
+    employment_target: [4, 5, 5, 4, 5, 3],
+    cert_target:       [2, 5, 5, 3, 3, 2]
+  },
+  web: {
+    axes: ['UI/UX 설계', '디자인툴(PS/AI)', 'HTML/CSS', 'JavaScript', '반응형 구현', '포트폴리오'],
+    employment_target: [4, 4, 5, 4, 4, 4],
+    cert_target:       [3, 3, 5, 4, 4, 3]
+  },
+  cg_maya: {
+    axes: ['3D 기획력', '마야 모델링', '텍스처/렌더링', '리깅·애니메이션', '언리얼 엔진', '포트폴리오'],
+    employment_target: [3, 5, 4, 3, 3, 5],
+    cert_target:       [2, 4, 4, 3, 2, 4]
+  },
+  it_programming: {
+    axes: ['알고리즘 이해', '언어 숙련도', 'DB/백엔드', 'GitHub 관리', '프로젝트 경험', '자격증'],
+    employment_target: [4, 5, 5, 4, 4, 3],
+    cert_target:       [3, 4, 3, 3, 2, 5]
+  },
+  ai: {
+    axes: ['프롬프트 엔지니어링', '이미지 AI', '영상 AI', 'ChatGPT 활용', '콘텐츠 기획', 'AI 자격증'],
+    employment_target: [5, 4, 3, 4, 4, 3],
+    cert_target:       [3, 3, 2, 4, 2, 5]
+  },
+  artwork: {
+    axes: ['드로잉 기초', '채색/렌더링', '캐릭터 디자인', '디지털 툴', 'AI 아트 활용', '포트폴리오'],
+    employment_target: [4, 4, 4, 4, 3, 4],
+    cert_target:       [3, 3, 3, 4, 2, 3]
+  },
+  certification: {
+    axes: ['포토샵 활용', '일러스트 활용', '오피스/엑셀', 'CAD 활용', '회계/세무', '자격증 이해도'],
+    employment_target: [3, 3, 4, 3, 3, 5],
+    cert_target:       [4, 4, 5, 4, 4, 5]
+  }
+};
+
+// ── 트랙별 포트폴리오 참고 사이트 ──
+const TRACK_PORTFOLIO_SITES = {
+  motion: [
+    { title: 'Behance · 모션그래픽', url: 'https://www.behance.net/search/projects?search=motion+graphic', description: '국내외 모션그래픽 포트폴리오 참고' },
+    { title: 'Vimeo · Motion Design', url: 'https://vimeo.com/categories/animation', description: '영상/애니메이션 포트폴리오 참고' },
+    { title: 'ArtStation · Motion', url: 'https://www.artstation.com/channels/motion-graphics', description: '전문 아티스트 모션 포트폴리오' }
+  ],
+  interior: [
+    { title: 'Archinect Portfolio', url: 'https://archinect.com/portfolio', description: '건축/인테리어 포트폴리오 참고' },
+    { title: 'Dezeen · Architecture', url: 'https://www.dezeen.com/architecture/', description: '건축 디자인 트렌드 참고' },
+    { title: 'Pinterest · 인테리어', url: 'https://www.pinterest.co.kr/ideas/interior-design/', description: '인테리어 아이디어 및 포트폴리오 참고' }
+  ],
+  visual_editing: [
+    { title: 'Behance · Graphic Design', url: 'https://www.behance.net/search/projects?search=graphic+design', description: '그래픽/편집 디자인 포트폴리오 참고' },
+    { title: 'Dribbble · Visual Design', url: 'https://dribbble.com/tags/graphic_design', description: '시각 디자인 트렌드 참고' },
+    { title: 'Pinterest · Brand Design', url: 'https://www.pinterest.co.kr/ideas/brand-design/', description: '브랜딩 디자인 아이디어 참고' }
+  ],
+  web: [
+    { title: 'Behance · UI/UX', url: 'https://www.behance.net/search/projects?search=ui+ux', description: 'UI/UX 디자인 포트폴리오 참고' },
+    { title: 'Dribbble · Web Design', url: 'https://dribbble.com/tags/web_design', description: '웹 디자인 트렌드 참고' },
+    { title: 'Awwwards', url: 'https://www.awwwards.com/', description: '세계 최고 수준 웹 디자인 참고' }
+  ],
+  cg_maya: [
+    { title: 'ArtStation · 3D Art', url: 'https://www.artstation.com/channels/character-art', description: '전문 3D 아티스트 포트폴리오 참고' },
+    { title: 'CGSociety', url: 'https://cgsociety.org/', description: 'CG/VFX 전문가 커뮤니티' },
+    { title: 'Sketchfab', url: 'https://sketchfab.com/', description: '3D 모델 포트폴리오 플랫폼' }
+  ],
+  it_programming: [
+    { title: 'GitHub Trending', url: 'https://github.com/trending', description: '트렌딩 오픈소스 프로젝트 참고' },
+    { title: 'Naver D2', url: 'https://d2.naver.com/home', description: '네이버 기술 블로그 참고' }
+  ],
+  ai: [
+    { title: 'Behance · AI Art', url: 'https://www.behance.net/search/projects?search=AI+art', description: 'AI 생성 아트 포트폴리오 참고' },
+    { title: 'Midjourney Explore', url: 'https://www.midjourney.com/explore', description: 'Midjourney 작품 탐색' }
+  ],
+  artwork: [
+    { title: 'ArtStation · Illustration', url: 'https://www.artstation.com/channels/illustration', description: '일러스트레이션 포트폴리오 참고' },
+    { title: 'Pixiv', url: 'https://www.pixiv.net/', description: '디지털 아트 커뮤니티' },
+    { title: 'Behance · Illustration', url: 'https://www.behance.net/search/projects?search=illustration', description: '일러스트 포트폴리오 참고' }
+  ],
+  certification: [
+    { title: 'Q-net 큐넷', url: 'https://www.q-net.or.kr/', description: '자격증 시험 정보 및 접수 안내' }
+  ]
+};
+
+// ═══════════════════════════════════════════════════════
+//  API KEY
+// ═══════════════════════════════════════════════════════
 function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
   if (!key) { alert('API 키를 입력해주세요.'); return; }
@@ -817,7 +835,9 @@ function saveApiKey() {
   document.getElementById('apiModal').style.display = 'none';
 }
 
-// ── STEP NAVIGATION ──
+// ═══════════════════════════════════════════════════════
+//  STEP NAVIGATION
+// ═══════════════════════════════════════════════════════
 function showSection(n) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec' + n).classList.add('active');
@@ -829,8 +849,7 @@ function showSection(n) {
     if (i < n) step.classList.add('done');
     else if (i === n) step.classList.add('active');
     if (i < 4) {
-      const line = document.getElementById('line' + i);
-      line.classList.toggle('done', i < n);
+      document.getElementById('line' + i).classList.toggle('done', i < n);
     }
   }
 }
@@ -838,8 +857,8 @@ function showSection(n) {
 function goToStep1() { showSection(1); }
 function goToStep2() {
   const name = document.getElementById('name').value.trim();
-  const age = document.getElementById('age').value;
-  const bg = document.getElementById('background').value;
+  const age  = document.getElementById('age').value;
+  const bg   = document.getElementById('background').value;
   if (!name || !age || !bg) { alert('이름, 나이, 배경을 입력해주세요.'); return; }
   showSection(2);
 }
@@ -850,12 +869,14 @@ function goToStep3() {
   showSection(3);
 }
 
-// ── GOAL & TRACK SELECT ──
+// ═══════════════════════════════════════════════════════
+//  GOAL & TRACK SELECT
+// ═══════════════════════════════════════════════════════
 function selectGoal(g) {
   selectedGoal = g;
   document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('goal_' + g).classList.add('selected');
-  document.getElementById('jobField').style.display = (g === 'employment') ? 'block' : 'none';
+  document.getElementById('jobField').style.display  = (g === 'employment')    ? 'block' : 'none';
   document.getElementById('certField').style.display = (g === 'certification') ? 'block' : 'none';
 }
 function selectTrack(t) {
@@ -864,7 +885,9 @@ function selectTrack(t) {
   document.getElementById('track_' + t).classList.add('selected');
 }
 
-// ── SKILL CHECK BUILD ──
+// ═══════════════════════════════════════════════════════
+//  SKILL CHECK BUILD
+// ═══════════════════════════════════════════════════════
 function buildSkillCheck() {
   const tools = TRACK_TOOLS[selectedTrack] || [];
   const area = document.getElementById('skillCheckArea');
@@ -891,12 +914,13 @@ function selectLevel(id, tool, val, el) {
   skillLevels[tool] = val;
 }
 
-// ── RUN ANALYSIS ──
+// ═══════════════════════════════════════════════════════
+//  RUN ANALYSIS
+// ═══════════════════════════════════════════════════════
 async function runAnalysis() {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('result').style.display = 'none';
   document.getElementById('loading').style.display = 'block';
-
   document.getElementById('step3').classList.remove('active');
   document.getElementById('step3').classList.add('done');
   document.getElementById('line3').classList.add('done');
@@ -914,29 +938,158 @@ async function runAnalysis() {
   }
 }
 
+// ═══════════════════════════════════════════════════════
+//  BUILD USER INPUT
+// ═══════════════════════════════════════════════════════
 function buildUserInput() {
   const skillStr = Object.entries(skillLevels)
-    .map(([tool, val]) => `${tool}: ${LEVEL_LABELS[val]} (${val}/4)`)
+    .map(([tool, val]) => `- ${tool}: ${LEVEL_LABELS[val]} (${val}/4)`)
     .join('\n');
 
-  return `
-[고객 정보]
+  const radarConfig = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
+  const goalLabel = selectedGoal === 'employment' ? '취업 준비' : '자격증 취득';
+  const targetVals = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
+
+  return `[고객 정보]
 - 이름: ${document.getElementById('name').value}
 - 나이: ${document.getElementById('age').value}세
 - 배경: ${document.getElementById('background').value === 'major' ? '전공자/관련학과' : '비전공자'}
-- 목표 유형: ${selectedGoal === 'employment' ? '취업 준비' : '자격증 취득'}
+- 목표 유형: ${goalLabel}
 - 희망 트랙: ${selectedTrack}
 - 희망 직업: ${document.getElementById('desiredJob')?.value || '미정'}
 - 목표 자격증: ${document.getElementById('targetCert')?.value || '없음'}
 - 투자 가능 기간: ${document.getElementById('availableMonths').value || '미정'}개월
 - 주당 투자 시간: ${document.getElementById('hoursPerWeek').value || '미정'}시간
 
-[현재 툴 수준 (0=없음, 1=독학, 2=학교수강, 3=자격증, 4=실무)]
+[현재 툴 수준 (0=없음 / 1=독학 / 2=학교수강 / 3=자격증보유 / 4=실무경험)]
 ${skillStr}
-`.trim();
+
+[레이더 차트 분석 요청]
+다음 6개 축(0~5점)의 현재 수준을 스킬 입력과 고객 배경을 고려해 계산 후 radar_current 배열로 반환하세요.
+축: ${JSON.stringify(radarConfig.axes)}
+목표 수준(${goalLabel}): ${JSON.stringify(targetVals)}
+변환 기준: 없음=0, 독학=1, 학교수강=2, 자격증=3, 실무=4~5 (전공자면 +0.5 보정)
+
+[월별 플래너 요청]
+추천 수업을 순서대로 월별로 배치해 monthly_planner 배열로 반환하세요.
+month_offset=1이 다음 달 기준 첫 번째 달입니다.
+각 month당 수업명(courses 배열)과 이달 목표(milestone 문자열)를 포함하세요.`.trim();
 }
 
-// ── GEMINI API CALL ──
+// ═══════════════════════════════════════════════════════
+//  BUILD SYSTEM PROMPT
+// ═══════════════════════════════════════════════════════
+function buildSystemPrompt() {
+  const radarConfig = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
+  const goalLabel   = selectedGoal === 'employment' ? '취업 준비' : '자격증 취득';
+  const targetVals  = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
+
+  return `당신은 SBS 아카데미 컴퓨터아트학원 수원점의 전문 상담 AI입니다.
+아래 커리큘럼 및 취업·자격증 데이터를 토대로 고객 맞춤 GAP 분석 결과를 JSON 형식으로만 반환하세요.
+
+[분석 규칙]
+1. 반드시 학원 커리큘럼 안에서만 수업을 추천하세요
+2. 투자 가능 기간보다 필요 기간이 길면 현실적인 전체 기간을 그대로 제시하세요 (단축 금지)
+3. 취업 트렌드는 2025~2026년 한국 기준으로 구체적으로 작성하세요
+4. 자격증 목표 시 시험 횟수, 주관처, 응시 조건을 milestone에 반영하세요
+5. 반드시 순수 JSON만 반환하세요 (마크다운 코드블록 없이)
+6. 모든 텍스트는 한국어로 작성하세요
+
+[레이더 차트 기준]
+트랙: ${selectedTrack} | 목표: ${goalLabel}
+6개 축: ${JSON.stringify(radarConfig.axes)}
+목표 수준(5점 만점): ${JSON.stringify(targetVals)}
+
+[학원 커리큘럼 데이터]
+■ 공통기초
+- 포토샵 기초(1개월), 포토웍스/심화(1개월), 일러스트 기초(1개월), 디테일일러스트/심화(1개월)
+
+■ 모션/영상
+- 프리미어프로(1), 애프터이펙트1(1), 애프터이펙트2(1), 애프터이펙트3(1)
+- 시네마4D 1~5(각 1개월), 모션포트폴리오(최소 2개월), AI크리에이터-모션(1, 선택)
+
+■ 건축/인테리어
+- 실내건축자격증: 기능사(3~4개월)/산업기사(4~5개월)/기사(5~6개월)
+- 스케치업1~2(각1), 캐드1~2(각1), 3ds Max1~2(각1), BIM1~2(각1)
+- 인테리어포트폴리오(최소2), AI크리에이터-인테리어(1, 선택)
+
+■ 시각/편집디자인
+- 인포그래픽1~2(각1), 브랜딩디자인1~2(각1), 패키지디자인1~2(각1)
+- 그래픽아트웍(1), 인디자인1~2(각1), 시각편집포트폴리오(최소2), AI크리에이터(1, 선택)
+
+■ 웹디자인
+- 인포그래픽(2), 브랜딩디자인(2)
+- 웹퍼블리셔1 HTML(1), 웹퍼블리셔2 CSS(1), 웹퍼블리셔3 JS(1), 웹퍼블리셔4 jQuery(1)
+- UI/UX1(1), UI/UX2(1), 웹포트폴리오(최소2), AI크리에이터-웹(1, 선택)
+
+■ CG/마야
+- 마야1~9(각1), 애프터이펙트(3), Unreal(1), CG포트폴리오(최소2), AI크리에이터(1, 선택)
+
+■ IT/프로그래밍
+- C언어(2), Java/Android(2), Python(2), AICE자격증(1, 파이썬 이수 후)
+- 백엔드 JSP/DB(6)
+
+■ AI
+- AI자격증(1), AI기초반 ChatGPT+Midjourney(1), AI유튜브(1), AI영상편집(1)
+
+■ 아트웍
+- 디지털드로잉(개인 맞춤, 기간 가변), AI아트웍(1), 아트웍포트폴리오(최소2)
+
+■ 자격증 단기과정
+- GTQ2급(1), GTQ1급(1), GTQ-i(1), 컴퓨터그래픽스기능사(2)
+- 웹디자인개발기사(2), MOS(1), 컴활2급(1), 컴활1급(1)
+- 전산회계1급(2), 전산세무2급(2), CAT2급(1), 전산응용건축제도기능사(3~4), ACP(1)
+
+[취업 시장 정보 (2025~2026 한국)]
+- 모션/영상: 숏폼(릴스/쇼츠) 편집 수요 폭증, AE 모션그래픽+프리미어 편집 동시 필수, 신입 연봉 2,200~2,800만원
+- 건축/인테리어: CAD 도면+3D 렌더링 동시 역량 필수, 자격증 보유 우대, 신입 2,000~2,600만원
+- 시각/편집: 브랜딩+SNS 콘텐츠 제작 가능한 디자이너 우대, Behance 포폴 필수, 신입 2,000~2,500만원
+- 웹디자인: Figma+코딩 가능한 UI/UX 디자이너 수요 높음, 반응형 웹 구현 필수, 신입 2,200~2,700만원
+- CG/마야: 게임사(넥슨·넷마블) 및 VFX 스튜디오 상시 채용, ArtStation 포폴 필수, 신입 2,400~3,000만원
+- IT/프로그래밍: GitHub 프로젝트+알고리즘 능력 필수, Python/Java 백엔드 수요 높음, 신입 2,600~3,200만원
+- AI: AI 활용 능력 전 직군 필수화, AI 콘텐츠 기획 전문직 신규 수요, 프리랜서 병행 가능
+- 아트웍: 웹툰·게임·광고 일러스트 수요 지속, ArtStation+SNS 포폴 필수, 신입 1,800~2,400만원
+
+[자격증 취득 기준]
+- GTQ 1급: 포토샵 중급 이상, 연 5~6회(KPC), 합격률 약 30%
+- GTQ-i: 일러스트 중급 이상, 연 5~6회(KPC)
+- 컴퓨터그래픽스기능사: 포토샵+일러스트, 연 4회(산업인력공단), 실기 비중 큼
+- 웹디자인개발기사: HTML/CSS/JS 필수, 연 3회(산업인력공단)
+- 전산응용건축제도기능사: AutoCAD, 연 4회(산업인력공단), 3~4개월 준비
+- 실내건축산업기사: 2년제 관련학과 졸업 또는 실무 2년 필요
+- 컴활 1급: 엑셀 고급+액세스, 연 6회(대한상공회의소), 합격률 약 20%
+- 전산회계 1급: 회계 이론+KcLep 프로그램, 연 6회(한국세무사회)
+- AICE: Python 수료 후 취득 가능, AI 관련 국내 최초 공인 자격증
+- AI-POT 2급: AI 기초 활용, 단기 준비 가능
+
+[출력 JSON 형식 — 반드시 이 형식으로만 반환]
+{
+  "customer_summary": { "name": "", "goal": "", "background": "" },
+  "current_level_summary": "현재 수준 2~3줄 요약",
+  "radar_current": [0, 0, 0, 0, 0, 0],
+  "gap_analysis": {
+    "strong_points": ["강점1", "강점2", "강점3"],
+    "weak_points": ["보완필요1", "보완필요2", "보완필요3"],
+    "gap_description": "GAP 분석 설명 2~3줄 (취업 기준 또는 자격증 기준으로 구체적으로)"
+  },
+  "recommended_courses": [
+    { "order": 1, "course_name": "수업명", "duration_months": 1, "reason": "추천 이유 (GAP 연계)" }
+  ],
+  "total_duration": { "min_months": 0, "max_months": 0 },
+  "monthly_planner": [
+    { "month_offset": 1, "courses": ["수업명"], "milestone": "이달 목표 한 줄" }
+  ],
+  "academy_coverage": {
+    "coverable": ["학원에서 커버 가능한 항목"],
+    "not_coverable": ["개인 자체 준비 필요 항목"],
+    "recommendation": "최종 안내 멘트 2~3줄"
+  }
+}`.trim();
+}
+
+// ═══════════════════════════════════════════════════════
+//  GEMINI API CALL
+// ═══════════════════════════════════════════════════════
 async function callGemini(userInput) {
   const systemPrompt = buildSystemPrompt();
   const resp = await fetch(
@@ -945,10 +1098,8 @@ async function callGemini(userInput) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{
-          parts: [{ text: systemPrompt + '\n\n' + userInput }]
-        }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
+        contents: [{ parts: [{ text: systemPrompt + '\n\n' + userInput }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
       })
     }
   );
@@ -962,56 +1113,9 @@ async function callGemini(userInput) {
   return data.candidates[0].content.parts[0].text;
 }
 
-function buildSystemPrompt() {
-  return `
-당신은 SBS 아카데미 컴퓨터아트학원 수원점의 전문 상담 AI입니다.
-아래 커리큘럼 데이터를 기반으로 고객의 GAP 분석 결과를 JSON 형식으로만 반환하세요.
-
-[규칙]
-1. 반드시 제공된 커리큘럼 데이터 안에서만 수업을 추천하세요
-2. 결과는 반드시 아래 JSON 형식으로만 반환하세요 (다른 텍스트 없이)
-3. 취업 트렌드는 현재 시장 기준으로 구체적으로 작성하세요
-4. 학원에서 커버 가능한 부분과 개인 준비 필요 부분을 명확히 구분하세요
-5. 예상 기간은 비전공자/전공자 구분에 맞게 제시하세요
-6. 모든 텍스트는 한국어로 작성하세요
-
-[커리큘럼 데이터 요약]
-- 공통기초: 포토샵 기초(1개월), 포토웍스(1개월), 일러스트 기초(1개월), 디테일일러스트(1개월)
-- 모션/영상: 프리미어(1개월), 애프터이펙트 1~3(각1개월), 시네마4D 1~5(각1개월), 모션포폴(최소2개월)
-- 건축/인테리어: 실내건축자격증(기능사3~4개월/산업기사4~5개월/기사5~6개월), 스케치업1~2(각1개월), 캐드1~2(각1개월), 맥스1~2(각1개월), BIM1~2(각1개월)
-- 시각/편집: 인포그래픽1~2(각1개월), 브랜딩1~2(각1개월), 패키지1~2(각1개월), 그래픽아트웍(1개월), 인디자인1~2(각1개월)
-- 웹디자인: 인포그래픽(2개월), 브랜딩(2개월), 웹퍼블리셔1~4(HTML/CSS/JS/jQuery 각1개월), UI/UX1~2(각1개월)
-- CG/마야: 마야1~9(각1개월), 애프터이펙트(3개월), Unreal(1개월)
-- IT/프로그래밍: C언어(2개월), Java(2개월), Python(2개월), AICE자격증(1개월), 백엔드JSP/DB(6개월)
-- AI: AI자격증(1개월), AI기초반(1개월), AI유튜브(1개월), AI영상편집(1개월)
-- 아트웍: 디지털드로잉(개인맞춤), AI아트웍(1개월)
-- AI크리에이터: 각 트랙별 심화 마지막 단계 (1개월)
-- 사무자격증: MOS/컴활2급/컴활1급(각1개월), 전산회계1급/전산세무2급(각2개월)
-
-[출력 JSON 형식]
-{
-  "customer_summary": { "name": "", "goal": "", "background": "" },
-  "current_level_summary": "현재 수준 요약",
-  "gap_analysis": {
-    "strong_points": ["강점1", "강점2"],
-    "weak_points": ["보완필요1", "보완필요2"],
-    "gap_description": "전체 GAP 설명"
-  },
-  "recommended_courses": [
-    { "order": 1, "course_name": "수업명", "duration_months": "기간", "reason": "이유" }
-  ],
-  "total_duration": { "min_months": 0, "max_months": 0 },
-  "goal_guide": "목표 달성을 위한 구체적인 가이드 (취업트렌드, 포트폴리오 요구사항, 자격증 준비 방법 등)",
-  "academy_coverage": {
-    "coverable": ["학원에서 준비 가능한 항목"],
-    "not_coverable": ["개인 자체 준비 필요 항목"],
-    "recommendation": "최종 안내 멘트"
-  }
-}
-`.trim();
-}
-
-// ── PARSE RESULT ──
+// ═══════════════════════════════════════════════════════
+//  PARSE RESULT
+// ═══════════════════════════════════════════════════════
 function parseResult(raw) {
   try {
     const match = raw.match(/\{[\s\S]*\}/);
@@ -1022,21 +1126,50 @@ function parseResult(raw) {
   }
 }
 
-// ── RENDER RESULT ──
+// ═══════════════════════════════════════════════════════
+//  RENDER RESULT
+// ═══════════════════════════════════════════════════════
 function renderResult(r) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('result').style.display = 'block';
 
+  // 헤더
   document.getElementById('resultTitle').textContent = `${r.customer_summary.name}님 GAP 분석 결과`;
-  document.getElementById('resultSubtitle').textContent = `${r.customer_summary.goal} · ${r.customer_summary.background}`;
+  document.getElementById('resultSubtitle').textContent =
+    `${r.customer_summary.goal} · ${r.customer_summary.background} · ${new Date().toLocaleDateString('ko-KR')} 기준`;
+
+  // 1. 현재 수준 진단
   document.getElementById('currentLevelSummary').textContent = r.current_level_summary;
+
+  // 2. 레이더 차트
+  const radarConfig  = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
+  const targetValues = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
+  const currentValues = Array.isArray(r.radar_current) ? r.radar_current.map(v => Math.min(Math.max(Number(v)||0, 0), 5)) : Array(6).fill(0);
+  document.getElementById('radarLegendTarget').textContent = selectedGoal === 'employment' ? '취업 목표 수준' : '자격증 목표 수준';
+  drawRadarChart('radarChartContainer', radarConfig.axes, targetValues, currentValues);
+
+  // GAP 설명 + 태그
   document.getElementById('gapDescription').textContent = r.gap_analysis.gap_description;
-
   document.getElementById('strongPoints').innerHTML =
-    (r.gap_analysis.strong_points || []).map(p => `<span class="tag tag-strong">${p}</span>`).join('');
+    (r.gap_analysis.strong_points || []).map(p => `<span class="tag tag-strong">✅ ${p}</span>`).join('');
   document.getElementById('weakPoints').innerHTML =
-    (r.gap_analysis.weak_points || []).map(p => `<span class="tag tag-weak">${p}</span>`).join('');
+    (r.gap_analysis.weak_points || []).map(p => `<span class="tag tag-weak">⚠️ ${p}</span>`).join('');
 
+  // 3. 포트폴리오 참고 링크
+  const portfolioSites = TRACK_PORTFOLIO_SITES[selectedTrack] || [];
+  if (portfolioSites.length > 0) {
+    document.getElementById('portfolioSection').style.display = 'block';
+    document.getElementById('portfolioLinks').innerHTML = portfolioSites.map(site => `
+      <a href="${site.url}" target="_blank" rel="noopener" class="portfolio-link-card">
+        <div class="portfolio-link-title">🔗 ${site.title}</div>
+        <div class="portfolio-link-desc">${site.description}</div>
+      </a>
+    `).join('');
+  } else {
+    document.getElementById('portfolioSection').style.display = 'none';
+  }
+
+  // 4. 추천 수업 로드맵
   document.getElementById('courseTimeline').innerHTML =
     (r.recommended_courses || []).map(c => `
       <div class="course-item">
@@ -1049,10 +1182,21 @@ function renderResult(r) {
       </div>
     `).join('');
 
+  // 5. 예상 기간
   document.getElementById('durationMin').textContent = r.total_duration.min_months;
   document.getElementById('durationMax').textContent = r.total_duration.max_months;
-  document.getElementById('goalGuide').textContent = r.goal_guide;
+  const avail = parseInt(document.getElementById('availableMonths').value) || 0;
+  if (avail > 0 && r.total_duration.min_months > avail) {
+    document.getElementById('durationNote').textContent =
+      `⚠️ 희망 기간(${avail}개월)보다 더 필요합니다. 목표 달성을 위해 기간 연장을 검토해 보세요.`;
+  } else {
+    document.getElementById('durationNote').textContent = '';
+  }
 
+  // 6. 월별 플래너
+  renderMonthlyPlanner(r.monthly_planner || []);
+
+  // 7. 학원 수강 안내
   document.getElementById('coverableList').innerHTML =
     (r.academy_coverage.coverable || []).map(i => `<li>${i}</li>`).join('');
   document.getElementById('notCoverableList').innerHTML =
@@ -1062,24 +1206,157 @@ function renderResult(r) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── PDF ──
+// ═══════════════════════════════════════════════════════
+//  DRAW RADAR CHART (SVG)
+// ═══════════════════════════════════════════════════════
+function drawRadarChart(containerId, axes, target, current) {
+  const W = 480, H = 420;
+  const cx = W / 2, cy = H / 2 - 15;
+  const R = 130;
+  const n = axes.length; // 6
+  const MAX = 5;
+  const labelDist = 36;
+
+  function angle(i) { return (Math.PI * 2 * i / n) - Math.PI / 2; }
+
+  function pt(val, i) {
+    const a = angle(i);
+    const r = (Math.min(Math.max(val, 0), MAX) / MAX) * R;
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  }
+
+  // 배경 육각형 (레벨 1~5)
+  let bg = '';
+  for (let lv = 1; lv <= 5; lv++) {
+    const pts = Array.from({length: n}, (_, i) => {
+      const a = angle(i);
+      const r = (lv / MAX) * R;
+      return `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`;
+    }).join(' ');
+    const fills = ['#FDFDFF','#F8F9FF','#F2F5FF','#EBF0FF','#E3ECFF'];
+    bg += `<polygon points="${pts}" fill="${fills[lv-1]}" stroke="#DFE1E6" stroke-width="0.8"/>`;
+  }
+
+  // 축선 + 레이블
+  let axLines = '', labels = '';
+  for (let i = 0; i < n; i++) {
+    const a = angle(i);
+    const [ox, oy] = [cx + R * Math.cos(a), cy + R * Math.sin(a)];
+    axLines += `<line x1="${cx}" y1="${cy}" x2="${ox}" y2="${oy}" stroke="#DFE1E6" stroke-width="1"/>`;
+
+    const lx = cx + (R + labelDist) * Math.cos(a);
+    const ly = cy + (R + labelDist) * Math.sin(a);
+    const anchor = lx < cx - 8 ? 'end' : lx > cx + 8 ? 'start' : 'middle';
+    const dyAdj  = ly < cy - 8 ? '-0.3em' : ly > cy + 8 ? '1em' : '0.35em';
+    labels += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" dy="${dyAdj}"
+      font-size="10.5" font-family="'Noto Sans KR',sans-serif" fill="#5E6C84" font-weight="500">${axes[i]}</text>`;
+  }
+
+  // 레벨 숫자 (첫 번째 축 위)
+  let lvLabels = '';
+  for (let lv = 1; lv <= 5; lv++) {
+    const a = angle(0);
+    const r = (lv / MAX) * R;
+    lvLabels += `<text x="${cx + r * Math.cos(a) + 4}" y="${cy + r * Math.sin(a)}"
+      font-size="8" fill="#B3BAC5" font-family="'Noto Sans KR',sans-serif" dominant-baseline="central">${lv}</text>`;
+  }
+
+  // 목표 다각형 (빨간 점선)
+  const tPts = target.map((v, i) => pt(v, i).join(',')).join(' ');
+  const tPoly = `<polygon points="${tPts}" fill="rgba(255,86,48,0.1)" stroke="#FF5630" stroke-width="1.8" stroke-dasharray="5,3"/>`;
+
+  // 현재 다각형 (파란 실선)
+  const cPts = current.map((v, i) => pt(v, i).join(',')).join(' ');
+  const cPoly = `<polygon points="${cPts}" fill="rgba(0,82,204,0.15)" stroke="#0052CC" stroke-width="2"/>`;
+
+  // 점 마커
+  let dots = '';
+  target.forEach((v, i) => {
+    const [px, py] = pt(v, i);
+    dots += `<circle cx="${px}" cy="${py}" r="3" fill="#FF5630" stroke="white" stroke-width="1.2"/>`;
+  });
+  current.forEach((v, i) => {
+    const [px, py] = pt(v, i);
+    dots += `<circle cx="${px}" cy="${py}" r="4" fill="#0052CC" stroke="white" stroke-width="1.5"/>`;
+  });
+
+  // 범례
+  const legendY = H - 20;
+  const legend = `
+    <line x1="20" y1="${legendY}" x2="40" y2="${legendY}" stroke="#FF5630" stroke-width="2" stroke-dasharray="5,3"/>
+    <circle cx="30" cy="${legendY}" r="3" fill="#FF5630"/>
+    <text x="46" y="${legendY}" font-size="10" fill="#6B778C" dominant-baseline="central" font-family="'Noto Sans KR',sans-serif">
+      ${selectedGoal === 'employment' ? '취업 목표 수준' : '자격증 목표 수준'}
+    </text>
+    <line x1="200" y1="${legendY}" x2="220" y2="${legendY}" stroke="#0052CC" stroke-width="2"/>
+    <circle cx="210" cy="${legendY}" r="4" fill="#0052CC"/>
+    <text x="226" y="${legendY}" font-size="10" fill="#6B778C" dominant-baseline="central" font-family="'Noto Sans KR',sans-serif">현재 수준</text>
+  `;
+
+  document.getElementById(containerId).innerHTML = `
+    <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block; margin:0 auto; max-width:480px">
+      ${bg}${axLines}${lvLabels}${tPoly}${cPoly}${dots}${labels}${legend}
+    </svg>`;
+}
+
+// ═══════════════════════════════════════════════════════
+//  RENDER MONTHLY PLANNER
+// ═══════════════════════════════════════════════════════
+function renderMonthlyPlanner(planner) {
+  const section = document.getElementById('monthlyPlannerSection');
+  if (!planner || planner.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+
+  // 다음 달 기준으로 시작
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const baseYear  = start.getFullYear();
+  const baseMonth = start.getMonth(); // 0-indexed
+
+  const MN = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+
+  const html = planner.map((item, idx) => {
+    const totalIdx  = baseMonth + (item.month_offset - 1);
+    const monthIdx  = totalIdx % 12;
+    const yearOff   = Math.floor(totalIdx / 12);
+    const label     = `${baseYear + yearOff}년 ${MN[monthIdx]}`;
+
+    const coursesHtml = (item.courses || [])
+      .map(c => `<div class="planner-course">${c}</div>`)
+      .join('');
+
+    return `
+      <div class="planner-card">
+        <div class="planner-month-badge">${label}</div>
+        <div class="planner-courses">${coursesHtml}</div>
+        ${item.milestone ? `<div class="planner-milestone">🎯 ${item.milestone}</div>` : ''}
+      </div>`;
+  }).join('');
+
+  document.getElementById('monthlyPlannerGrid').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════
+//  PDF & RESET
+// ═══════════════════════════════════════════════════════
 function generatePDF() {
   if (!analysisResult) return;
-  // 인쇄 대화상자 열기 (브라우저 내장 PDF 저장 기능 활용)
-  // 한글 완벽 지원, 별도 폰트 설치 불필요
   window.print();
 }
 
-// ── RESET ──
 function resetAll() {
-  selectedGoal = '';
+  selectedGoal  = '';
   selectedTrack = '';
-  skillLevels = {};
+  skillLevels   = {};
   analysisResult = null;
   document.getElementById('result').style.display = 'none';
   document.querySelectorAll('.goal-btn, .track-btn').forEach(b => b.classList.remove('selected'));
   showSection(1);
 }
+
 </script>
 </body>
 </html>
