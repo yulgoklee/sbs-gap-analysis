@@ -1,0 +1,31 @@
+{
+  "description": "모든 학과 공통 기초 과정",
+  "courses": [
+    {
+      "id": "photoshop_basic",
+      "name": "포토샵 기초",
+      "duration_months": 1,
+      "skills_gained": ["포토샵 기본 툴", "레이어", "보정", "합성"]
+    },
+    {
+      "id": "photoshop_advanced",
+      "name": "포토웍스 (포토샵 심화)",
+      "duration_months": 1,
+      "prerequisite": "photoshop_basic",
+      "skills_gained": ["고급 합성", "디자인 응용", "GTO 자격증 대비"]
+    },
+    {
+      "id": "illust_basic",
+      "name": "일러스트 기초",
+      "duration_months": 1,
+      "skills_gained": ["벡터 드로잉", "펜툴", "타이포그래피"]
+    },
+    {
+      "id": "illust_advanced",
+      "name": "디테일 일러스트 (심화)",
+      "duration_months": 1,
+      "prerequisite": "illust_basic",
+      "skills_gained": ["고급 벡터", "캐릭터 디자인", "브랜드 심볼"]
+    }
+  ]
+}

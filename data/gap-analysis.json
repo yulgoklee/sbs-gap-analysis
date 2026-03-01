@@ -1,0 +1,14 @@
+{
+  "goal_types": ["취업", "자격증"],
+  "skill_levels": [
+    { "value": 0, "label": "없음 (써본 적 없음)" },
+    { "value": 1, "label": "들어본 적 있음 / 독학으로 조금 만져봤음" },
+    { "value": 2, "label": "학교/학원에서 배운 적 있음" },
+    { "value": 3, "label": "자격증 있음" },
+    { "value": 4, "label": "실무에서 써봤음" }
+  ],
+  "background_types": [
+    { "value": "non_major", "label": "비전공자" },
+    { "value": "major", "label": "전공자 또는 관련 학과 재학/졸업" }
+  ]
+}

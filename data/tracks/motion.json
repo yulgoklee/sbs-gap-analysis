@@ -1,0 +1,64 @@
+{
+  "id": "motion",
+  "name": "모션/영상",
+  "description": "영상 편집부터 모션그래픽, 3D까지",
+  "jobs": [
+    "영상편집자",
+    "모션그래퍼",
+    "유튜브 크리에이터/편집자",
+    "VFX 아티스트",
+    "방송편집자",
+    "SNS 콘텐츠 영상 제작자"
+  ],
+  "key_tools": ["프리미어프로", "애프터이펙트", "시네마4D"],
+  "required_skills": [
+    "프리미어프로 (편집, 색보정, 오디오)",
+    "애프터이펙트 (모션그래픽, 합성)",
+    "포토샵/일러스트 (썸네일, 그래픽 소스)",
+    "시네마4D (3D 모션, 선택적)"
+  ],
+  "certifications": ["GTQ", "ACA", "영상편집기사"],
+  "portfolio": {
+    "requirements": [
+      "30초~2분 내외 모션그래픽 클립",
+      "실사 영상 편집본",
+      "브랜드 영상 또는 SNS 콘텐츠",
+      "유튜브 채널 운영 이력 (플러스 요소)"
+    ],
+    "count": "2~3편"
+  },
+  "duration": {
+    "non_major": "12~18개월",
+    "major": "8~12개월"
+  },
+  "radar_config": {
+    "axes": ["영상 기획력", "편집(프리미어)", "모션그래픽(AE)", "3D(시네마4D)", "포트폴리오", "트렌드 이해"],
+    "employment_target": [3, 5, 4, 3, 5, 3],
+    "cert_target": [2, 4, 4, 2, 3, 2]
+  },
+  "portfolio_sites": [
+    { "title": "Behance · 모션그래픽", "url": "https://www.behance.net/search/projects?search=motion+graphic", "description": "국내외 모션그래픽 포트폴리오 참고" },
+    { "title": "Vimeo · Motion Design", "url": "https://vimeo.com/categories/animation", "description": "영상/애니메이션 포트폴리오 참고" },
+    { "title": "ArtStation · Motion", "url": "https://www.artstation.com/channels/motion-graphics", "description": "전문 아티스트 모션 포트폴리오" }
+  ],
+  "employment_market": {
+    "trend": "숏폼 콘텐츠(릴스/쇼츠) 수요 폭증, 광고/유튜브 영상 편집자 상시 채용",
+    "required_portfolio": "모션그래픽 2~3편 + 영상 편집본 1편 이상",
+    "salary_range": "신입 2,200~2,800만원, 경력 3,500만원+",
+    "hiring_channels": ["사람인", "잡코리아", "크몽(프리랜서)", "링크드인"]
+  },
+  "courses": [
+    { "id": "premiere", "name": "프리미어프로", "duration_months": 1 },
+    { "id": "aftereffects_1", "name": "애프터이펙트 1", "duration_months": 1 },
+    { "id": "aftereffects_2", "name": "애프터이펙트 2", "duration_months": 1 },
+    { "id": "aftereffects_3", "name": "애프터이펙트 3", "duration_months": 1 },
+    { "id": "cinema4d_1", "name": "시네마4D 1", "duration_months": 1 },
+    { "id": "cinema4d_2", "name": "시네마4D 2", "duration_months": 1 },
+    { "id": "cinema4d_3", "name": "시네마4D 3", "duration_months": 1 },
+    { "id": "cinema4d_4", "name": "시네마4D 4", "duration_months": 1 },
+    { "id": "cinema4d_5", "name": "시네마4D 5", "duration_months": 1 },
+    { "id": "motion_portfolio", "name": "모션 포트폴리오", "duration_months": 2, "note": "개인 진도에 따라 상이, 최소 2개월" },
+    { "id": "ai_creator_motion", "name": "AI크리에이터 (모션)", "duration_months": 1, "note": "선택 심화 과정" }
+  ],
+  "course_flow": "포토샵/일러스트 기초 → 프리미어프로 → 애프터이펙트 1~3 → 시네마4D 1~5 → 모션포폴 → (AI크리에이터)"
+}

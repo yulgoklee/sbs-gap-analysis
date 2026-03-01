@@ -1,0 +1,55 @@
+{
+  "id": "it_programming",
+  "name": "IT/프로그래밍",
+  "description": "개발 언어부터 앱, 백엔드까지",
+  "jobs": [
+    "프론트엔드 개발자",
+    "백엔드 개발자",
+    "앱 개발자",
+    "데이터 분석가",
+    "시스템 엔지니어"
+  ],
+  "key_tools": ["C언어", "Java", "Python"],
+  "required_skills": [
+    "선택 언어 (C / Java / Python)",
+    "DB (JSP/DB)",
+    "알고리즘 기초",
+    "포트폴리오 프로젝트"
+  ],
+  "certifications": ["정보처리기사", "컴활 1급", "AICE (파이썬 과정)"],
+  "portfolio": {
+    "requirements": [
+      "토이 프로젝트 1~2개",
+      "GitHub 관리",
+      "기능 구현 중심"
+    ],
+    "count": "1~2개"
+  },
+  "duration": {
+    "non_major": "12~18개월",
+    "major": "8~12개월"
+  },
+  "radar_config": {
+    "axes": ["알고리즘 이해", "언어 숙련도", "DB/백엔드", "GitHub 관리", "프로젝트 경험", "자격증"],
+    "employment_target": [4, 5, 5, 4, 4, 3],
+    "cert_target": [3, 4, 3, 3, 2, 5]
+  },
+  "portfolio_sites": [
+    { "title": "GitHub Trending", "url": "https://github.com/trending", "description": "트렌딩 오픈소스 프로젝트 참고" },
+    { "title": "Naver D2", "url": "https://d2.naver.com/home", "description": "네이버 기술 블로그 참고" }
+  ],
+  "employment_market": {
+    "trend": "신입 개발자 GitHub 포폴 필수, Python/Java 백엔드 수요 높음, AICE 자격증 플러스",
+    "required_portfolio": "GitHub 레포지토리 관리 + 토이프로젝트 1~2개 (README 포함)",
+    "salary_range": "신입 2,600~3,200만원, 경력 4,500만원+",
+    "hiring_channels": ["원티드", "로켓펀치", "사람인", "프로그래머스 채용"]
+  },
+  "courses": [
+    { "id": "c_language", "name": "C언어", "duration_months": 2 },
+    { "id": "java", "name": "Java/Android", "duration_months": 2 },
+    { "id": "python", "name": "Python", "duration_months": 2 },
+    { "id": "aice", "name": "AICE 자격증", "duration_months": 1, "prerequisite": "python", "note": "파이썬 이수 후 별도" },
+    { "id": "backend", "name": "백엔드 (JSP/DB)", "duration_months": 6 }
+  ],
+  "course_flow": "C언어 또는 Java 또는 Python → 백엔드(JSP/DB) → 포트폴리오 프로젝트 / Python → AICE 자격증"
+}
