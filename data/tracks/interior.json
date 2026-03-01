@@ -1,0 +1,78 @@
+{
+  "id": "interior",
+  "name": "건축/인테리어",
+  "description": "실내 공간 설계부터 3D 시각화까지",
+  "jobs": [
+    "인테리어 디자이너",
+    "건축설계사",
+    "공간 디자이너",
+    "3D 시각화 아티스트",
+    "건축 드래프터"
+  ],
+  "key_tools": ["AutoCAD(캐드)", "스케치업", "3ds Max"],
+  "required_skills": [
+    "AutoCAD (평면도, 도면)",
+    "스케치업 (3D 모델링)",
+    "3ds Max + V-Ray (렌더링)",
+    "BIM/Revit (선택적)",
+    "포토샵 (후보정)"
+  ],
+  "certifications": [
+    "전산응용건축제도기능사",
+    "실내건축산업기사",
+    "실내건축기사",
+    "CAT 2급"
+  ],
+  "portfolio": {
+    "requirements": [
+      "평면도/입면도/단면도 도면 세트",
+      "3D 렌더링 이미지",
+      "실내 공간 디자인 프로젝트 1~2개"
+    ],
+    "count": "2~4개"
+  },
+  "duration": {
+    "non_major": "12~18개월",
+    "major": "8~12개월"
+  },
+  "radar_config": {
+    "axes": ["공간 기획력", "2D 도면(CAD)", "3D 모델링", "렌더링(3dsMax)", "포트폴리오", "자격증 보유"],
+    "employment_target": [3, 5, 5, 4, 4, 3],
+    "cert_target": [2, 5, 2, 2, 2, 5]
+  },
+  "portfolio_sites": [
+    { "title": "Archinect Portfolio", "url": "https://archinect.com/portfolio", "description": "건축/인테리어 포트폴리오 참고" },
+    { "title": "Dezeen · Architecture", "url": "https://www.dezeen.com/architecture/", "description": "건축 디자인 트렌드 참고" },
+    { "title": "Pinterest · 인테리어", "url": "https://www.pinterest.co.kr/ideas/interior-design/", "description": "인테리어 아이디어 및 포트폴리오 참고" }
+  ],
+  "employment_market": {
+    "trend": "인테리어 리모델링 수요 지속, CAD+3D 렌더링 동시 가능한 인재 선호",
+    "required_portfolio": "도면 세트 + 3D 렌더링 이미지 + 공간 기획안",
+    "salary_range": "신입 2,000~2,600만원, 경력 3,000만원+",
+    "hiring_channels": ["건설취업", "잡코리아", "사람인", "인테리어 업체 직접 지원"]
+  },
+  "courses": [
+    {
+      "id": "indoor_arch_cert",
+      "name": "실내건축자격증",
+      "duration_months": "3~6",
+      "note": "기능사 3~4개월 / 산업기사 4~5개월 / 기사 5~6개월",
+      "variants": [
+        { "name": "전산응용건축제도기능사", "duration_months": "3~4" },
+        { "name": "실내건축산업기사", "duration_months": "4~5" },
+        { "name": "실내건축기사", "duration_months": "5~6" }
+      ]
+    },
+    { "id": "sketch_1", "name": "스케치업 1", "duration_months": 1 },
+    { "id": "sketch_2", "name": "스케치업 2", "duration_months": 1 },
+    { "id": "cad_1", "name": "캐드 1", "duration_months": 1 },
+    { "id": "cad_2", "name": "캐드 2", "duration_months": 1 },
+    { "id": "max_1", "name": "3ds Max 1", "duration_months": 1 },
+    { "id": "max_2", "name": "3ds Max 2", "duration_months": 1 },
+    { "id": "bim_1", "name": "BIM 1", "duration_months": 1 },
+    { "id": "bim_2", "name": "BIM 2", "duration_months": 1 },
+    { "id": "interior_portfolio", "name": "인테리어 포트폴리오", "duration_months": 2, "note": "개인 진도에 따라 상이" },
+    { "id": "ai_creator_interior", "name": "AI크리에이터 (인테리어)", "duration_months": 1, "note": "선택 심화 과정" }
+  ],
+  "course_flow": "포토샵/일러스트 기초 → 실내건축자격증 → 스케치업 → 캐드 → 맥스 → BIM → 인테리어포폴 → (AI크리에이터)"
+}

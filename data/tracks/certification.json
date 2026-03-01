@@ -1,0 +1,33 @@
+{
+  "id": "certification",
+  "name": "자격증 과정",
+  "description": "취업/이직에 필요한 자격증 단기 집중",
+  "jobs": ["사무직", "경리/회계", "공공기관", "일반 기업"],
+  "radar_config": {
+    "axes": ["포토샵 활용", "일러스트 활용", "오피스/엑셀", "CAD 활용", "회계/세무", "자격증 이해도"],
+    "employment_target": [3, 3, 4, 3, 3, 5],
+    "cert_target": [4, 4, 5, 4, 4, 5]
+  },
+  "portfolio_sites": [
+    { "title": "Q-net 큐넷", "url": "https://www.q-net.or.kr/", "description": "자격증 시험 정보 및 접수 안내" }
+  ],
+  "certifications": [
+    { "id": "gtq_2", "name": "GTQ 2급", "duration_months": 1, "tool": "포토샵", "exam_per_year": "연 5~6회", "organizer": "KPC" },
+    { "id": "gtq_1", "name": "GTQ 1급", "duration_months": 1, "tool": "포토샵", "prerequisite": "gtq_2", "exam_per_year": "연 5~6회", "organizer": "KPC" },
+    { "id": "gtqi", "name": "GTQ-i", "duration_months": 1, "tool": "일러스트", "exam_per_year": "연 5~6회", "organizer": "KPC" },
+    { "id": "computer_graphics", "name": "컴퓨터그래픽스기능사", "duration_months": 2, "tool": "포토샵+일러스트", "exam_per_year": "연 4회", "organizer": "한국산업인력공단" },
+    { "id": "web_design", "name": "웹디자인개발기사", "duration_months": 2, "tool": "HTML/CSS", "exam_per_year": "연 3회", "organizer": "한국산업인력공단" },
+    { "id": "mos", "name": "MOS", "duration_months": 1, "tool": "MS Office", "exam_per_year": "상시", "organizer": "Certiport" },
+    { "id": "comhwal_2", "name": "컴활 2급", "duration_months": 1, "tool": "엑셀", "exam_per_year": "연 6회", "organizer": "대한상공회의소" },
+    { "id": "comhwal_1", "name": "컴활 1급", "duration_months": 1, "tool": "엑셀/액세스", "prerequisite": "comhwal_2", "exam_per_year": "연 6회", "organizer": "대한상공회의소" },
+    { "id": "accounting_1", "name": "전산회계 1급", "duration_months": 2, "tool": "회계 프로그램", "exam_per_year": "연 6회", "organizer": "한국세무사회" },
+    { "id": "tax_2", "name": "전산세무 2급", "duration_months": 2, "tool": "세무 프로그램", "exam_per_year": "연 6회", "organizer": "한국세무사회" },
+    { "id": "cat_2", "name": "CAT 2급", "duration_months": 1, "tool": "AutoCAD", "exam_per_year": "연 4회", "organizer": "대한상공회의소" },
+    { "id": "arch_draft", "name": "전산응용건축제도기능사", "duration_months": "3~4", "tool": "AutoCAD", "exam_per_year": "연 4회", "organizer": "한국산업인력공단" },
+    { "id": "acp", "name": "ACP", "duration_months": 1, "tool": "Adobe", "exam_per_year": "상시", "organizer": "Adobe" }
+  ],
+  "duration": {
+    "short": "1~2개월",
+    "mid": "2~3개월"
+  }
+}

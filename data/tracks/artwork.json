@@ -1,0 +1,58 @@
+{
+  "id": "artwork",
+  "name": "아트웍",
+  "description": "디지털 드로잉, AI 아트, 포트폴리오",
+  "jobs": [
+    "디지털 아티스트",
+    "웹툰 작가",
+    "콘셉트 아티스트",
+    "일러스트레이터"
+  ],
+  "key_tools": ["포토샵", "일러스트", "디지털드로잉 툴"],
+  "required_skills": [
+    "디지털 드로잉",
+    "채색 및 렌더링",
+    "캐릭터 디자인",
+    "AI 아트 툴 활용"
+  ],
+  "certifications": ["ACP", "GTQ"],
+  "portfolio": {
+    "requirements": [
+      "캐릭터/배경 일러스트",
+      "AI 아트 작업물",
+      "스토리보드 (선택적)"
+    ],
+    "count": "2~4개"
+  },
+  "duration": {
+    "non_major": "12~18개월",
+    "major": "8~12개월"
+  },
+  "radar_config": {
+    "axes": ["드로잉 기초", "채색/렌더링", "캐릭터 디자인", "디지털 툴", "AI 아트 활용", "포트폴리오"],
+    "employment_target": [4, 4, 4, 4, 3, 4],
+    "cert_target": [3, 3, 3, 4, 2, 3]
+  },
+  "portfolio_sites": [
+    { "title": "ArtStation · Illustration", "url": "https://www.artstation.com/channels/illustration", "description": "일러스트레이션 포트폴리오 참고" },
+    { "title": "Pixiv", "url": "https://www.pixiv.net/", "description": "디지털 아트 커뮤니티" },
+    { "title": "Behance · Illustration", "url": "https://www.behance.net/search/projects?search=illustration", "description": "일러스트 포트폴리오 참고" }
+  ],
+  "employment_market": {
+    "trend": "웹툰·게임·광고 일러스트 수요 지속, ArtStation 포폴 + SNS(인스타/픽시브) 활동 필수",
+    "required_portfolio": "캐릭터 일러스트 5점 이상 + 배경/배경+캐릭터 구도 포함",
+    "salary_range": "프리랜서 중심, 신입 1,800~2,400만원 (게임사/출판사)",
+    "hiring_channels": ["ArtStation Jobs", "원티드", "크몽", "프리랜서 SNS 영업"]
+  },
+  "courses": [
+    {
+      "id": "digital_drawing",
+      "name": "디지털드로잉",
+      "duration_months": "개인 맞춤",
+      "note": "정해진 진도 없음, 목표 수준까지 개별 진행"
+    },
+    { "id": "ai_artwork", "name": "AI-아트웍", "duration_months": 1 },
+    { "id": "artwork_portfolio", "name": "아트웍 포트폴리오", "duration_months": 2, "note": "개인 진도에 따라 상이" }
+  ],
+  "course_flow": "포토샵/일러스트 기초 → 디지털드로잉 (개인 맞춤) → AI-아트웍 → 아트웍포폴"
+}

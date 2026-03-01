@@ -1,0 +1,65 @@
+{
+  "id": "web",
+  "name": "웹디자인",
+  "description": "웹 디자인부터 UI/UX, 퍼블리싱까지",
+  "jobs": [
+    "웹 디자이너",
+    "UI/UX 디자이너",
+    "퍼블리셔",
+    "프론트엔드 디자이너"
+  ],
+  "key_tools": ["포토샵", "일러스트", "HTML/CSS/JS"],
+  "required_skills": [
+    "포토샵",
+    "일러스트",
+    "HTML (웹퍼블리셔 1)",
+    "CSS (웹퍼블리셔 2)",
+    "JavaScript (웹퍼블리셔 3)",
+    "jQuery (웹퍼블리셔 4)",
+    "Figma",
+    "UI/UX 설계"
+  ],
+  "certifications": ["웹디자인개발기사", "GTQ", "ACP", "컴퓨터그래픽스기능사"],
+  "portfolio": {
+    "requirements": [
+      "웹사이트 디자인 시안 2~3개",
+      "반응형 웹 구현본",
+      "UI 컴포넌트 정리",
+      "모바일 앱 UI (선택적)"
+    ],
+    "count": "2~4개"
+  },
+  "duration": {
+    "non_major": "12~18개월",
+    "major": "8~12개월"
+  },
+  "radar_config": {
+    "axes": ["UI/UX 설계", "디자인 툴(PS/AI)", "HTML/CSS", "JavaScript", "반응형 구현", "포트폴리오"],
+    "employment_target": [4, 4, 5, 4, 4, 4],
+    "cert_target": [3, 3, 5, 4, 4, 3]
+  },
+  "portfolio_sites": [
+    { "title": "Behance · UI/UX", "url": "https://www.behance.net/search/projects?search=ui+ux", "description": "UI/UX 디자인 포트폴리오 참고" },
+    { "title": "Dribbble · Web Design", "url": "https://dribbble.com/tags/web_design", "description": "웹 디자인 트렌드 참고" },
+    { "title": "Awwwards", "url": "https://www.awwwards.com/", "description": "세계 최고 수준 웹 디자인 참고" }
+  ],
+  "employment_market": {
+    "trend": "Figma 기반 UI/UX + 코딩 가능한 퍼블리셔 수요 높음, 웹디자인기사 자격증 우대",
+    "required_portfolio": "반응형 웹사이트 2~3개 + UI 시안 + GitHub Pages 배포",
+    "salary_range": "신입 2,200~2,700만원, 경력 3,500만원+",
+    "hiring_channels": ["원티드", "잡플래닛", "사람인", "Wanted(UI/UX)"]
+  },
+  "courses": [
+    { "id": "infographic_web", "name": "인포그래픽", "duration_months": 2 },
+    { "id": "branding_web", "name": "브랜딩디자인", "duration_months": 2 },
+    { "id": "web_pub_1", "name": "웹퍼블리셔 1 (HTML)", "duration_months": 1 },
+    { "id": "web_pub_2", "name": "웹퍼블리셔 2 (CSS)", "duration_months": 1 },
+    { "id": "web_pub_3", "name": "웹퍼블리셔 3 (JavaScript)", "duration_months": 1 },
+    { "id": "web_pub_4", "name": "웹퍼블리셔 4 (jQuery)", "duration_months": 1 },
+    { "id": "uiux_1", "name": "UI/UX 1", "duration_months": 1 },
+    { "id": "uiux_2", "name": "UI/UX 2", "duration_months": 1 },
+    { "id": "web_portfolio", "name": "웹 포트폴리오", "duration_months": 2, "note": "개인 진도에 따라 상이" },
+    { "id": "ai_creator_web", "name": "AI크리에이터 (웹)", "duration_months": 1, "note": "선택 심화 과정" }
+  ],
+  "course_flow": "포토샵/일러스트 기초 → 인포그래픽 → 브랜딩디자인 → 웹퍼블리셔 1~4 → UI/UX → 웹포폴 → (AI크리에이터)"
+}

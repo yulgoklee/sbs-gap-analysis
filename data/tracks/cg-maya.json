@@ -1,0 +1,65 @@
+{
+  "id": "cg_maya",
+  "name": "CG/마야",
+  "description": "3D 모델링, 캐릭터, VFX",
+  "jobs": [
+    "3D 모델러",
+    "CG 아티스트",
+    "캐릭터 디자이너",
+    "게임 아트 디자이너",
+    "영화/방송 VFX"
+  ],
+  "key_tools": ["마야", "애프터이펙트", "Unreal Engine"],
+  "required_skills": [
+    "마야 (모델링, 리깅, 애니메이션)",
+    "ZBrush (선택적)",
+    "Unreal Engine",
+    "Octane Render",
+    "포토샵"
+  ],
+  "certifications": ["ACA", "컴퓨터그래픽스기능사"],
+  "portfolio": {
+    "requirements": [
+      "3D 캐릭터/오브젝트 모델링",
+      "텍스처링/라이팅/렌더링 완성본",
+      "애니메이션 클립 (선택적)"
+    ],
+    "count": "2~3개"
+  },
+  "duration": {
+    "non_major": "12~18개월",
+    "major": "8~12개월"
+  },
+  "radar_config": {
+    "axes": ["3D 기획력", "마야 모델링", "텍스처/렌더링", "리깅·애니메이션", "언리얼 엔진", "포트폴리오"],
+    "employment_target": [3, 5, 4, 3, 3, 5],
+    "cert_target": [2, 4, 4, 3, 2, 4]
+  },
+  "portfolio_sites": [
+    { "title": "ArtStation · 3D Art", "url": "https://www.artstation.com/channels/character-art", "description": "전문 3D 아티스트 포트폴리오 참고" },
+    { "title": "CGSociety", "url": "https://cgsociety.org/", "description": "CG/VFX 전문가 커뮤니티" },
+    { "title": "Sketchfab", "url": "https://sketchfab.com/", "description": "3D 모델 포트폴리오 플랫폼" }
+  ],
+  "employment_market": {
+    "trend": "게임사(넥슨·넷마블 등) 및 광고/영화 VFX 스튜디오 상시 채용, ArtStation 포폴 필수",
+    "required_portfolio": "3D 캐릭터 모델링 + 렌더링 완성본 2~3개, ArtStation 업로드 권장",
+    "salary_range": "신입 2,400~3,000만원, 경력 4,000만원+",
+    "hiring_channels": ["ArtStation Jobs", "게임빌/넥슨 채용사이트", "잡코리아"]
+  },
+  "courses": [
+    { "id": "maya_1", "name": "마야 1", "duration_months": 1 },
+    { "id": "maya_2", "name": "마야 2", "duration_months": 1 },
+    { "id": "maya_3", "name": "마야 3", "duration_months": 1 },
+    { "id": "maya_4", "name": "마야 4", "duration_months": 1 },
+    { "id": "maya_5", "name": "마야 5", "duration_months": 1 },
+    { "id": "aftereffects_cg", "name": "애프터이펙트", "duration_months": 3 },
+    { "id": "maya_6", "name": "마야 6 (리깅)", "duration_months": 1 },
+    { "id": "maya_7", "name": "마야 7 (애니메이션)", "duration_months": 1 },
+    { "id": "maya_8", "name": "마야 8", "duration_months": 1 },
+    { "id": "maya_9", "name": "마야 9", "duration_months": 1 },
+    { "id": "unreal", "name": "Unreal", "duration_months": 1 },
+    { "id": "cg_portfolio", "name": "마야 포트폴리오", "duration_months": 2, "note": "개인 진도에 따라 상이" },
+    { "id": "ai_creator_cg", "name": "AI크리에이터 (CG)", "duration_months": 1, "note": "선택 심화 과정" }
+  ],
+  "course_flow": "포토샵/일러스트 기초 → 디지털드로잉 → 마야 1~9 → 애프터이펙트 → Unreal → CG포폴 → (AI크리에이터)"
+}
