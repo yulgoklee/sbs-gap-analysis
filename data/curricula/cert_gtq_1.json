@@ -1,0 +1,62 @@
+{
+  "course_id": "cert_gtq_1",
+  "name": "GTQ 1급 (포토샵)",
+  "covers_courses": ["gtq_1"],
+  "instructor": "김민주",
+  "track": "certification",
+  "software": ["Adobe Photoshop"],
+  "prerequisite_courses": ["photoshop"],
+  "prerequisite_skills": ["포토샵 기초"],
+  "difficulty": 2,
+  "age_range": { "min": 15, "max": 60 },
+  "schedule": "주말반 (토·일) 2주",
+  "duration_total_weeks": 2,
+  "certifications_targeted": ["GTQ 1급"],
+  "objectives": [
+    "GTQ 1급 시험 출제 유형 파악 및 단기 완성",
+    "이미지 합성·문자 효과·필터 실기 기출 풀이",
+    "펜툴·마스크·조정 레이어 실무 적용 숙달",
+    "실전 기출문제 반복으로 합격 역량 완성"
+  ],
+  "employment_fields": ["디자이너 취업 자격증"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "GTQ 1급 — 1주차 (토·일)",
+      "weeks": [
+        {
+          "week": "1주차 토",
+          "description": "GTQ 1급 시험 유형 오리엔테이션. 기출 유형 1·2번 (이미지 합성, 레이어 마스크, 클리핑 마스크) 풀이 및 실습",
+          "keywords": ["GTQ 1급", "시험 유형", "이미지 합성", "레이어 마스크", "클리핑 마스크"]
+        },
+        {
+          "week": "1주차 일",
+          "description": "기출 유형 3번 (문자 효과, 레이어 스타일, 블렌딩 모드). 펜툴·패스 활용 정밀 선택 실습",
+          "keywords": ["문자 효과", "레이어 스타일", "블렌딩 모드", "펜툴", "패스"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "GTQ 1급 — 2주차 (토·일)",
+      "weeks": [
+        {
+          "week": "2주차 토",
+          "description": "기출 유형 4번 (필터 효과, 색상 보정, 조정 레이어). 시험 시간 관리 전략 및 반복 실습",
+          "keywords": ["필터", "색상 보정", "조정 레이어", "시간 관리", "기출"]
+        },
+        {
+          "week": "2주차 일",
+          "description": "최신 기출문제 실전 풀이 (전 유형 종합). 오답 분석 및 최종 완성",
+          "keywords": ["기출문제", "실전 풀이", "오답 분석", "종합 실습"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "이미지 합성", "레이어 마스크", "클리핑 마스크",
+    "문자 효과", "레이어 스타일", "블렌딩 모드", "펜툴", "패스",
+    "필터", "색상 보정", "조정 레이어",
+    "기출문제", "시험 시간 관리"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "course_id": "interior_3dsmax",
+  "name": "3DS MAX 1~2",
+  "covers_courses": ["max_1", "max_2"],
+  "instructor": "남현우",
+  "track": "interior",
+  "software": ["3DS MAX", "VRay", "AutoCAD", "Photoshop"],
+  "prerequisite_courses": ["cad_1", "cad_2", "photoshop"],
+  "prerequisite_skills": ["AutoCAD", "포토샵"],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "objectives": [
+    "3DS MAX 기초 인터페이스 및 폴리곤 모델링 습득",
+    "VRay 재질·조명·카메라를 활용한 실사 수준 렌더링",
+    "CAD 도면 기반 실내공간(원룸·주거) 3D 모델링 및 투시도 완성",
+    "물·잔디 등 특수 재질 표현 및 고급 렌더링 실무 역량"
+  ],
+  "employment_fields": ["실내건축 설계사무소", "인테리어 디자이너", "3D 시각화 전문가", "건축 투시도 제작"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "3DS MAX 1 - 기초 모델링 & VRay 입문",
+      "estimated_courses": ["max_1"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "3DS MAX 기본 셋팅 및 화면 조작, 인터페이스 학습",
+          "keywords": ["3DS MAX 인터페이스", "기본 셋팅", "화면 조작", "뷰포트"]
+        },
+        {
+          "week": 2,
+          "description": "EditPoly 기초, VRay Material 설정, 반사·굴절 재질 표현",
+          "keywords": ["EditPoly", "VRay Material", "반사", "굴절", "재질"]
+        },
+        {
+          "week": 3,
+          "description": "폴리곤 편집 심화, VRay 재질·조명 설정 실습",
+          "keywords": ["폴리곤 편집", "VRay 조명", "VRay 재질", "Light"]
+        },
+        {
+          "week": 4,
+          "description": "VRay 카메라 설정, 실사 조명(HDRI/IES) 셋팅 및 렌더링",
+          "keywords": ["VRay Camera", "실사 조명", "HDRI", "IES", "렌더링"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "3DS MAX 2 - 실내공간 투시도 제작",
+      "estimated_courses": ["max_2"],
+      "weeks": [
+        {
+          "week": 5,
+          "description": "VRay 기본 셋팅 심화, 조명 환경 최적화 실습",
+          "keywords": ["VRay 셋팅", "조명 환경", "렌더링 최적화"]
+        },
+        {
+          "week": 6,
+          "description": "CAD 도면을 활용한 원룸 아이소메트릭 모델링 제작",
+          "keywords": ["원룸", "아이소메트릭", "CAD 도면 활용", "도면 기반 모델링"]
+        },
+        {
+          "week": 7,
+          "description": "VRay 실내투시도 제작 - 주거 공간 완성",
+          "keywords": ["실내투시도", "주거 공간", "VRay 렌더링"]
+        },
+        {
+          "week": 8,
+          "description": "물·잔디 특수 재질 표현, 외부 공간 렌더링 및 최종 보정",
+          "keywords": ["물 재질", "잔디 재질", "특수 재질", "외부 공간", "최종 보정"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "3DS MAX 인터페이스", "기본 셋팅", "화면 조작", "뷰포트",
+    "EditPoly", "폴리곤 편집",
+    "VRay Material", "반사", "굴절", "재질",
+    "VRay 조명", "Light",
+    "VRay Camera", "실사 조명", "HDRI", "IES",
+    "렌더링 최적화",
+    "아이소메트릭", "CAD 도면 활용", "도면 기반 모델링",
+    "실내투시도", "주거 공간",
+    "물 재질", "잔디 재질", "특수 재질", "외부 공간", "최종 보정"
+  ]
+}

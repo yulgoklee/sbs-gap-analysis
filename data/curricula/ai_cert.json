@@ -1,0 +1,54 @@
+{
+  "course_id": "ai_cert",
+  "name": "AI 자격증",
+  "covers_courses": ["ai_cert"],
+  "instructor": "김민주",
+  "track": "ai",
+  "software": ["ChatGPT", "Gemini", "뤼튼"],
+  "prerequisite_courses": [],
+  "difficulty": 1,
+  "age_range": { "min": 15, "max": 60 },
+  "duration_total_weeks": 4,
+  "objectives": [
+    "생성형 AI 기본 개념 및 도구별 특징 이해",
+    "프롬프트 작성 핵심 원리 습득 (제로샷/원샷/퓨샷/CoT 등)",
+    "AI 환각현상·윤리 이해 및 안전한 활용 원칙 학습",
+    "AI 자격증(뤼튼AI, AI-POT 2급) 취득"
+  ],
+  "certifications_targeted": ["뤼튼AI 활용능력 자격증", "AI-POT 2급"],
+  "employment_fields": ["디자이너 전 직업군", "AI 활용 실무자"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "AI 자격증",
+      "weeks": [
+        {
+          "week": 1,
+          "description": "생성형 AI 기본 개념과 프롬프트 작동 원리 이해. 뤼튼·제미나이·ChatGPT 직접 활용 및 도구별 특징 비교",
+          "keywords": ["생성AI", "프롬프트", "뤼튼", "제미나이", "ChatGPT"]
+        },
+        {
+          "week": 2,
+          "description": "프롬프트 작성 핵심 원리 학습. 의도 전달력을 높이는 문장 구조와 응답 제어 방식 실습 (제로샷/원샷/퓨샷)",
+          "keywords": ["프롬프트 작성", "제로샷", "원샷", "퓨샷", "ChatGPT", "응답 제어"]
+        },
+        {
+          "week": 3,
+          "description": "프롬프트 기법 심화. ChatGPT 커스터마이징, 이미지 생성·문서·엑셀·PPT 실무 응용 (CoT/Self-Consistency/PS/ToT/후카츠)",
+          "keywords": ["CoT", "제로샷CoT", "Self-Consistency", "Sampling", "PS", "ToT", "후카츠", "ChatGPT 커스터마이징", "이미지 생성"]
+        },
+        {
+          "week": 4,
+          "description": "AI 환각현상과 윤리 이해, 안전한 활용 원칙 학습. 실전 자격시험 유사 문제 풀이 및 응용력 검증",
+          "keywords": ["환각현상", "RAG", "AI 윤리", "AI 자격증", "실전 문제"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "생성AI", "프롬프트", "뤼튼", "제미나이", "ChatGPT",
+    "제로샷", "원샷", "퓨샷", "응답 제어",
+    "CoT", "Self-Consistency", "ToT", "후카츠", "커스터마이징",
+    "환각현상", "RAG", "AI 윤리"
+  ]
+}

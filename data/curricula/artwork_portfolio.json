@@ -1,0 +1,53 @@
+{
+  "course_id": "artwork_portfolio",
+  "name": "아트웍 포트폴리오",
+  "covers_courses": ["artwork_portfolio"],
+  "instructor": "나제인",
+  "track": "artwork",
+  "structure": "stage_based",
+  "structure_note": "개인 작업물 중심의 1:1 지도 과정. 최소 6개월 이상 소요. 학생의 창작 역량과 목표 분야에 따라 기간 상이.",
+  "software": ["Adobe Photoshop", "펜 타블렛"],
+  "prerequisite_courses": ["artwork_digital_drawing"],
+  "prerequisite_skills": ["디지털드로잉 12개월 수준 (창작 가능 단계)"],
+  "difficulty": 5,
+  "duration_min_months": 6,
+  "employment_fields": ["일러스트레이터", "웹툰 작가", "이모티콘 작가", "콘셉트 아티스트", "게임 일러스트레이터"],
+  "objectives": [
+    "취업·활동 목표 분야에 맞는 포트폴리오 방향 설정",
+    "개성 있는 퍼스널 스타일 확립",
+    "완성도 높은 창작 작품 5점 이상 제작",
+    "ArtStation / Pixiv / SNS 포트폴리오 구축 및 취업·프리랜서 준비"
+  ],
+  "stages": [
+    {
+      "stage": 1,
+      "title": "스타일 탐색 & 기획",
+      "description": "목표 분야 및 활동 방식 확정 (웹툰/이모티콘/일러스트/게임 등), 레퍼런스 분석, 퍼스널 스타일 방향 탐색",
+      "keywords": ["스타일 탐색", "레퍼런스", "목표 분야", "기획", "퍼스널 캐릭터"]
+    },
+    {
+      "stage": 2,
+      "title": "작품 제작 1 — 캐릭터 & 컨셉",
+      "description": "퍼스널 캐릭터 완성도 향상, 배경 구성, 컬러 팔레트 확립, 캐릭터 시트(정면/측면/표정집) 제작",
+      "keywords": ["캐릭터 시트", "컬러 팔레트", "표정집", "배경", "컨셉아트"]
+    },
+    {
+      "stage": 3,
+      "title": "작품 제작 2 — 스토리 & 연출",
+      "description": "컷만화·스토리보드·이모티콘 등 목표 분야 작업물 제작. 스토리 연출력 및 페이지 구성 훈련",
+      "keywords": ["컷만화", "스토리보드", "이모티콘", "연출", "페이지 구성"]
+    },
+    {
+      "stage": 4,
+      "title": "포트폴리오 완성 & 게재",
+      "description": "최종 작품 정리 및 ArtStation / Pixiv / SNS 게재. 작가 프로필 작성, 취업·프리랜서 채널 준비",
+      "keywords": ["ArtStation", "Pixiv", "SNS", "포트폴리오", "작가 프로필", "프리랜서"]
+    }
+  ],
+  "skills_taught": [
+    "스타일 탐색", "레퍼런스 분석", "기획",
+    "캐릭터 시트", "컬러 팔레트", "배경", "컨셉아트",
+    "컷만화", "스토리보드", "이모티콘", "연출",
+    "ArtStation", "Pixiv", "포트폴리오 구성"
+  ]
+}

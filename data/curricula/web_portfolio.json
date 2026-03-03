@@ -1,0 +1,53 @@
+{
+  "course_id": "web_portfolio",
+  "name": "웹 포트폴리오",
+  "covers_courses": ["web_portfolio"],
+  "instructor": "양은진",
+  "track": "web",
+  "software": ["Figma", "Visual Studio Code", "HTML/CSS/JavaScript"],
+  "prerequisite_courses": ["web_pub_1", "web_pub_2", "web_pub_3", "web_pub_4", "uiux_1", "uiux_2"],
+  "prerequisite_skills": ["HTML/CSS", "JavaScript", "Figma"],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_months": { "min": 2, "max": 4 },
+  "structure": "stage_based",
+  "note": "개인 진도에 따라 상이, 완성도 높은 포트폴리오를 목표로 진행. 클론코딩 방식으로 포트폴리오 완성 가능",
+  "objectives": [
+    "Figma 디자인 시안을 기반으로 HTML/CSS/JS 구현까지 전 과정 경험",
+    "기획→디자인→구현→배포까지 실전 웹 개발 프로세스 경험",
+    "완성도 높은 반응형 웹 포트폴리오 제작 및 GitHub Pages/Vercel 배포"
+  ],
+  "employment_fields": ["웹에이전시 (브랜드기획팀)", "UI/UX 디자이너", "웹 퍼블리셔", "프론트엔드 개발자"],
+  "stages": [
+    {
+      "stage": 1,
+      "title": "기획 (Plan)",
+      "description": "포트폴리오를 계획하고 시안을 학습. 첫 번째 프로젝트 실습 결과물 완성 및 부족한 부분 피드백. 클론코딩으로 포트폴리오 완성 방식",
+      "keywords": ["기획 방향", "프로젝트 방향 및 기획", "프로젝트 목표 및 기능 설계", "코드 설계"]
+    },
+    {
+      "stage": 2,
+      "title": "레이아웃 & 구현",
+      "description": "포트폴리오 초기 메뉴 전반 구상, 타겟/레이아웃/콘텐츠 요소 공유. Figma 디자인 시안 기반으로 HTML/CSS 코드 구현, 픽셀 퍼펙트 구현 실습",
+      "keywords": ["레이아웃 기획", "Figma 시안", "HTML/CSS 구현", "디자인 시안 코딩", "픽셀 구현"]
+    },
+    {
+      "stage": 3,
+      "title": "완성 (Script 추가)",
+      "description": "비주얼 요소들(이미지 최적화/반응형/내용 설명) 체크 및 완성. JavaScript 스크립트 추가, 코드리뷰 및 부족한 부분 보완",
+      "keywords": ["JavaScript 추가", "이미지 최적화", "반응형 완성", "코드 리뷰", "완성화 스크립트"]
+    },
+    {
+      "stage": 4,
+      "title": "배포 (Deploy)",
+      "description": "완성된 포트폴리오를 배포. 개인 도메인 추가, GitHub Pages나 Vercel 등 배포 플랫폼에서 포트폴리오 공개",
+      "keywords": ["포트폴리오 배포", "GitHub Pages", "Vercel", "도메인 연결", "최종 리뷰"]
+    }
+  ],
+  "skills_taught": [
+    "프로젝트 기획", "기능 설계", "코드 설계",
+    "레이아웃 기획", "Figma 시안 분석", "HTML/CSS 구현", "픽셀 구현",
+    "JavaScript 추가", "이미지 최적화", "반응형 완성", "코드 리뷰",
+    "GitHub Pages 배포", "Vercel 배포", "도메인 연결"
+  ]
+}

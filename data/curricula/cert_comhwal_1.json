@@ -1,0 +1,78 @@
+{
+  "course_id": "cert_comhwal_1",
+  "name": "컴퓨터활용능력 1급",
+  "covers_courses": ["comhwal_1"],
+  "instructor": "김인준",
+  "track": "certification",
+  "software": ["MS Office 2021 (Excel + Access)"],
+  "prerequisite_courses": ["comhwal_2"],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 40 },
+  "duration_total_weeks": 4,
+  "certifications_targeted": ["컴퓨터활용능력 1급"],
+  "objectives": [
+    "엑셀 기본·함수 이해 및 조건부서식·필터·날짜함수 실습",
+    "피벗테이블·매크로·차트·프로시저로 엑셀 분석 역량 완성",
+    "엑셀 기출문제(기본/계산/분석/기타작업) 완전 정복",
+    "엑세스 DB 구축·폼·보고서·쿼리·SQL 이론 및 기출문제 완성"
+  ],
+  "employment_fields": ["사무업무", "경영 및 관리", "공기업·대기업 가산점 대상 직군"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "엑셀 기본 / 함수",
+      "description": "엑셀 기본 이론·서식, 함수 사용법 집중 학습",
+      "sub_sections": [
+        "Section 00: MS 오피스 시작",
+        "Section 01: 기본용어·데이터·셀의 개념",
+        "Section 02: 조건부서식, 필터, 검토기능",
+        "Section 03: 날짜함수 기반 독문함수 사용법",
+        "Section 04: 기타함수"
+      ],
+      "keywords": ["MS 오피스", "기본용어", "조건부서식", "필터", "날짜함수", "함수"]
+    },
+    {
+      "section": 2,
+      "title": "엑셀 분석 / 기타",
+      "description": "피벗테이블·매크로·차트·프로시저 실무 분석 도구 학습",
+      "sub_sections": [
+        "Section 01: 피벗테이블 제작 및 속성변경",
+        "Section 02: 매크로 원리와 다양한 방식의 매크로 제작",
+        "Section 03: 차트 요소와 요소별 속성 정리",
+        "Section 04: 시험유형 프로시저 집중 공략"
+      ],
+      "keywords": ["피벗테이블", "매크로", "차트", "프로시저", "분석"]
+    },
+    {
+      "section": 3,
+      "title": "엑셀 기출문제",
+      "description": "기본작업·계산작업·분석작업·기타작업 기출문제 전 유형 풀이",
+      "sub_sections": [
+        "Section 01: 기본작업 문제풀이 (필터, 조건부서식)",
+        "Section 02: 계산작업 문제풀이 (함수)",
+        "Section 03: 분석작업 문제풀이 (피벗, 매크로)",
+        "Section 04: 기타작업 문제풀이 (차트, 프로시저)"
+      ],
+      "keywords": ["기출문제", "기본작업", "계산작업", "분석작업", "기타작업"]
+    },
+    {
+      "section": 4,
+      "title": "엑세스 이론 및 기출문제",
+      "description": "DB 구축부터 폼·보고서·쿼리·SQL까지 엑세스 전 영역 이론 및 기출문제",
+      "sub_sections": [
+        "Section 01: 테이블 생성·필드 속성·관계 지정",
+        "Section 02: 폼 제작·속성변경·함수/매크로 DB 표현",
+        "Section 03: 보고서 제작·이벤트 프로시저",
+        "Section 04: 쿼리 및 SQL (추가/업데이트/삭제/크로스탭)",
+        "Section 05: 기출문제"
+      ],
+      "keywords": ["엑세스", "테이블", "폼", "보고서", "쿼리", "SQL", "DB 구축", "기출문제"]
+    }
+  ],
+  "skills_taught": [
+    "기본용어", "조건부서식", "필터", "날짜함수",
+    "피벗테이블", "매크로", "차트", "프로시저",
+    "기출문제",
+    "엑세스", "테이블", "폼", "보고서", "쿼리", "SQL", "DB 구축"
+  ]
+}

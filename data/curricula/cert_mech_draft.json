@@ -1,0 +1,67 @@
+{
+  "course_id": "cert_mech_draft",
+  "name": "전산응용기계제도기능사",
+  "covers_courses": ["mech_draft_cert"],
+  "instructor": "박재영",
+  "track": "certification",
+  "structure": "stage_based",
+  "software": ["AutoCAD"],
+  "prerequisite_courses": ["cert_inventor"],
+  "prerequisite_skills": ["AutoCAD 기초", "기계 도면 이해"],
+  "difficulty": 3,
+  "age_range": { "min": 15, "max": 50 },
+  "certifications_targeted": ["전산응용기계제도기능사"],
+  "objectives": [
+    "도면 작성 기본 개념·규칙 이해 및 도면양식·템플릿 생성",
+    "규격집 기반 2D 모델링 작업 숙련",
+    "V벨트 풀리·본체 투상도·단면도 실습",
+    "표면거칠기·기하공차 적용으로 최종 도면 완성"
+  ],
+  "employment_fields": ["기계설계", "제조업 도면 작성 직군"],
+  "stages": [
+    {
+      "stage": 1,
+      "title": "도면 기초 개념 & 템플릿",
+      "description": "도면 작성 기본 개념·규칙 이해, 2D 도면 작성 실습, 기계제도기능사 맞춤 도면양식·템플릿 생성",
+      "keywords": ["척도", "레이어", "템플릿", "도면관리기법", "도면양식"]
+    },
+    {
+      "stage": 2,
+      "title": "규격집 활용 2D 모델링",
+      "description": "규격집을 이용한 2D 모델링 작업 실습 (척도, 레이어, 도면관리기법 적용)",
+      "keywords": ["규격집", "2D 모델링", "척도", "레이어", "도면관리기법"]
+    },
+    {
+      "stage": 3,
+      "title": "V벨트 풀리 모델링",
+      "description": "규격집을 이용한 V벨트 풀리와 커버 모델링 작업",
+      "keywords": ["V벨트 풀리", "커버 모델링", "규격집", "도면관리기법"]
+    },
+    {
+      "stage": 4,
+      "title": "투상법·단면법 본체 모델링",
+      "description": "투상법과 단면법을 활용한 본체 모델링 (동력전달장치 적용)",
+      "keywords": ["투상법", "단면법", "본체 모델링", "동력전달장치"]
+    },
+    {
+      "stage": 5,
+      "title": "표면거칠기 & 기하공차 완성",
+      "description": "표면거칠기 및 기하공차를 이용한 모델링 완성",
+      "keywords": ["표면거칠기", "기하공차", "모델링 완성"]
+    },
+    {
+      "stage": 6,
+      "title": "최종 도면 완성",
+      "description": "전산응용기계제도기능사 시험 대비 최종 도면 완성 및 검토",
+      "keywords": ["최종도면", "도면 완성", "기능사 시험 대비"]
+    }
+  ],
+  "skills_taught": [
+    "척도", "레이어", "템플릿", "도면관리기법",
+    "규격집", "2D 모델링",
+    "V벨트 풀리",
+    "투상법", "단면법", "본체 모델링",
+    "표면거칠기", "기하공차",
+    "최종도면"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "course_id": "it_python",
+  "name": "Python (주말 과정)",
+  "covers_courses": ["python"],
+  "instructor": "김은범",
+  "track": "it_programming",
+  "software": ["Visual Studio Code", "Python 3", "Google Colab"],
+  "prerequisite_courses": [],
+  "prerequisite_skills": [],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "note": "주말 과정. 평일+AICE 과정은 it_python_aice.json 참조",
+  "objectives": [
+    "컴퓨터 프로그래밍에 대한 전반적인 이해",
+    "Python Programming 언어의 이해와 기본 지식 습득",
+    "컬렉션의 이해와 활용",
+    "데이터 분석, 웹크롤링 등 실전 어플리케이션 개발"
+  ],
+  "employment_fields": ["다양한 응용 분야 개발자", "데이터 분석가", "AI 개발자"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "Python 1 - 기초 문법 & 자료구조",
+      "estimated_courses": ["python"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "파이썬 소개 및 개발환경 설정(VSCode, Google Colab), 데이터 타입과 변수, 기본 연산자",
+          "keywords": ["Python 소개", "VSCode", "Google Colab", "데이터 타입", "변수", "연산자", "print", "Extension"]
+        },
+        {
+          "week": 2,
+          "description": "조건문(if/elif/else, match)과 반복문(for, while, break, continue) 학습 및 응용",
+          "keywords": ["조건문", "if", "elif", "else", "match", "for", "while", "range", "break", "continue", "indentation"]
+        },
+        {
+          "week": 3,
+          "description": "기본 자료구조: 리스트(list), 튜플(tuple), 세트(set), 딕셔너리(dict) 개념과 활용",
+          "keywords": ["list", "tuple", "set", "dictionary", "collections", "Python 자료구조"]
+        },
+        {
+          "week": 4,
+          "description": "함수 개념, 내장 함수, 사용자 정의 함수(파라미터, 반환값, 다중 반환, 가변길이 파라미터)",
+          "keywords": ["함수", "function", "파라미터", "반환값", "def", "Named parameter", "Default parameter", "가변길이 파라미터"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "Python 2 - 모듈·OOP & 데이터 분석",
+      "estimated_courses": ["python"],
+      "weeks": [
+        {
+          "week": 5,
+          "description": "모듈과 패키지(내부/외부 모듈), OOP: 클래스·인스턴스·생성자·메서드·상속·오버라이드",
+          "keywords": ["모듈", "module", "라이브러리", "library", "패키지", "package", "OOP", "클래스", "인스턴스", "생성자", "상속", "override"]
+        },
+        {
+          "week": 6,
+          "description": "파일 입출력: 텍스트·CSV·JSON·Binary 파일 처리, with문으로 리소스 보호",
+          "keywords": ["파일 입출력", "File I/O", "txt", "csv", "json", "Binary", "with문"]
+        },
+        {
+          "week": 7,
+          "description": "예외처리(try~except, finally, raise), Numpy 기초, Pandas 기초",
+          "keywords": ["예외처리", "try~except", "finally", "raise", "커스텀 예외", "numpy", "pandas"]
+        },
+        {
+          "week": 8,
+          "description": "Pandas로 엑셀 파일 불러오기, 데이터 파악/분석, Matplotlib 데이터 시각화(Scatter/line/bar/pie 그래프)",
+          "keywords": ["Pandas", "데이터 분석", "Matplotlib", "데이터 시각화", "Scatter", "line", "bar", "pie"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "Python 소개", "VSCode", "Google Colab", "데이터 타입", "변수", "연산자", "print",
+    "조건문", "if", "elif", "match", "for", "while", "range", "break", "continue",
+    "list", "tuple", "set", "dictionary", "collections",
+    "함수", "파라미터", "반환값", "def", "Default parameter", "가변길이 파라미터",
+    "모듈", "라이브러리", "패키지", "OOP", "클래스", "인스턴스", "생성자", "상속", "override",
+    "파일 입출력", "csv", "json", "with문",
+    "예외처리", "try~except", "finally", "raise", "numpy", "pandas",
+    "데이터 분석", "Matplotlib", "데이터 시각화"
+  ]
+}

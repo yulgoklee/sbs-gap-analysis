@@ -1,0 +1,52 @@
+{
+  "course_id": "ai_creator_interior",
+  "name": "AI 크리에이터 (인테리어)",
+  "covers_courses": ["ai_creator_interior"],
+  "instructor": "남현우",
+  "track": "interior",
+  "structure": "stage_based",
+  "software": ["ChatGPT", "Midjourney", "Photoshop", "Sketchup"],
+  "prerequisite_courses": ["ai_basic", "interior_cad", "interior_sketchup", "interior_3dsmax", "photoshop"],
+  "prerequisite_skills": ["프롬프트 엔지니어링", "AutoCAD", "SketchUp", "3ds Max", "Photoshop"],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 35 },
+  "objectives": [
+    "ChatGPT+Midjourney 셋팅 및 가상 페르소나 기반 AI 기획설계",
+    "Midjourney로 AI 도면 생성 및 컨셉 이미지 제작",
+    "AI 이미지 합성·콜라주로 실사 품질 공간 이미지 완성",
+    "AI 영상 제작 툴로 인테리어 디자인 모션 영상 완성"
+  ],
+  "employment_fields": ["인테리어 디자이너", "건축 설계사", "AI 활용 공간 디자이너"],
+  "stages": [
+    {
+      "stage": 1,
+      "title": "AI 기획 설계",
+      "description": "ChatGPT·Midjourney 셋팅. 가상 페르소나 설정으로 대상 사용자 분석. AI 기반 설계 기획 및 무드보드 제작",
+      "keywords": ["ChatGPT", "Midjourney", "무드보드", "AI 기획설계", "가상 페르소나"]
+    },
+    {
+      "stage": 2,
+      "title": "AI 도면 생성 & 컨셉 이미지",
+      "description": "AI를 이용한 도면 생성 실습. AI 컨셉 도출 및 Midjourney로 공간 이미지 생성",
+      "keywords": ["AI 도면생성", "Midjourney", "컨셉 도출", "공간 이미지 생성"]
+    },
+    {
+      "stage": 3,
+      "title": "AI 이미지 합성 & 실사 생성",
+      "description": "AI 이미지 합성 및 콜라주 기법으로 실사 품질 공간 이미지 생성. ChatGPT·Midjourney 복합 활용",
+      "keywords": ["Midjourney", "ChatGPT", "AI 이미지 생성", "이미지 합성", "콜라주", "실사"]
+    },
+    {
+      "stage": 4,
+      "title": "AI 영상 제작",
+      "description": "AI 영상 제작 툴을 활용해 최종 인테리어 디자인을 모션 영상으로 완성",
+      "keywords": ["Midjourney", "ChatGPT", "AI 영상", "모션 영상", "포트폴리오"]
+    }
+  ],
+  "skills_taught": [
+    "ChatGPT", "Midjourney", "무드보드", "AI 기획설계", "가상 페르소나",
+    "AI 도면생성", "컨셉 도출", "공간 이미지 생성",
+    "이미지 합성", "콜라주", "실사 이미지",
+    "AI 영상", "모션 영상"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "course_id": "ai_youtube",
+  "name": "AI 유튜브",
+  "covers_courses": ["ai_youtube"],
+  "instructor": "박소룡",
+  "track": "ai",
+  "software": ["ChatGPT", "Midjourney", "Kling", "ElevenLabs", "Suno", "CapCut"],
+  "prerequisite_courses": [],
+  "prerequisite_skills": ["컴퓨터 기초"],
+  "difficulty": 1,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 4,
+  "objectives": [
+    "ChatGPT 채널 기획 + Midjourney 고퀄리티 비주얼 이미지 제작",
+    "Kling으로 정적 이미지→생동감 있는 AI 영상 변환",
+    "Suno·ElevenLabs로 배경음악·목소리 생성, CapCut 기초 편집",
+    "유튜브 업로드 및 수익화 전략 수립"
+  ],
+  "employment_fields": ["콘텐츠 크리에이터", "영상 편집자", "디지털 마케터", "SNS 운영자"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "AI YOUTUBE",
+      "weeks": [
+        {
+          "week": 1,
+          "description": "[기획 및 생성] ChatGPT로 채널 스토리 기획. Midjourney로 고퀄리티 비주얼 이미지 제작",
+          "keywords": ["ChatGPT", "Midjourney", "채널 기획", "스토리", "이미지 생성"]
+        },
+        {
+          "week": 2,
+          "description": "[영상 소스 생성] Kling(클링) 활용으로 정적 이미지에 생동감 부여. AI 영상 소스 제작",
+          "keywords": ["Kling", "AI영상제작", "이미지→영상", "영상 소스"]
+        },
+        {
+          "week": 3,
+          "description": "[오디오 및 기초 편집] Suno로 배경음악 생성, ElevenLabs로 목소리 생성, CapCut으로 영상 기본 틀 구성",
+          "keywords": ["Suno", "ElevenLabs", "CapCut", "배경음악", "목소리", "기초 편집"]
+        },
+        {
+          "week": 4,
+          "description": "[채널 운영 및 수익화] CapCut 최종 영상 편집, 유튜브 업로드. 실질적인 수익 창출 전략 수립",
+          "keywords": ["CapCut", "컷 편집", "유튜브", "수익창출", "채널 운영"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "ChatGPT", "Midjourney", "채널 기획", "스토리",
+    "Kling", "AI영상제작",
+    "Suno", "ElevenLabs", "배경음악", "목소리 생성",
+    "CapCut", "컷 편집", "유튜브", "수익창출"
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "course_id": "cg_maya_main",
+  "name": "마야 (Maya) 전과정",
+  "covers_courses": ["maya_1", "maya_2", "maya_3", "maya_4", "maya_5", "maya_6", "maya_7", "maya_8", "maya_9", "unreal"],
+  "instructor": "전휘재",
+  "track": "cg_maya",
+  "software": ["Maya", "ZBrush", "Vray", "Substance Painter", "Unreal Engine 5"],
+  "prerequisite_courses": ["photoshop", "illustrator", "digital_drawing"],
+  "prerequisite_skills": ["Photoshop", "After Effects", "디지털드로잉"],
+  "difficulty": 5,
+  "age_range": { "min": 15, "max": 40 },
+  "duration_total_weeks": 32,
+  "objectives": [
+    "Maya 모델링, 리깅, 애니메이션 전 과정 습득",
+    "ZBrush 하이폴리 조각 작업",
+    "Vray / Substance Painter 텍스처 및 렌더링",
+    "Unreal Engine 5를 활용한 실시간 렌더링",
+    "영화 CG, Post Production, Animation 취업 준비"
+  ],
+  "employment_fields": ["영화 CG", "Post Production", "Animation 관련산업", "VFX"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "Maya 인터페이스 & 기초 모델링",
+      "estimated_courses": ["maya_1"],
+      "weeks": [
+        { "week": 1, "description": "기본 Interface 및 화면 구성 방법, 기본 Tool 활용", "keywords": ["기본 Interface", "화면구성", "Tool활용"] },
+        { "week": 2, "description": "Nurbs Basic, Polygon / Nurbs 차이점 학습, Project Setting", "keywords": ["Nurbs", "Polygon", "Project Setting"] },
+        { "week": 3, "description": "Nurbs → Polygon Convert 방법 학습", "keywords": ["Nurbs", "Polygon", "Convert"] },
+        { "week": 4, "description": "Polygon Train Modeling, Edge 흐름 이해 및 적용", "keywords": ["Edge Flow", "Polygon Modeling", "Train Modeling"] }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "Polygon 심화 & ZBrush",
+      "estimated_courses": ["maya_2"],
+      "weeks": [
+        { "week": 5, "description": "Polygon 심화 학습, Project Setting, Polygon 기본조작", "keywords": ["Polygon 심화", "Project Setting", "기본조작"] },
+        { "week": 6, "description": "Polygon 심화, 팔/다리 모델링, 발등 모델링", "keywords": ["Polygon 심화", "팔/다리 모델링", "발등 모델링"] },
+        { "week": 7, "description": "ZBrush UI / 인터페이스, Brush 기능 및 활용법, Dynamesh / Divide", "keywords": ["ZBrush", "Brush", "Dynamesh", "Divide"] },
+        { "week": 8, "description": "Zremesher 및 Layer 사용, High Poly Topology 학습", "keywords": ["Zremesher", "Layer", "High Poly Topology"] }
+      ]
+    },
+    {
+      "section": 3,
+      "title": "기획 & Free Modeling",
+      "estimated_courses": ["maya_3"],
+      "weeks": [
+        { "week": 9, "description": "기획서 작성, 스토리보드 설명", "keywords": ["기획서 작성", "스토리보드"] },
+        { "week": 10, "description": "Free Modeling 실습 2 (1:1 수업)", "keywords": ["Free Modeling", "1:1 수업"] },
+        { "week": 11, "description": "Free Modeling 실습 3 (1:1 수업)", "keywords": ["Free Modeling", "1:1 수업"] },
+        { "week": 12, "description": "Free Modeling 실습 4 (1:1 수업)", "keywords": ["Free Modeling", "1:1 수업"] }
+      ]
+    },
+    {
+      "section": 4,
+      "title": "UV & 렌더링 & Substance Painter",
+      "estimated_courses": ["maya_4", "maya_5"],
+      "weeks": [
+        { "week": 13, "description": "UV Basic, Multi UV (UDIM) 학습", "keywords": ["UV", "UDIM", "UV Basic"] },
+        { "week": 14, "description": "UV 작업 실습, Hypershade 및 Vray Light, Vray Shader", "keywords": ["Hypershade", "Vray Light", "Vray Shader"] },
+        { "week": 15, "description": "Vray Render Option 및 Render Pass, Substance Painter Basic", "keywords": ["Vray Render", "Render Pass", "Substance Painter"] },
+        { "week": 16, "description": "Substance Painter UI 학습 및 작업과정, Map 작업 및 Maya 연동", "keywords": ["Substance Painter", "Map 작업", "Maya 연동"] }
+      ]
+    },
+    {
+      "section": 5,
+      "title": "리깅 (Rigging)",
+      "estimated_courses": ["maya_6"],
+      "weeks": [
+        { "week": 17, "description": "Rigging Basic, Joint 및 Constrain 활용", "keywords": ["Rigging", "Joint", "Constrain"] },
+        { "week": 18, "description": "Human IK를 이용한 관체 Joint 학습, Human Rigging 1", "keywords": ["Human IK", "Human Rigging", "Joint"] },
+        { "week": 19, "description": "Human Rigging 2, 3", "keywords": ["Human Rigging", "Joint", "Constrain"] },
+        { "week": 20, "description": "Human Rigging 4, Bind Skin / Skin Weight, Blend Shape", "keywords": ["Bind Skin", "Skin Weight", "Blend Shape"] }
+      ]
+    },
+    {
+      "section": 6,
+      "title": "애니메이션 (Animation)",
+      "estimated_courses": ["maya_7"],
+      "weeks": [
+        { "week": 21, "description": "Animation Basic, Key Frame / Graph Editor, Tangents Handle", "keywords": ["Animation", "Key Frame", "Graph Editor", "Tangents"] },
+        { "week": 22, "description": "애니메이션 12원칙 [상], 캐릭터를 이용한 애니메이션 실습 1, 2", "keywords": ["애니메이션 12원칙", "캐릭터 애니메이션"] },
+        { "week": 23, "description": "애니메이션 12원칙 [중], 카메라를 이용한 애니메이션 1, 2", "keywords": ["애니메이션 12원칙", "카메라 애니메이션"] },
+        { "week": 24, "description": "애니메이션 12원칙 [하], 카메라를 이용한 애니메이션 1, 2", "keywords": ["애니메이션 12원칙", "카메라 애니메이션"] }
+      ]
+    },
+    {
+      "section": 7,
+      "title": "Unreal Engine 5",
+      "estimated_courses": ["maya_8", "maya_9"],
+      "weeks": [
+        { "week": 25, "description": "Unreal5 소개, UI / 인터페이스 Basic", "keywords": ["Unreal Engine", "Interface", "UI"] },
+        { "week": 26, "description": "Local Light 라이팅과 GI, Node / Material", "keywords": ["Unreal Light", "GI", "Material", "Node"] },
+        { "week": 27, "description": "Light 환경 설정 [상/하], Camera 씨네마틱 설정", "keywords": ["Unreal Light", "Camera", "씨네마틱"] },
+        { "week": 28, "description": "Camera Setting / Render, Lumen Render, Sequence Output", "keywords": ["Camera Render", "Lumen", "Sequence"] },
+        { "week": 29, "description": "Nanite System, Light Advanced", "keywords": ["Nanite", "Light Advanced"] },
+        { "week": 30, "description": "Asset 관리, Landscape를 이용한 모델링", "keywords": ["Asset", "Landscape", "환경 모델링"] },
+        { "week": 31, "description": "Landscape를 이용한 텍스처, Environment 설정", "keywords": ["Landscape 텍스처", "Environment"] },
+        { "week": 32, "description": "Blueprint / Effect를 이용한 Interaction 1, 2", "keywords": ["Blueprint", "Effect", "Interaction"] }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "기본 Interface", "화면구성", "Tool활용",
+    "Nurbs", "Polygon Modeling", "Project Setting", "Convert", "Edge Flow", "Train Modeling",
+    "Polygon 심화", "팔/다리 모델링", "발등 모델링",
+    "ZBrush", "Brush", "Dynamesh", "Divide", "Zremesher", "Layer", "High Poly Topology",
+    "기획서 작성", "스토리보드", "Free Modeling",
+    "UV", "UDIM", "Hypershade", "Vray Light", "Vray Shader", "Vray Render", "Render Pass",
+    "Substance Painter", "Map 작업", "Maya 연동",
+    "Rigging", "Joint", "Constrain", "Human IK", "Human Rigging", "Bind Skin", "Skin Weight", "Blend Shape",
+    "Animation", "Key Frame", "Graph Editor", "Tangents", "애니메이션 12원칙", "캐릭터 애니메이션", "카메라 애니메이션",
+    "Unreal Engine", "GI", "Material", "Node", "Lumen", "Sequence", "Nanite", "Asset", "Landscape", "Environment", "Blueprint", "Interaction"
+  ]
+}

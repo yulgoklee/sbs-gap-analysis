@@ -1,0 +1,79 @@
+{
+  "course_id": "cert_inventor",
+  "name": "인벤터 (Inventor 3D 기계 모델링)",
+  "covers_courses": ["inventor"],
+  "instructor": "박재영",
+  "track": "certification",
+  "software": ["AutoCAD", "Autodesk Inventor"],
+  "prerequisite_courses": [],
+  "difficulty": 3,
+  "age_range": { "min": 15, "max": 50 },
+  "certifications_targeted": ["전산응용기계제도기능사"],
+  "objectives": [
+    "인벤터 기본 환경설정 및 2D 스케치 명령어·구속조건 습득",
+    "돌출·구멍·코일·스윕 등 3D 모델링 기초 기능 익히기",
+    "기어·본체·어셈블리 모델링 및 부품 조립 환경 구성",
+    "도면 환경설정·투상도·단면도·BOM 부품리스트로 2D 도면화 완성"
+  ],
+  "employment_fields": ["기계설계", "제조업 설계직"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "기본환경설정 및 2D 스케치 기초",
+      "sub_sections": [
+        "Section 01: 인벤터 시작하기",
+        "Section 02: 환경설정",
+        "Section 03: 2D 스케치 명령어",
+        "Section 04: 구속조건 익히기",
+        "Section 05: 연습도면 작성",
+        "Section 06: 2D 연습도면 작성하기"
+      ],
+      "keywords": ["인벤터", "환경설정", "2D 스케치", "구속조건", "연습도면"]
+    },
+    {
+      "section": 2,
+      "title": "3D 모델링 기초",
+      "sub_sections": [
+        "Section 07: 돌출 기능으로 기본 형상 모델링",
+        "Section 08: 작업평면 기능",
+        "Section 09: 구멍 기능과 스레드 기능",
+        "Section 10: 코일 기능과 스윕 기능",
+        "Section 11: 나사 모델링",
+        "Section 12: 벨트 풀리 모델링"
+      ],
+      "keywords": ["돌출", "작업평면", "구멍", "스레드", "코일", "스윕", "나사", "벨트 풀리", "3D 모델링"]
+    },
+    {
+      "section": 3,
+      "title": "3D 모델링 어셈블리",
+      "sub_sections": [
+        "Section 13: 기어 모델링하기",
+        "Section 14: 본체 모델링 / 패턴 기능",
+        "Section 15: 조립 환경 만들기",
+        "Section 16: 구속조건을 이용한 간섭 기능 사용",
+        "Section 17: 조립 및 부품 배치",
+        "Section 18: 어셈블리 모델링"
+      ],
+      "keywords": ["기어", "본체 모델링", "패턴", "조립", "어셈블리", "구속조건", "간섭", "부품 배치"]
+    },
+    {
+      "section": 4,
+      "title": "3D 모델링 도면화 작업",
+      "sub_sections": [
+        "Section 19: 도면 환경설정 및 투상도 이해",
+        "Section 20: 단면도 작성 및 투상도 작성",
+        "Section 21: 단면도 작성 및 투상도 작성 (심화)",
+        "Section 22: BOM을 이용한 부품 리스트",
+        "Section 23: 3D 모델링을 이용한 2D 도면화 작업",
+        "Section 24: 3D 모델링을 이용한 2D 도면화 작업 (완성)"
+      ],
+      "keywords": ["도면 환경설정", "투상도", "단면도", "BOM", "부품 리스트", "2D 도면화"]
+    }
+  ],
+  "skills_taught": [
+    "환경설정", "2D 스케치", "구속조건",
+    "돌출", "작업평면", "구멍", "스레드", "코일", "스윕", "나사", "벨트 풀리",
+    "기어", "본체 모델링", "어셈블리", "조립",
+    "투상도", "단면도", "BOM", "부품 리스트", "2D 도면화"
+  ]
+}

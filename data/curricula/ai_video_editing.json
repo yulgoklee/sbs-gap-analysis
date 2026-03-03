@@ -1,0 +1,55 @@
+{
+  "course_id": "ai_video_editing",
+  "name": "AI 영상편집",
+  "covers_courses": ["ai_video_editing"],
+  "instructor": "박소룡",
+  "track": "ai",
+  "software": ["ChatGPT", "Midjourney", "Kling", "ElevenLabs", "Suno", "CapCut"],
+  "prerequisite_courses": [],
+  "prerequisite_skills": ["컴퓨터 기초"],
+  "difficulty": 1,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 4,
+  "note": "AI 유튜브 미수강생은 영상 소스 제공 후 수업 진행. AI 유튜브 수강 후 이수 권장.",
+  "objectives": [
+    "CapCut 기본 인터페이스 및 컷 편집 기술 습득",
+    "효과·보정 기능으로 영상 완성도 향상",
+    "미드저니 소스 활용 숏폼(Short-form) 영상 제작",
+    "기승전결 있는 롱폼(Long-form) 영상 제작으로 실전 편집 역량 완성"
+  ],
+  "employment_fields": ["콘텐츠 크리에이터", "영상 편집자", "디지털 마케터", "교육 콘텐츠 제작자"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "AI VIDEO",
+      "weeks": [
+        {
+          "week": 1,
+          "description": "[기초 편집] CapCut 기본 인터페이스 학습. 일반 영상 소스 활용 효율적인 컷 편집 기술 습득",
+          "keywords": ["CapCut", "컷 편집", "인터페이스", "기초 편집"]
+        },
+        {
+          "week": 2,
+          "description": "[심화 편집] 다양한 효과·보정 기능으로 영상 완성도 향상. CapCut 디테일한 편집 기능 마스터",
+          "keywords": ["CapCut", "효과", "보정", "심화 편집", "다양한 편집 기능"]
+        },
+        {
+          "week": 3,
+          "description": "[숏폼 실습] AI 유튜브 수업 영상 + 미드저니 소스 활용. 최신 트렌드 맞춤 숏폼(Short-form) 영상 제작",
+          "keywords": ["숏폼", "미드저니", "CapCut", "트렌드", "Short-form"]
+        },
+        {
+          "week": 4,
+          "description": "[롱폼 실습] AI 유튜브 수업 영상 + 미드저니 소스 활용. 기획→완성 기승전결 롱폼(Long-form) 영상 제작",
+          "keywords": ["롱폼", "스토리텔링", "Long-form", "기승전결", "실전 편집"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "CapCut", "컷 편집", "인터페이스",
+    "효과", "보정", "심화 편집",
+    "숏폼", "미드저니", "Short-form",
+    "롱폼", "스토리텔링", "Long-form"
+  ]
+}

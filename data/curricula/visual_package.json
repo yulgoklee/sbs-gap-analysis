@@ -1,0 +1,55 @@
+{
+  "course_id": "visual_package",
+  "name": "패키지 디자인",
+  "covers_courses": ["package_1", "package_2"],
+  "instructor": "김민주",
+  "track": "visual_editing",
+  "software": ["Adobe Illustrator", "Adobe Photoshop"],
+  "prerequisite_courses": ["branding_1", "branding_2"],
+  "prerequisite_skills": ["브랜딩 디자인"],
+  "difficulty": 5,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "objectives": [
+    "2D 그래픽을 3D 구조에 적용하는 통합 능력 확보",
+    "다양한 패키지 형태(박스·파우치 등) 전개도 구조 이해 및 디자인 적용",
+    "AI 활용 고품질 Mockup 제작 기술 습득",
+    "인쇄 및 제작 실무에 바로 투입 가능한 포트폴리오 완성"
+  ],
+  "employment_fields": ["패키지 디자이너", "인쇄 및 Production 전문가", "제품 디자이너"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "패키지 디자인 - 전개도부터 목업까지",
+      "estimated_courses": ["package_1", "package_2"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "타겟 제품에 어울리는 기성 패키지 형태(단상자·튜브·파우치 등) 선정, 브랜드 컨셉에 맞는 전체 그래픽 방향성 수립",
+          "keywords": ["Box Type", "Concept Reference", "Material Selection", "패키지 형태 선정", "그래픽 방향성"]
+        },
+        {
+          "week": 2,
+          "description": "기성 도면(템플릿)으로 앞면·뒷면·날개 등 면의 역할 파악, 일러스트레이터에서 레이아웃 구성",
+          "keywords": ["Layout", "Bleed Guide", "Panel Design", "전개도", "면 구성"]
+        },
+        {
+          "week": 3,
+          "description": "전개도 위 로고와 그래픽 요소 배치로 시안 확정, 포토샵 스마트 오브젝트·왜곡 기능으로 2D 목업 합성",
+          "keywords": ["Surface Graphics", "Smart Object", "Blending Mode", "Photoshop Mockup", "시안 확정"]
+        },
+        {
+          "week": 4,
+          "description": "AI 프로그램으로 입체 이미지 구현, 2D 목업과 함께 최종 포트폴리오 레이아웃 완성",
+          "keywords": ["Pacdora", "Midjourney", "Final Polish", "3D 목업", "포트폴리오 레이아웃"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "Box Type", "Concept Reference", "Material Selection", "패키지 형태 선정", "그래픽 방향성",
+    "Layout", "Bleed Guide", "Panel Design", "전개도", "면 구성",
+    "Surface Graphics", "Smart Object", "Blending Mode", "Photoshop Mockup", "시안 확정",
+    "Pacdora", "Midjourney", "Final Polish", "3D 목업", "포트폴리오 레이아웃"
+  ]
+}

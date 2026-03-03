@@ -24,7 +24,9 @@
     { "id": "tax_2", "name": "전산세무 2급", "duration_months": 2, "tool": "세무 프로그램", "exam_per_year": "연 6회", "organizer": "한국세무사회" },
     { "id": "cat_2", "name": "CAT 2급", "duration_months": 1, "tool": "AutoCAD", "exam_per_year": "연 4회", "organizer": "대한상공회의소" },
     { "id": "arch_draft", "name": "전산응용건축제도기능사", "duration_months": "3~4", "tool": "AutoCAD", "exam_per_year": "연 4회", "organizer": "한국산업인력공단" },
-    { "id": "acp", "name": "ACP", "duration_months": 1, "tool": "Adobe", "exam_per_year": "상시", "organizer": "Adobe" }
+    { "id": "acp", "name": "ACP", "duration_months": 1, "tool": "Adobe", "exam_per_year": "상시", "organizer": "Adobe" },
+    { "id": "inventor", "name": "인벤터 (3D 기계 모델링)", "duration_months": 2, "tool": "AutoCAD + Autodesk Inventor", "exam_per_year": "연 4회", "organizer": "한국산업인력공단", "note": "전산응용기계제도기능사 취득 목적 과정" },
+    { "id": "mech_draft_cert", "name": "전산응용기계제도기능사", "duration_months": 2, "tool": "AutoCAD", "prerequisite": "inventor", "exam_per_year": "연 4회", "organizer": "한국산업인력공단" }
   ],
   "duration": {
     "short": "1~2개월",

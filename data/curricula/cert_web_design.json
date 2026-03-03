@@ -1,0 +1,63 @@
+{
+  "course_id": "cert_web_design",
+  "name": "웹디자인개발기능사",
+  "covers_courses": ["web_design"],
+  "instructor": "이희준",
+  "track": "certification",
+  "software": ["VS Code", "Adobe Photoshop"],
+  "prerequisite_courses": ["web_pub_1", "web_pub_2"],
+  "prerequisite_skills": ["HTML", "CSS", "포토샵 기초"],
+  "difficulty": 3,
+  "age_range": { "min": 15, "max": 60 },
+  "schedule": "3주 과정",
+  "duration_total_weeks": 3,
+  "certifications_targeted": ["웹디자인개발기능사"],
+  "objectives": [
+    "웹디자인개발기능사 실기 출제 기준 완전 파악",
+    "HTML/CSS 레이아웃 (Float, Flex, Grid) 시험 유형 실습",
+    "JavaScript 이벤트 처리 및 DOM 조작 기출 유형 실습",
+    "실전 모의고사 반복으로 시험 시간 내 완성 역량 확보"
+  ],
+  "employment_fields": ["웹 디자이너/퍼블리셔 취업 자격증", "국가기술자격증"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "웹디자인개발기능사 — 1주차",
+      "weeks": [
+        {
+          "week": 1,
+          "description": "시험 유형 오리엔테이션, 포토샵 시안 분석. HTML/CSS 레이아웃 기출 유형 실습 (Float·Flex·Grid, 헤더·네비·콘텐츠·푸터 구조 완성)",
+          "keywords": ["시험 유형", "포토샵 시안", "HTML", "CSS", "Float", "Flex", "Grid", "레이아웃"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "웹디자인개발기능사 — 2주차",
+      "weeks": [
+        {
+          "week": 2,
+          "description": "반응형 디자인(미디어 쿼리) 기출 유형. JavaScript 이벤트 처리 및 DOM 조작 (슬라이드·탭·팝업) 기출 유형 실습",
+          "keywords": ["반응형", "미디어 쿼리", "JavaScript", "DOM", "이벤트", "슬라이드", "탭", "팝업"]
+        }
+      ]
+    },
+    {
+      "section": 3,
+      "title": "웹디자인개발기능사 — 3주차",
+      "weeks": [
+        {
+          "week": 3,
+          "description": "실전 모의고사 반복 풀이 (포토샵 시안 → HTML/CSS/JS 구현 전 과정). 시간 배분 전략, 오답 분석 및 최종 완성",
+          "keywords": ["모의고사", "실전 풀이", "포토샵 시안", "시간 배분", "오답 분석"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "포토샵 시안 분석", "HTML", "CSS", "Float", "Flex", "Grid", "레이아웃",
+    "반응형", "미디어 쿼리",
+    "JavaScript", "DOM", "이벤트 처리", "슬라이드", "탭", "팝업",
+    "모의고사", "시간 배분"
+  ]
+}
