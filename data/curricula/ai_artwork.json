@@ -1,0 +1,51 @@
+{
+  "course_id": "ai_artwork",
+  "name": "AI 아트웍",
+  "covers_courses": ["ai_artwork"],
+  "instructor": "김창순",
+  "track": "artwork",
+  "structure": "stage_based",
+  "software": ["ChatGPT", "ComfyUI", "Stable Diffusion"],
+  "prerequisite_courses": [],
+  "difficulty": 3,
+  "age_range": { "min": 15, "max": 50 },
+  "objectives": [
+    "생성형 AI 기본 개념 및 드로잉 기초 이론 이해",
+    "Stable Diffusion으로 인물화·배경 제작 실습",
+    "트렌드 드로잉 기법 + 저작권 이해로 AI 아트웍 제작",
+    "개인 스타일 개발 및 ComfyUI 활용 포트폴리오 구축"
+  ],
+  "employment_fields": ["AI 크리에이터", "AI 그림 작가", "일러스트·삽화 디자이너"],
+  "stages": [
+    {
+      "stage": 1,
+      "title": "AI 드로잉 기초 이론",
+      "description": "생성형 AI 기본 개념과 활용 방법 이해. 드로잉 기초 이론 및 다양한 기법 소개, AI 도구 익히기",
+      "keywords": ["생성형AI", "AI 기초", "척도", "비례", "디자인 시트"]
+    },
+    {
+      "stage": 2,
+      "title": "AI 도구(Stable Diffusion) 실습",
+      "description": "다양한 무료 AI 드로잉 모델 실사용 실습. 인물화 그리기로 비례·형태 이해, 배경 제작 및 세계관·컨셉아트 제작",
+      "keywords": ["Stable Diffusion", "인물화", "비례", "형태", "배경", "세계관", "컨셉아트", "변형", "데포르메"]
+    },
+    {
+      "stage": 3,
+      "title": "AI 도구 아트웍 제작",
+      "description": "트렌드 드로잉 기법 학습 및 실습. 저작권·사용권한 이해, AI 도구로 실제 아트웍 제작 및 피드백으로 퀄리티 향상",
+      "keywords": ["채색", "뷰포인트", "아트웍", "저작권", "드로잉 기법", "피드백"]
+    },
+    {
+      "stage": 4,
+      "title": "스타일 개발 & 포트폴리오",
+      "description": "개인 스타일 발견 및 ComfyUI 활용. 포트폴리오 제작으로 일러스트레이터·AI 아티스트 활동 준비",
+      "keywords": ["ComfyUI", "포트폴리오", "아트웍", "개인 스타일", "AI 아티스트"]
+    }
+  ],
+  "skills_taught": [
+    "생성형AI", "AI 기초", "척도", "비례", "디자인 시트",
+    "Stable Diffusion", "인물화", "형태", "배경", "세계관", "컨셉아트", "데포르메",
+    "채색", "뷰포인트", "아트웍", "저작권",
+    "ComfyUI", "포트폴리오", "개인 스타일"
+  ]
+}

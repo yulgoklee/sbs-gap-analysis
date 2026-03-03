@@ -1,0 +1,78 @@
+{
+  "course_id": "cert_mos",
+  "name": "MOS (Microsoft Office Specialist)",
+  "covers_courses": ["mos"],
+  "instructor": "김인준",
+  "track": "certification",
+  "software": ["MS Office 2021 (PowerPoint, Word, Excel, Access)"],
+  "prerequisite_courses": [],
+  "difficulty": 2,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 4,
+  "certifications_targeted": ["MOS (Microsoft Office Specialist)"],
+  "objectives": [
+    "PowerPoint 슬라이드·마스터·개체·미디어·애니메이션 기능 습득",
+    "Word 서식파일·스타일·목차·매크로·개체 생성 기능 습득",
+    "Excel 파일관리·조건부서식·함수·차트·피벗테이블 습득",
+    "Access DB 생성·테이블·쿼리·폼·보고서 전반 습득"
+  ],
+  "employment_fields": ["사무업무", "경영 및 관리", "외국계 기업 취업"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "파워포인트",
+      "description": "슬라이드 레이아웃·마스터, 개체 삽입·효과, 미디어·하이퍼링크, 애니메이션·전환효과",
+      "sub_sections": [
+        "Section 00: MS 오피스 시작",
+        "Section 01: 슬라이드 관리, 슬라이드 마스터 레이아웃",
+        "Section 02: 도형·그림 삽입, 효과·그룹·정렬",
+        "Section 03: 스마트아트, 오디오·비디오 등 미디어 활용",
+        "Section 04: 애니메이션 효과, 슬라이드 전환효과"
+      ],
+      "keywords": ["슬라이드", "마스터", "레이아웃", "도형", "미디어", "애니메이션", "전환효과"]
+    },
+    {
+      "section": 2,
+      "title": "워드",
+      "description": "서식파일·문서검토, 스타일·페이지 서식, 참조·목차, 매크로·개체 활용",
+      "sub_sections": [
+        "Section 01: 워드 옵션설정, 서식파일 활용·문서검토",
+        "Section 02: 글꼴·단락 스타일 생성·적용, 페이지·문서 서식 관리",
+        "Section 03: 참조·목차 개념, 편지병합 사용법",
+        "Section 04: 매크로 사용법, 컨트롤·개체 활용"
+      ],
+      "keywords": ["서식파일", "스타일", "목차", "참조", "편지병합", "매크로", "개체"]
+    },
+    {
+      "section": 3,
+      "title": "엑셀",
+      "description": "통합문서·시트 보호, 조건부서식·매크로, 함수·수식, 차트·피벗테이블",
+      "sub_sections": [
+        "Section 01: 파일·문서 관리, 파일·시트 보호 설정",
+        "Section 02: 조건부서식·기타서식, 매크로 활용",
+        "Section 03: 다양한 함수 사용법, 수식기능 이해",
+        "Section 04: 차트·피벗테이블 생성·설정"
+      ],
+      "keywords": ["통합문서", "시트 보호", "조건부서식", "매크로", "함수", "수식", "차트", "피벗테이블"]
+    },
+    {
+      "section": 4,
+      "title": "엑세스",
+      "description": "DB 생성·설정, DB 구성요소·데이터 연결, 쿼리, 폼, 보고서",
+      "sub_sections": [
+        "Section 01: 데이터베이스 생성·관리, 기타 환경설정",
+        "Section 02: 테이블·필드·레코드 정리, 관계 설정·바운드 개념",
+        "Section 03: 쿼리 생성·수정, 계산쿼리 활용",
+        "Section 04: 폼 생성·속성 수정",
+        "Section 05: 보고서 생성·속성 수정"
+      ],
+      "keywords": ["데이터베이스", "테이블", "필드", "레코드", "관계", "쿼리", "폼", "보고서"]
+    }
+  ],
+  "skills_taught": [
+    "슬라이드", "마스터", "레이아웃", "미디어", "애니메이션",
+    "서식파일", "스타일", "목차", "편지병합", "매크로",
+    "통합문서", "시트 보호", "조건부서식", "함수", "차트", "피벗테이블",
+    "데이터베이스", "테이블", "쿼리", "폼", "보고서"
+  ]
+}

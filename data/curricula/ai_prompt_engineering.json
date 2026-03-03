@@ -1,0 +1,53 @@
+{
+  "course_id": "ai_prompt_engineering",
+  "name": "AI 프롬프트 엔지니어링",
+  "covers_courses": ["ai_basic"],
+  "instructor": "김민주",
+  "track": "ai",
+  "software": ["ChatGPT", "Midjourney", "Gemini", "뤼튼", "NotebookLM"],
+  "prerequisite_courses": ["ai_cert"],
+  "difficulty": 3,
+  "age_range": { "min": 15, "max": 60 },
+  "duration_total_weeks": 4,
+  "objectives": [
+    "AI 이미지·텍스트 생성 기초 워크플로우 확립 (뤼튼/제미나이/노트북LM)",
+    "ChatGPT 프롬프트 6요소 설계 및 고품질 이미지 생성법 습득",
+    "Midjourney 파라미터 제어로 스타일·비율·조명 정밀 연출",
+    "MBTI 기반 퍼스널 캐릭터 + 3D 텍스트 최종 결과물 완성"
+  ],
+  "employment_fields": ["디자이너 전 직업군", "AI 콘텐츠 크리에이터"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "AI 프롬프트 엔지니어링",
+      "weeks": [
+        {
+          "week": 1,
+          "description": "뤼튼 문서·이미지 생성, 프롬프트 구조 차이 비교. 제미나이·노트북LM 실습으로 AI 기반 텍스트·이미지 생성 기초 워크플로우 확립",
+          "keywords": ["뤼튼", "제미나이", "노트북LM", "이미지 생성", "텍스트 생성", "워크플로우"]
+        },
+        {
+          "week": 2,
+          "description": "ChatGPT 인터페이스 학습, 핵심 프롬프트 6요소 실습. 고품질 프롬프트 설계법 및 이미지 품질 향상 절차 구체적 학습",
+          "keywords": ["ChatGPT", "프롬프트 엔지니어링", "6요소", "이미지 생성", "품질 향상"]
+        },
+        {
+          "week": 3,
+          "description": "Midjourney 인터페이스 학습, ChatGPT 연동으로 컨셉→이미지 제작 흐름 설계. 스타일·비율·조명 파라미터 정밀 제어",
+          "keywords": ["Midjourney", "ChatGPT", "파라미터", "스타일", "비율", "조명", "컨셉"]
+        },
+        {
+          "week": 4,
+          "description": "MBTI 성향 반영 캐릭터 이미지 설계, 3D 텍스트 + 모션 효과 결합으로 시각적 완성도 높인 최종 결과물 완성",
+          "keywords": ["Midjourney", "MBTI", "ChatGPT", "3D 텍스트", "모션", "캐릭터"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "뤼튼", "제미나이", "노트북LM", "이미지 생성", "텍스트 생성", "워크플로우",
+    "ChatGPT", "프롬프트 엔지니어링", "6요소", "품질 향상",
+    "Midjourney", "파라미터", "스타일", "비율", "조명", "컨셉",
+    "MBTI 캐릭터", "3D 텍스트", "모션"
+  ]
+}

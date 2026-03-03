@@ -1,0 +1,52 @@
+{
+  "course_id": "ai_creator_cg",
+  "name": "AI 크리에이터 (CG/마야)",
+  "covers_courses": ["ai_creator_cg"],
+  "instructor": "전휘재",
+  "track": "cg_maya",
+  "structure": "stage_based",
+  "software": ["Maya", "GrAIBox", "ComfyUI", "ControlNet", "IP-Adapter", "Runway"],
+  "prerequisite_courses": ["photoshop", "aftereffects_cg", "maya_1"],
+  "prerequisite_skills": ["Adobe Photoshop", "After Effects", "Maya 기초"],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 40 },
+  "objectives": [
+    "ComfyUI 노드 기반 워크플로우로 Stable Diffusion 이미지 생성",
+    "ControlNet + IP-Adapter로 캐릭터·배경 일관성 유지 생성",
+    "Maya/GrAIBox 연동으로 3D 형태 기반 고퀄리티 캐릭터 이미지 완성",
+    "Runway로 이미지→시네마틱 영상 확장 파이프라인 완성"
+  ],
+  "employment_fields": ["CG 아티스트", "VFX 아티스트", "시네마틱 연출가", "게임 컨셉 아티스트"],
+  "stages": [
+    {
+      "stage": 1,
+      "title": "ComfyUI 기본 & Txt2Img",
+      "description": "ComfyUI 설치, 인터페이스 및 패널 구성, 노드 구조 이해. 가벼운 이미지 생성 방법 및 Custom Node 학습",
+      "keywords": ["ComfyUI", "설치", "노드 구조", "인터페이스", "프롬프트", "Custom Node", "Txt2Img"]
+    },
+    {
+      "stage": 2,
+      "title": "Img2Img / Inpaint / Upscale / ControlNet + IP-Adapter",
+      "description": "이미지 수정·보완 및 선명도 향상 방법 학습. ControlNet + IP-Adapter로 캐릭터 일관성 유지 생성법 학습",
+      "keywords": ["Img2Img", "Inpaint", "Upscale", "ControlNet", "IP-Adapter", "디테일 보정", "일관성", "해상도 업스케일"]
+    },
+    {
+      "stage": 3,
+      "title": "Maya / GrAIBox",
+      "description": "Maya에서 제작된 형태·구조를 기반으로 GrAIBox 활용. 라인·윤곽·질감을 안정적으로 디테일업하여 완성도 높은 캐릭터 이미지 제작",
+      "keywords": ["Maya", "GrAIBox", "디테일업", "Projection", "Baking", "캐릭터", "형태", "질감"]
+    },
+    {
+      "stage": 4,
+      "title": "Runway - 이미지→시네마틱 영상",
+      "description": "정적 이미지를 자연스러운 움직임 있는 영상으로 확장. 감정·리듬·분위기를 고려한 컷 구성으로 시네마틱 영상 클립 제작",
+      "keywords": ["Runway", "컷 구성", "분위기", "영상 확장", "시네마틱 연출", "감정 표현"]
+    }
+  ],
+  "skills_taught": [
+    "ComfyUI", "노드 구조", "Custom Node", "Txt2Img",
+    "Img2Img", "Inpaint", "Upscale", "ControlNet", "IP-Adapter", "일관성",
+    "Maya", "GrAIBox", "디테일업", "Projection", "Baking",
+    "Runway", "시네마틱 연출", "영상 확장"
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "course_id": "cg_maya_portfolio",
+  "name": "마야 포트폴리오",
+  "covers_courses": [
+    "cg_portfolio"
+  ],
+  "instructor": "전휘재",
+  "track": "cg_maya",
+  "software": [
+    "Maya",
+    "ZBrush",
+    "Substance Painter",
+    "Unreal Engine 5"
+  ],
+  "prerequisite_courses": [
+    "maya_1",
+    "maya_2",
+    "maya_3",
+    "maya_4",
+    "maya_5",
+    "maya_6",
+    "maya_7",
+    "maya_8",
+    "maya_9"
+  ],
+  "difficulty": 5,
+  "duration_weeks": 24,
+  "portfolios_count": 6,
+  "objectives": [
+    "실제 취업용 포트폴리오 제작",
+    "캐릭터 모델링 + LookDev + 애니메이션 완성",
+    "Unreal Engine을 활용한 최종 렌더링 및 제출"
+  ],
+  "weeks": [
+    {
+      "portfolio": 1,
+      "week": 1,
+      "description": "파티 및 기획서 작성",
+      "keywords": [
+        "작업 계획",
+        "기획서 작성"
+      ]
+    },
+    {
+      "portfolio": 1,
+      "week": 2,
+      "description": "스토리보드 설명, 레퍼런스 가이드 작성",
+      "keywords": [
+        "현장분석",
+        "스타일가이드",
+        "스토리보드",
+        "레퍼런스 가이드"
+      ]
+    },
+    {
+      "portfolio": 1,
+      "week": 3,
+      "description": "Modeling LookDev: 캐릭터모델링 01 / Animation: 포즈·보조 애니메이션 01",
+      "keywords": [
+        "캐릭터 모델링",
+        "포즈 애니메이션"
+      ]
+    },
+    {
+      "portfolio": 1,
+      "week": 4,
+      "description": "Modeling LookDev: 캐릭터모델링 02 / Animation: 포즈·보조 애니메이션 02",
+      "keywords": [
+        "텍스처",
+        "레이아웃"
+      ]
+    },
+    {
+      "portfolio": 2,
+      "week": 1,
+      "description": "Modeling LookDev: 캐릭터모델링 03 / Animation: 포즈·보조 애니메이션 03",
+      "keywords": [
+        "하드서페이스 모델링",
+        "키 설정",
+        "레이아웃 플로우"
+      ]
+    },
+    {
+      "portfolio": 2,
+      "week": 2,
+      "description": "Modeling LookDev: 캐릭터모델링 04 / Animation: 포즈·보조 애니메이션 04",
+      "keywords": [
+        "레이아웃 분리 타이밍",
+        "씬 체크",
+        "씬 준비"
+      ]
+    },
+    {
+      "portfolio": 2,
+      "week": 3,
+      "description": "Modeling LookDev: 캐릭터모델링 05 / Animation: 포즈·보조 애니메이션 05",
+      "keywords": [
+        "브러시크린",
+        "씬 뷰잉"
+      ]
+    },
+    {
+      "portfolio": 2,
+      "week": 4,
+      "description": "Modeling LookDev: 캐릭터모델링 06 / Animation: 포즈·보조 애니메이션 06",
+      "keywords": [
+        "키 설정",
+        "씬 최종 확인"
+      ]
+    },
+    {
+      "portfolio": 3,
+      "week": 1,
+      "description": "Modeling LookDev: 배경/파티 플로우 01 / Animation: 바디액션 애니메이션 01",
+      "keywords": [
+        "3화면 레이아웃 분석",
+        "배경 플로우"
+      ]
+    },
+    {
+      "portfolio": 3,
+      "week": 2,
+      "description": "Modeling LookDev: 배경/파티 플로우 02 / Animation: 바디액션 애니메이션 02",
+      "keywords": [
+        "파티클",
+        "테스트 렌더",
+        "라이팅"
+      ]
+    },
+    {
+      "portfolio": 3,
+      "week": 3,
+      "description": "Modeling LookDev: UV 작업 01 / Animation: 바디액션 애니메이션 03",
+      "keywords": [
+        "배경 모델링",
+        "UV 기획",
+        "그래픽 렌더링"
+      ]
+    },
+    {
+      "portfolio": 3,
+      "week": 4,
+      "description": "Modeling LookDev: UV 작업 02 / Animation: 바디액션 애니메이션 04",
+      "keywords": [
+        "UDIM",
+        "UV 작업"
+      ]
+    },
+    {
+      "portfolio": 4,
+      "week": 1,
+      "description": "Modeling LookDev: Cleanup / Animation: 바디액션 애니메이션 05",
+      "keywords": [
+        "Outliner Clean",
+        "Naming"
+      ]
+    },
+    {
+      "portfolio": 4,
+      "week": 2,
+      "description": "Modeling LookDev: 텍스처 작업 01 / Animation: 얼굴 애니메이션 01",
+      "keywords": [
+        "BaseColor",
+        "Bake",
+        "레퍼런스 세팅"
+      ]
+    },
+    {
+      "portfolio": 4,
+      "week": 3,
+      "description": "Modeling LookDev: 텍스처 작업 02 / Animation: 얼굴 애니메이션 02",
+      "keywords": [
+        "Layer",
+        "Key 수정",
+        "Roughness"
+      ]
+    },
+    {
+      "portfolio": 4,
+      "week": 4,
+      "description": "Modeling LookDev: 텍스처 작업 03 / Animation: 얼굴 애니메이션 03",
+      "keywords": [
+        "Dirt & Highlight",
+        "Detail & Mask",
+        "Weathering"
+      ]
+    },
+    {
+      "portfolio": 5,
+      "week": 1,
+      "description": "Modeling LookDev: 텍스처 작업 04/라이팅 작업 01 / Animation: 얼굴 애니메이션 04",
+      "keywords": [
+        "가이드 설정",
+        "렌더"
+      ]
+    },
+    {
+      "portfolio": 5,
+      "week": 2,
+      "description": "Modeling LookDev: 라이팅 작업 02 / Animation: 얼굴 애니메이션 05",
+      "keywords": [
+        "HDRI 라이팅",
+        "3 Point Light",
+        "Render"
+      ]
+    },
+    {
+      "portfolio": 5,
+      "week": 3,
+      "description": "Modeling LookDev: 라이팅 작업 03 / Animation: 영화 애니메이션 01",
+      "keywords": [
+        "카메라 씨네마틱",
+        "Environment",
+        "Fog Light"
+      ]
+    },
+    {
+      "portfolio": 5,
+      "week": 4,
+      "description": "Modeling LookDev: 라이팅 작업 04 / Animation: 영화 애니메이션 02",
+      "keywords": [
+        "레이어 라이팅",
+        "라이팅 확인"
+      ]
+    },
+    {
+      "portfolio": 6,
+      "week": 1,
+      "description": "Modeling LookDev: 리깅 01 / Animation: 영화 애니메이션 03",
+      "keywords": [
+        "관절 설정",
+        "Joint Setting"
+      ]
+    },
+    {
+      "portfolio": 6,
+      "week": 2,
+      "description": "Modeling LookDev: 리깅 02 / Animation: 영화 애니메이션 04",
+      "keywords": [
+        "Bind Skin",
+        "Skin Weight",
+        "Graph Editor"
+      ]
+    },
+    {
+      "portfolio": 6,
+      "week": 3,
+      "description": "Modeling LookDev: 씬 정리/파티클 반복 작업 01 / Animation: 영화 애니메이션 05",
+      "keywords": [
+        "Unreal Convert",
+        "KeyFrame 수정"
+      ]
+    },
+    {
+      "portfolio": 6,
+      "week": 4,
+      "description": "Modeling LookDev: 씬 정리/파티클 반복 작업 02 / Animation: 언리얼 씬 렌더 작업",
+      "keywords": [
+        "플로우 그레이드",
+        "Unreal SQ Render",
+        "폴리지"
+      ]
+    }
+  ],
+  "skills_taught": [
+    "기획서 작성",
+    "스타일가이드",
+    "스토리보드",
+    "레퍼런스 가이드",
+    "캐릭터 모델링",
+    "하드서페이스 모델링",
+    "배경 모델링",
+    "포즈 애니메이션",
+    "바디액션 애니메이션",
+    "영화 애니메이션",
+    "얼굴 애니메이션",
+    "레이아웃 분석",
+    "UV 기획",
+    "UDIM",
+    "UV 작업",
+    "Outliner Clean",
+    "Naming",
+    "씬 정리",
+    "BaseColor",
+    "Bake",
+    "Roughness",
+    "Dirt & Highlight",
+    "Weathering",
+    "Detail & Mask",
+    "HDRI 라이팅",
+    "3 Point Light",
+    "카메라 씨네마틱",
+    "Environment",
+    "Fog Light",
+    "레이어 라이팅",
+    "관절 설정",
+    "Bind Skin",
+    "Skin Weight",
+    "Unreal Convert",
+    "KeyFrame 수정",
+    "Unreal SQ Render",
+    "파티클",
+    "폴리지"
+  ]
+}

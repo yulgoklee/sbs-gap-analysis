@@ -1,0 +1,62 @@
+{
+  "course_id": "cert_gtqi",
+  "name": "GTQ-i (일러스트)",
+  "covers_courses": ["gtqi"],
+  "instructor": "김민주",
+  "track": "certification",
+  "software": ["Adobe Illustrator"],
+  "prerequisite_courses": ["illustrator"],
+  "prerequisite_skills": ["일러스트레이터 기초"],
+  "difficulty": 2,
+  "age_range": { "min": 15, "max": 60 },
+  "schedule": "주말반 (토·일) 2주",
+  "duration_total_weeks": 2,
+  "certifications_targeted": ["GTQ-i (일러스트레이터)"],
+  "objectives": [
+    "GTQ-i 시험 출제 유형 파악 및 단기 완성",
+    "펜툴·패스파인더·심볼 디자인 실기 기출 풀이",
+    "로고·CI·그라디언트 메시 실무 적용 숙달",
+    "실전 기출문제 반복으로 합격 역량 완성"
+  ],
+  "employment_fields": ["디자이너 취업 자격증"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "GTQ-i — 1주차 (토·일)",
+      "weeks": [
+        {
+          "week": "1주차 토",
+          "description": "GTQ-i 시험 유형 오리엔테이션. 기출 유형 1·2번 (도형 조합, 패스파인더, 쉐이프 빌더) 풀이 및 실습",
+          "keywords": ["GTQ-i", "시험 유형", "도형 조합", "패스파인더", "쉐이프 빌더"]
+        },
+        {
+          "week": "1주차 일",
+          "description": "기출 유형 3번 (펜툴 로고·심볼 디자인, 그라디언트, 투명도). 정밀 펜툴 드로잉 집중 실습",
+          "keywords": ["펜툴", "로고", "심볼", "그라디언트", "투명도"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "GTQ-i — 2주차 (토·일)",
+      "weeks": [
+        {
+          "week": "2주차 토",
+          "description": "기출 유형 4번 (문자 효과, 클리핑 마스크, 브러시, 패턴). 시험 시간 관리 전략 및 반복 실습",
+          "keywords": ["문자 효과", "클리핑 마스크", "브러시", "패턴", "시간 관리"]
+        },
+        {
+          "week": "2주차 일",
+          "description": "최신 기출문제 실전 풀이 (전 유형 종합). 오답 분석 및 최종 완성",
+          "keywords": ["기출문제", "실전 풀이", "오답 분석", "종합 실습"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "도형 조합", "패스파인더", "쉐이프 빌더",
+    "펜툴", "로고 디자인", "심볼", "그라디언트",
+    "문자 효과", "클리핑 마스크", "브러시", "패턴",
+    "기출문제", "시험 시간 관리"
+  ]
+}

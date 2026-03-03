@@ -1,0 +1,55 @@
+{
+  "course_id": "visual_infographic",
+  "name": "인포그래픽",
+  "covers_courses": ["infographic_1", "infographic_2"],
+  "instructor": "김민주",
+  "track": "visual_editing",
+  "software": ["Adobe Illustrator", "Adobe Photoshop"],
+  "prerequisite_courses": ["photoworks", "detail_illust"],
+  "prerequisite_skills": ["포토샵 응용", "일러스트 응용"],
+  "difficulty": 5,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "objectives": [
+    "복잡한 정보를 직관적으로 전달하는 인포그래픽 제작 능력 습득",
+    "데이터의 핵심을 파악하고 시각적 스토리를 기획하는 능력",
+    "다양한 인포그래픽 유형별 디자인 완벽 마스터",
+    "설득력 있는 논리적 디자인 포트폴리오 완성"
+  ],
+  "employment_fields": ["데이터 시각화 전문가", "콘텐츠 마케터", "보고서 디자이너"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "인포그래픽 - 기획부터 완성까지",
+      "estimated_courses": ["infographic_1", "infographic_2"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "인포그래픽 개념 이해, 나만의 인포그래픽 포스터 주제 선정 및 정보 수집",
+          "keywords": ["Data Mining Visual", "Infographic", "정보의 시각화", "주제 선정"]
+        },
+        {
+          "week": 2,
+          "description": "수집한 정보를 분석하여 구조화, 스토리텔링 전략 수립 및 스케치",
+          "keywords": ["정보 분석", "스토리텔링", "Chart Design", "Infographic Type", "구조화"]
+        },
+        {
+          "week": 3,
+          "description": "구조화된 인포그래픽 정보를 아이콘·차트·그래픽 요소로 제작 및 디자인화",
+          "keywords": ["Pictogram", "Isometry Diagram", "Process Map", "Chart Design", "아이콘"]
+        },
+        {
+          "week": 4,
+          "description": "원페이지 인포그래픽 포스터 완성, 최종 레이아웃 피드백 및 발표",
+          "keywords": ["원페이지 인포그래픽", "Layout", "Readability", "Export", "최종 완성"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "Data Mining Visual", "Infographic", "정보의 시각화", "주제 선정",
+    "정보 분석", "스토리텔링", "Chart Design", "Infographic Type", "구조화",
+    "Pictogram", "Isometry Diagram", "Process Map", "아이콘 제작",
+    "원페이지 인포그래픽", "Layout", "Readability", "Export"
+  ]
+}

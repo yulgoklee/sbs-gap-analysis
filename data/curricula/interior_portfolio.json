@@ -1,0 +1,62 @@
+{
+  "course_id": "interior_portfolio",
+  "name": "인테리어 포트폴리오",
+  "covers_courses": ["interior_portfolio"],
+  "instructor": "남현우",
+  "track": "interior",
+  "software": ["AutoCAD", "SketchUp", "VRay", "3DS MAX", "Photoshop"],
+  "prerequisite_courses": ["cad_1", "cad_2", "sketch_1", "sketch_2", "max_1", "max_2", "photoshop"],
+  "prerequisite_skills": ["AutoCAD", "SketchUp", "3DS MAX", "VRay", "포토샵"],
+  "difficulty": 5,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "structure": "stage_based",
+  "note": "기획부터 3D 투시도 완성까지 실무 포트폴리오 1개 이상 완성 목표. 실제 공간 대상으로 기획·설계·시각화 전 과정 경험",
+  "objectives": [
+    "실제 대상지를 기반으로 한 실내 공간 기획 및 설계",
+    "클라이언트 요구사항 분석을 반영한 컨셉·공간계획 수립",
+    "AutoCAD 도면 + SketchUp/3DS MAX 투시도로 완성된 포트폴리오 제작",
+    "취업 시장에서 바로 활용 가능한 인테리어 포트폴리오 완성"
+  ],
+  "employment_fields": ["실내건축 설계사무소", "인테리어 디자이너", "공간 디자이너", "건축 투시도 제작"],
+  "stages": [
+    {
+      "stage": 1,
+      "title": "대상지 분석 (Site Analysis)",
+      "description": "포트폴리오 공간의 대상지를 선정하고 현황 분석, 주변 환경 및 입지 조건 파악",
+      "keywords": ["대상지 선정", "현황 분석", "입지 조건", "주변 환경 분석"]
+    },
+    {
+      "stage": 2,
+      "title": "클라이언트 & 요구사항 분석 (Client Analysis)",
+      "description": "가상 클라이언트 설정, 사용자 요구사항 및 공간 프로그램 도출",
+      "keywords": ["클라이언트 분석", "요구사항 분석", "공간 프로그램", "사용자 분석"]
+    },
+    {
+      "stage": 3,
+      "title": "컨셉 설정 (Concept Setting)",
+      "description": "디자인 컨셉 및 테마 설정, 레퍼런스 수집, 색채·재료 계획 수립",
+      "keywords": ["컨셉 설정", "디자인 테마", "레퍼런스", "색채 계획", "재료 계획"]
+    },
+    {
+      "stage": 4,
+      "title": "공간 계획 (Space Planning)",
+      "description": "평면 레이아웃 및 동선 계획, AutoCAD 도면(평면도·천장도·입면도) 작성",
+      "keywords": ["공간 계획", "평면 레이아웃", "동선 계획", "AutoCAD 도면", "평면도", "천장도", "입면도"]
+    },
+    {
+      "stage": 5,
+      "title": "3D 투시도 제작 (3D Visualization)",
+      "description": "SketchUp 또는 3DS MAX로 공간 모델링, VRay 렌더링 및 Photoshop 후보정으로 최종 투시도 완성",
+      "keywords": ["3D 모델링", "3D 투시도", "VRay 렌더링", "후보정", "Photoshop 보정", "최종 결과물"]
+    }
+  ],
+  "skills_taught": [
+    "대상지 분석", "현황 분석", "입지 조건",
+    "클라이언트 분석", "요구사항 분석", "공간 프로그램",
+    "컨셉 설정", "디자인 테마", "레퍼런스 수집", "색채 계획", "재료 계획",
+    "공간 계획", "평면 레이아웃", "동선 계획",
+    "AutoCAD 도면 작성", "평면도", "천장도", "입면도",
+    "3D 모델링", "3D 투시도", "VRay 렌더링", "후보정", "포트폴리오 완성"
+  ]
+}

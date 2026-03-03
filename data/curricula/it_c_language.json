@@ -1,0 +1,55 @@
+{
+  "course_id": "it_c_language",
+  "name": "C언어",
+  "covers_courses": ["c_language"],
+  "instructor": "김은범",
+  "track": "it_programming",
+  "software": ["Visual Studio 2022"],
+  "prerequisite_courses": [],
+  "prerequisite_skills": [],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "objectives": [
+    "컴퓨터 프로그래밍에 대한 전반적인 이해",
+    "C Programming 언어의 이해와 기본 지식 습득",
+    "Pointer와 Function의 이해와 활용",
+    "정렬, 탐색, 자료구조 등 전반적인 코딩 스킬 습득"
+  ],
+  "employment_fields": ["전자공학(IoT)", "소프트웨어 및 게임 개발자"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "C언어 기초 - 문법 & 배열",
+      "estimated_courses": ["c_language"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "C언어 개발환경 설정 및 기본구조 학습. 자료형·변수·연산자를 활용한 입출력문, 제어문, 반복문, 배열 기초",
+          "keywords": ["C언어 기본구조", "자료형", "변수", "연산자", "입출력문", "제어문", "반복문", "배열"]
+        },
+        {
+          "week": 2,
+          "description": "배열과 문자열 심화 이해, 함수 정의 및 호출, 포인터 개념 도입(변수의 주소, 배열, 함수와의 관계)",
+          "keywords": ["함수", "포인터", "문자열", "배열과 함수", "변수 주소"]
+        },
+        {
+          "week": 3,
+          "description": "구조체와 공용체로 복합 데이터 구성, 동적 메모리 할당 및 해제 기법 완벽 습득",
+          "keywords": ["구조체", "공용체", "동적 메모리 할당", "malloc", "free"]
+        },
+        {
+          "week": 4,
+          "description": "파일 입출력 기능 구현으로 데이터 저장/관리, 인사관리 프로그램 실전 코딩 프로젝트 완성",
+          "keywords": ["파일 I/O", "데이터 저장", "실전 프로젝트", "인사관리 프로그램"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "C언어 기본구조", "자료형", "변수", "연산자", "입출력문", "제어문", "반복문", "배열",
+    "함수", "포인터", "문자열", "변수 주소",
+    "구조체", "공용체", "동적 메모리 할당", "malloc", "free",
+    "파일 I/O", "실전 프로젝트"
+  ]
+}

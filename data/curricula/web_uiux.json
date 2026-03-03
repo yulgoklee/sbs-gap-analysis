@@ -1,0 +1,86 @@
+{
+  "course_id": "web_uiux",
+  "name": "UI/UX 1~2 (Figma)",
+  "covers_courses": ["uiux_1", "uiux_2"],
+  "instructor": "양은진",
+  "track": "web",
+  "software": ["Figma"],
+  "prerequisite_courses": ["web_pub_1", "web_pub_2"],
+  "prerequisite_skills": ["웹 기초 이해"],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "objectives": [
+    "Figma 기본 도구 및 인터페이스 완전 습득",
+    "Auto Layout, 컴포넌트, 인스턴스 활용한 효율적인 UI 설계",
+    "프로토타입 및 인터랙션으로 실제 앱/웹 UX 흐름 구현",
+    "IT 현업에서 바로 활용 가능한 UI/UX 디자인 실무 역량"
+  ],
+  "employment_fields": ["웹에이전시 (브랜드기획팀)", "UI/UX 디자이너", "웹 퍼블리셔", "서비스기획자"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "UI/UX 1 - Figma 기초 & 컴포넌트",
+      "estimated_courses": ["uiux_1"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "Figma 인터페이스 기본 세팅, Frame/Shape/Text 도구 활용, 그래픽 작업, 레이아웃(Frame)으로 레이어 생성 및 세팅",
+          "keywords": ["Figma 기초", "Frame", "Shape", "Text", "레이어", "그래픽 도구"]
+        },
+        {
+          "week": 2,
+          "description": "Constraints(제약 조건) 설정, Auto Layout 소개 및 기본 설정, 버튼/카드 UI 설계 실습",
+          "keywords": ["Constraints", "Auto Layout", "레이어 분류", "버튼 UI", "카드 UI"]
+        },
+        {
+          "week": 3,
+          "description": "Components(컴포넌트) 생성 및 기본 설명, 인스턴스와 오버라이드 활용, 로컬 스타일(Local Style) 생성 및 스타일 가이드 화면 설계",
+          "keywords": ["컴포넌트", "인스턴스", "오버라이드", "로컬 스타일", "스타일 가이드"]
+        },
+        {
+          "week": 4,
+          "description": "디바이스 크기에 맞는 UI 설계, 로그인 팝업 UI, 텍스트 레이어 크기 변환 카드, 컴포넌트 탭 UI, 그리드 탭내비게이션",
+          "keywords": ["반응형 UI", "로그인 팝업 UI", "탭 UI", "그리드 탭내비게이션", "카드 UI"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "UI/UX 2 - 프로토타입 & 인터랙션",
+      "estimated_courses": ["uiux_2"],
+      "weeks": [
+        {
+          "week": 5,
+          "description": "프로토타입 기본 설정(링크 연결/화면이동/인터랙션), 클릭 및 화면이동, 아래탭 인터랙션, 스크롤 위치 이동, Variants로 팝업버튼 설계",
+          "keywords": ["프로토타입", "인터랙션", "화면이동", "Variants", "탭 내비게이션"]
+        },
+        {
+          "week": 6,
+          "description": "Variants로 아코디언 메뉴 설계, After delay 인터랙션, 스마트 애니메이션(로딩 UI / 드래그 블러 / 스크롤 애니메이션)",
+          "keywords": ["Variants", "스마트 애니메이션", "After delay", "아코디언", "로딩 UI"]
+        },
+        {
+          "week": 7,
+          "description": "Auto Layout 활용 슬라이드 UI 설계, 캐러셀 슬라이드, 탭 UI 이미지 레이어 프레임 맞춤, 스마트폰 인터랙션 플로우 확인",
+          "keywords": ["슬라이드 UI", "캐러셀", "인터랙션 플로우", "Auto Layout 응용"]
+        },
+        {
+          "week": 8,
+          "description": "완전한 앱 서비스 화면 완성, 일러스트 export, 상단바/하단바/시간 UI 설계, 카드/기사 컴포넌트 설계, 화면 끝 인터랙션 추가",
+          "keywords": ["앱 화면 설계", "Export", "상단바", "하단바", "카드 컴포넌트", "기사 컴포넌트"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "Figma 기초", "Frame", "Shape", "Text 도구", "레이어", "그래픽 도구",
+    "Constraints", "Auto Layout", "레이어 분류",
+    "컴포넌트", "인스턴스", "오버라이드", "로컬 스타일", "스타일 가이드",
+    "반응형 UI", "로그인 팝업 UI", "탭 UI", "그리드 탭내비게이션", "카드 UI",
+    "프로토타입", "인터랙션", "화면이동", "Variants",
+    "스마트 애니메이션", "After delay", "아코디언",
+    "슬라이드 UI", "캐러셀", "인터랙션 플로우",
+    "앱 화면 설계", "Export", "상단바", "하단바", "카드 컴포넌트"
+  ]
+}

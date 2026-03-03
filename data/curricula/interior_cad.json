@@ -1,0 +1,84 @@
+{
+  "course_id": "interior_cad",
+  "name": "AutoCAD 1~2",
+  "covers_courses": ["cad_1", "cad_2"],
+  "instructor": "오유경",
+  "track": "interior",
+  "software": ["AutoCAD"],
+  "prerequisite_courses": [],
+  "prerequisite_skills": [],
+  "difficulty": 3,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "objectives": [
+    "AutoCAD 기초 명령어를 활용한 2D 도면 작성",
+    "주거공간 및 상업공간 실내 도면(평면도/천장도/입면도) 완성",
+    "제작가구도면 및 단면도 작성 실무 역량 습득",
+    "전산응용건축제도기능사 시험 대비 도면 작성 능력"
+  ],
+  "employment_fields": ["실내건축 설계사무소", "인테리어 디자이너", "건축제도사", "CAD 오퍼레이터"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "AutoCAD 1 - 기초 명령어",
+      "estimated_courses": ["cad_1"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "AutoCAD 시작하기(인터페이스/환경설정), Line·Circle·Osnap 기초, Offset·Trim 명령어",
+          "keywords": ["AutoCAD 인터페이스", "Line", "Circle", "Osnap", "Offset", "Trim"]
+        },
+        {
+          "week": 2,
+          "description": "Rectangle·Move·Copy, Xline·Spline, Arc·Ellipse 명령어 실습",
+          "keywords": ["Rectangle", "Move", "Copy", "Xline", "Spline", "Arc", "Ellipse"]
+        },
+        {
+          "week": 3,
+          "description": "Polygon·Polyline, Mirror·Rotate·Scale, Fillet·Chamfer, Array 명령어 실습",
+          "keywords": ["Polygon", "Polyline", "Mirror", "Rotate", "Scale", "Fillet", "Chamfer", "Array"]
+        },
+        {
+          "week": 4,
+          "description": "Divide·Measure·Align·Donut, Group·Block, Hatch, Layer, Text/Mtext, Dimension·Dimension Style, Plot(출력)",
+          "keywords": ["Divide", "Measure", "Align", "Group", "Block", "Hatch", "Layer", "Text", "Dimension", "Plot"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "AutoCAD 2 - 실내 도면 제작",
+      "estimated_courses": ["cad_2"],
+      "weeks": [
+        {
+          "week": 5,
+          "description": "OT 및 CAD1 명령어 복습, 응용 명령어[1] 학습",
+          "keywords": ["응용 명령어", "복습", "도면 기초"]
+        },
+        {
+          "week": 6,
+          "description": "주거공간 평면도·천장도·입면도 작성 실습",
+          "keywords": ["주거공간", "평면도", "천장도", "입면도", "주거 도면"]
+        },
+        {
+          "week": 7,
+          "description": "도면 정리[1], 응용 명령어[2], 상업공간 평면도·천장도·입면도 작성",
+          "keywords": ["상업공간", "평면도", "천장도", "입면도", "도면 정리"]
+        },
+        {
+          "week": 8,
+          "description": "도면 정리[2~3], 제작가구도면, 단면도 작성 및 최종 출력",
+          "keywords": ["제작가구도면", "단면도", "도면 정리", "최종 출력"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "AutoCAD 인터페이스", "Line", "Circle", "Osnap", "Offset", "Trim",
+    "Rectangle", "Move", "Copy", "Xline", "Spline", "Arc", "Ellipse",
+    "Polygon", "Polyline", "Mirror", "Rotate", "Scale", "Fillet", "Chamfer", "Array",
+    "Divide", "Measure", "Align", "Group", "Block", "Hatch", "Layer", "Text", "Dimension", "Plot",
+    "응용 명령어", "주거공간 도면", "평면도", "천장도", "입면도",
+    "상업공간 도면", "제작가구도면", "단면도"
+  ]
+}

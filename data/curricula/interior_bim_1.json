@@ -1,0 +1,131 @@
+{
+  "course_id": "bim_1",
+  "name": "BIM-REVIT 1",
+  "covers_courses": [
+    "bim_1"
+  ],
+  "instructor": "권애란",
+  "track": "interior",
+  "software": [
+    "Autodesk Revit"
+  ],
+  "prerequisite_courses": [],
+  "difficulty": 5,
+  "age_range": {
+    "min": 15,
+    "max": 50
+  },
+  "duration_total_weeks": 4,
+  "certifications_targeted": [],
+  "objectives": [
+    "BIM(Building Information Modeling) 3D 모델링 기초 개념 이해",
+    "Revit 인터페이스 및 프로젝트 템플릿 작성 숙달",
+    "벽체·바닥·지붕·계단·난간 등 주요 구조부 모델링",
+    "물량산출 일람표 작성 및 시트 구성",
+    "캐드 데이터를 활용한 전환설계 요령 파악"
+  ],
+  "employment_fields": [
+    "인테리어 디자이너",
+    "건축 구조설계",
+    "공간 설계",
+    "BIM 코디네이터"
+  ],
+  "sections": [
+    {
+      "section": 1,
+      "title": "BIM-REVIT 1 — Week 1",
+      "description": "프로젝트 기준 요소 작성을 통한 템플릿 이해 / 모델링 요소 작성 수정 및 활용 / 모델링 요소 스케치 수정 편집 요령 파악하기",
+      "keywords": [
+        "BIM",
+        "그리드",
+        "레벨",
+        "지형",
+        "RPC",
+        "특성",
+        "탭",
+        "판넬",
+        "프로젝트뷰",
+        "패밀리",
+        "유형",
+        "요소"
+      ]
+    },
+    {
+      "section": 2,
+      "title": "BIM-REVIT 1 — Week 2",
+      "description": "프로젝트 뷰 템플릿 작성을 통한 공간 활용 및 이해 / BIM 모델링 벽체, 바닥, 지붕, 기초관 작성 및 편집",
+      "keywords": [
+        "스케치",
+        "벽체",
+        "바닥",
+        "지붕",
+        "램프",
+        "수정",
+        "관리",
+        "설정"
+      ]
+    },
+    {
+      "section": 3,
+      "title": "BIM-REVIT 1 — Week 3",
+      "description": "벽식 구조물 작성을 위한 주요 구조부 이해 및 작성 / 모델링 간섭 확인을 통한 중복 물량 조회 및 산출",
+      "keywords": [
+        "벽식구조",
+        "패밀리로드",
+        "유형편집",
+        "숨기기",
+        "계단",
+        "난간",
+        "간섭확인",
+        "단면도"
+      ]
+    },
+    {
+      "section": 4,
+      "title": "BIM-REVIT 1 — Week 4",
+      "description": "캐드 데이터를 이용한 전환설계 요령 파악 / 벽식 구조물 이해 및 창호, 내외장 작성을 통한 구조·마감재 물량 산출",
+      "keywords": [
+        "벽식구조",
+        "형상결합",
+        "문/창문",
+        "BIM object",
+        "일람표",
+        "시트",
+        "비주얼스타일",
+        "렌더링",
+        "재질",
+        "전환설계"
+      ]
+    }
+  ],
+  "skills_taught": [
+    "BIM",
+    "그리드",
+    "레벨",
+    "지형",
+    "RPC",
+    "프로젝트뷰",
+    "패밀리",
+    "유형",
+    "벽체",
+    "바닥",
+    "지붕",
+    "램프",
+    "벽식구조",
+    "패밀리로드",
+    "유형편집",
+    "계단",
+    "난간",
+    "간섭확인",
+    "단면도",
+    "형상결합",
+    "문/창문",
+    "BIM object",
+    "일람표",
+    "시트",
+    "비주얼스타일",
+    "렌더링",
+    "재질",
+    "전환설계"
+  ]
+}

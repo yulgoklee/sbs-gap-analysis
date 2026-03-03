@@ -1,0 +1,60 @@
+{
+  "course_id": "motion_portfolio",
+  "name": "모션 포트폴리오",
+  "covers_courses": ["motion_portfolio"],
+  "instructor": "오은비",
+  "track": "motion",
+  "software": ["After Effects", "Photoshop", "Illustrator", "Cinema 4D", "Premiere Pro"],
+  "prerequisite_courses": ["premiere", "aftereffects_1", "aftereffects_2", "aftereffects_3", "cinema4d_1", "cinema4d_2", "cinema4d_3", "cinema4d_4", "cinema4d_5"],
+  "prerequisite_skills": ["프리미어프로", "애프터이펙트", "시네마4D", "포토샵", "일러스트"],
+  "difficulty": 5,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_months": { "min": 2, "max": 4 },
+  "structure": "stage_based",
+  "note": "개인 진도에 따라 상이, 최소 2개 이상 포트폴리오 완성 목표. 기획 100% 자율로 진행 가능한 실무 능력 보강",
+  "objectives": [
+    "TV/광고/SNS 콘텐츠용 모션그래픽 포트폴리오 제작",
+    "기획→스토리보드→소스제작→애니메이션→배포까지 전 과정 경험",
+    "채용 시장에서 바로 활용 가능한 포트폴리오 완성"
+  ],
+  "employment_fields": ["TV/광고 크리에이터", "모션그래픽 디자이너", "광고/브랜드 영상 작업 스튜디오", "영화/OTT 특수효과", "게임/앱/UI 모션"],
+  "stages": [
+    {
+      "stage": 1,
+      "title": "기획 (Planning)",
+      "description": "타겟 및 컨셉 설정, 레퍼런스 분석, 타겟 분석",
+      "keywords": ["레퍼런스 분석", "스토리보드", "타겟 분석", "컨셉 설정"]
+    },
+    {
+      "stage": 2,
+      "title": "스토리보드 & 콘티 (Storyboard & Contee)",
+      "description": "기획을 시각화하고, 전체 구성 흐름을 체계화하는 단계. 완성도에 영향을 미치는 다음 작업을 위한 기반",
+      "keywords": ["씬 구성", "타이밍", "화면전환", "가이드 시각화"]
+    },
+    {
+      "stage": 3,
+      "title": "디자인 & 소스 제작 (Design & Asset Creation)",
+      "description": "비주얼 요소와 작업에 필요한 모든 리소스를 준비하고 각 파트를 확인",
+      "keywords": ["색상 확인", "그래픽 소스 제작", "스타일 디렉션", "일러스트 작업", "포토샵 합성", "AE 작업", "C4D 작업"]
+    },
+    {
+      "stage": 4,
+      "title": "애니메이션 & 마무리 (Animation & Finalization)",
+      "description": "준비된 모든 소스들을 애니메이팅하고, 완성도 높은 결과물로 마무리하는 단계",
+      "keywords": ["씬 렌더", "합성 및 컴포지트", "보정 작업", "음향 삽입"]
+    },
+    {
+      "stage": 5,
+      "title": "포트폴리오 제작 & 배포 (Portfolio Documentation & Distribution)",
+      "description": "채용 과정에서 쉽게 공유할 수 있는 상태로 최종 가능한 마지막 작업",
+      "keywords": ["최종 디자인 검토", "PDF 제작", "플랫폼 업로드", "최종화 리뷰"]
+    }
+  ],
+  "skills_taught": [
+    "레퍼런스 분석", "타겟 분석", "컨셉 설정",
+    "스토리보드", "콘티", "씬 구성", "타이밍", "화면전환",
+    "그래픽 소스 제작", "스타일 디렉션", "일러스트 활용", "포토샵 합성",
+    "씬 렌더", "컴포지트", "보정 작업", "음향 삽입",
+    "PDF 포트폴리오 제작", "플랫폼 업로드"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "course_id": "it_java",
+  "name": "Java",
+  "covers_courses": ["java"],
+  "instructor": "김은범",
+  "track": "it_programming",
+  "software": ["IntelliJ IDEA", "JDK 17"],
+  "prerequisite_courses": [],
+  "prerequisite_skills": [],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 8,
+  "objectives": [
+    "컴퓨터 프로그래밍에 대한 전반적인 이해",
+    "JAVA Programming 언어의 이해와 기본 지식 습득",
+    "Class와 객체의 이해",
+    "객체지향형 프로그래밍, 함수형 프로그래밍 방법론 이해"
+  ],
+  "employment_fields": ["Full-Stack 개발자", "모바일 앱 개발자 (Android)"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "Java - 기초 문법",
+      "estimated_courses": ["java"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "JAVA 개발환경 설정(IntelliJ IDEA, JDK 17), JVM/JRE/JDK 이해, 자료형·변수, 입출력 메서드, 연산자 학습",
+          "keywords": ["JVM", "JRE", "JDK", "IntelliJ IDEA", "데이터 타입", "변수", "Primitive Type", "Referenced Type", "연산자", "Scanner"]
+        },
+        {
+          "week": 2,
+          "description": "제어문(if, switch~case)과 반복문(while, do~while, for) 학습 및 알고리즘 개념 이해",
+          "keywords": ["제어문", "if", "switch~case", "반복문", "while", "do~while", "for"]
+        },
+        {
+          "week": 3,
+          "description": "1차원·2차원·Jagged Array 학습, for~each 활용, 다차원 반복문 응용",
+          "keywords": ["배열", "Array", "1차원 배열", "2차원 배열", "Jagged Array", "for~each", "continue"]
+        },
+        {
+          "week": 4,
+          "description": "메서드 정의와 호출, 파라미터와 반환값, 메서드 오버로딩, 접근제어자",
+          "keywords": ["메서드", "Method", "반환형", "매개변수", "메서드 오버로딩", "접근제어자"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "Java - 객체지향 & 심화",
+      "estimated_courses": ["java"],
+      "weeks": [
+        {
+          "week": 5,
+          "description": "객체지향형 프로그래밍(OOP), 클래스·객체·인스턴스 개념, 필드·메서드·생성자, this 키워드",
+          "keywords": ["OOP", "클래스", "객체", "인스턴스", "생성자", "필드", "this"]
+        },
+        {
+          "week": 6,
+          "description": "캡슐화(getter/setter), 상속(inheritance), 부모/자식 클래스 관계, 다형성, 오버라이딩",
+          "keywords": ["캡슐화", "getter", "setter", "상속", "inheritance", "다형성", "polymorphism", "오버라이딩", "extends"]
+        },
+        {
+          "week": 7,
+          "description": "예외처리 개념(try~catch, finally, throw/throws), 파일 Input/Output Stream, FileReader/FileWriter",
+          "keywords": ["예외처리", "try~catch", "finally", "throw", "throws", "File I/O", "FileReader", "FileWriter", "try with resource"]
+        },
+        {
+          "week": 8,
+          "description": "Generic Class, Collection(ArrayList, LinkedList, HashSet, TreeSet, HashMap, TreeMap), JSON Data 처리, Java Swing Application",
+          "keywords": ["Generic", "Collection", "ArrayList", "LinkedList", "HashSet", "HashMap", "TreeMap", "JSON", "Java Swing"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "JVM", "JRE", "JDK", "IntelliJ IDEA", "데이터 타입", "변수", "Primitive Type", "Referenced Type", "연산자",
+    "제어문", "if", "switch~case", "반복문", "while", "for",
+    "배열", "Array", "Jagged Array", "for~each",
+    "메서드", "반환형", "매개변수", "메서드 오버로딩", "접근제어자",
+    "OOP", "클래스", "객체", "인스턴스", "생성자", "this",
+    "캡슐화", "getter", "setter", "상속", "다형성", "오버라이딩",
+    "예외처리", "try~catch", "File I/O", "FileReader", "FileWriter",
+    "Generic", "Collection", "ArrayList", "LinkedList", "HashMap", "JSON", "Java Swing"
+  ]
+}

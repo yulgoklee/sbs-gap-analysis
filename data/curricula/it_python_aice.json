@@ -1,0 +1,118 @@
+{
+  "course_id": "it_python_aice",
+  "name": "Python with AICE (평일 과정)",
+  "covers_courses": ["python", "aice"],
+  "instructor": "김은범",
+  "track": "it_programming",
+  "software": ["Visual Studio Code", "Python 3", "Google Colab", "Scikit-learn", "TensorFlow"],
+  "prerequisite_courses": [],
+  "prerequisite_skills": [],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 12,
+  "note": "평일 과정. Python 1~2 (8주) + Python 3/AICE (4주) 통합 커리큘럼. AICE 자격증 취득 목표",
+  "objectives": [
+    "Python Programming 언어의 이해와 기본 지식 습득",
+    "데이터 분석, 웹크롤링 등 실전 어플리케이션 개발",
+    "머신러닝/딥러닝 AI 모델링 개념 이해 및 실습",
+    "AICE (AI Certificate for Everyone) 자격증 취득 대비"
+  ],
+  "employment_fields": ["데이터 분석가", "AI 개발자", "다양한 응용 분야 개발자"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "Python 1 - 기초 문법 & 자료구조",
+      "estimated_courses": ["python"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "파이썬 소개 및 개발환경 설정(VSCode, Google Colab), 데이터 타입과 변수, 기본 연산자",
+          "keywords": ["Python 소개", "VSCode", "Google Colab", "데이터 타입", "변수", "연산자", "print", "Extension"]
+        },
+        {
+          "week": 2,
+          "description": "조건문(if/elif/else, match)과 반복문(for, while, break, continue) 학습 및 응용",
+          "keywords": ["조건문", "if", "elif", "else", "match", "for", "while", "range", "break", "continue", "indentation"]
+        },
+        {
+          "week": 3,
+          "description": "기본 자료구조: 리스트(list), 튜플(tuple), 세트(set), 딕셔너리(dict) 개념과 활용",
+          "keywords": ["list", "tuple", "set", "dictionary", "collections", "Python 자료구조"]
+        },
+        {
+          "week": 4,
+          "description": "함수 개념, 내장 함수, 사용자 정의 함수(파라미터, 반환값, 다중 반환, 가변길이 파라미터)",
+          "keywords": ["함수", "function", "파라미터", "반환값", "def", "Named parameter", "Default parameter", "가변길이 파라미터"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "Python 2 - 모듈·OOP & 데이터 분석",
+      "estimated_courses": ["python"],
+      "weeks": [
+        {
+          "week": 5,
+          "description": "모듈과 패키지(내부/외부 모듈), OOP: 클래스·인스턴스·생성자·메서드·상속·오버라이드",
+          "keywords": ["모듈", "module", "라이브러리", "library", "패키지", "package", "OOP", "클래스", "인스턴스", "생성자", "상속", "override"]
+        },
+        {
+          "week": 6,
+          "description": "파일 입출력: 텍스트·CSV·JSON·Binary 파일 처리, with문으로 리소스 보호",
+          "keywords": ["파일 입출력", "File I/O", "txt", "csv", "json", "Binary", "with문"]
+        },
+        {
+          "week": 7,
+          "description": "예외처리(try~except, finally, raise), Numpy 기초, Pandas 기초",
+          "keywords": ["예외처리", "try~except", "finally", "raise", "numpy", "pandas"]
+        },
+        {
+          "week": 8,
+          "description": "Pandas로 엑셀 파일 불러오기, 데이터 파악/분석, Matplotlib 데이터 시각화",
+          "keywords": ["Pandas", "데이터 분석", "Matplotlib", "데이터 시각화", "Scatter", "line", "bar", "pie"]
+        }
+      ]
+    },
+    {
+      "section": 3,
+      "title": "Python 3 - AI 모델링 & AICE 준비",
+      "estimated_courses": ["aice"],
+      "weeks": [
+        {
+          "week": 9,
+          "description": "데이터 탐색과 전처리: matplotlib·seaborn을 이용한 고급 시각화, 수치형/범주형 데이터 정제, 정규화·표준화",
+          "keywords": ["데이터 탐색", "matplotlib", "seaborn", "데이터 전처리", "수치형 데이터", "범주형 데이터", "정규화", "표준화", "preprocessing", "변수 선택"]
+        },
+        {
+          "week": 10,
+          "description": "AI 모델링 필수 개념: 머신러닝/딥러닝 이해, 지도/비지도 학습, AI 모델링 프로세스, 학습 데이터 분할, 과적합 확인",
+          "keywords": ["머신러닝", "딥러닝", "Machine Learning", "Deep Learning", "지도학습", "비지도학습", "AI 모델링", "과적합"]
+        },
+        {
+          "week": 11,
+          "description": "지도학습으로 AI 모델링: Scikit-learn, 선형회귀, 로지스틱 회귀, 의사결정 트리, 앙상블, 랜덤 포레스트, 신경망/딥러닝",
+          "keywords": ["Scikit-learn", "선형회귀", "로지스틱 회귀", "의사결정 트리", "Decision tree", "앙상블", "랜덤 포레스트", "인공 신경망", "Neural Network", "딥러닝 프레임워크", "Regression"]
+        },
+        {
+          "week": 12,
+          "description": "비지도학습(군집화, 차원 축소), 하이퍼 파라미터 튜닝(그리드 서치, 랜덤 서치), AICE 기출문제 풀이",
+          "keywords": ["비지도학습", "군집화", "Clustering", "차원 축소", "PCA", "하이퍼 파라미터", "Hyper Parameter Tuning", "그리드 서치", "랜덤 서치", "AICE 기출문제"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "Python 소개", "VSCode", "Google Colab", "데이터 타입", "변수", "연산자",
+    "조건문", "if", "elif", "for", "while", "range", "break", "continue",
+    "list", "tuple", "set", "dictionary", "collections",
+    "함수", "파라미터", "반환값", "def", "Default parameter",
+    "모듈", "라이브러리", "패키지", "OOP", "클래스", "인스턴스", "생성자", "상속", "override",
+    "파일 입출력", "csv", "json", "with문",
+    "예외처리", "try~except", "finally", "numpy", "pandas",
+    "데이터 분석", "Matplotlib", "seaborn", "데이터 시각화",
+    "데이터 전처리", "정규화", "표준화", "변수 선택",
+    "머신러닝", "딥러닝", "지도학습", "비지도학습", "AI 모델링", "과적합",
+    "Scikit-learn", "선형회귀", "로지스틱 회귀", "의사결정 트리", "랜덤 포레스트", "인공 신경망",
+    "군집화", "차원 축소", "PCA", "하이퍼 파라미터 튜닝", "AICE 기출문제"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "course_id": "visual_graphic_artwork",
+  "name": "그래픽 아트웍",
+  "covers_courses": ["graphic_artwork"],
+  "instructor": "김민주",
+  "track": "visual_editing",
+  "software": ["Adobe Photoshop", "Adobe Illustrator"],
+  "prerequisite_courses": ["photoworks", "detail_illust"],
+  "prerequisite_skills": ["포토샵 응용", "일러스트 응용"],
+  "difficulty": 4,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 4,
+  "objectives": [
+    "포토샵과 일러스트레이터의 심화 기능 완벽 마스터",
+    "창의적인 컨셉을 시각적으로 구체화하는 능력 향상",
+    "고품질 상업용 아트워크 제작 기술 습득",
+    "주제 선정 → 레퍼런스 수집 → 아트웍 완성까지 전 과정 경험"
+  ],
+  "employment_fields": ["광고 및 브랜드 디자이너", "콘텐츠 제작 디지털 아티스트", "출판 및 인쇄 디자이너"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "그래픽 아트웍 - 주제별 포스터 & 아트워크",
+      "estimated_courses": ["graphic_artwork"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "관광 여행지/축제를 주제로 한 포스터 제작. 아이디어 스케치 → 레퍼런스 수집 → 아트웍 완성 과정 경험",
+          "keywords": ["여행지 포스터", "축제 포스터", "illustration", "타이포그래피", "아이디어 스케치"]
+        },
+        {
+          "week": 2,
+          "description": "아티스트 앨범 커버 리디자인. 스마트 오브젝트와 목업 제작 기법 활용",
+          "keywords": ["앨범 커버 디자인", "스마트 오브젝트", "목업", "리디자인"]
+        },
+        {
+          "week": 3,
+          "description": "하늘 위 섬/시간이 멈춘 도시/물 속의 도시 포스터 제작. 색감 보정과 합성 기술",
+          "keywords": ["색감 보정", "비주얼 아트워크", "Layer Mask", "합성"]
+        },
+        {
+          "week": 4,
+          "description": "스트릿 패션/화장품/향수 브랜드 잡지 포스터 제작. 클리핑마스크·노이즈 텍스처 활용",
+          "keywords": ["클리핑 마스크", "홍보 포스터", "Noise Texture", "Kitsch Poster", "잡지 포스터"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "여행지 포스터", "축제 포스터", "illustration", "타이포그래피", "아이디어 스케치",
+    "앨범 커버 디자인", "스마트 오브젝트", "목업", "리디자인",
+    "색감 보정", "비주얼 아트워크", "Layer Mask", "합성",
+    "클리핑 마스크", "홍보 포스터", "Noise Texture", "Kitsch Poster", "잡지 포스터"
+  ]
+}

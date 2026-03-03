@@ -1,0 +1,116 @@
+{
+  "course_id": "motion_aftereffects",
+  "name": "애프터이펙트 1~3",
+  "covers_courses": ["aftereffects_1", "aftereffects_2", "aftereffects_3", "aftereffects_cg"],
+  "instructor": "오은비",
+  "track": "motion",
+  "software": ["After Effects", "Photoshop", "Illustrator"],
+  "prerequisite_courses": ["premiere", "photoshop", "illustrator"],
+  "prerequisite_skills": ["프리미어프로", "포토샵", "일러스트"],
+  "difficulty": 5,
+  "age_range": { "min": 15, "max": 50 },
+  "duration_total_weeks": 12,
+  "objectives": [
+    "2D 모션그래픽 기초부터 고급 기술 습득",
+    "Fake 3D, 캐릭터 리깅을 활용한 2D 모션그래픽",
+    "합성, 이펙트, 트래킹, 키잉 전문 기술 습득",
+    "TV, 인스타그램, 유튜브 콘텐츠 제작 실무 능력"
+  ],
+  "employment_fields": ["모션그래픽 합성형", "광고/브랜딩 합성형", "영상/콘텐츠 제작형"],
+  "sections": [
+    {
+      "section": 1,
+      "title": "에펙 1 - 기초 & 합성",
+      "estimated_courses": ["aftereffects_1"],
+      "weeks": [
+        {
+          "week": 1,
+          "description": "인터페이스, 기본 Tool 활용, 트랜지션 활용, 기본 Motion 및 Keyframe",
+          "keywords": ["Basic", "Motion", "Rendering", "Keyframe"]
+        },
+        {
+          "week": 2,
+          "description": "합성에서 사용되는 다양한 합성 효과, Mask 및 Track Matte 활용",
+          "keywords": ["Mask", "Pre-compose", "Roto Brush", "Track Matte"]
+        },
+        {
+          "week": 3,
+          "description": "쉐이프 레이어와 텍스트 레이어 활용하여 그래픽합성",
+          "keywords": ["Shape Layer", "Parents", "Expression", "Text Animation", "Puppet Tool"]
+        },
+        {
+          "week": 4,
+          "description": "3D 레이어 활용, 카메라 레이어 활용하여 모션그래픽",
+          "keywords": ["3D Layer", "Light Layer", "Camera Layer", "Camera work"]
+        }
+      ]
+    },
+    {
+      "section": 2,
+      "title": "에펙 2 - 이펙트 & 모션그래픽",
+      "estimated_courses": ["aftereffects_2"],
+      "weeks": [
+        {
+          "week": 5,
+          "description": "다양한 이펙트 활용, Tracking, Keying, Compositing",
+          "keywords": ["Effects", "Tracking", "Keying", "Compositing"]
+        },
+        {
+          "week": 6,
+          "description": "파티클, cc starburst 활용 자막 날리기, 글리치 영상효과",
+          "keywords": ["Audio Spectrum", "Particles", "Glitch", "Fractal Noise"]
+        },
+        {
+          "week": 7,
+          "description": "그래픽 활용한 다양한 타이포 모션그래픽, 3D 레이어 Echo",
+          "keywords": ["3D Layer", "Echo", "Typo Motion"]
+        },
+        {
+          "week": 8,
+          "description": "쉐이프 레이어 활용한 다양한 모션그래픽 디자인",
+          "keywords": ["Shape Wave", "Motion Graphic"]
+        }
+      ]
+    },
+    {
+      "section": 3,
+      "title": "에펙 3 - 일러스트 & 캐릭터 리깅",
+      "estimated_courses": ["aftereffects_3"],
+      "weeks": [
+        {
+          "week": 9,
+          "description": "애니메이션 12원칙 적용, 일러스트 작업 활용한 모션그래픽 소스 학습",
+          "keywords": ["Illustrator", "Value Graph", "Squash and Stretch", "Anticipation", "애니메이션 12원칙"]
+        },
+        {
+          "week": 10,
+          "description": "Fake3D 기술로 실제에서 다양한 그래픽 아이템 표현, 캐릭터 페이스 리깅",
+          "keywords": ["Fake 3D", "Duik", "Face Rigging", "Transition"]
+        },
+        {
+          "week": 11,
+          "description": "사지 작동을 위한 FK 링크 방법 학습, FK 링크 Path를 이용한 독특한 움직임",
+          "keywords": ["FK Rigging", "Path", "Dog walk", "Hand Motion"]
+        },
+        {
+          "week": 12,
+          "description": "외부 플러그인 Limber를 이용한 IK 링크 방법 학습, Walk cycle 제작",
+          "keywords": ["IK Rigging", "Limber", "Duik", "Walk cycle"]
+        }
+      ]
+    }
+  ],
+  "skills_taught": [
+    "Basic", "Motion", "Rendering", "Keyframe",
+    "Mask", "Pre-compose", "Roto Brush", "Track Matte",
+    "Shape Layer", "Parents", "Expression", "Text Animation", "Puppet Tool",
+    "3D Layer", "Light Layer", "Camera Layer", "Camera work",
+    "Effects", "Tracking", "Keying", "Compositing",
+    "Audio Spectrum", "Particles", "Glitch", "Fractal Noise",
+    "Echo", "Typo Motion", "Shape Wave", "Motion Graphic",
+    "Illustrator 활용", "Value Graph", "Squash and Stretch", "Anticipation", "애니메이션 12원칙",
+    "Fake 3D", "Duik", "Face Rigging", "Transition",
+    "FK Rigging", "Path", "Dog walk", "Hand Motion",
+    "IK Rigging", "Limber", "Walk cycle"
+  ]
+}
