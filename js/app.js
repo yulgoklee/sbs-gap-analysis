@@ -10,14 +10,33 @@ let skillLevels   = {};
 let analysisResult = null;
 
 // ═══════════════════════════════════════════════════════
-//  API KEY
+//  API KEY  (localStorage로 기기당 1회 입력)
 // ═══════════════════════════════════════════════════════
+const LS_KEY = 'sbs_gemini_api_key';
+
 function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
   if (!key) { alert('API 키를 입력해주세요.'); return; }
   apiKey = key;
+  localStorage.setItem(LS_KEY, key);          // ← 기기에 영구 저장
   document.getElementById('apiModal').style.display = 'none';
 }
+
+// API 키 변경 버튼용 (헤더 또는 결과 화면에서 호출)
+function changeApiKey() {
+  const current = localStorage.getItem(LS_KEY) || '';
+  document.getElementById('apiKeyInput').value = current;
+  document.getElementById('apiModal').style.display = 'flex';
+}
+
+// 페이지 로드 시 저장된 키 복원 → 모달 건너뜀
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem(LS_KEY);
+  if (saved) {
+    apiKey = saved;
+    document.getElementById('apiModal').style.display = 'none';
+  }
+});
 
 // ═══════════════════════════════════════════════════════
 //  STEP NAVIGATION
