@@ -24,9 +24,27 @@
 
 ```
 sbs-gap-analysis/
-├── index.html          # 메인 웹 앱 (단일 파일로 전체 기능 포함)
-├── sbs_academy_data.json   # 학원 커리큘럼 데이터 (참조용)
-└── README.md           # 프로젝트 문서
+├── index.html              # 메인 진입점 (HTML 뼈대)
+├── css/
+│   └── style.css           # 전체 스타일 (반응형 + 인쇄용 포함)
+├── js/
+│   ├── app.js              # 핵심 앱 로직 (폼 흐름, API 호출, 결과 렌더링)
+│   └── constants.js        # 트랙 메타데이터, 상수 정의
+├── data/
+│   ├── academy.json        # 학원 기본 정보
+│   ├── common-courses.json # 공통 기초 과목 데이터
+│   ├── gap-analysis.json   # GAP 분석 설정 데이터
+│   └── tracks/             # 트랙별 커리큘럼 JSON (9개 파일)
+│       ├── ai.json
+│       ├── artwork.json
+│       ├── certification.json
+│       ├── cg-maya.json
+│       ├── interior.json
+│       ├── it-programming.json
+│       ├── motion.json
+│       ├── visual-editing.json
+│       └── web.json
+└── README.md               # 프로젝트 문서
 ```
 
 ---
@@ -105,7 +123,13 @@ sbs-gap-analysis/
 
 ## 버전 히스토리
 
-### v1.1.0 (현재)
+### v1.2.0 (현재)
+- [x] **파일 구조 모듈화** — 단일 HTML에서 `css/`, `js/`, `data/` 디렉토리 분리
+- [x] **JSON 데이터 분리** — 트랙별 커리큘럼을 개별 JSON 파일로 관리
+- [x] **상수 파일 분리** — 트랙 메타데이터·상수를 `constants.js`로 독립
+- [x] **유지보수성 개선** — 데이터와 로직, 스타일 완전 분리
+
+### v1.1.0
 - [x] **레이더 차트 (SVG)** — 취업/자격증 목표 수준 vs 현재 수준 6각형 시각화
 - [x] **포트폴리오 참고 링크** — 트랙별 최대 3개 외부 링크 카드 (없으면 미표시)
 - [x] **월별 학습 플래너** — 수업 로드맵을 캘린더 형식으로 시각화 (좌우 스크롤)
@@ -125,12 +149,12 @@ sbs-gap-analysis/
 
 ## 다음 버전 예정 작업
 
-### v1.2.0 - 기능 추가
+### v1.3.0 - 기능 추가
 - [ ] 시나리오 A (적성검사) 구현
 - [ ] 포트폴리오 예시 이미지 연동
 - [ ] 취업 공고 실시간 트렌드 연동
 
-### v1.3.0 - 운영 안정화
+### v1.4.0 - 운영 안정화
 - [ ] API 에러 핸들링 강화
 - [ ] 상담 이력 저장 기능
 - [ ] 학원 정보 섹션 추가
@@ -153,7 +177,7 @@ sbs-gap-analysis/
 
 ```
 이 README를 참고해서 작업을 이어가줘.
-현재 버전: v1.0.0
+현재 버전: v1.2.0
 작업할 내용: [여기에 작업 내용 입력]
 ```
 
