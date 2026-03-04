@@ -77,10 +77,20 @@
           </select>
         </div>
         <div class="form-group">
+          <label>현재 상태 <span>*</span></label>
+          <select id="currentStatus">
+            <option value="">선택해주세요</option>
+            <option value="student">학생</option>
+            <option value="employed">재직 중</option>
+            <option value="unemployed">구직 중</option>
+            <option value="other">기타</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label>투자 가능 기간</label>
           <input type="number" id="availableMonths" placeholder="예: 12" min="1" max="36" />
         </div>
-        <div class="form-group full">
+        <div class="form-group">
           <label>주당 투자 가능 시간</label>
           <select id="hoursPerWeek">
             <option value="">선택해주세요</option>
@@ -146,16 +156,47 @@
       </div>
 
       <div id="jobField" style="display:none; margin-top:20px">
-        <div class="form-group">
-          <label>희망 직업 (선택)</label>
-          <input type="text" id="desiredJob" placeholder="예: 모션그래퍼, 웹 디자이너, 미정" />
+        <label style="margin-bottom:10px; display:block">취업 목표 <span style="color:var(--accent)">*</span></label>
+        <div class="job-specificity-selector">
+          <label class="radio-card" id="radioCard_specific">
+            <input type="radio" name="jobSpecificity" value="specific" onchange="selectJobSpecificity('specific')" />
+            <div class="radio-card-content">
+              <div class="radio-card-title">🎯 특정 직업이 있어요</div>
+              <div class="radio-card-desc">목표 직업을 구체적으로 알고 있어요</div>
+            </div>
+          </label>
+          <label class="radio-card" id="radioCard_general">
+            <input type="radio" name="jobSpecificity" value="general" onchange="selectJobSpecificity('general')" />
+            <div class="radio-card-content">
+              <div class="radio-card-title">🌐 해당 직군 취업이 목표예요</div>
+              <div class="radio-card-desc">직군은 정했지만 직업은 아직 미정이에요</div>
+            </div>
+          </label>
+        </div>
+        <div id="specificJobInput" style="display:none; margin-top:12px">
+          <div class="form-group">
+            <label>희망 직업명</label>
+            <input type="text" id="desiredJob" placeholder="예: 모션그래퍼, 웹 디자이너, 영상편집자" />
+          </div>
         </div>
       </div>
+
       <div id="certField" style="display:none; margin-top:20px">
         <div class="form-group">
           <label>목표 자격증 <span style="color:var(--accent)">*</span></label>
           <input type="text" id="targetCert" placeholder="예: GTQ 1급, 컴활 1급" />
         </div>
+      </div>
+
+      <div class="form-group full" style="margin-top:16px">
+        <label>목표 달성 희망 시기</label>
+        <select id="targetTimeline">
+          <option value="">선택해주세요</option>
+          <option value="3">3개월 내</option>
+          <option value="6">6개월 내</option>
+          <option value="12">1년 내</option>
+          <option value="0">기간 무관</option>
+        </select>
       </div>
 
       <div style="display:flex; gap:10px; margin-top:24px">
@@ -237,11 +278,11 @@
       </div>
     </div>
 
-    <!-- 3. 포트폴리오 참고 링크 (조건부) -->
-    <div class="result-section" id="portfolioSection" style="display:none">
-      <h3><div class="dot"></div>포트폴리오 참고 링크</h3>
-      <p style="font-size:12px; color:var(--text-sub); margin-bottom:12px">아래 사이트에서 해당 분야 우수 포트폴리오를 확인하고 방향을 잡아보세요.</p>
-      <div class="portfolio-links" id="portfolioLinks"></div>
+    <!-- 3. 직군 요구 스펙 (취업 목표 시) -->
+    <div class="result-section" id="jobMarketSection" style="display:none">
+      <h3><div class="dot"></div>직군 요구 스펙</h3>
+      <p style="font-size:12px; color:var(--text-sub); margin-bottom:14px">2025~2026년 한국 채용시장 기준 · AI 활용 요구 포함</p>
+      <div class="job-spec-grid" id="jobSpecGrid"></div>
     </div>
 
     <!-- 4. 추천 수업 로드맵 -->
