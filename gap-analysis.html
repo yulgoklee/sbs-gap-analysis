@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SBS 아카데미 | 맞춤 GAP 분석</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- API KEY MODAL -->
+<div id="apiModal">
+  <div class="modal-box">
+    <h3>🔑 Gemini API 키 설정</h3>
+    <p>Gemini API 키를 입력하세요.<br/>키는 이 브라우저 세션에만 저장되며 외부로 전송되지 않습니다.</p>
+    <input type="text" id="apiKeyInput" placeholder="AIza..." />
+    <button class="btn-modal" onclick="saveApiKey()">저장하고 시작하기</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div style="display:flex; align-items:center; gap:16px">
+    <a href="index.html" style="color:rgba(255,255,255,0.7); text-decoration:none; font-size:13px; display:flex; align-items:center; gap:4px; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">← 메인</a>
+    <div>
+      <div class="logo-text">SBS ACADEMY</div>
+      <div class="subtitle">컴퓨터아트학원 수원점 · 031-546-3644</div>
+    </div>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px">
+    <div class="badge">B · GAP 분석</div>
+    <button onclick="changeApiKey()" title="API 키 변경" style="background:transparent; border:1px solid rgba(255,255,255,0.4); color:white; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; opacity:0.7;">🔑 키 변경</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- STEP INDICATOR -->
+  <div class="steps">
+    <div class="step active" id="step1">
+      <div class="step-num">1</div>
+      <div class="step-label">기본 정보</div>
+    </div>
+    <div class="step-line" id="line1"></div>
+    <div class="step" id="step2">
+      <div class="step-num">2</div>
+      <div class="step-label">목표 설정</div>
+    </div>
+    <div class="step-line" id="line2"></div>
+    <div class="step" id="step3">
+      <div class="step-num">3</div>
+      <div class="step-label">현재 수준</div>
+    </div>
+    <div class="step-line" id="line3"></div>
+    <div class="step" id="step4">
+      <div class="step-num">4</div>
+      <div class="step-label">GAP 분석</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: 기본 정보 -->
+  <div class="section active" id="sec1">
+    <div class="card">
+      <div class="card-title"><div class="icon">👤</div>기본 정보 입력</div>
+      <div class="card-desc">상담 고객의 기본 정보를 입력해주세요.</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>이름 <span>*</span></label>
+          <input type="text" id="name" placeholder="홍길동" />
+        </div>
+        <div class="form-group">
+          <label>나이 <span>*</span></label>
+          <input type="number" id="age" placeholder="25" min="15" max="70" />
+        </div>
+        <div class="form-group">
+          <label>배경 <span>*</span></label>
+          <select id="background">
+            <option value="">선택해주세요</option>
+            <option value="non_major">비전공자</option>
+            <option value="major">전공자 / 관련학과</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>현재 상태 <span>*</span></label>
+          <select id="currentStatus">
+            <option value="">선택해주세요</option>
+            <option value="student">학생</option>
+            <option value="employed">재직 중</option>
+            <option value="unemployed">구직 중</option>
+            <option value="other">기타</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>투자 가능 기간</label>
+          <input type="number" id="availableMonths" placeholder="예: 12" min="1" max="36" />
+        </div>
+        <div class="form-group">
+          <label>주당 투자 가능 시간</label>
+          <select id="hoursPerWeek">
+            <option value="">선택해주세요</option>
+            <option value="10">주 10시간 이하 (파트타임)</option>
+            <option value="20">주 20시간 내외 (반일)</option>
+            <option value="30">주 30시간 이상 (풀타임)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-analyze" style="margin-top:24px" onclick="goToStep2()">다음 단계 →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 목표 설정 -->
+  <div class="section" id="sec2">
+    <div class="card">
+      <div class="card-title"><div class="icon">🎯</div>목표 설정</div>
+      <div class="card-desc">고객의 방문 목적을 선택해주세요.</div>
+
+      <label style="margin-bottom:12px; display:block">목표 유형 <span style="color:var(--accent)">*</span></label>
+      <div class="goal-selector" style="margin-bottom:24px">
+        <div class="goal-btn" onclick="selectGoal('employment')" id="goal_employment">
+          <div class="goal-icon">💼</div>
+          <div class="goal-name">취업 준비</div>
+          <div class="goal-desc">포트폴리오 제작 + 취업까지</div>
+        </div>
+        <div class="goal-btn" onclick="selectGoal('certification')" id="goal_certification">
+          <div class="goal-icon">📜</div>
+          <div class="goal-name">자격증 취득</div>
+          <div class="goal-desc">특정 자격증 집중 준비</div>
+        </div>
+      </div>
+
+      <label style="margin-bottom:12px; display:block">희망 트랙 <span style="color:var(--accent)">*</span></label>
+      <div class="track-grid" id="trackGrid">
+        <div class="track-btn" onclick="selectTrack('motion')" id="track_motion">
+          <div class="track-icon">🎬</div><div class="track-name">모션/영상</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('interior')" id="track_interior">
+          <div class="track-icon">🏠</div><div class="track-name">건축/인테리어</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('visual_editing')" id="track_visual_editing">
+          <div class="track-icon">🎨</div><div class="track-name">시각/편집디자인</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('web')" id="track_web">
+          <div class="track-icon">🌐</div><div class="track-name">웹디자인</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('cg_maya')" id="track_cg_maya">
+          <div class="track-icon">🤖</div><div class="track-name">CG/마야</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('it_programming')" id="track_it_programming">
+          <div class="track-icon">💻</div><div class="track-name">IT/프로그래밍</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('ai')" id="track_ai">
+          <div class="track-icon">✨</div><div class="track-name">AI</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('artwork')" id="track_artwork">
+          <div class="track-icon">🖌️</div><div class="track-name">아트웍</div>
+        </div>
+        <div class="track-btn" onclick="selectTrack('certification')" id="track_certification">
+          <div class="track-icon">📋</div><div class="track-name">자격증 과정</div>
+        </div>
+      </div>
+
+      <div id="jobField" style="display:none; margin-top:20px">
+        <label style="margin-bottom:10px; display:block">취업 목표 <span style="color:var(--accent)">*</span></label>
+        <div class="job-specificity-selector">
+          <label class="radio-card" id="radioCard_specific">
+            <input type="radio" name="jobSpecificity" value="specific" onchange="selectJobSpecificity('specific')" />
+            <div class="radio-card-content">
+              <div class="radio-card-title">🎯 특정 직업이 있어요</div>
+              <div class="radio-card-desc">목표 직업을 구체적으로 알고 있어요</div>
+            </div>
+          </label>
+          <label class="radio-card" id="radioCard_general">
+            <input type="radio" name="jobSpecificity" value="general" onchange="selectJobSpecificity('general')" />
+            <div class="radio-card-content">
+              <div class="radio-card-title">🌐 해당 직군 취업이 목표예요</div>
+              <div class="radio-card-desc">직군은 정했지만 직업은 아직 미정이에요</div>
+            </div>
+          </label>
+        </div>
+        <div id="specificJobInput" style="display:none; margin-top:12px">
+          <div class="form-group">
+            <label>희망 직업명</label>
+            <input type="text" id="desiredJob" placeholder="예: 모션그래퍼, 웹 디자이너, 영상편집자" />
+          </div>
+        </div>
+      </div>
+
+      <div id="certField" style="display:none; margin-top:20px">
+        <div class="form-group">
+          <label>목표 자격증 <span style="color:var(--accent)">*</span></label>
+          <input type="text" id="targetCert" placeholder="예: GTQ 1급, 컴활 1급" />
+        </div>
+      </div>
+
+      <div class="form-group full" style="margin-top:16px">
+        <label>목표 달성 희망 시기</label>
+        <select id="targetTimeline">
+          <option value="">선택해주세요</option>
+          <option value="3">3개월 내</option>
+          <option value="6">6개월 내</option>
+          <option value="12">1년 내</option>
+          <option value="0">기간 무관</option>
+        </select>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:24px">
+        <button class="btn-reset" onclick="goToStep1()" style="width:auto; padding:14px 24px">← 이전</button>
+        <button class="btn-analyze" onclick="goToStep3()">다음 단계 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 현재 수준 -->
+  <div class="section" id="sec3">
+    <div class="card">
+      <div class="card-title"><div class="icon">📊</div>현재 수준 체크</div>
+      <div class="card-desc">각 툴의 경험 수준을 선택해주세요. 없으면 '없음'을 선택하세요.</div>
+      <div id="skillCheckArea"></div>
+      <div style="display:flex; gap:10px; margin-top:24px">
+        <button class="btn-reset" onclick="goToStep2()" style="width:auto; padding:14px 24px">← 이전</button>
+        <button class="btn-analyze" onclick="runAnalysis()">🔍 GAP 분석 시작</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">AI가 GAP 분석 중입니다...</div>
+    <div class="loading-sub">Gemini가 커리큘럼 · 취업시장 · 자격증 데이터를 종합 분석 중이에요</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  RESULT                                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="result">
+
+    <!-- 헤더 -->
+    <div class="result-header">
+      <h2 id="resultTitle">GAP 분석 결과</h2>
+      <p id="resultSubtitle"></p>
+    </div>
+
+    <!-- 1. 현재 수준 진단 -->
+    <div class="result-section">
+      <h3><div class="dot"></div>현재 수준 진단</h3>
+      <div class="info-box" id="currentLevelSummary"></div>
+    </div>
+
+    <!-- 2. GAP 분석 (레이더 차트 + 강점/약점) -->
+    <div class="result-section">
+      <h3><div class="dot"></div>GAP 분석</h3>
+
+      <!-- 레이더 차트 -->
+      <div class="radar-wrapper">
+        <div id="radarChartContainer" style="width:100%; max-width:480px;"></div>
+        <div class="radar-legend">
+          <div class="radar-legend-item">
+            <div class="radar-legend-line target" style="border-top:2px dashed #FF5630; background:none; height:0;"></div>
+            <span id="radarLegendTarget">취업 목표 수준</span>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-line current"></div>
+            <span>현재 수준</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAP 설명 -->
+      <div class="info-box" id="gapDescription" style="margin-bottom:16px"></div>
+
+      <!-- 강점/보완 태그 -->
+      <div class="gap-columns">
+        <div>
+          <div class="gap-col-label" style="color:var(--success)">✅ 강점</div>
+          <div class="tag-list" id="strongPoints"></div>
+        </div>
+        <div>
+          <div class="gap-col-label" style="color:var(--accent)">⚠️ 보완 필요</div>
+          <div class="tag-list" id="weakPoints"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 직군 요구 스펙 (취업 목표 시) -->
+    <div class="result-section" id="jobMarketSection" style="display:none">
+      <h3><div class="dot"></div>직군 요구 스펙</h3>
+      <p style="font-size:12px; color:var(--text-sub); margin-bottom:14px">2025~2026년 한국 채용시장 기준 · AI 활용 요구 포함</p>
+      <div class="job-spec-grid" id="jobSpecGrid"></div>
+    </div>
+
+    <!-- 4. 추천 수업 로드맵 -->
+    <div class="result-section">
+      <h3><div class="dot"></div>추천 수업 로드맵</h3>
+      <div class="course-timeline" id="courseTimeline"></div>
+    </div>
+
+    <!-- 5. 예상 소요 기간 -->
+    <div class="result-section">
+      <h3><div class="dot"></div>예상 소요 기간</h3>
+      <div class="duration-grid">
+        <div class="duration-box">
+          <div class="duration-num" id="durationMin">-</div>
+          <div class="duration-label">최소 개월</div>
+        </div>
+        <div class="duration-box">
+          <div class="duration-num" id="durationMax">-</div>
+          <div class="duration-label">최대 개월</div>
+        </div>
+      </div>
+      <div id="durationNote" style="margin-top:12px; font-size:12px; color:var(--text-sub); text-align:center;"></div>
+    </div>
+
+    <!-- 6. 월별 학습 플래너 -->
+    <div class="result-section" id="monthlyPlannerSection" style="display:none">
+      <h3><div class="dot"></div>월별 학습 플래너</h3>
+      <p style="font-size:12px; color:var(--text-sub); margin-bottom:14px">좌우로 스크롤하여 전체 플랜을 확인하세요.</p>
+      <div class="planner-scroll">
+        <div class="planner-grid" id="monthlyPlannerGrid"></div>
+      </div>
+    </div>
+
+    <!-- 7. 학원 수강 안내 -->
+    <div class="result-section">
+      <h3><div class="dot"></div>학원 수강 안내</h3>
+      <div class="coverage-grid" style="margin-bottom:16px">
+        <div class="coverage-box can">
+          <h4>✅ 학원에서 준비 가능</h4>
+          <ul id="coverableList"></ul>
+        </div>
+        <div class="coverage-box cannot">
+          <h4>📌 개인 자체 준비 필요</h4>
+          <ul id="notCoverableList"></ul>
+        </div>
+      </div>
+      <div class="recommendation-box" id="recommendationBox"></div>
+    </div>
+
+    <button class="btn-pdf" onclick="generatePDF()">📄 PDF로 저장하기 (Ctrl+P)</button>
+    <div class="print-footer">SBS 아카데미 컴퓨터아트학원 수원점 | Tel. 031-546-3644 | 본 자료는 AI 상담 시스템을 통해 생성된 맞춤형 분석 결과입니다.</div>
+    <button class="btn-reset" onclick="resetAll()">🔄 새 상담 시작</button>
+  </div><!-- /result -->
+
+</main>
+
+<script src="js/constants.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
