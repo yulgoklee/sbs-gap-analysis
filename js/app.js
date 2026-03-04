@@ -288,7 +288,7 @@ ${certInfo}
 //  GEMINI API CALL
 // ═══════════════════════════════════════════════════════
 // ※ 유지보수: 모델명 변경 시 GEMINI_MODEL 상수만 수정하세요.
-const GEMINI_MODEL = 'gemini-2.0-flash';
+const GEMINI_MODEL = 'gemini-2.5-flash-lite';
 
 async function callGemini(userInput) {
   const systemPrompt = buildSystemPrompt();
