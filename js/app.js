@@ -1,10 +1,12 @@
 // ═══════════════════════════════════════════════════════
 //  STATE
 // ═══════════════════════════════════════════════════════
-let apiKey = '';
-let selectedGoal = '';
+let apiKey        = '';
+let selectedGoal  = '';
 let selectedTrack = '';
-let skillLevels = {};
+let jobSpecificity = '';   // 'specific' | 'general'
+let aiToolLevel   = 0;
+let skillLevels   = {};
 let analysisResult = null;
 
 // ═══════════════════════════════════════════════════════
@@ -37,16 +39,30 @@ function showSection(n) {
 }
 
 function goToStep1() { showSection(1); }
+
 function goToStep2() {
-  const name = document.getElementById('name').value.trim();
-  const age  = document.getElementById('age').value;
-  const bg   = document.getElementById('background').value;
-  if (!name || !age || !bg) { alert('이름, 나이, 배경을 입력해주세요.'); return; }
+  const name   = document.getElementById('name').value.trim();
+  const age    = document.getElementById('age').value;
+  const bg     = document.getElementById('background').value;
+  const status = document.getElementById('currentStatus').value;
+  if (!name || !age || !bg || !status) {
+    alert('이름, 나이, 배경, 현재 상태를 모두 입력해주세요.');
+    return;
+  }
   showSection(2);
 }
+
 function goToStep3() {
-  if (!selectedGoal) { alert('목표 유형을 선택해주세요.'); return; }
+  if (!selectedGoal)  { alert('목표 유형을 선택해주세요.'); return; }
   if (!selectedTrack) { alert('희망 트랙을 선택해주세요.'); return; }
+  if (selectedGoal === 'employment' && !jobSpecificity) {
+    alert('취업 목표를 선택해주세요. (특정 직업 / 해당 직군)');
+    return;
+  }
+  if (selectedGoal === 'certification') {
+    const cert = document.getElementById('targetCert')?.value.trim();
+    if (!cert) { alert('목표 자격증을 입력해주세요.'); return; }
+  }
   buildSkillCheck();
   showSection(3);
 }
@@ -60,7 +76,14 @@ function selectGoal(g) {
   document.getElementById('goal_' + g).classList.add('selected');
   document.getElementById('jobField').style.display  = (g === 'employment')    ? 'block' : 'none';
   document.getElementById('certField').style.display = (g === 'certification') ? 'block' : 'none';
+  // 목표 전환 시 직업 구체성 초기화
+  if (g !== 'employment') {
+    jobSpecificity = '';
+    document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('specificJobInput').style.display = 'none';
+  }
 }
+
 function selectTrack(t) {
   selectedTrack = t;
   document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('selected'));
@@ -68,13 +91,36 @@ function selectTrack(t) {
 }
 
 // ═══════════════════════════════════════════════════════
+//  JOB SPECIFICITY SELECT
+// ═══════════════════════════════════════════════════════
+function selectJobSpecificity(type) {
+  jobSpecificity = type;
+  document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('radioCard_' + type).classList.add('selected');
+  document.getElementById('specificJobInput').style.display = (type === 'specific') ? 'block' : 'none';
+}
+
+// ═══════════════════════════════════════════════════════
 //  SKILL CHECK BUILD
 // ═══════════════════════════════════════════════════════
 function buildSkillCheck() {
   const tools = TRACK_TOOLS[selectedTrack] || [];
-  const area = document.getElementById('skillCheckArea');
-  skillLevels = {};
-  area.innerHTML = tools.map(tool => `
+  const area  = document.getElementById('skillCheckArea');
+  skillLevels  = {};
+  aiToolLevel  = 0;
+
+  // 레벨 설명 범례
+  const legendHtml = `
+    <div class="level-legend">
+      ${LEVEL_LABELS.map((label, i) => `
+        <div class="legend-item">
+          <span class="legend-label">${label}</span>
+          <span class="legend-desc">${LEVEL_DESCS[i]}</span>
+        </div>`).join('')}
+    </div>`;
+
+  // 툴별 수준 체크
+  const toolsHtml = tools.map(tool => `
     <div class="skill-row">
       <div class="skill-name">${tool}</div>
       <div class="skill-levels" id="levels_${tool.replace(/[^a-zA-Z0-9가-힣]/g,'_')}">
@@ -87,6 +133,24 @@ function buildSkillCheck() {
       </div>
     </div>
   `).join('');
+
+  // AI 도구 활용 경험 (별도 섹션)
+  const aiToolHtml = `
+    <div class="ai-tool-section">
+      <div class="ai-tool-title">🤖 AI 도구 활용 경험</div>
+      <div class="ai-tool-desc">현재 AI 도구를 어느 수준으로 활용하고 있나요?</div>
+      <div class="ai-tool-levels" id="aiToolLevels">
+        ${AI_TOOL_LEVELS.map((label, i) => `
+          <button class="level-btn ${i===0?'selected':''}"
+            onclick="selectAIToolLevel(${i}, this)"
+            title="${AI_TOOL_DESCS[i]}">
+            ${label}
+          </button>
+        `).join('')}
+      </div>
+    </div>`;
+
+  area.innerHTML = legendHtml + toolsHtml + aiToolHtml;
   tools.forEach(t => { skillLevels[t] = 0; });
 }
 
@@ -94,6 +158,12 @@ function selectLevel(id, tool, val, el) {
   document.querySelectorAll(`#levels_${id} .level-btn`).forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
   skillLevels[tool] = val;
+}
+
+function selectAIToolLevel(val, el) {
+  document.querySelectorAll('#aiToolLevels .level-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  aiToolLevel = val;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -124,33 +194,48 @@ async function runAnalysis() {
 //  BUILD USER INPUT
 // ═══════════════════════════════════════════════════════
 function buildUserInput() {
+  const statusMap = { student: '학생', employed: '재직 중', unemployed: '구직 중', other: '기타' };
+  const statusVal = document.getElementById('currentStatus').value;
+
+  const timelineMap = { '3': '3개월 내', '6': '6개월 내', '12': '1년 내', '0': '기간 무관' };
+  const timelineVal = document.getElementById('targetTimeline')?.value || '';
+
+  const jobSpecStr = selectedGoal === 'employment'
+    ? (jobSpecificity === 'specific'
+        ? `특정 직업 목표: ${document.getElementById('desiredJob')?.value?.trim() || '미입력'}`
+        : '취업 방향: 해당 직군 취업 희망 (구체적 직업은 미정)')
+    : '해당 없음';
+
   const skillStr = Object.entries(skillLevels)
-    .map(([tool, val]) => `- ${tool}: ${LEVEL_LABELS[val]} (${val}/4)`)
+    .map(([tool, val]) => `- ${tool}: ${LEVEL_LABELS[val]} (${val}/4) — ${LEVEL_DESCS[val]}`)
     .join('\n');
 
   const radarConfig = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
-  const goalLabel = selectedGoal === 'employment' ? '취업 준비' : '자격증 취득';
-  const targetVals = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
+  const goalLabel   = selectedGoal === 'employment' ? '취업 준비' : '자격증 취득';
+  const targetVals  = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
 
   return `[고객 정보]
 - 이름: ${document.getElementById('name').value}
 - 나이: ${document.getElementById('age').value}세
+- 현재 상태: ${statusMap[statusVal] || '미선택'}
 - 배경: ${document.getElementById('background').value === 'major' ? '전공자/관련학과' : '비전공자'}
 - 목표 유형: ${goalLabel}
 - 희망 트랙: ${selectedTrack}
-- 희망 직업: ${document.getElementById('desiredJob')?.value || '미정'}
+- ${jobSpecStr}
 - 목표 자격증: ${document.getElementById('targetCert')?.value || '없음'}
+- 목표 달성 희망 시기: ${timelineMap[timelineVal] || '미선택'}
 - 투자 가능 기간: ${document.getElementById('availableMonths').value || '미정'}개월
 - 주당 투자 시간: ${document.getElementById('hoursPerWeek').value || '미정'}시간
+- AI 도구 활용 경험: ${AI_TOOL_LEVELS[aiToolLevel]} — ${AI_TOOL_DESCS[aiToolLevel]}
 
-[현재 툴 수준 (0=없음 / 1=독학 / 2=학교수강 / 3=자격증보유 / 4=실무경험)]
+[현재 툴 수준 (0=없음 / 1=독학 / 2=학원수강 / 3=자격증 / 4=실무경험)]
 ${skillStr}
 
 [레이더 차트 분석 요청]
 다음 6개 축(0~5점)의 현재 수준을 스킬 입력과 고객 배경을 고려해 계산 후 radar_current 배열로 반환하세요.
 축: ${JSON.stringify(radarConfig.axes)}
 목표 수준(${goalLabel}): ${JSON.stringify(targetVals)}
-변환 기준: 없음=0, 독학=1, 학교수강=2, 자격증=3, 실무=4~5 (전공자면 +0.5 보정)
+변환 기준: 없음=0, 독학=1, 학원수강=2, 자격증=3, 실무=4~5 (전공자면 +0.5 보정)
 
 [월별 플래너 요청]
 추천 수업을 순서대로 월별로 배치해 monthly_planner 배열로 반환하세요.
@@ -160,6 +245,7 @@ month_offset=1이 다음 달 기준 첫 번째 달입니다.
 
 // ═══════════════════════════════════════════════════════
 //  BUILD SYSTEM PROMPT
+//  ※ 유지보수: 프롬프트 규칙·커리큘럼·JSON 형식은 여기서 관리합니다.
 // ═══════════════════════════════════════════════════════
 function buildSystemPrompt() {
   const radarConfig = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
@@ -167,20 +253,35 @@ function buildSystemPrompt() {
   const targetVals  = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
 
   return `당신은 SBS 아카데미 컴퓨터아트학원 수원점의 전문 상담 AI입니다.
-아래 커리큘럼 및 취업·자격증 데이터를 토대로 고객 맞춤 GAP 분석 결과를 JSON 형식으로만 반환하세요.
+아래 규칙과 데이터를 기반으로 고객 맞춤 GAP 분석 결과를 JSON 형식으로만 반환하세요.
 
 [분석 규칙]
 1. 반드시 학원 커리큘럼 안에서만 수업을 추천하세요
-2. 투자 가능 기간보다 필요 기간이 길면 현실적인 전체 기간을 그대로 제시하세요 (단축 금지)
-3. 취업 트렌드는 2025~2026년 한국 기준으로 구체적으로 작성하세요
-4. 자격증 목표 시 시험 횟수, 주관처, 응시 조건을 milestone에 반영하세요
-5. 반드시 순수 JSON만 반환하세요 (마크다운 코드블록 없이)
-6. 모든 텍스트는 한국어로 작성하세요
+2. 취업 트렌드는 2025~2026년 한국 기준으로 구체적으로 작성하세요
+3. 자격증 목표 시 시험 횟수, 주관처, 응시 조건을 milestone에 반영하세요
+4. 반드시 순수 JSON만 반환하세요 (마크다운 코드블록 없이)
+5. 모든 텍스트는 한국어로 작성하세요
+
+[current_level_summary — 반드시 정확히 3줄]
+줄1: 현재 수준 한 줄 요약 (어떤 상태인지 핵심만)
+줄2: 가장 큰 결핍 한 줄 (목표 달성에 가장 부족한 부분 1가지)
+줄3: 달성 가능성 한 줄 (현실적이고 솔직한 평가 — 긍정적 포장 금지)
+
+[직업 목표 처리]
+- 특정 직업 명시된 경우 → 해당 직업의 채용 요구 스펙 기준으로 GAP 분석
+- 직군 취업 희망(직업 미정)인 경우 → 해당 트랙 신입 공통 요구 스펙 기준으로 GAP 분석
+
+[기간 산정 규칙 — 절대 준수]
+- 수강생 희망 기간과 무관하게 실제 필요 학습량으로 기간 산정
+- 희망 기간보다 필요 기간이 길면 실제 필요 기간으로 제시 (단축 금지)
+- 재직 중 / 학생인 경우 주당 투자 가능 시간 반드시 반영 (총 학습량은 동일하게 유지)
+- total_duration은 현실적 기준으로 산정 — 낙관적 단축 절대 금지
 
 [레이더 차트 기준]
 트랙: ${selectedTrack} | 목표: ${goalLabel}
 6개 축: ${JSON.stringify(radarConfig.axes)}
 목표 수준(5점 만점): ${JSON.stringify(targetVals)}
+변환 기준: 없음=0, 독학=1, 학원수강=2, 자격증=3, 실무=4~5 (전공자 +0.5 보정)
 
 [학원 커리큘럼 데이터]
 ■ 공통기초
@@ -223,7 +324,7 @@ function buildSystemPrompt() {
 - 전산회계1급(2), 전산세무2급(2), CAT2급(1), 전산응용건축제도기능사(3~4), ACP(1)
 
 [취업 시장 정보 (2025~2026 한국)]
-- 모션/영상: 숏폼(릴스/쇼츠) 편집 수요 폭증, AE 모션그래픽+프리미어 편집 동시 필수, 신입 연봉 2,200~2,800만원
+- 모션/영상: 숏폼(릴스/쇼츠) 편집 수요 폭증, AE 모션그래픽+프리미어 편집 동시 필수, AI 편집 툴 활용 가능자 우대, 신입 연봉 2,200~2,800만원
 - 건축/인테리어: CAD 도면+3D 렌더링 동시 역량 필수, 자격증 보유 우대, 신입 2,000~2,600만원
 - 시각/편집: 브랜딩+SNS 콘텐츠 제작 가능한 디자이너 우대, Behance 포폴 필수, 신입 2,000~2,500만원
 - 웹디자인: Figma+코딩 가능한 UI/UX 디자이너 수요 높음, 반응형 웹 구현 필수, 신입 2,200~2,700만원
@@ -242,20 +343,27 @@ function buildSystemPrompt() {
 - 컴활 1급: 엑셀 고급+액세스, 연 6회(대한상공회의소), 합격률 약 20%
 - 전산회계 1급: 회계 이론+KcLep 프로그램, 연 6회(한국세무사회)
 - AICE: Python 수료 후 취득 가능, AI 관련 국내 최초 공인 자격증
-- AI-POT 2급: AI 기초 활용, 단기 준비 가능
 
 [출력 JSON 형식 — 반드시 이 형식으로만 반환]
 {
-  "customer_summary": { "name": "", "goal": "", "background": "" },
-  "current_level_summary": "현재 수준 2~3줄 요약",
+  "customer_summary": { "name": "", "goal": "", "background": "", "status": "" },
+  "current_level_summary": "줄1: 현재 수준\\n줄2: 가장 큰 결핍\\n줄3: 달성 가능성",
   "radar_current": [0, 0, 0, 0, 0, 0],
   "gap_analysis": {
     "strong_points": ["강점1", "강점2", "강점3"],
     "weak_points": ["보완필요1", "보완필요2", "보완필요3"],
-    "gap_description": "GAP 분석 설명 2~3줄 (취업 기준 또는 자격증 기준으로 구체적으로)"
+    "gap_description": "목표 수준 난이도와 현재와의 차이 2~3줄 (구체적 수치나 기준 포함)"
+  },
+  "job_market": {
+    "required_skills": ["필수스킬1", "필수스킬2", "필수스킬3"],
+    "preferred_skills": ["우대스킬1", "우대스킬2"],
+    "ai_requirement": "AI 도구 활용 요구 수준 한 줄",
+    "portfolio_platform": "포트폴리오 제출 플랫폼",
+    "avg_salary": "신입 평균 연봉 범위",
+    "market_trend": "2025~2026 채용 트렌드 핵심 한 줄"
   },
   "recommended_courses": [
-    { "order": 1, "course_name": "수업명", "duration_months": 1, "reason": "추천 이유 (GAP 연계)" }
+    { "order": 1, "course_name": "수업명", "duration_months": 1, "reason": "GAP 연계 추천 이유" }
   ],
   "total_duration": { "min_months": 0, "max_months": 0 },
   "monthly_planner": [
@@ -266,7 +374,9 @@ function buildSystemPrompt() {
     "not_coverable": ["개인 자체 준비 필요 항목"],
     "recommendation": "최종 안내 멘트 2~3줄"
   }
-}`.trim();
+}
+
+※ 목표가 자격증 취득인 경우 job_market 값은 null로 반환하세요.`.trim();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -320,14 +430,17 @@ function renderResult(r) {
   document.getElementById('resultSubtitle').textContent =
     `${r.customer_summary.goal} · ${r.customer_summary.background} · ${new Date().toLocaleDateString('ko-KR')} 기준`;
 
-  // 1. 현재 수준 진단
+  // 1. 현재 수준 진단 (3줄)
   document.getElementById('currentLevelSummary').textContent = r.current_level_summary;
 
   // 2. 레이더 차트
-  const radarConfig  = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
-  const targetValues = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
-  const currentValues = Array.isArray(r.radar_current) ? r.radar_current.map(v => Math.min(Math.max(Number(v)||0, 0), 5)) : Array(6).fill(0);
-  document.getElementById('radarLegendTarget').textContent = selectedGoal === 'employment' ? '취업 목표 수준' : '자격증 목표 수준';
+  const radarConfig   = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
+  const targetValues  = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
+  const currentValues = Array.isArray(r.radar_current)
+    ? r.radar_current.map(v => Math.min(Math.max(Number(v)||0, 0), 5))
+    : Array(6).fill(0);
+  document.getElementById('radarLegendTarget').textContent =
+    selectedGoal === 'employment' ? '취업 목표 수준' : '자격증 목표 수준';
   drawRadarChart('radarChartContainer', radarConfig.axes, targetValues, currentValues);
 
   // GAP 설명 + 태그
@@ -337,18 +450,39 @@ function renderResult(r) {
   document.getElementById('weakPoints').innerHTML =
     (r.gap_analysis.weak_points || []).map(p => `<span class="tag tag-weak">⚠️ ${p}</span>`).join('');
 
-  // 3. 포트폴리오 참고 링크
-  const portfolioSites = TRACK_PORTFOLIO_SITES[selectedTrack] || [];
-  if (portfolioSites.length > 0) {
-    document.getElementById('portfolioSection').style.display = 'block';
-    document.getElementById('portfolioLinks').innerHTML = portfolioSites.map(site => `
-      <a href="${site.url}" target="_blank" rel="noopener" class="portfolio-link-card">
-        <div class="portfolio-link-title">🔗 ${site.title}</div>
-        <div class="portfolio-link-desc">${site.description}</div>
-      </a>
-    `).join('');
+  // 3. 직군 요구 스펙 (취업 목표 시)
+  const jm = r.job_market;
+  if (jm && selectedGoal === 'employment') {
+    document.getElementById('jobMarketSection').style.display = 'block';
+    document.getElementById('jobSpecGrid').innerHTML = `
+      <div class="job-spec-card required">
+        <div class="job-spec-label">✅ 필수 스킬</div>
+        ${(jm.required_skills || []).map(s => `<div class="job-spec-item">${s}</div>`).join('')}
+      </div>
+      <div class="job-spec-card preferred">
+        <div class="job-spec-label">⭐ 우대 스킬</div>
+        ${(jm.preferred_skills || []).map(s => `<div class="job-spec-item">${s}</div>`).join('')}
+      </div>
+      <div class="job-spec-card info">
+        <div class="job-spec-label">🤖 AI 활용 요구</div>
+        <div class="job-spec-item">${jm.ai_requirement || '-'}</div>
+      </div>
+      <div class="job-spec-card info">
+        <div class="job-spec-label">💰 신입 평균 연봉</div>
+        <div class="job-spec-item salary">${jm.avg_salary || '-'}</div>
+      </div>
+      <div class="job-spec-card trend">
+        <div class="job-spec-label">📈 채용 트렌드</div>
+        <div class="job-spec-item">${jm.market_trend || '-'}</div>
+      </div>
+      ${jm.portfolio_platform ? `
+      <div class="job-spec-card info">
+        <div class="job-spec-label">📁 포트폴리오 플랫폼</div>
+        <div class="job-spec-item">${jm.portfolio_platform}</div>
+      </div>` : ''}
+    `;
   } else {
-    document.getElementById('portfolioSection').style.display = 'none';
+    document.getElementById('jobMarketSection').style.display = 'none';
   }
 
   // 4. 추천 수업 로드맵
@@ -370,7 +504,7 @@ function renderResult(r) {
   const avail = parseInt(document.getElementById('availableMonths').value) || 0;
   if (avail > 0 && r.total_duration.min_months > avail) {
     document.getElementById('durationNote').textContent =
-      `⚠️ 희망 기간(${avail}개월)보다 더 필요합니다. 목표 달성을 위해 기간 연장을 검토해 보세요.`;
+      `⚠️ 희망 기간(${avail}개월)보다 실제 필요 기간이 깁니다. 목표 달성을 위해 기간 조정이 필요합니다.`;
   } else {
     document.getElementById('durationNote').textContent = '';
   }
@@ -500,7 +634,7 @@ function renderMonthlyPlanner(planner) {
 
   const MN = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
 
-  const html = planner.map((item, idx) => {
+  const html = planner.map((item) => {
     const totalIdx  = baseMonth + (item.month_offset - 1);
     const monthIdx  = totalIdx % 12;
     const yearOff   = Math.floor(totalIdx / 12);
@@ -530,11 +664,15 @@ function generatePDF() {
 }
 
 function resetAll() {
-  selectedGoal  = '';
-  selectedTrack = '';
-  skillLevels   = {};
+  selectedGoal   = '';
+  selectedTrack  = '';
+  jobSpecificity = '';
+  aiToolLevel    = 0;
+  skillLevels    = {};
   analysisResult = null;
   document.getElementById('result').style.display = 'none';
-  document.querySelectorAll('.goal-btn, .track-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('specificJobInput').style.display = 'none';
+  document.querySelectorAll('.goal-btn, .track-btn, .radio-card').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('input[name="jobSpecificity"]').forEach(r => r.checked = false);
   showSection(1);
 }

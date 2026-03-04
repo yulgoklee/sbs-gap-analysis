@@ -405,3 +405,74 @@ input:focus, select:focus, textarea:focus { border-color: var(--primary); }
   .result-section:nth-child(6) { page-break-before: always; }
 }
 .print-footer { display: none; }
+
+/* ── JOB SPECIFICITY RADIO CARD ── */
+.job-specificity-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.radio-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px; border: 2px solid var(--border); border-radius: 10px;
+  cursor: pointer; transition: all .2s; background: white;
+}
+.radio-card input[type="radio"] { display: none; }
+.radio-card:hover { border-color: var(--primary); }
+.radio-card.selected { border-color: var(--primary); background: #EBF2FF; }
+.radio-card-content { flex: 1; }
+.radio-card-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.radio-card-desc { font-size: 11px; color: var(--text-sub); line-height: 1.4; }
+
+/* ── LEVEL LEGEND ── */
+.level-legend {
+  background: var(--bg); border-radius: 10px; padding: 12px 16px;
+  margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 6px 16px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-label {
+  font-size: 11px; font-weight: 700; color: var(--primary);
+  background: #EBF2FF; padding: 2px 8px; border-radius: 12px;
+}
+.legend-desc { font-size: 11px; color: var(--text-sub); }
+
+/* ── AI TOOL SECTION ── */
+.ai-tool-section {
+  margin-top: 20px; padding-top: 18px;
+  border-top: 2px dashed var(--border);
+}
+.ai-tool-title { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+.ai-tool-desc { font-size: 12px; color: var(--text-sub); margin-bottom: 10px; }
+.ai-tool-levels { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* ── JOB SPEC GRID ── */
+.job-spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.job-spec-card { border-radius: 10px; padding: 14px 16px; }
+.job-spec-card.required  { background: #E3F9E5; }
+.job-spec-card.preferred { background: #EBF2FF; }
+.job-spec-card.info      { background: var(--bg); }
+.job-spec-card.trend     { background: #FFF8E1; grid-column: 1 / -1; }
+.job-spec-label {
+  font-size: 11px; font-weight: 700; color: var(--text-sub);
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+}
+.job-spec-item {
+  font-size: 13px; color: var(--text); padding: 4px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06); line-height: 1.5;
+}
+.job-spec-item:last-child { border-bottom: none; }
+.job-spec-item.salary { font-size: 15px; font-weight: 700; color: var(--primary); }
+
+@media (max-width: 600px) {
+  .job-specificity-selector { grid-template-columns: 1fr; }
+  .job-spec-grid { grid-template-columns: 1fr; }
+  .job-spec-card.trend { grid-column: auto; }
+}
+
+/* ── 인쇄: 직군 요구 스펙 ── */
+@media print {
+  .job-spec-card { border: 1px solid #DFE1E6 !important; box-shadow: none !important; }
+  .job-spec-card.required  { background: #E3F9E5 !important; }
+  .job-spec-card.preferred { background: #EBF2FF !important; }
+  .job-spec-card.info      { background: #F4F5F7 !important; }
+  .job-spec-card.trend     { background: #FFF8E1 !important; }
+  .job-spec-label { font-size: 10px; }
+  .job-spec-item  { font-size: 11px; }
+  .level-legend   { display: none; }
+}
