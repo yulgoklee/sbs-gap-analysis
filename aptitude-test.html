@@ -174,6 +174,13 @@
     }
     .low-score-box p { font-size: 13px; color: var(--text); line-height: 1.7; }
 
+    /* ── MENTOR BOX ── */
+    .mentor-box {
+      border-radius: 12px; padding: 20px 24px;
+      border-left: 4px solid; margin-bottom: 16px;
+    }
+    .mentor-box p { font-size: 13px; color: var(--text); line-height: 1.7; }
+
     /* ── AI COMMENT ── */
     .ai-comment-box {
       background: linear-gradient(135deg, #EBF2FF, #F3E8FF);
@@ -310,11 +317,11 @@
   <div class="result-top" id="resultTopBanner">
     <div class="result-top-icon" id="rtIcon"></div>
     <div>
-      <div class="result-top-label">최적 추천 과정</div>
+      <div class="result-top-label" id="rtLabel">최적 추천 과정</div>
       <div class="result-top-name" id="rtName"></div>
       <div class="result-top-sub" id="rtSub"></div>
     </div>
-    <div class="result-top-score">
+    <div class="result-top-score" id="rtScoreWrap">
       <div class="big" id="rtScore"></div>
       <div class="small">/ 100점</div>
     </div>
@@ -325,6 +332,11 @@
     <p>📋 <strong>아직 뚜렷한 방향이 나타나지 않았습니다.</strong><br/>
     다양한 분야에 골고루 관심을 보이시거나, 아직 탐색 중인 단계일 수 있습니다.
     결과를 참고하시되, 직접 상담을 통해 방향을 함께 잡아드릴 수 있습니다.</p>
+  </div>
+
+  <!-- MENTOR CONSULTATION BOX -->
+  <div id="mentorBox" class="mentor-box" style="display:none;">
+    <p><strong id="mentorTitle"></strong><br/><span class="mentor-msg"></span></p>
   </div>
 
   <!-- RADAR CHART -->
@@ -465,10 +477,11 @@ const MAX_SCORES = { artwork:27, design:29, video:28, interior:22.5, it:25.5, of
 // ═══════════════════════════════════════════════════════
 //  STATE
 // ═══════════════════════════════════════════════════════
-let apiKey    = '';
-let currentQ  = 0;
-let answers   = new Array(QUESTIONS.length).fill(0);
-let topTrackKey = '';
+let apiKey          = '';
+let currentQ        = 0;
+let answers         = new Array(QUESTIONS.length).fill(0);
+let topTrackKey     = '';
+let autoAdvanceTimer = null;
 
 const LS_KEY = 'sbs_gemini_api_key';
 
@@ -538,6 +551,9 @@ function selectAnswer(score) {
     btn.classList.toggle('selected', i + 1 === score);
   });
   document.getElementById('btnNext').disabled = false;
+  // 선택 후 400ms 뒤 자동 이동
+  clearTimeout(autoAdvanceTimer);
+  autoAdvanceTimer = setTimeout(nextQuestion, 400);
 }
 
 function nextQuestion() {
@@ -549,6 +565,7 @@ function nextQuestion() {
   }
 }
 function prevQuestion() {
+  clearTimeout(autoAdvanceTimer);
   if (currentQ > 0) renderQuestion(currentQ - 1);
 }
 
@@ -621,6 +638,20 @@ ${scoreLines}
 }
 
 // ═══════════════════════════════════════════════════════
+//  RESULT MODE DETECTION
+// ═══════════════════════════════════════════════════════
+function getResultMode(scores, avg) {
+  const topScore = Math.max(...TRACK_KEYS.map(k => scores[k]));
+  const gap = topScore - avg;
+  if (gap < 10) {
+    if (avg < 30) return 'low';      // 전부 1점 → 특정 방향 없음
+    if (avg > 70) return 'allHigh';  // 전부 5점 → 멘토 상담 권장
+    return 'neutral';                // 전부 3점 등 → 방향 미결정
+  }
+  return 'normal';
+}
+
+// ═══════════════════════════════════════════════════════
 //  RESULT RENDERING
 // ═══════════════════════════════════════════════════════
 function renderResult(scores, avg, commentary) {
@@ -629,16 +660,54 @@ function renderResult(scores, avg, commentary) {
   const sorted   = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
   const top      = TRACKS[sorted[0]];
   const topScore = scores[sorted[0]];
+  const mode     = getResultMode(scores, avg);
 
   // 상단 배너
-  document.getElementById('resultTopBanner').style.background = top.bg;
-  document.getElementById('rtIcon').textContent  = top.icon;
-  document.getElementById('rtName').textContent  = top.name;
-  document.getElementById('rtSub').textContent   = top.subtitle;
-  document.getElementById('rtScore').textContent = topScore;
+  if (mode === 'normal') {
+    document.getElementById('resultTopBanner').style.background = top.bg;
+    document.getElementById('rtLabel').textContent = '최적 추천 과정';
+    document.getElementById('rtIcon').textContent  = top.icon;
+    document.getElementById('rtName').textContent  = top.name;
+    document.getElementById('rtSub').textContent   = top.subtitle;
+    document.getElementById('rtScore').textContent = topScore;
+    document.getElementById('rtScoreWrap').style.display = '';
+  } else {
+    const BANNERS = {
+      low:     { bg:'linear-gradient(135deg,#607D8B,#455A64)', icon:'🔍', name:'방향 탐색 중',   sub:'아직 뚜렷한 방향이 나타나지 않았습니다' },
+      allHigh: { bg:'linear-gradient(135deg,#FF8B00,#E07000)', icon:'⭐', name:'전 방면 균형형',  sub:'모든 분야에 골고루 높은 관심을 보이고 있습니다' },
+      neutral: { bg:'linear-gradient(135deg,#5E35B1,#4527A0)', icon:'🧭', name:'방향 탐색 필요', sub:'특정 분야에 대한 선호가 아직 나타나지 않았습니다' },
+    };
+    const b = BANNERS[mode];
+    document.getElementById('resultTopBanner').style.background = b.bg;
+    document.getElementById('rtLabel').textContent = '검사 결과';
+    document.getElementById('rtIcon').textContent  = b.icon;
+    document.getElementById('rtName').textContent  = b.name;
+    document.getElementById('rtSub').textContent   = b.sub;
+    document.getElementById('rtScoreWrap').style.display = 'none';
+  }
 
-  // 낮은 점수 처리
-  if (topScore < 40) document.getElementById('lowScoreBox').style.display = 'block';
+  // 점수 경고 / 멘토 상담 박스
+  if (mode === 'normal') {
+    if (topScore < 40) document.getElementById('lowScoreBox').style.display = 'block';
+  } else {
+    const MENTOR = {
+      low:     { icon:'🔍', title:'현재 추천 과정이 없습니다',
+                 msg:'검사 결과만으로는 특별히 두드러지는 분야가 나타나지 않았습니다. 다양한 분야를 직접 경험해보시거나, 담당 선생님과 1:1 상담을 통해 방향을 함께 찾아보시길 권장드립니다.',
+                 bg:'#ECEFF1', border:'#607D8B' },
+      allHigh: { icon:'⭐', title:'멘토와의 상담을 권장드립니다',
+                 msg:'모든 분야에 높은 관심과 열의를 보이고 계십니다! 다양한 가능성이 열려 있는 만큼, 담당 멘토와 1:1 상담을 통해 나에게 가장 잘 맞는 과정을 함께 결정해 보세요.',
+                 bg:'#FFF8E1', border:'#FF8B00' },
+      neutral: { icon:'🧭', title:'멘토와의 상담을 권장드립니다',
+                 msg:'아직 특정 방향에 대한 뚜렷한 선호가 나타나지 않았습니다. 담당 선생님과의 상담을 통해 더 구체적인 방향을 함께 찾아보시길 권장드립니다.',
+                 bg:'#E3F2FD', border:'#1565C0' },
+    }[mode];
+    const mb = document.getElementById('mentorBox');
+    mb.style.background    = MENTOR.bg;
+    mb.style.borderColor   = MENTOR.border;
+    document.getElementById('mentorTitle').textContent = `${MENTOR.icon} ${MENTOR.title}`;
+    mb.querySelector('.mentor-msg').textContent = MENTOR.msg;
+    mb.style.display = 'block';
+  }
 
   // 레이더 차트
   drawAptitudeRadar('radarContainer', scores, avg);
@@ -652,8 +721,8 @@ function renderResult(scores, avg, commentary) {
   const list = document.getElementById('scoreList');
   list.innerHTML = '';
   sorted.forEach(k => {
-    const t   = TRACKS[k];
-    const s   = scores[k];
+    const t     = TRACKS[k];
+    const s     = scores[k];
     const above = s >= avg;
     list.innerHTML += `
       <div class="score-item">
@@ -667,21 +736,26 @@ function renderResult(scores, avg, commentary) {
       </div>`;
   });
 
-  // 진로 정보
-  const tr = TRACKS[sorted[0]];
-  document.getElementById('careerDesc').textContent = `${tr.name} 과정 이수 후 진출 가능한 분야입니다.`;
-  document.getElementById('certList').innerHTML     = tr.certs.map(c => `<span class="career-tag">${c}</span>`).join('');
-  document.getElementById('jobList').innerHTML      = tr.jobs.map(j => `<span class="career-tag">${j}</span>`).join('');
-  document.getElementById('employerList').innerHTML = tr.employers.map(e => `<span class="career-tag">${e}</span>`).join('');
+  // 진로 정보 & GAP 버튼 — normal 모드만 표시
+  if (mode === 'normal') {
+    const tr = TRACKS[sorted[0]];
+    document.getElementById('careerDesc').textContent = `${tr.name} 과정 이수 후 진출 가능한 분야입니다.`;
+    document.getElementById('certList').innerHTML     = tr.certs.map(c => `<span class="career-tag">${c}</span>`).join('');
+    document.getElementById('jobList').innerHTML      = tr.jobs.map(j => `<span class="career-tag">${j}</span>`).join('');
+    document.getElementById('employerList').innerHTML = tr.employers.map(e => `<span class="career-tag">${e}</span>`).join('');
+    document.getElementById('careerCard').style.display  = '';
+    document.getElementById('btnGoGap').style.display    = '';
+    document.getElementById('btnGoGap').textContent      = `📊 [${tr.name}] 과정으로 GAP 분석 시작하기`;
+  } else {
+    document.getElementById('careerCard').style.display = 'none';
+    document.getElementById('btnGoGap').style.display   = 'none';
+  }
 
   // AI 코멘트
   if (commentary) {
     document.getElementById('aiCommentText').textContent = commentary;
     document.getElementById('aiCommentCard').style.display = 'block';
   }
-
-  // GAP 분석 버튼 텍스트
-  document.getElementById('btnGoGap').textContent = `📊 [${tr.name}] 과정으로 GAP 분석 시작하기`;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -773,9 +847,13 @@ function goToGap() { location.href = 'gap-analysis.html'; }
 function retryQuiz() {
   answers  = new Array(QUESTIONS.length).fill(0);
   currentQ = 0;
+  clearTimeout(autoAdvanceTimer);
   document.getElementById('resultScreen').style.display   = 'none';
   document.getElementById('lowScoreBox').style.display    = 'none';
+  document.getElementById('mentorBox').style.display      = 'none';
+  document.getElementById('careerCard').style.display     = '';
   document.getElementById('aiCommentCard').style.display  = 'none';
+  document.getElementById('btnGoGap').style.display       = '';
   document.getElementById('introScreen').style.display    = 'block';
   window.scrollTo(0, 0);
 }
