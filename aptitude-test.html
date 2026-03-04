@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SBS 아카데미 | 적성검사</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── APTITUDE SPECIFIC ── */
+    .apt-main { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* ── INTRO ── */
+    .intro-card {
+      background: white; border-radius: 20px; padding: 52px 48px;
+      text-align: center; border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+    }
+    .intro-icon { font-size: 56px; margin-bottom: 20px; line-height: 1; }
+    .intro-card h1 { font-size: 32px; font-weight: 900; margin-bottom: 8px; color: var(--text); }
+    .intro-meta { font-size: 13px; color: var(--text-sub); margin-bottom: 32px; }
+    .intro-features {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+      margin: 0 auto 36px; max-width: 320px; text-align: left;
+    }
+    .intro-features li {
+      font-size: 14px; color: var(--text-sub);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .intro-features li .fi {
+      width: 24px; height: 24px; background: #EBF2FF; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;
+    }
+    .btn-start {
+      background: #7C3AED; color: white; border: none;
+      border-radius: 12px; padding: 16px 48px;
+      font-size: 16px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-start:hover { background: #6D28D9; }
+
+    /* ── QUIZ PROGRESS ── */
+    .quiz-progress {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+    }
+    .q-counter { font-size: 13px; font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .progress-bar-wrap { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: #7C3AED; border-radius: 3px; transition: width .4s ease; }
+    .q-time { font-size: 12px; color: var(--text-sub); white-space: nowrap; }
+
+    /* ── QUESTION CARD ── */
+    .question-card {
+      background: white; border-radius: 16px; padding: 40px 36px;
+      border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      margin-bottom: 20px; min-height: 180px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .q-tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 16px;
+    }
+    .q-tag.normal { background: #EBF2FF; color: var(--primary); }
+    .q-tag.aspiration { background: #F3E8FF; color: #7C3AED; }
+    .question-text {
+      font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.5;
+    }
+
+    /* ── LIKERT SCALE ── */
+    .likert-wrap { margin-bottom: 28px; }
+    .likert-labels {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--text-sub); margin-bottom: 10px; padding: 0 4px;
+    }
+    .likert-scale { display: flex; gap: 8px; }
+    .likert-btn {
+      flex: 1; padding: 14px 6px; border: 2px solid var(--border);
+      border-radius: 10px; background: white; cursor: pointer;
+      transition: all .15s; text-align: center;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .likert-btn:hover { border-color: #7C3AED; background: #FAF5FF; }
+    .likert-btn.selected { border-color: #7C3AED; background: #7C3AED; }
+    .likert-btn .l-num {
+      font-size: 18px; font-weight: 900; color: var(--text-sub);
+      display: block; line-height: 1;
+    }
+    .likert-btn.selected .l-num { color: white; }
+
+    /* ── QUIZ NAV ── */
+    .quiz-nav { display: flex; gap: 10px; }
+    .btn-prev {
+      padding: 14px 24px; border: 1.5px solid var(--border);
+      border-radius: 10px; background: white; color: var(--text-sub);
+      font-size: 14px; font-weight: 600; font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-prev:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-prev:disabled { opacity: .3; cursor: not-allowed; }
+    .btn-next {
+      flex: 1; padding: 14px; background: #7C3AED; color: white;
+      border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-next:hover { background: #6D28D9; }
+    .btn-next:disabled { background: var(--border); color: var(--text-sub); cursor: not-allowed; }
+
+    /* ── LOADING ── */
+    .loading-apt {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 340px; text-align: center;
+    }
+    .spinner-apt {
+      width: 52px; height: 52px; border: 4px solid var(--border);
+      border-top-color: #7C3AED; border-radius: 50%;
+      animation: spin 1s linear infinite; margin-bottom: 24px;
+    }
+
+    /* ── RESULT ── */
+    .result-top {
+      border-radius: 16px; padding: 32px; margin-bottom: 20px; color: white;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .result-top-icon { font-size: 52px; flex-shrink: 0; }
+    .result-top-label { font-size: 12px; font-weight: 700; opacity: .8; margin-bottom: 4px; letter-spacing: 1px; }
+    .result-top-name { font-size: 28px; font-weight: 900; margin-bottom: 4px; }
+    .result-top-sub { font-size: 14px; opacity: .85; }
+    .result-top-score { margin-left: auto; text-align: center; flex-shrink: 0; }
+    .result-top-score .big { font-family: 'Bebas Neue', sans-serif; font-size: 56px; line-height: 1; }
+    .result-top-score .small { font-size: 12px; opacity: .8; }
+
+    /* ── SCORE BARS ── */
+    .score-list { display: flex; flex-direction: column; gap: 10px; }
+    .score-item {
+      display: flex; align-items: center; gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .score-item:last-child { border-bottom: none; }
+    .score-icon { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
+    .score-name { font-size: 13px; font-weight: 700; width: 100px; flex-shrink: 0; }
+    .score-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+    .score-bar-fill.above { background: #7C3AED; }
+    .score-bar-fill.below { background: #DFE1E6; }
+    .score-val { font-size: 13px; font-weight: 700; width: 36px; text-align: right; flex-shrink: 0; }
+    .score-badge {
+      font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px;
+      flex-shrink: 0;
+    }
+    .score-badge.above { background: #F3E8FF; color: #7C3AED; }
+    .score-badge.below { background: var(--bg); color: var(--text-sub); }
+
+    /* ── AVERAGE NOTE ── */
+    .avg-note {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-sub);
+      background: var(--bg); border-radius: 8px; padding: 8px 14px; margin-top: 12px;
+    }
+
+    /* ── CAREER CARD ── */
+    .career-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .career-box { background: var(--bg); border-radius: 10px; padding: 16px; }
+    .career-box-label { font-size: 11px; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; letter-spacing: 0.5px; }
+    .career-tag-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .career-tag {
+      font-size: 11px; background: white; border: 1px solid var(--border);
+      border-radius: 20px; padding: 3px 9px; color: var(--text);
+    }
+
+    /* ── LOW SCORE ── */
+    .low-score-box {
+      background: #FFF8E1; border-radius: 12px; padding: 20px 24px;
+      border-left: 4px solid #FF8B00; margin-bottom: 16px;
+    }
+    .low-score-box p { font-size: 13px; color: var(--text); line-height: 1.7; }
+
+    /* ── AI COMMENT ── */
+    .ai-comment-box {
+      background: linear-gradient(135deg, #EBF2FF, #F3E8FF);
+      border-radius: 12px; padding: 24px 28px;
+      border-left: 4px solid #7C3AED; font-size: 14px; line-height: 1.8; color: var(--text);
+    }
+    .ai-comment-label {
+      font-size: 11px; font-weight: 700; color: #7C3AED;
+      letter-spacing: 1px; margin-bottom: 10px;
+    }
+
+    /* ── ACTION BUTTONS ── */
+    .action-row { display: flex; gap: 10px; margin-top: 8px; }
+    .btn-gap {
+      flex: 1; padding: 16px; background: var(--primary); color: white;
+      border: none; border-radius: 10px; font-size: 15px; font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif; cursor: pointer; transition: background .2s;
+    }
+    .btn-gap:hover { background: #003FA3; }
+    .btn-retry {
+      padding: 16px 24px; border: 1.5px solid var(--border);
+      border-radius: 10px; background: white; color: var(--text-sub);
+      font-size: 14px; font-weight: 600; font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-retry:hover { border-color: #7C3AED; color: #7C3AED; }
+
+    @media (max-width: 600px) {
+      .apt-main { padding: 24px 16px 60px; }
+      .intro-card { padding: 36px 24px; }
+      .question-card { padding: 28px 20px; }
+      .question-text { font-size: 17px; }
+      .likert-labels { font-size: 9px; }
+      .career-grid { grid-template-columns: 1fr; }
+      .result-top { flex-wrap: wrap; }
+      .result-top-score { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- API KEY MODAL -->
+<div id="apiModal">
+  <div class="modal-box">
+    <h3>🔑 Gemini API 키 설정</h3>
+    <p>Gemini API 키를 입력하세요.<br/>키는 이 브라우저에 저장되며 외부로 전송되지 않습니다.</p>
+    <input type="text" id="apiKeyInput" placeholder="AIza..." />
+    <button class="btn-modal" onclick="saveApiKey()">저장하고 시작하기</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div style="display:flex; align-items:center; gap:16px">
+    <a href="index.html" style="color:rgba(255,255,255,0.7); text-decoration:none; font-size:13px; display:flex; align-items:center; gap:4px; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">← 메인</a>
+    <div>
+      <div class="logo-text">SBS ACADEMY</div>
+      <div class="subtitle">컴퓨터아트학원 수원점 · 031-546-3644</div>
+    </div>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px">
+    <div class="badge">A · 적성검사</div>
+    <button onclick="changeApiKey()" title="API 키 변경" style="background:transparent; border:1px solid rgba(255,255,255,0.4); color:white; border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; opacity:0.7;">🔑 키 변경</button>
+  </div>
+</header>
+
+<!-- ════════ INTRO ════════ -->
+<div id="introScreen" class="apt-main">
+  <div class="intro-card">
+    <div class="intro-icon">🧭</div>
+    <h1>적성검사</h1>
+    <p class="intro-meta">24개 문항 · 약 4분 소요 · AI 분석 포함</p>
+    <ul class="intro-features">
+      <li><span class="fi">✓</span> 성향·관심사 기반 6개 트랙 적합도 측정</li>
+      <li><span class="fi">✓</span> 내 점수와 평균의 비교 육각형 레이더 차트</li>
+      <li><span class="fi">✓</span> 추천 과정의 관련 직업·자격증 안내</li>
+      <li><span class="fi">✓</span> AI 맞춤 코멘트 및 다음 단계 제안</li>
+    </ul>
+    <button class="btn-start" onclick="startQuiz()">검사 시작하기 →</button>
+  </div>
+</div>
+
+<!-- ════════ QUIZ ════════ -->
+<div id="quizScreen" style="display:none;" class="apt-main">
+  <div class="quiz-progress">
+    <span class="q-counter" id="qCounter">Q1 / 24</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <span class="q-time" id="qTime">약 4분 남음</span>
+  </div>
+
+  <div class="question-card">
+    <span class="q-tag" id="qTag">문항 유형</span>
+    <p class="question-text" id="questionText">질문 내용</p>
+  </div>
+
+  <div class="likert-wrap">
+    <div class="likert-labels">
+      <span>전혀 아니다</span>
+      <span>아니다</span>
+      <span>보통이다</span>
+      <span>그렇다</span>
+      <span>매우 그렇다</span>
+    </div>
+    <div class="likert-scale" id="likertScale">
+      <button class="likert-btn" onclick="selectAnswer(1)"><span class="l-num">1</span></button>
+      <button class="likert-btn" onclick="selectAnswer(2)"><span class="l-num">2</span></button>
+      <button class="likert-btn" onclick="selectAnswer(3)"><span class="l-num">3</span></button>
+      <button class="likert-btn" onclick="selectAnswer(4)"><span class="l-num">4</span></button>
+      <button class="likert-btn" onclick="selectAnswer(5)"><span class="l-num">5</span></button>
+    </div>
+  </div>
+
+  <div class="quiz-nav">
+    <button class="btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>← 이전</button>
+    <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>다음 →</button>
+  </div>
+</div>
+
+<!-- ════════ LOADING ════════ -->
+<div id="loadingScreen" style="display:none;" class="apt-main">
+  <div class="loading-apt">
+    <div class="spinner-apt"></div>
+    <p class="loading-text">AI가 적성을 분석하고 있습니다</p>
+    <p class="loading-sub" style="margin-top:6px">6개 트랙 점수 산출 중...</p>
+  </div>
+</div>
+
+<!-- ════════ RESULT ════════ -->
+<div id="resultScreen" style="display:none;" class="apt-main">
+
+  <!-- TOP TRACK HEADER -->
+  <div class="result-top" id="resultTopBanner">
+    <div class="result-top-icon" id="rtIcon"></div>
+    <div>
+      <div class="result-top-label">최적 추천 과정</div>
+      <div class="result-top-name" id="rtName"></div>
+      <div class="result-top-sub" id="rtSub"></div>
+    </div>
+    <div class="result-top-score">
+      <div class="big" id="rtScore"></div>
+      <div class="small">/ 100점</div>
+    </div>
+  </div>
+
+  <!-- LOW SCORE WARNING -->
+  <div id="lowScoreBox" class="low-score-box" style="display:none;">
+    <p>📋 <strong>아직 뚜렷한 방향이 나타나지 않았습니다.</strong><br/>
+    다양한 분야에 골고루 관심을 보이시거나, 아직 탐색 중인 단계일 수 있습니다.
+    결과를 참고하시되, 직접 상담을 통해 방향을 함께 잡아드릴 수 있습니다.</p>
+  </div>
+
+  <!-- RADAR CHART -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📊</span> 트랙별 적합도 분석</div>
+    <div class="card-desc">6개 트랙의 적합도 점수와 평균을 비교한 결과입니다.</div>
+    <div id="radarContainer" style="margin-bottom:16px;"></div>
+    <div class="avg-note">
+      <span>📏</span>
+      <span id="avgNote">6개 트랙 평균: —점 | 평균 이상: <strong id="aboveList">—</strong></span>
+    </div>
+  </div>
+
+  <!-- SCORE BARS -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📈</span> 트랙별 점수</div>
+    <div class="score-list" id="scoreList"></div>
+  </div>
+
+  <!-- CAREER INFO -->
+  <div class="card" id="careerCard">
+    <div class="card-title"><span class="icon">💼</span> 추천 과정 진로 정보</div>
+    <div class="card-desc" id="careerDesc"></div>
+    <div class="career-grid">
+      <div class="career-box">
+        <div class="career-box-label">📜 관련 자격증</div>
+        <div class="career-tag-list" id="certList"></div>
+      </div>
+      <div class="career-box">
+        <div class="career-box-label">👤 주요 직업</div>
+        <div class="career-tag-list" id="jobList"></div>
+      </div>
+      <div class="career-box">
+        <div class="career-box-label">🏢 주요 취업처</div>
+        <div class="career-tag-list" id="employerList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI COMMENT -->
+  <div class="card" id="aiCommentCard" style="display:none;">
+    <div class="card-title"><span class="icon">🤖</span> AI 종합 코멘트</div>
+    <div class="ai-comment-box">
+      <div class="ai-comment-label">AI ANALYSIS</div>
+      <div id="aiCommentText"></div>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="action-row">
+    <button class="btn-gap" id="btnGoGap" onclick="goToGap()">📊 이 과정으로 GAP 분석 시작하기</button>
+    <button class="btn-retry" onclick="retryQuiz()">↺ 다시 하기</button>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCRIPT
+════════════════════════════════════════════════════ -->
+<script>
+
+// ═══════════════════════════════════════════════════════
+//  DATA — TRACKS
+// ═══════════════════════════════════════════════════════
+const TRACK_KEYS = ['artwork','design','video','interior','it','office'];
+
+const TRACKS = {
+  artwork:  { name: '아트웍',       icon: '🎨', color: '#E91E8C', bg: 'linear-gradient(135deg,#E91E8C,#C2185B)',
+              subtitle: '감성과 표현의 세계',
+              certs:     ['GTQ (그래픽기술자격)', '웹디자인기능사', '일러스트레이터 자격증'],
+              jobs:      ['웹툰작가', '일러스트레이터', '캐릭터디자이너', '콘셉트아티스트'],
+              employers: ['게임회사', '출판사', '엔터테인먼트사', '프리랜서'] },
+
+  design:   { name: '디자인/편집',  icon: '🖥️', color: '#0052CC', bg: 'linear-gradient(135deg,#0052CC,#0041A3)',
+              subtitle: '시각으로 소통하는 세계',
+              certs:     ['GTQ', '시각디자인산업기사', '웹디자인기능사'],
+              jobs:      ['그래픽디자이너', '편집디자이너', 'UI/UX디자이너', '웹디자이너'],
+              employers: ['디자인 에이전시', '광고회사', '스타트업', '기업 마케팅팀'] },
+
+  video:    { name: '영상/CG',      icon: '🎬', color: '#FF5630', bg: 'linear-gradient(135deg,#FF5630,#DE350B)',
+              subtitle: '움직임과 공간의 세계',
+              certs:     ['컴퓨터그래픽스운용기능사', '게임그래픽전문가'],
+              jobs:      ['모션그래퍼', '3D아티스트', 'VFX아티스트', '영상편집자'],
+              employers: ['방송국', '광고제작사', '게임회사', '영화제작사'] },
+
+  interior: { name: '인테리어',     icon: '🏠', color: '#00875A', bg: 'linear-gradient(135deg,#00875A,#006644)',
+              subtitle: '공간을 디자인하는 세계',
+              certs:     ['실내건축기능사', '실내건축산업기사', '전산응용건축제도기능사'],
+              jobs:      ['인테리어디자이너', '공간디자이너', '인테리어플래너'],
+              employers: ['인테리어회사', '건축설계사무소', '가구/건자재회사', '프리랜서'] },
+
+  it:       { name: 'IT/프로그래밍', icon: '💻', color: '#6554C0', bg: 'linear-gradient(135deg,#6554C0,#403294)',
+              subtitle: '논리와 구조의 세계',
+              certs:     ['정보처리기사', 'SQLD', '컴퓨터활용능력'],
+              jobs:      ['웹개발자', '앱개발자', '데이터분석가', '시스템엔지니어'],
+              employers: ['IT기업', '스타트업', 'SI업체', '대기업 IT부서'] },
+
+  office:   { name: '사무직',       icon: '📋', color: '#FF8B00', bg: 'linear-gradient(135deg,#FF8B00,#E07000)',
+              subtitle: '효율과 정확의 세계',
+              certs:     ['컴퓨터활용능력 1·2급', 'MOS', 'ITQ', 'ERP정보관리사'],
+              jobs:      ['경영지원', '총무·행정', '영업관리', '무역사무원'],
+              employers: ['일반기업', '금융권', '관공서', '중소기업'] }
+};
+
+// ═══════════════════════════════════════════════════════
+//  DATA — QUESTIONS (24개, 고정 순서)
+// ═══════════════════════════════════════════════════════
+const QUESTIONS = [
+  { text: "공간을 어떻게 배치하고 꾸밀지 머릿속으로 구상하는 것이 즐겁다",             scores: { interior:1.0, artwork:0.2 },                    aspiration:false },
+  { text: "나는 어릴 때부터 그림 그리기, 낙서, 스케치를 즐겨왔다",                    scores: { artwork:1.0, design:0.3 },                      aspiration:false },
+  { text: "나는 규칙과 패턴을 찾아서 문제를 해결하는 과정이 재미있다",                 scores: { it:1.0, office:0.2 },                           aspiration:false },
+  { text: "길을 걷다가 포스터·로고·브랜드 디자인이 자연스럽게 눈에 들어온다",          scores: { design:1.0, artwork:0.2 },                      aspiration:false },
+  { text: "5년 후 나는 내 이름으로 된 작품이나 포트폴리오를 갖고 싶다",               scores: { artwork:0.8, design:0.4, video:0.4 },           aspiration:true  },
+  { text: "영화 특수효과·유튜브 모션그래픽이 어떻게 만들어지는지 궁금하다",            scores: { video:1.0, it:0.2 },                            aspiration:false },
+  { text: "엑셀·PPT 같은 업무 도구를 잘 다뤄서 실무에서 인정받고 싶다",               scores: { office:1.0, it:0.2 },                           aspiration:false },
+  { text: "나만의 앱이나 웹서비스를 직접 만들어서 세상에 내놓고 싶다",                 scores: { it:1.0, design:0.3 },                           aspiration:true  },
+  { text: "나는 내가 만든 캐릭터나 일러스트로 나만의 세계를 표현하고 싶다",             scores: { artwork:1.0, video:0.3 },                       aspiration:false },
+  { text: "보기 좋고 정돈된 레이아웃·브랜드 감각 있는 디자인을 만들고 싶다",           scores: { design:1.0, artwork:0.2 },                      aspiration:false },
+  { text: "나는 영상·광고·방송 같은 미디어 산업에서 일하고 싶다",                      scores: { video:1.0, design:0.3 },                        aspiration:true  },
+  { text: "집·카페·상업공간을 보면 어떻게 바꾸면 더 좋을지 자연스럽게 생각하게 된다",  scores: { interior:1.0, design:0.2 },                     aspiration:false },
+  { text: "앱·웹사이트가 어떤 원리로 작동하는지 직접 만들어보고 싶다",                 scores: { it:1.0, design:0.2 },                           aspiration:false },
+  { text: "나는 눈에 보이는 공간을 직접 설계하고 변화시키는 일을 하고 싶다",           scores: { interior:1.0, artwork:0.2 },                    aspiration:true  },
+  { text: "나는 정적인 이미지보다 움직이는 콘텐츠를 만드는 것이 더 끌린다",            scores: { video:1.0, design:0.2 },                        aspiration:false },
+  { text: "지금 내게 가장 중요한 건 빠르게 실무에 쓸 수 있는 기술을 익히는 것이다",   scores: { office:1.0 },                                   aspiration:false },
+  { text: "나는 안정적인 직장에서 전문 소프트웨어를 능숙하게 다루는 사람이 되고 싶다", scores: { office:0.8, design:0.4, it:0.3 },               aspiration:true  },
+  { text: "나는 감각과 직관을 발휘하는 창의적인 일을 하고 싶다",                       scores: { artwork:0.8, design:0.5, video:0.3 },           aspiration:true  },
+  { text: "나는 한 작품을 완성도 높게 다듬는 과정이 즐겁다",                           scores: { artwork:1.0, video:0.3, interior:0.2 },         aspiration:false },
+  { text: "나는 SNS 콘텐츠·홍보물처럼 많은 사람에게 보여지는 결과물을 만들고 싶다",   scores: { design:1.0, video:0.3 },                        aspiration:false },
+  { text: "3D 모델링이나 입체적인 표현 방식에 관심이 있다",                             scores: { video:1.0, interior:0.3 },                      aspiration:false },
+  { text: "나는 도면·설계도를 보거나 수치를 다루는 작업에 거부감이 없다",              scores: { interior:1.0, it:0.2 },                         aspiration:false },
+  { text: "나는 반복적인 작업을 자동화하거나 더 효율적인 방법을 찾는 것이 좋다",       scores: { it:1.0, office:0.3 },                           aspiration:false },
+  { text: "나는 정해진 업무를 정확하고 빠르게 처리하는 것이 잘 맞는다",               scores: { office:1.0, it:0.2 },                           aspiration:false }
+];
+
+// 트랙별 최대 가능 원점수 (응답 최대=5 기준으로 사전 계산)
+const MAX_SCORES = { artwork:27, design:29, video:28, interior:22.5, it:25.5, office:21.5 };
+
+// ═══════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════
+let apiKey    = '';
+let currentQ  = 0;
+let answers   = new Array(QUESTIONS.length).fill(0);
+let topTrackKey = '';
+
+const LS_KEY = 'sbs_gemini_api_key';
+
+// ═══════════════════════════════════════════════════════
+//  API KEY
+// ═══════════════════════════════════════════════════════
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) { alert('API 키를 입력해주세요.'); return; }
+  apiKey = key;
+  localStorage.setItem(LS_KEY, key);
+  document.getElementById('apiModal').style.display = 'none';
+}
+function changeApiKey() {
+  document.getElementById('apiKeyInput').value = localStorage.getItem(LS_KEY) || '';
+  document.getElementById('apiModal').style.display = 'flex';
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem(LS_KEY);
+  if (saved) { apiKey = saved; document.getElementById('apiModal').style.display = 'none'; }
+});
+
+// ═══════════════════════════════════════════════════════
+//  QUIZ FLOW
+// ═══════════════════════════════════════════════════════
+function startQuiz() {
+  answers = new Array(QUESTIONS.length).fill(0);
+  currentQ = 0;
+  document.getElementById('introScreen').style.display = 'none';
+  document.getElementById('quizScreen').style.display = 'block';
+  renderQuestion(0);
+}
+
+function renderQuestion(idx) {
+  currentQ = idx;
+  const q   = QUESTIONS[idx];
+  const pct = Math.round((idx / QUESTIONS.length) * 100);
+  const rem = Math.round((QUESTIONS.length - idx) * 10 / 60 * 10) / 10;
+
+  document.getElementById('qCounter').textContent   = `Q${idx + 1} / ${QUESTIONS.length}`;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('qTime').textContent      = `약 ${rem < 1 ? Math.round(rem * 60) + '초' : rem + '분'} 남음`;
+
+  // 태그
+  const tag = document.getElementById('qTag');
+  if (q.aspiration) { tag.textContent = '💭 희망·열망'; tag.className = 'q-tag aspiration'; }
+  else              { tag.textContent = '✦ 성향·관심사'; tag.className = 'q-tag normal'; }
+
+  document.getElementById('questionText').textContent = q.text;
+
+  // Likert 버튼 상태 복원
+  document.querySelectorAll('.likert-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', answers[idx] === i + 1);
+  });
+
+  // 네비게이션 버튼
+  document.getElementById('btnPrev').disabled = idx === 0;
+  const isLast = idx === QUESTIONS.length - 1;
+  const btnNext = document.getElementById('btnNext');
+  btnNext.disabled   = answers[idx] === 0;
+  btnNext.textContent = isLast ? '결과 보기 →' : '다음 →';
+}
+
+function selectAnswer(score) {
+  answers[currentQ] = score;
+  document.querySelectorAll('.likert-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', i + 1 === score);
+  });
+  document.getElementById('btnNext').disabled = false;
+}
+
+function nextQuestion() {
+  if (answers[currentQ] === 0) return;
+  if (currentQ < QUESTIONS.length - 1) {
+    renderQuestion(currentQ + 1);
+  } else {
+    submitQuiz();
+  }
+}
+function prevQuestion() {
+  if (currentQ > 0) renderQuestion(currentQ - 1);
+}
+
+// ═══════════════════════════════════════════════════════
+//  SCORE CALCULATION
+// ═══════════════════════════════════════════════════════
+function calcScores() {
+  const raw = { artwork:0, design:0, video:0, interior:0, it:0, office:0 };
+  QUESTIONS.forEach((q, i) => {
+    const ans = answers[i] || 0;
+    Object.entries(q.scores).forEach(([track, w]) => { raw[track] += ans * w; });
+  });
+  const norm = {};
+  TRACK_KEYS.forEach(k => { norm[k] = Math.round((raw[k] / MAX_SCORES[k]) * 100); });
+  return norm;
+}
+
+// ═══════════════════════════════════════════════════════
+//  SUBMIT & API
+// ═══════════════════════════════════════════════════════
+async function submitQuiz() {
+  document.getElementById('quizScreen').style.display   = 'none';
+  document.getElementById('loadingScreen').style.display = 'block';
+
+  const scores  = calcScores();
+  const sorted  = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
+  topTrackKey   = sorted[0];
+  const botKey  = sorted[sorted.length - 1];
+  const avg     = Math.round(TRACK_KEYS.reduce((s, k) => s + scores[k], 0) / TRACK_KEYS.length);
+
+  let commentary = '';
+  if (apiKey) {
+    commentary = await callGemini(scores, topTrackKey, botKey, avg);
+  }
+
+  document.getElementById('loadingScreen').style.display = 'none';
+  renderResult(scores, avg, commentary);
+}
+
+async function callGemini(scores, topKey, botKey, avg) {
+  const topTrack = TRACKS[topKey];
+  const botTrack = TRACKS[botKey];
+  const scoreLines = TRACK_KEYS.map(k => `  - ${TRACKS[k].name}: ${scores[k]}점`).join('\n');
+  const prompt = `당신은 SBS 아카데미 진로 상담 전문가입니다.
+아래는 적성검사 결과입니다.
+
+트랙별 적합도 (0~100점):
+${scoreLines}
+
+평균: ${avg}점
+최고 적합 트랙: ${topTrack.name} (${scores[topKey]}점)
+최저 적합 트랙: ${botTrack.name} (${scores[botKey]}점)
+
+위 결과를 바탕으로 다음 내용을 3~5문장으로 작성해주세요:
+1. 검사자의 핵심 성향 한 문장
+2. 왜 '${topTrack.name}' 과정이 가장 적합한지 구체적인 근거 2문장
+3. 다음 단계로 GAP 분석을 추천하는 자연스러운 마무리 한 문장
+
+따뜻하고 격려하는 톤으로, JSON 없이 순수 텍스트로만 반환하세요.`;
+
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${apiKey}`,
+      { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ contents:[{ parts:[{ text:prompt }] }] }) }
+    );
+    const data = await res.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
+  } catch(e) { return ''; }
+}
+
+// ═══════════════════════════════════════════════════════
+//  RESULT RENDERING
+// ═══════════════════════════════════════════════════════
+function renderResult(scores, avg, commentary) {
+  document.getElementById('resultScreen').style.display = 'block';
+
+  const sorted   = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
+  const top      = TRACKS[sorted[0]];
+  const topScore = scores[sorted[0]];
+
+  // 상단 배너
+  document.getElementById('resultTopBanner').style.background = top.bg;
+  document.getElementById('rtIcon').textContent  = top.icon;
+  document.getElementById('rtName').textContent  = top.name;
+  document.getElementById('rtSub').textContent   = top.subtitle;
+  document.getElementById('rtScore').textContent = topScore;
+
+  // 낮은 점수 처리
+  if (topScore < 40) document.getElementById('lowScoreBox').style.display = 'block';
+
+  // 레이더 차트
+  drawAptitudeRadar('radarContainer', scores, avg);
+
+  // 평균 노트
+  const aboveAvg = TRACK_KEYS.filter(k => scores[k] >= avg).map(k => TRACKS[k].name).join(', ');
+  document.getElementById('avgNote').innerHTML =
+    `6개 트랙 평균: <strong>${avg}점</strong> &nbsp;|&nbsp; 평균 이상: <strong>${aboveAvg || '없음'}</strong>`;
+
+  // 점수 바
+  const list = document.getElementById('scoreList');
+  list.innerHTML = '';
+  sorted.forEach(k => {
+    const t   = TRACKS[k];
+    const s   = scores[k];
+    const above = s >= avg;
+    list.innerHTML += `
+      <div class="score-item">
+        <span class="score-icon">${t.icon}</span>
+        <span class="score-name">${t.name}</span>
+        <div class="score-bar-wrap">
+          <div class="score-bar-fill ${above ? 'above' : 'below'}" style="width:${s}%; background:${above ? t.color : '#DFE1E6'}"></div>
+        </div>
+        <span class="score-val" style="color:${above ? t.color : 'var(--text-sub)'}">${s}</span>
+        <span class="score-badge ${above ? 'above' : 'below'}">${above ? '↑ 평균 이상' : '평균 이하'}</span>
+      </div>`;
+  });
+
+  // 진로 정보
+  const tr = TRACKS[sorted[0]];
+  document.getElementById('careerDesc').textContent = `${tr.name} 과정 이수 후 진출 가능한 분야입니다.`;
+  document.getElementById('certList').innerHTML     = tr.certs.map(c => `<span class="career-tag">${c}</span>`).join('');
+  document.getElementById('jobList').innerHTML      = tr.jobs.map(j => `<span class="career-tag">${j}</span>`).join('');
+  document.getElementById('employerList').innerHTML = tr.employers.map(e => `<span class="career-tag">${e}</span>`).join('');
+
+  // AI 코멘트
+  if (commentary) {
+    document.getElementById('aiCommentText').textContent = commentary;
+    document.getElementById('aiCommentCard').style.display = 'block';
+  }
+
+  // GAP 분석 버튼 텍스트
+  document.getElementById('btnGoGap').textContent = `📊 [${tr.name}] 과정으로 GAP 분석 시작하기`;
+}
+
+// ═══════════════════════════════════════════════════════
+//  RADAR CHART (SVG) — 적성검사 전용
+// ═══════════════════════════════════════════════════════
+function drawAptitudeRadar(containerId, scores, avg) {
+  const W = 480, H = 420;
+  const cx = W / 2, cy = H / 2 - 10;
+  const R = 130, MAX = 100, n = 6;
+  const labelDist = 38;
+
+  const axes = TRACK_KEYS.map(k => TRACKS[k].icon + ' ' + TRACKS[k].name);
+
+  function angle(i) { return (Math.PI * 2 * i / n) - Math.PI / 2; }
+  function pt(val, i) {
+    const a = angle(i);
+    const r = (Math.min(Math.max(val, 0), MAX) / MAX) * R;
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  }
+
+  // 배경 동심 육각형 (20 40 60 80 100)
+  let bg = '';
+  const fills = ['#FDFDFF','#F8F9FF','#F2F5FF','#EBF0FF','#E3ECFF'];
+  [20,40,60,80,100].forEach((lv, li) => {
+    const pts = Array.from({length:n}, (_,i) => {
+      const a = angle(i), r = (lv/MAX)*R;
+      return `${cx+r*Math.cos(a)},${cy+r*Math.sin(a)}`;
+    }).join(' ');
+    bg += `<polygon points="${pts}" fill="${fills[li]}" stroke="#DFE1E6" stroke-width="0.8"/>`;
+  });
+
+  // 축선 + 레이블
+  let axLines = '', labels = '';
+  for (let i = 0; i < n; i++) {
+    const a = angle(i);
+    const [ox, oy] = [cx + R*Math.cos(a), cy + R*Math.sin(a)];
+    axLines += `<line x1="${cx}" y1="${cy}" x2="${ox}" y2="${oy}" stroke="#DFE1E6" stroke-width="1"/>`;
+    const lx = cx + (R + labelDist)*Math.cos(a);
+    const ly = cy + (R + labelDist)*Math.sin(a);
+    const anchor = lx < cx-8 ? 'end' : lx > cx+8 ? 'start' : 'middle';
+    const dy     = ly < cy-8 ? '-0.3em' : ly > cy+8 ? '1em' : '0.35em';
+    labels += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" dy="${dy}"
+      font-size="10" font-family="'Noto Sans KR',sans-serif" fill="#5E6C84" font-weight="500">${axes[i]}</text>`;
+  }
+
+  // 레벨 숫자
+  let lvLabels = '';
+  [20,40,60,80,100].forEach(lv => {
+    const a = angle(0), r = (lv/MAX)*R;
+    lvLabels += `<text x="${cx+r*Math.cos(a)+4}" y="${cy+r*Math.sin(a)}"
+      font-size="8" fill="#B3BAC5" font-family="'Noto Sans KR',sans-serif" dominant-baseline="central">${lv}</text>`;
+  });
+
+  // 평균 다각형 (점선)
+  const avgPts = TRACK_KEYS.map((_,i) => pt(avg,i).join(',')).join(' ');
+  const avgPoly = `<polygon points="${avgPts}" fill="rgba(107,119,140,0.08)" stroke="#6B778C" stroke-width="1.5" stroke-dasharray="5,3"/>`;
+
+  // 사용자 점수 다각형
+  const uPts  = TRACK_KEYS.map((k,i) => pt(scores[k],i).join(',')).join(' ');
+  const uPoly = `<polygon points="${uPts}" fill="rgba(124,58,237,0.15)" stroke="#7C3AED" stroke-width="2.2"/>`;
+
+  // 사용자 점 마커
+  let dots = '';
+  TRACK_KEYS.forEach((k,i) => {
+    const [px,py] = pt(scores[k], i);
+    dots += `<circle cx="${px}" cy="${py}" r="4" fill="#7C3AED" stroke="white" stroke-width="1.5"/>`;
+  });
+
+  // 범례
+  const ly = H - 18;
+  const legend = `
+    <line x1="20" y1="${ly}" x2="44" y2="${ly}" stroke="#6B778C" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="50" y="${ly}" font-size="10" fill="#6B778C" dominant-baseline="central" font-family="'Noto Sans KR',sans-serif">평균 (${avg}점)</text>
+    <circle cx="210" cy="${ly}" r="4" fill="#7C3AED"/>
+    <text x="220" y="${ly}" font-size="10" fill="#6B778C" dominant-baseline="central" font-family="'Noto Sans KR',sans-serif">내 점수</text>
+  `;
+
+  document.getElementById(containerId).innerHTML = `
+    <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;margin:0 auto;max-width:480px">
+      ${bg}${axLines}${lvLabels}${avgPoly}${uPoly}${dots}${labels}${legend}
+    </svg>`;
+}
+
+// ═══════════════════════════════════════════════════════
+//  ACTIONS
+// ═══════════════════════════════════════════════════════
+function goToGap() { location.href = 'gap-analysis.html'; }
+
+function retryQuiz() {
+  answers  = new Array(QUESTIONS.length).fill(0);
+  currentQ = 0;
+  document.getElementById('resultScreen').style.display   = 'none';
+  document.getElementById('lowScoreBox').style.display    = 'none';
+  document.getElementById('aiCommentCard').style.display  = 'none';
+  document.getElementById('introScreen').style.display    = 'block';
+  window.scrollTo(0, 0);
+}
+
+</script>
+</body>
+</html>
