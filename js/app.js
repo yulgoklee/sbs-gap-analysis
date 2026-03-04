@@ -382,10 +382,13 @@ function buildSystemPrompt() {
 // ═══════════════════════════════════════════════════════
 //  GEMINI API CALL
 // ═══════════════════════════════════════════════════════
+// ※ 유지보수: 모델명 변경 시 GEMINI_MODEL 상수만 수정하세요.
+const GEMINI_MODEL = 'gemini-2.0-flash';
+
 async function callGemini(userInput) {
   const systemPrompt = buildSystemPrompt();
   const resp = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -396,9 +399,10 @@ async function callGemini(userInput) {
     }
   );
   if (!resp.ok) {
+    if (resp.status === 400) throw new Error('요청 형식 오류(400). API 키를 다시 확인하거나 페이지를 새로고침 후 재시도해주세요.');
+    if (resp.status === 403) throw new Error('API 키가 유효하지 않습니다(403). API 키를 확인해주세요.');
+    if (resp.status === 404) throw new Error('모델을 찾을 수 없습니다(404). 관리자에게 문의해주세요.');
     if (resp.status === 429) throw new Error('요청 한도 초과(429). 1~2분 후 다시 시도해주세요.');
-    if (resp.status === 404) throw new Error('모델을 찾을 수 없습니다(404). API 키를 확인해주세요.');
-    if (resp.status === 403) throw new Error('API 키가 유효하지 않습니다(403).');
     throw new Error('API 호출 실패: ' + resp.status);
   }
   const data = await resp.json();
