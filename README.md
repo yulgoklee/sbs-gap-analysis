@@ -2,6 +2,8 @@
 
 > SBS 아카데미 컴퓨터아트학원 수원점 | AI 기반 맞춤 상담 시스템
 
+**🔗 배포 URL**: https://yulgoklee.github.io/sbs-gap-analysis/
+
 ---
 
 ## 프로젝트 개요
@@ -11,12 +13,37 @@
 
 ---
 
+## 사용 방법 (멘토/상담사용)
+
+### 접속
+- 크롬 브라우저에서 https://yulgoklee.github.io/sbs-gap-analysis/ 접속
+- 별도 설치 없음, 인터넷만 연결되어 있으면 사용 가능
+
+### API 키 설정 (기기당 최초 1회)
+1. 접속 시 API 키 입력 모달 표시
+2. [Google AI Studio](https://aistudio.google.com) → Get API key → 무료 발급
+3. 키 입력 후 저장 → 브라우저에 저장되어 다음 접속 시 자동 로그인
+4. 키 변경이 필요한 경우 우상단 **🔑 키 변경** 버튼 클릭
+
+### 상담 진행
+1. **Step 1** - 고객 기본 정보 입력 (이름, 나이, 배경, 현재 상태, 투자 가능 기간)
+2. **Step 2** - 목표 선택 (취업 준비 / 자격증 취득) + 트랙 선택
+3. **Step 3** - 트랙별 핵심 툴 경험 수준 선택 (없음 / 독학 / 학원 수강 / 업무 활용 / 실무 경험)
+4. **GAP 분석 시작** → Gemini AI가 분석 후 결과 화면 출력
+5. **PDF 저장** → 상단 저장 버튼 → 브라우저 인쇄 대화상자 → PDF로 저장
+
+---
+
 ## 기술 스택
 
-- **Frontend**: HTML / CSS / Vanilla JS (단일 파일)
-- **AI API**: Google Gemini API (`gemini-2.5-flash-lite`)
-- **PDF**: 브라우저 인쇄 기능 (window.print) + 인쇄용 CSS
-- **버전 관리**: GitHub
+| 구분 | 내용 |
+|---|---|
+| **Frontend** | HTML / CSS / Vanilla JS |
+| **AI API** | Google Gemini API (`gemini-2.5-flash-lite`) |
+| **PDF** | 브라우저 인쇄 기능 (window.print) + 인쇄용 CSS |
+| **배포** | GitHub Pages (main 브랜치 루트) |
+| **자동화 테스트** | Playwright (E2E, headless Chromium) |
+| **버전 관리** | GitHub |
 
 ---
 
@@ -24,7 +51,7 @@
 
 ```
 sbs-gap-analysis/
-├── index.html              # 메인 진입점 (HTML 뼈대)
+├── index.html              # 메인 진입점
 ├── css/
 │   └── style.css           # 전체 스타일 (반응형 + 인쇄용 포함)
 ├── js/
@@ -44,7 +71,17 @@ sbs-gap-analysis/
 │       ├── motion.json
 │       ├── visual-editing.json
 │       └── web.json
-└── README.md               # 프로젝트 문서
+├── tests/
+│   ├── helpers/
+│   │   └── mock-response.js    # Gemini API 목업 응답 데이터
+│   └── e2e/
+│       ├── 01_validation.spec.js       # 입력 유효성 검사 테스트
+│       ├── 02_step_navigation.spec.js  # Step 이동 및 UI 상태 테스트
+│       ├── 03_track_tools.spec.js      # 트랙별 스킬 체크 항목 테스트
+│       └── 04_api_mock.spec.js         # API 목업 + 결과 렌더링 테스트
+├── package.json            # 테스트 의존성 및 스크립트
+├── playwright.config.js    # Playwright 설정
+└── README.md
 ```
 
 ---
@@ -52,20 +89,19 @@ sbs-gap-analysis/
 ## 주요 기능
 
 ### 시나리오 B - GAP 분석 (현재 구현)
-1. **기본 정보 입력** - 이름, 나이, 배경(전공/비전공), 투자 가능 기간
-2. **목표 설정** - 취업 준비 / 자격증 취득 선택 + 트랙 선택
-3. **현재 수준 체크** - 트랙별 핵심 툴 경험 수준 선택 (0~4단계)
-4. **GAP 분석 결과** - Gemini API 분석 → 결과 화면 출력
-5. **PDF 저장** - 브라우저 인쇄 기능으로 PDF 저장
+1. **기본 정보 입력** — 이름, 나이, 배경(전공/비전공), 투자 가능 기간
+2. **목표 설정** — 취업 준비 / 자격증 취득 선택 + 트랙 선택
+3. **현재 수준 체크** — 트랙별 핵심 툴 경험 수준 선택 (0~4단계)
+4. **GAP 분석 결과** — Gemini API 분석 → 결과 화면 출력
+5. **PDF 저장** — 브라우저 인쇄 기능으로 PDF 저장
 
 ### 시나리오 A - 적성검사 (예정)
-- 아직 미구현
+- 미구현
 
 ---
 
-## 커리큘럼 데이터 구조
+## 트랙 목록 (9개)
 
-### 트랙 목록 (9개)
 | 트랙 | 주요 툴 | 예상 기간 (비전공/전공) |
 |---|---|---|
 | 모션/영상 | 프리미어, 애프터이펙트, 시네마4D | 12~18 / 8~12개월 |
@@ -78,23 +114,9 @@ sbs-gap-analysis/
 | 아트웍 | 포토샵, 일러스트, 디지털드로잉 | 12~18 / 8~12개월 |
 | 자격증 과정 | 트랙별 단기 집중 | 1~6개월 |
 
-### 공통 기초 (모든 학과)
-- 포토샵 기초 1개월 + 포토웍스 심화 1개월
-- 일러스트 기초 1개월 + 디테일일러스트 심화 1개월
-
-### 수업 기간 규칙
-- 커리큘럼 번호 1개 = 1개월 (예: 애프터이펙트 1,2,3 = 3개월)
-- 포트폴리오 = 개인 진도에 따라 최소 2개월~
-- AI크리에이터 = 각 트랙 마지막 심화 단계 (1개월, 선택)
-
 ---
 
 ## Gemini 프롬프트 구조
-
-### 시스템 프롬프트
-- 역할 부여: SBS 아카데미 상담 AI
-- 커리큘럼 데이터 전체 포함
-- 출력 형식: JSON 고정
 
 ### 출력 JSON 구조
 ```json
@@ -121,26 +143,91 @@ sbs-gap-analysis/
 
 ---
 
+## 자동화 테스트
+
+### 환경 설치
+```bash
+npm install
+npx playwright install chromium
+```
+
+### 테스트 실행
+```bash
+npm test                # headless 전체 실행 (CI/CD용)
+npm run test:headed     # 브라우저 화면 보면서 실행
+npm run test:ui         # Playwright UI 모드 (대화형)
+npm run test:report     # 마지막 테스트 리포트 보기
+```
+
+### 테스트 현황
+
+| 파일 | 내용 | 테스트 수 |
+|---|---|---|
+| `01_validation.spec.js` | 필수 입력값 누락 시 alert 발생 및 Step 이동 차단 | 9개 |
+| `02_step_navigation.spec.js` | Step 이동, 인디케이터, 이전 버튼, 입력값 유지 | 10개 |
+| `03_track_tools.spec.js` | 9개 트랙 스킬 항목 정확성, 툴 레벨 버튼 동작 | 16개 |
+| `04_api_mock.spec.js` | API 목업으로 결과 렌더링 전 영역 검증, 에러 처리 | 34개 |
+| **합계** | | **69개 (전체 통과)** |
+
+### 테스트 주요 기법
+- **Alert 인터셉트**: `page.addInitScript()`로 `window.alert` 오버라이드 → dialog deadlock 우회
+- **API 목업**: `page.route('**/generativelanguage.googleapis.com/**')` → 실제 API 호출 없이 결과 렌더링 전체 검증
+- **섹션별 선택자**: `#sec1 .btn-analyze`, `#sec2 .btn-analyze` 등으로 숨겨진 섹션 버튼 매칭 방지
+
+---
+
+## 사람 테스트 환경
+
+- **테스트 가이드 (Notion)**: https://www.notion.so/3191f0564d87812a979df844db512a91
+  - 접속 방법, API 키 설정, 트랙별 시나리오, 피드백 체크리스트 포함
+- **테스트 결과 트래커 (Notion DB)**: 12개 시나리오 사전 등록, 결과/버그/의견 기록
+
+---
+
+## 개발 워크플로우
+
+```
+기능 개발/수정
+    ↓
+npm test  (로컬 자동화 테스트 69개 통과 확인)
+    ↓
+git push origin main
+    ↓
+GitHub Pages 자동 배포 (수 초 내)
+    ↓
+https://yulgoklee.github.io/sbs-gap-analysis/ 접속 확인
+    ↓
+멘토/상담사 사람 테스트 → 피드백 → 수정 반복
+```
+
+---
+
 ## 버전 히스토리
 
-### v1.2.0 (현재)
+### v1.3.0 (현재)
+- [x] **자동화 테스트 69개 전체 통과** — Playwright E2E (01~04 spec)
+- [x] **GitHub Pages 배포** — https://yulgoklee.github.io/sbs-gap-analysis/
+- [x] **API 키 localStorage 영구 저장** — 기기당 최초 1회 입력 후 자동 유지
+- [x] **🔑 키 변경 버튼** — 헤더 우측에 API 키 재설정 버튼 추가
+- [x] **Notion 사람 테스트 환경** — 가이드 페이지 + 결과 트래커 DB 구축
+
+### v1.2.0
 - [x] **파일 구조 모듈화** — 단일 HTML에서 `css/`, `js/`, `data/` 디렉토리 분리
 - [x] **JSON 데이터 분리** — 트랙별 커리큘럼을 개별 JSON 파일로 관리
 - [x] **상수 파일 분리** — 트랙 메타데이터·상수를 `constants.js`로 독립
-- [x] **유지보수성 개선** — 데이터와 로직, 스타일 완전 분리
+- [x] **Gemini 모델 변경** — `gemini-2.0-flash` → `gemini-2.5-flash-lite` (429 에러 해결)
 
 ### v1.1.0
 - [x] **레이더 차트 (SVG)** — 취업/자격증 목표 수준 vs 현재 수준 6각형 시각화
-- [x] **포트폴리오 참고 링크** — 트랙별 최대 3개 외부 링크 카드 (없으면 미표시)
+- [x] **포트폴리오 참고 링크** — 트랙별 최대 3개 외부 링크 카드
 - [x] **월별 학습 플래너** — 수업 로드맵을 캘린더 형식으로 시각화 (좌우 스크롤)
 - [x] **프롬프트 대폭 개선** — 취업 시장 정보·자격증 기준·레이더 수치 계산 포함
 - [x] **투자 기간 초과 안내** — 희망 기간보다 필요 기간이 길 경우 경고 메시지 표시
-- [x] **JSON 데이터 강화** — 트랙별 radar_config, portfolio_sites, employment_market 추가
 - [x] maxOutputTokens 4096으로 증가
 
 ### v1.0.0
 - [x] 4단계 입력 폼 (기본정보 → 목표 → 수준체크 → 결과)
-- [x] Gemini API 연동 (`gemini-2.5-flash-lite`)
+- [x] Gemini API 연동
 - [x] GAP 분석 결과 화면 렌더링
 - [x] PDF 저장 (브라우저 인쇄 방식, 한글 완벽 지원)
 - [x] 반응형 (태블릿/PC 대응)
@@ -149,27 +236,14 @@ sbs-gap-analysis/
 
 ## 다음 버전 예정 작업
 
-### v1.3.0 - 기능 추가
-- [ ] 시나리오 A (적성검사) 구현
-- [ ] 포트폴리오 예시 이미지 연동
-- [ ] 취업 공고 실시간 트렌드 연동
-
-### v1.4.0 - 운영 안정화
+### v1.4.0 - 피드백 반영
+- [ ] 사람 테스트 피드백 기반 UI/UX 개선
 - [ ] API 에러 핸들링 강화
+
+### v1.5.0 - 기능 추가
+- [ ] 시나리오 A (적성검사) 구현
 - [ ] 상담 이력 저장 기능
-- [ ] 학원 정보 섹션 추가
-
----
-
-## 사용 방법
-
-1. `index.html` 크롬에서 열기
-2. Gemini API 키 입력 (최초 1회)
-3. 고객 정보 입력 → 목표 선택 → 수준 체크 → GAP 분석 시작
-4. 결과 확인 후 PDF 저장 버튼 → 인쇄 대화상자 → PDF로 저장
-
-### API 키 발급
-[Google AI Studio](https://aistudio.google.com) → Get API key → 무료 발급
+- [ ] 취업 공고 실시간 트렌드 연동
 
 ---
 
@@ -177,7 +251,8 @@ sbs-gap-analysis/
 
 ```
 이 README를 참고해서 작업을 이어가줘.
-현재 버전: v1.2.0
+현재 버전: v1.3.0
+배포 URL: https://yulgoklee.github.io/sbs-gap-analysis/
 작업할 내용: [여기에 작업 내용 입력]
 ```
 
@@ -188,3 +263,4 @@ sbs-gap-analysis/
 - **학원명**: SBS 아카데미 컴퓨터아트학원 수원점
 - **전화**: 031-546-3644
 - **GitHub**: https://github.com/yulgoklee/sbs-gap-analysis
+- **배포**: https://yulgoklee.github.io/sbs-gap-analysis/
