@@ -53,6 +53,29 @@
     .after-meta-label { font-size: 10px; opacity: 0.75; margin-bottom: 5px; font-weight: 600; }
     .after-meta-value { font-size: 13px; font-weight: 700; line-height: 1.4; }
 
+    .after-extra-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .after-extra-block {}
+    .after-extra-label {
+      font-size: 10px; font-weight: 700; opacity: 0.8;
+      letter-spacing: 0.5px; margin-bottom: 8px;
+    }
+    .after-extra-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .after-spec-tag {
+      font-size: 11px; font-weight: 600;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px; padding: 3px 10px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 420px) {
+      .after-extra-grid { grid-template-columns: 1fr; }
+    }
+
     /* ══════════════════════════════════════
        ② BEFORE SECTION
     ══════════════════════════════════════ */
@@ -242,15 +265,6 @@
             <option value="other">기타</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>주당 학습 가능 시간</label>
-          <select id="hoursPerWeek">
-            <option value="">선택해주세요</option>
-            <option value="10">주 10시간 이하 (파트타임)</option>
-            <option value="20">주 20시간 내외 (반일)</option>
-            <option value="30">주 30시간 이상 (풀타임)</option>
-          </select>
-        </div>
       </div>
 
       <label style="margin-bottom:12px; display:block; font-size:13px; font-weight:700; color:var(--text)">희망 트랙 <span style="color:var(--accent)">*</span></label>
@@ -370,7 +384,6 @@
       <div id="stageTimeline" class="stage-timeline"></div>
 
       <div class="duration-summary-row" id="durationSummary"></div>
-      <div id="durationNote" style="margin-top:12px; font-size:12px; color:var(--text-sub); text-align:center;"></div>
     </div>
 
     <button class="btn-reset" onclick="resetAll()">🔄 새 상담 시작</button>
