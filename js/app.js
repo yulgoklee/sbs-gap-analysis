@@ -577,6 +577,5 @@ function resetAll() {
   document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('name').value = '';
   document.getElementById('currentStatus').value = '';
-  document.getElementById('hoursPerWeek').value  = '';
   showSection(1);
 }
