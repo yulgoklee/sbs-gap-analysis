@@ -2,15 +2,19 @@
 //  STATE
 // ═══════════════════════════════════════════════════════
 let apiKey        = '';
-let selectedGoal  = '';
 let selectedTrack = '';
-let jobSpecificity = '';   // 'specific' | 'general'
 let aiToolLevel   = 0;
 let skillLevels   = {};
 let analysisResult = null;
 
+const TRACK_NAMES = {
+  motion: '모션/영상', interior: '건축/인테리어', visual_editing: '시각/편집디자인',
+  web: '웹디자인', cg_maya: 'CG/마야', it_programming: 'IT/프로그래밍',
+  ai: 'AI', artwork: '아트웍', certification: '자격증 과정'
+};
+
 // ═══════════════════════════════════════════════════════
-//  API KEY  (localStorage로 기기당 1회 입력)
+//  API KEY
 // ═══════════════════════════════════════════════════════
 const LS_KEY = 'sbs_gemini_api_key';
 
@@ -18,105 +22,60 @@ function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
   if (!key) { alert('API 키를 입력해주세요.'); return; }
   apiKey = key;
-  localStorage.setItem(LS_KEY, key);          // ← 기기에 영구 저장
+  localStorage.setItem(LS_KEY, key);
   document.getElementById('apiModal').style.display = 'none';
 }
 
-// API 키 변경 버튼용 (헤더 또는 결과 화면에서 호출)
 function changeApiKey() {
-  const current = localStorage.getItem(LS_KEY) || '';
-  document.getElementById('apiKeyInput').value = current;
+  document.getElementById('apiKeyInput').value = localStorage.getItem(LS_KEY) || '';
   document.getElementById('apiModal').style.display = 'flex';
 }
 
-// 페이지 로드 시 저장된 키 복원 → 모달 건너뜀
 window.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem(LS_KEY);
-  if (saved) {
-    apiKey = saved;
-    document.getElementById('apiModal').style.display = 'none';
-  }
+  if (saved) { apiKey = saved; document.getElementById('apiModal').style.display = 'none'; }
 });
 
 // ═══════════════════════════════════════════════════════
-//  STEP NAVIGATION
+//  STEP NAVIGATION (3단계)
 // ═══════════════════════════════════════════════════════
 function showSection(n) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec' + n).classList.add('active');
   document.getElementById('loading').style.display = 'none';
-  document.getElementById('result').style.display = 'none';
-  for (let i = 1; i <= 4; i++) {
+  document.getElementById('result').style.display  = 'none';
+
+  for (let i = 1; i <= 3; i++) {
     const step = document.getElementById('step' + i);
     step.classList.remove('active', 'done');
     if (i < n) step.classList.add('done');
     else if (i === n) step.classList.add('active');
-    if (i < 4) {
+    if (i < 3) {
       document.getElementById('line' + i).classList.toggle('done', i < n);
     }
   }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function goToStep1() { showSection(1); }
 
 function goToStep2() {
   const name   = document.getElementById('name').value.trim();
-  const age    = document.getElementById('age').value;
-  const bg     = document.getElementById('background').value;
   const status = document.getElementById('currentStatus').value;
-  if (!name || !age || !bg || !status) {
-    alert('이름, 나이, 배경, 현재 상태를 모두 입력해주세요.');
-    return;
-  }
+  if (!name)        { alert('이름을 입력해주세요.'); return; }
+  if (!status)      { alert('현재 신분을 선택해주세요.'); return; }
+  if (!selectedTrack){ alert('희망 트랙을 선택해주세요.'); return; }
+  buildSkillCheck();
   showSection(2);
 }
 
-function goToStep3() {
-  if (!selectedGoal)  { alert('목표 유형을 선택해주세요.'); return; }
-  if (!selectedTrack) { alert('희망 트랙을 선택해주세요.'); return; }
-  if (selectedGoal === 'employment' && !jobSpecificity) {
-    alert('취업 목표를 선택해주세요. (특정 직업 / 해당 직군)');
-    return;
-  }
-  if (selectedGoal === 'certification') {
-    const cert = document.getElementById('targetCert')?.value.trim();
-    if (!cert) { alert('목표 자격증을 입력해주세요.'); return; }
-  }
-  buildSkillCheck();
-  showSection(3);
-}
-
 // ═══════════════════════════════════════════════════════
-//  GOAL & TRACK SELECT
+//  TRACK SELECT
 // ═══════════════════════════════════════════════════════
-function selectGoal(g) {
-  selectedGoal = g;
-  document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('selected'));
-  document.getElementById('goal_' + g).classList.add('selected');
-  document.getElementById('jobField').style.display  = (g === 'employment')    ? 'block' : 'none';
-  document.getElementById('certField').style.display = (g === 'certification') ? 'block' : 'none';
-  // 목표 전환 시 직업 구체성 초기화
-  if (g !== 'employment') {
-    jobSpecificity = '';
-    document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
-    document.getElementById('specificJobInput').style.display = 'none';
-  }
-}
-
 function selectTrack(t) {
   selectedTrack = t;
   document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('track_' + t).classList.add('selected');
-}
-
-// ═══════════════════════════════════════════════════════
-//  JOB SPECIFICITY SELECT
-// ═══════════════════════════════════════════════════════
-function selectJobSpecificity(type) {
-  jobSpecificity = type;
-  document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('radioCard_' + type).classList.add('selected');
-  document.getElementById('specificJobInput').style.display = (type === 'specific') ? 'block' : 'none';
 }
 
 // ═══════════════════════════════════════════════════════
@@ -128,7 +87,6 @@ function buildSkillCheck() {
   skillLevels  = {};
   aiToolLevel  = 0;
 
-  // 레벨 설명 범례
   const legendHtml = `
     <div class="level-legend">
       ${LEVEL_LABELS.map((label, i) => `
@@ -138,7 +96,6 @@ function buildSkillCheck() {
         </div>`).join('')}
     </div>`;
 
-  // 툴별 수준 체크
   const toolsHtml = tools.map(tool => `
     <div class="skill-row">
       <div class="skill-name">${tool}</div>
@@ -153,7 +110,6 @@ function buildSkillCheck() {
     </div>
   `).join('');
 
-  // AI 도구 활용 경험 (별도 섹션)
   const aiToolHtml = `
     <div class="ai-tool-section">
       <div class="ai-tool-title">🤖 AI 도구 활용 경험</div>
@@ -190,127 +146,115 @@ function selectAIToolLevel(val, el) {
 // ═══════════════════════════════════════════════════════
 async function runAnalysis() {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById('result').style.display = 'none';
+  document.getElementById('result').style.display  = 'none';
   document.getElementById('loading').style.display = 'block';
-  document.getElementById('step3').classList.remove('active');
-  document.getElementById('step3').classList.add('done');
-  document.getElementById('line3').classList.add('done');
-  document.getElementById('step4').classList.add('active');
 
-  const userInput = buildUserInput();
-  try {
-    const raw = await callGemini(userInput);
-    analysisResult = parseResult(raw);
-    renderResult(analysisResult);
-  } catch(e) {
-    document.getElementById('loading').style.display = 'none';
-    alert('분석 중 오류가 발생했습니다: ' + e.message);
-    showSection(3);
+  // step2 → done, step3 → active
+  ['step1','step2'].forEach(id => {
+    document.getElementById(id).classList.remove('active');
+    document.getElementById(id).classList.add('done');
+  });
+  ['line1','line2'].forEach(id => document.getElementById(id).classList.add('done'));
+  document.getElementById('step3').classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  let aiResult = null;
+  let isAiFallback = false;
+
+  if (apiKey) {
+    try {
+      const raw = await callGemini(buildUserInput(), buildSystemPrompt());
+      aiResult = parseResult(raw);
+    } catch(e) {
+      console.warn('AI 분석 실패, 표준 로드맵으로 대체:', e.message);
+      isAiFallback = true;
+    }
+  } else {
+    isAiFallback = true;
   }
+
+  document.getElementById('loading').style.display = 'none';
+  renderResult(aiResult, isAiFallback);
 }
 
 // ═══════════════════════════════════════════════════════
 //  BUILD USER INPUT
 // ═══════════════════════════════════════════════════════
 function buildUserInput() {
-  const statusMap = { student: '학생', employed: '재직 중', unemployed: '구직 중', other: '기타' };
+  const statusMap = {
+    job_seeker: '구직 중', graduate_ready: '졸업예정(취업준비생)',
+    student: '재학 중 대학생', employed: '재직 중', other: '기타'
+  };
   const statusVal = document.getElementById('currentStatus').value;
-
-  const timelineMap = { '3': '3개월 내', '6': '6개월 내', '12': '1년 내', '0': '기간 무관' };
-  const timelineVal = document.getElementById('targetTimeline')?.value || '';
-
-  const jobSpecStr = selectedGoal === 'employment'
-    ? (jobSpecificity === 'specific'
-        ? `특정 직업 목표: ${document.getElementById('desiredJob')?.value?.trim() || '미입력'}`
-        : '취업 방향: 해당 직군 취업 희망 (구체적 직업은 미정)')
-    : '해당 없음';
+  const hours     = document.getElementById('hoursPerWeek').value || '미정';
 
   const skillStr = Object.entries(skillLevels)
-    .map(([tool, val]) => `- ${tool}: ${LEVEL_LABELS[val]}(${val}/4)`)
+    .map(([tool, val]) => `  - ${tool}: ${LEVEL_LABELS[val]}(${val}/4)`)
     .join('\n');
 
   const radarConfig = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
-  const goalLabel   = selectedGoal === 'employment' ? '취업 준비' : '자격증 취득';
-  const targetVals  = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
+  const stagesStr   = (TRACK_ROADMAP_STAGES[selectedTrack] || [])
+    .map((s, i) => `  ${i+1}. [${s.stage}] ${s.courses.join(', ')} → ${s.outcome} (표준 ${s.months}개월)`)
+    .join('\n');
 
   return `[고객 정보]
 - 이름: ${document.getElementById('name').value}
-- 나이: ${document.getElementById('age').value}세
-- 현재 상태: ${statusMap[statusVal] || '미선택'}
-- 배경: ${document.getElementById('background').value === 'major' ? '전공자/관련학과' : '비전공자'}
-- 목표 유형: ${goalLabel}
-- 희망 트랙: ${selectedTrack}
-- ${jobSpecStr}
-- 목표 자격증: ${document.getElementById('targetCert')?.value || '없음'}
-- 목표 달성 희망 시기: ${timelineMap[timelineVal] || '미선택'}
-- 투자 가능 기간: ${document.getElementById('availableMonths').value || '미정'}개월
-- 주당 투자 시간: ${document.getElementById('hoursPerWeek').value || '미정'}시간
-- AI 도구 활용 경험: ${AI_TOOL_LEVELS[aiToolLevel]} — ${AI_TOOL_DESCS[aiToolLevel]}
+- 현재 신분: ${statusMap[statusVal] || '미선택'}
+- 희망 트랙: ${TRACK_NAMES[selectedTrack]}
+- 주당 학습 가능 시간: ${hours}시간
+- AI 도구 활용: ${AI_TOOL_LEVELS[aiToolLevel]}
 
-[현재 툴 수준 (0=없음 / 1=독학 / 2=학원수강 / 3=자격증 / 4=실무경험)]
+[현재 툴 수준 (0=없음/1=독학/2=학원수강/3=자격증/4=실무경험)]
 ${skillStr}
 
-[레이더 차트 분석 요청]
-다음 6개 축(0~5점)의 현재 수준을 스킬 입력과 고객 배경을 고려해 계산 후 radar_current 배열로 반환하세요.
+[레이더 차트 요청]
 축: ${JSON.stringify(radarConfig.axes)}
-목표 수준(${goalLabel}): ${JSON.stringify(targetVals)}
-변환 기준: 없음=0, 독학=1, 학원수강=2, 자격증=3, 실무=4~5 (전공자면 +0.5 보정)
+취업 목표 수준: ${JSON.stringify(radarConfig.employment_target)}
+현재 수준을 스킬 입력 기반으로 0~5점으로 계산해 radar_current 배열로 반환
 
-[월별 플래너 요청]
-추천 수업을 순서대로 월별로 배치해 monthly_planner 배열로 반환하세요.
-month_offset=1이 다음 달 기준 첫 번째 달입니다.
-각 month당 수업명(courses 배열)과 이달 목표(milestone 문자열)를 포함하세요.`.trim();
+[표준 로드맵 (개인화 기준)]
+${stagesStr}`.trim();
 }
 
 // ═══════════════════════════════════════════════════════
 //  BUILD SYSTEM PROMPT
-//  ※ 유지보수: 프롬프트 규칙·커리큘럼·JSON 형식은 여기서 관리합니다.
 // ═══════════════════════════════════════════════════════
 function buildSystemPrompt() {
-  const radarConfig = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
-  const goalLabel   = selectedGoal === 'employment' ? '취업 준비' : '자격증 취득';
-  const targetVals  = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
-
-  // 선택 트랙 데이터만 삽입 (토큰 절약)
-  const curriculum  = TRACK_CURRICULUM_TEXT[selectedTrack]  || '';
-  const jobMarket   = TRACK_JOB_MARKET_TEXT[selectedTrack]  || '';
-  const certInfo    = TRACK_CERT_TEXT[selectedTrack]         || '';
+  const curriculum = TRACK_CURRICULUM_TEXT[selectedTrack]  || '';
+  const jobMarket  = TRACK_JOB_MARKET_TEXT[selectedTrack]  || '';
+  const certInfo   = TRACK_CERT_TEXT[selectedTrack]         || '';
 
   return `SBS아카데미 컴퓨터아트학원 수원점 상담 AI입니다. 아래 데이터 기반으로 GAP분석 결과를 순수 JSON으로만 반환하세요.
 
 [규칙]
 1. 학원 커리큘럼 안에서만 수업 추천
-2. current_level_summary는 정확히 3줄: 줄1=현재수준 / 줄2=가장큰결핍 / 줄3=달성가능성(솔직하게)
-3. 특정직업 명시 → 해당 직업 스펙 기준 GAP분석 / 직군취업희망 → 트랙 신입 공통 스펙 기준
-4. 기간산정: 희망기간 무관하게 실제필요기간으로 산정, 단축금지, 재직/학생은 주당시간 반영
-5. 취업목표 → job_market 필수 / 자격증목표 → job_market: null
-6. 순수 JSON만 반환 (마크다운 코드블록 없이), 한국어
-
-[레이더차트]
-트랙:${selectedTrack} | 목표:${goalLabel}
-축:${JSON.stringify(radarConfig.axes)}
-목표수준:${JSON.stringify(targetVals)}
-변환:없음=0,독학=1,학원수강=2,자격증=3,실무=4~5 (전공자+0.5)
+2. strong_points: 학원수강(2) 이상 스킬 → 강점 (없으면 "아직 전문 스킬 없음")
+3. weak_points: 없음(0)·독학(1) 중 취업 필수 스킬 → 채울 것들
+4. roadmap_stages: 표준 로드맵을 현재 스킬에 맞게 개인화 (학원수강 이상 스킬 포함 단계는 reducible=true)
+5. reduce_reason: 단축 가능 이유를 간결하게 (왜 단축되는지)
+6. total_duration: standard_months=표준 합계, personalized_min/max=현재 스킬 반영 후 예상
+7. 순수 JSON만 반환 (마크다운 코드블록 없이), 한국어
 
 [커리큘럼]
 ${curriculum}
 
-${selectedGoal === 'employment' ? `[취업시장 2025~2026]\n${jobMarket}` : ''}
-[자격증정보]
+[취업시장 2025~2026]
+${jobMarket}
+
+[자격증 정보]
 ${certInfo}
 
-[출력JSON]
-{"customer_summary":{"name":"","goal":"","background":"","status":""},"current_level_summary":"줄1\\n줄2\\n줄3","radar_current":[0,0,0,0,0,0],"gap_analysis":{"strong_points":["",""],"weak_points":["",""],"gap_description":""},"job_market":{"required_skills":[""],"preferred_skills":[""],"ai_requirement":"","portfolio_platform":"","avg_salary":"","market_trend":""},"recommended_courses":[{"order":1,"course_name":"","duration_months":1,"reason":""}],"total_duration":{"min_months":0,"max_months":0},"monthly_planner":[{"month_offset":1,"courses":[""],"milestone":""}],"academy_coverage":{"coverable":[""],"not_coverable":[""],"recommendation":""}}`.trim();
+[출력 JSON 형식]
+{"customer_summary":{"name":""},"radar_current":[0,0,0,0,0,0],"strong_points":[""],"weak_points":[""],"gap_description":"현재와 목표 사이 갭 한두 문장","roadmap_stages":[{"stage":"","courses":[""],"outcome":"","months":0,"reducible":false,"reduce_reason":""}],"total_duration":{"standard_months":0,"personalized_min":0,"personalized_max":0},"personalization_note":"현재 스킬 반영 개인화 메시지 1~2문장"}`.trim();
 }
 
 // ═══════════════════════════════════════════════════════
 //  GEMINI API CALL
 // ═══════════════════════════════════════════════════════
-// ※ 유지보수: 모델명 변경 시 GEMINI_MODEL 상수만 수정하세요.
 const GEMINI_MODEL = 'gemini-2.5-flash-lite';
 
-async function callGemini(userInput) {
-  const systemPrompt = buildSystemPrompt();
+async function callGemini(userInput, systemPrompt) {
   const resp = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
     {
@@ -318,15 +262,13 @@ async function callGemini(userInput) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: systemPrompt + '\n\n' + userInput }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
+        generationConfig: { temperature: 0.5, maxOutputTokens: 3000 }
       })
     }
   );
   if (!resp.ok) {
-    if (resp.status === 400) throw new Error('요청 형식 오류(400). API 키를 다시 확인하거나 페이지를 새로고침 후 재시도해주세요.');
-    if (resp.status === 403) throw new Error('API 키가 유효하지 않습니다(403). API 키를 확인해주세요.');
-    if (resp.status === 404) throw new Error('모델을 찾을 수 없습니다(404). 관리자에게 문의해주세요.');
-    if (resp.status === 429) throw new Error('요청 한도 초과(429). 1~2분 후 다시 시도해주세요.');
+    if (resp.status === 403) throw new Error('API 키 오류(403)');
+    if (resp.status === 429) throw new Error('요청 한도 초과(429)');
     throw new Error('API 호출 실패: ' + resp.status);
   }
   const data = await resp.json();
@@ -342,152 +284,237 @@ function parseResult(raw) {
     if (match) return JSON.parse(match[0]);
     return JSON.parse(raw);
   } catch(e) {
-    throw new Error('결과 파싱 실패. 다시 시도해주세요.');
+    throw new Error('결과 파싱 실패');
   }
+}
+
+// ═══════════════════════════════════════════════════════
+//  FALLBACK: 스킬 기반 강점/약점 계산
+// ═══════════════════════════════════════════════════════
+function calcFallbackAnalysis() {
+  const strong = [];
+  const weak   = [];
+
+  Object.entries(skillLevels).forEach(([tool, level]) => {
+    if (level >= 2) strong.push(`${tool} (${LEVEL_LABELS[level]})`);
+    else if (level === 1) weak.push(`${tool} — 심화 학습 필요`);
+    else weak.push(`${tool} — 처음부터 시작`);
+  });
+
+  if (aiToolLevel >= 2) strong.push(`AI 도구 활용 (${AI_TOOL_LEVELS[aiToolLevel]})`);
+
+  return {
+    strong_points: strong.length ? strong : ['학습 준비 완료 — 기초부터 체계적으로 시작 가능'],
+    weak_points:   weak,
+    gap_description: `${TRACK_NAMES[selectedTrack]} 트랙의 표준 커리큘럼에 따라 학습을 시작합니다.`
+  };
 }
 
 // ═══════════════════════════════════════════════════════
 //  RENDER RESULT
 // ═══════════════════════════════════════════════════════
-function renderResult(r) {
-  document.getElementById('loading').style.display = 'none';
+function renderResult(r, isAiFallback) {
   document.getElementById('result').style.display = 'block';
 
+  const name = document.getElementById('name').value || '';
+
   // 헤더
-  document.getElementById('resultTitle').textContent = `${r.customer_summary.name}님 GAP 분석 결과`;
+  document.getElementById('resultTitle').textContent   = `${name}님의 GAP 분석 결과`;
   document.getElementById('resultSubtitle').textContent =
-    `${r.customer_summary.goal} · ${r.customer_summary.background} · ${new Date().toLocaleDateString('ko-KR')} 기준`;
+    `${TRACK_NAMES[selectedTrack]} 트랙 · ${new Date().toLocaleDateString('ko-KR')} 기준`;
 
-  // 1. 현재 수준 진단 (3줄)
-  document.getElementById('currentLevelSummary').textContent = r.current_level_summary;
+  // ① After 섹션
+  renderAfterSection();
 
-  // 2. 레이더 차트
-  const radarConfig   = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
-  const targetValues  = selectedGoal === 'employment' ? radarConfig.employment_target : radarConfig.cert_target;
-  const currentValues = Array.isArray(r.radar_current)
-    ? r.radar_current.map(v => Math.min(Math.max(Number(v)||0, 0), 5))
-    : Array(6).fill(0);
-  document.getElementById('radarLegendTarget').textContent =
-    selectedGoal === 'employment' ? '취업 목표 수준' : '자격증 목표 수준';
-  drawRadarChart('radarChartContainer', radarConfig.axes, targetValues, currentValues);
+  // ② Before 섹션
+  renderBeforeSection(r, isAiFallback);
 
-  // GAP 설명 + 태그
-  document.getElementById('gapDescription').textContent = r.gap_analysis.gap_description;
-  document.getElementById('strongPoints').innerHTML =
-    (r.gap_analysis.strong_points || []).map(p => `<span class="tag tag-strong">✅ ${p}</span>`).join('');
-  document.getElementById('weakPoints').innerHTML =
-    (r.gap_analysis.weak_points || []).map(p => `<span class="tag tag-weak">⚠️ ${p}</span>`).join('');
+  // ③ 로드맵 섹션
+  renderRoadmapSection(r, isAiFallback);
 
-  // 3. 직군 요구 스펙 (취업 목표 시)
-  const jm = r.job_market;
-  if (jm && selectedGoal === 'employment') {
-    document.getElementById('jobMarketSection').style.display = 'block';
-    document.getElementById('jobSpecGrid').innerHTML = `
-      <div class="job-spec-card required">
-        <div class="job-spec-label">✅ 필수 스킬</div>
-        ${(jm.required_skills || []).map(s => `<div class="job-spec-item">${s}</div>`).join('')}
-      </div>
-      <div class="job-spec-card preferred">
-        <div class="job-spec-label">⭐ 우대 스킬</div>
-        ${(jm.preferred_skills || []).map(s => `<div class="job-spec-item">${s}</div>`).join('')}
-      </div>
-      <div class="job-spec-card info">
-        <div class="job-spec-label">🤖 AI 활용 요구</div>
-        <div class="job-spec-item">${jm.ai_requirement || '-'}</div>
-      </div>
-      <div class="job-spec-card info">
-        <div class="job-spec-label">💰 신입 평균 연봉</div>
-        <div class="job-spec-item salary">${jm.avg_salary || '-'}</div>
-      </div>
-      <div class="job-spec-card trend">
-        <div class="job-spec-label">📈 채용 트렌드</div>
-        <div class="job-spec-item">${jm.market_trend || '-'}</div>
-      </div>
-      ${jm.portfolio_platform ? `
-      <div class="job-spec-card info">
-        <div class="job-spec-label">📁 포트폴리오 플랫폼</div>
-        <div class="job-spec-item">${jm.portfolio_platform}</div>
-      </div>` : ''}
-    `;
-  } else {
-    document.getElementById('jobMarketSection').style.display = 'none';
-  }
-
-  // 4. 추천 수업 로드맵
-  document.getElementById('courseTimeline').innerHTML =
-    (r.recommended_courses || []).map(c => `
-      <div class="course-item">
-        <div class="course-order">${c.order}</div>
-        <div class="course-info">
-          <div class="course-name">${c.course_name}</div>
-          <div class="course-reason">${c.reason}</div>
-        </div>
-        <div class="course-duration">${c.duration_months}개월</div>
-      </div>
-    `).join('');
-
-  // 5. 예상 기간
-  document.getElementById('durationMin').textContent = r.total_duration.min_months;
-  document.getElementById('durationMax').textContent = r.total_duration.max_months;
-  const avail = parseInt(document.getElementById('availableMonths').value) || 0;
-  if (avail > 0 && r.total_duration.min_months > avail) {
-    document.getElementById('durationNote').textContent =
-      `⚠️ 희망 기간(${avail}개월)보다 실제 필요 기간이 깁니다. 목표 달성을 위해 기간 조정이 필요합니다.`;
-  } else {
-    document.getElementById('durationNote').textContent = '';
-  }
-
-  // 6. 월별 플래너
-  renderMonthlyPlanner(r.monthly_planner || []);
-
-  // 7. 학원 수강 안내
-  document.getElementById('coverableList').innerHTML =
-    (r.academy_coverage.coverable || []).map(i => `<li>${i}</li>`).join('');
-  document.getElementById('notCoverableList').innerHTML =
-    (r.academy_coverage.not_coverable || []).map(i => `<li>${i}</li>`).join('');
-  document.getElementById('recommendationBox').textContent = r.academy_coverage.recommendation;
-
+  analysisResult = r;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ── ① After ──────────────────────────────────────────
+function renderAfterSection() {
+  const track = TRACK_AFTER_DATA[selectedTrack];
+  if (!track) return;
+
+  const card = document.getElementById('afterCard');
+  card.style.background = track.bg;
+
+  card.innerHTML = `
+    <div class="after-card-top">
+      <div class="after-track-icon">${track.icon}</div>
+      <div>
+        <div class="after-track-label">${TRACK_NAMES[selectedTrack].toUpperCase()} TRACK</div>
+        <div class="after-job-title">${track.jobTitle}</div>
+      </div>
+    </div>
+    <div class="after-tasks">
+      <div class="after-tasks-label">이런 일을 하게 됩니다</div>
+      ${track.tasks.map(t => `
+        <div class="after-task-item">
+          <div class="after-task-check">✓</div>
+          <span>${t}</span>
+        </div>`).join('')}
+    </div>
+    <div class="after-meta-grid">
+      <div class="after-meta-item">
+        <div class="after-meta-label">💰 신입 연봉</div>
+        <div class="after-meta-value">${track.salary.min.toLocaleString()}~${track.salary.max.toLocaleString()}만원</div>
+      </div>
+      <div class="after-meta-item">
+        <div class="after-meta-label">📅 준비 기간</div>
+        <div class="after-meta-value">${track.duration.min}~${track.duration.max}개월<br/><span style="font-size:10px;opacity:0.75">(비전공자 기준)</span></div>
+      </div>
+      <div class="after-meta-item">
+        <div class="after-meta-label">🏢 주요 취업처</div>
+        <div class="after-meta-value">${track.employers.join(', ')}</div>
+      </div>
+    </div>`;
+}
+
+// ── ② Before ─────────────────────────────────────────
+function renderBeforeSection(r, isAiFallback) {
+  const fb = isAiFallback || !r ? calcFallbackAnalysis() : r;
+
+  // 강점
+  document.getElementById('strongPoints').innerHTML =
+    (fb.strong_points || []).map(p => `<span class="tag tag-strong">✅ ${p}</span>`).join('');
+
+  // 약점
+  document.getElementById('weakPoints').innerHTML =
+    (fb.weak_points || []).map(p => `<span class="tag tag-weak">📌 ${p}</span>`).join('');
+
+  // GAP 설명
+  const gapEl = document.getElementById('gapDescription');
+  if (fb.gap_description) {
+    gapEl.textContent  = fb.gap_description;
+    gapEl.style.display = 'block';
+  } else {
+    gapEl.style.display = 'none';
+  }
+
+  // 레이더 차트
+  const radarConfig    = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
+  const targetValues   = radarConfig.employment_target;
+  const currentValues  = (!isAiFallback && r && Array.isArray(r.radar_current))
+    ? r.radar_current.map(v => Math.min(Math.max(Number(v)||0, 0), 5))
+    : Array(6).fill(0);
+
+  drawRadarChart('radarChartContainer', radarConfig.axes, targetValues, currentValues);
+}
+
+// ── ③ 로드맵 ──────────────────────────────────────────
+function renderRoadmapSection(r, isAiFallback) {
+  const hasAiRoadmap = !isAiFallback && r && Array.isArray(r.roadmap_stages) && r.roadmap_stages.length;
+
+  // AI 개인화 노트
+  const noteEl = document.getElementById('personalizationNote');
+  if (hasAiRoadmap && r.personalization_note) {
+    document.getElementById('personalizationNoteText').textContent = r.personalization_note;
+    noteEl.style.display = 'block';
+  } else {
+    noteEl.style.display = 'none';
+  }
+
+  // Fallback 안내
+  document.getElementById('fallbackNote').style.display = isAiFallback ? 'block' : 'none';
+
+  // 스테이지 렌더링
+  const stages = hasAiRoadmap
+    ? r.roadmap_stages
+    : TRACK_ROADMAP_STAGES[selectedTrack] || [];
+
+  const track = TRACK_AFTER_DATA[selectedTrack];
+  const accentColor = track ? track.color : 'var(--primary)';
+
+  document.getElementById('stageTimeline').innerHTML = stages.map((s, i) => `
+    <div class="stage-item ${s.reducible ? 'reducible' : ''}">
+      <div class="stage-header">
+        <div class="stage-num" style="${s.reducible ? `background:${accentColor}` : ''}">${i + 1}</div>
+        <div class="stage-info">
+          <div class="stage-name">${s.stage}</div>
+          <div class="stage-courses">${(s.courses || []).join(' · ')}</div>
+        </div>
+        <div class="stage-months" style="${s.reducible ? `color:${accentColor}` : ''}">${s.months}개월</div>
+      </div>
+      <div class="stage-outcome">→ ${s.outcome}</div>
+      ${s.reducible && s.reduce_reason
+        ? `<div class="stage-reduce-note" style="color:${accentColor}">⚡ ${s.reduce_reason}</div>`
+        : ''}
+    </div>`).join('');
+
+  // 기간 요약
+  const dur = (!isAiFallback && r && r.total_duration) ? r.total_duration : null;
+  const trackDur = TRACK_AFTER_DATA[selectedTrack]?.duration;
+  const durationEl = document.getElementById('durationSummary');
+
+  if (dur && dur.personalized_min && dur.personalized_min !== dur.standard_months) {
+    durationEl.innerHTML = `
+      <div class="duration-summary-box">
+        <div class="duration-summary-num">${dur.standard_months}</div>
+        <div class="duration-summary-label">표준 개월</div>
+      </div>
+      <div class="duration-vs">→</div>
+      <div class="duration-summary-box personalized">
+        <div class="duration-summary-num">${dur.personalized_min}~${dur.personalized_max}</div>
+        <div class="duration-summary-label">현재 스킬 반영 개월</div>
+      </div>`;
+  } else {
+    const min = dur?.standard_months || trackDur?.min || '-';
+    const max = trackDur?.max || '-';
+    durationEl.innerHTML = `
+      <div class="duration-summary-box">
+        <div class="duration-summary-num">${min}~${max}</div>
+        <div class="duration-summary-label">예상 소요 개월 (비전공자 기준)</div>
+      </div>`;
+  }
+
+  // 주당 시간 기반 노트
+  const hours = parseInt(document.getElementById('hoursPerWeek').value) || 0;
+  const noteDiv = document.getElementById('durationNote');
+  if (hours > 0 && trackDur) {
+    const dailyHours = (hours / 5).toFixed(1);
+    noteDiv.textContent = `📌 주 ${hours}시간 (하루 약 ${dailyHours}시간) 학습 기준`;
+  } else {
+    noteDiv.textContent = '';
+  }
+}
+
 // ═══════════════════════════════════════════════════════
-//  DRAW RADAR CHART (SVG)
+//  DRAW RADAR CHART (SVG) — 기존 유지
 // ═══════════════════════════════════════════════════════
 function drawRadarChart(containerId, axes, target, current) {
   const W = 480, H = 420;
   const cx = W / 2, cy = H / 2 - 15;
-  const R = 130;
-  const n = axes.length; // 6
-  const MAX = 5;
+  const R = 130, n = axes.length, MAX = 5;
   const labelDist = 36;
 
   function angle(i) { return (Math.PI * 2 * i / n) - Math.PI / 2; }
-
   function pt(val, i) {
     const a = angle(i);
     const r = (Math.min(Math.max(val, 0), MAX) / MAX) * R;
     return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
   }
 
-  // 배경 육각형 (레벨 1~5)
   let bg = '';
   for (let lv = 1; lv <= 5; lv++) {
     const pts = Array.from({length: n}, (_, i) => {
-      const a = angle(i);
-      const r = (lv / MAX) * R;
+      const a = angle(i), r = (lv / MAX) * R;
       return `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`;
     }).join(' ');
     const fills = ['#FDFDFF','#F8F9FF','#F2F5FF','#EBF0FF','#E3ECFF'];
     bg += `<polygon points="${pts}" fill="${fills[lv-1]}" stroke="#DFE1E6" stroke-width="0.8"/>`;
   }
 
-  // 축선 + 레이블
   let axLines = '', labels = '';
   for (let i = 0; i < n; i++) {
     const a = angle(i);
     const [ox, oy] = [cx + R * Math.cos(a), cy + R * Math.sin(a)];
     axLines += `<line x1="${cx}" y1="${cy}" x2="${ox}" y2="${oy}" stroke="#DFE1E6" stroke-width="1"/>`;
-
     const lx = cx + (R + labelDist) * Math.cos(a);
     const ly = cy + (R + labelDist) * Math.sin(a);
     const anchor = lx < cx - 8 ? 'end' : lx > cx + 8 ? 'start' : 'middle';
@@ -496,24 +523,19 @@ function drawRadarChart(containerId, axes, target, current) {
       font-size="10.5" font-family="'Noto Sans KR',sans-serif" fill="#5E6C84" font-weight="500">${axes[i]}</text>`;
   }
 
-  // 레벨 숫자 (첫 번째 축 위)
   let lvLabels = '';
   for (let lv = 1; lv <= 5; lv++) {
-    const a = angle(0);
-    const r = (lv / MAX) * R;
+    const a = angle(0), r = (lv / MAX) * R;
     lvLabels += `<text x="${cx + r * Math.cos(a) + 4}" y="${cy + r * Math.sin(a)}"
       font-size="8" fill="#B3BAC5" font-family="'Noto Sans KR',sans-serif" dominant-baseline="central">${lv}</text>`;
   }
 
-  // 목표 다각형 (빨간 점선)
-  const tPts = target.map((v, i) => pt(v, i).join(',')).join(' ');
+  const tPts  = target.map((v, i) => pt(v, i).join(',')).join(' ');
   const tPoly = `<polygon points="${tPts}" fill="rgba(255,86,48,0.1)" stroke="#FF5630" stroke-width="1.8" stroke-dasharray="5,3"/>`;
 
-  // 현재 다각형 (파란 실선)
-  const cPts = current.map((v, i) => pt(v, i).join(',')).join(' ');
+  const cPts  = current.map((v, i) => pt(v, i).join(',')).join(' ');
   const cPoly = `<polygon points="${cPts}" fill="rgba(0,82,204,0.15)" stroke="#0052CC" stroke-width="2"/>`;
 
-  // 점 마커
   let dots = '';
   target.forEach((v, i) => {
     const [px, py] = pt(v, i);
@@ -524,18 +546,14 @@ function drawRadarChart(containerId, axes, target, current) {
     dots += `<circle cx="${px}" cy="${py}" r="4" fill="#0052CC" stroke="white" stroke-width="1.5"/>`;
   });
 
-  // 범례
   const legendY = H - 20;
   const legend = `
     <line x1="20" y1="${legendY}" x2="40" y2="${legendY}" stroke="#FF5630" stroke-width="2" stroke-dasharray="5,3"/>
     <circle cx="30" cy="${legendY}" r="3" fill="#FF5630"/>
-    <text x="46" y="${legendY}" font-size="10" fill="#6B778C" dominant-baseline="central" font-family="'Noto Sans KR',sans-serif">
-      ${selectedGoal === 'employment' ? '취업 목표 수준' : '자격증 목표 수준'}
-    </text>
+    <text x="46" y="${legendY}" font-size="10" fill="#6B778C" dominant-baseline="central" font-family="'Noto Sans KR',sans-serif">취업 목표 수준</text>
     <line x1="200" y1="${legendY}" x2="220" y2="${legendY}" stroke="#0052CC" stroke-width="2"/>
     <circle cx="210" cy="${legendY}" r="4" fill="#0052CC"/>
-    <text x="226" y="${legendY}" font-size="10" fill="#6B778C" dominant-baseline="central" font-family="'Noto Sans KR',sans-serif">현재 수준</text>
-  `;
+    <text x="226" y="${legendY}" font-size="10" fill="#6B778C" dominant-baseline="central" font-family="'Noto Sans KR',sans-serif">현재 수준</text>`;
 
   document.getElementById(containerId).innerHTML = `
     <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block; margin:0 auto; max-width:480px">
@@ -544,63 +562,17 @@ function drawRadarChart(containerId, axes, target, current) {
 }
 
 // ═══════════════════════════════════════════════════════
-//  RENDER MONTHLY PLANNER
+//  RESET
 // ═══════════════════════════════════════════════════════
-function renderMonthlyPlanner(planner) {
-  const section = document.getElementById('monthlyPlannerSection');
-  if (!planner || planner.length === 0) {
-    section.style.display = 'none';
-    return;
-  }
-  section.style.display = 'block';
-
-  // 다음 달 기준으로 시작
-  const now = new Date();
-  const start = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-  const baseYear  = start.getFullYear();
-  const baseMonth = start.getMonth(); // 0-indexed
-
-  const MN = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
-
-  const html = planner.map((item) => {
-    const totalIdx  = baseMonth + (item.month_offset - 1);
-    const monthIdx  = totalIdx % 12;
-    const yearOff   = Math.floor(totalIdx / 12);
-    const label     = `${baseYear + yearOff}년 ${MN[monthIdx]}`;
-
-    const coursesHtml = (item.courses || [])
-      .map(c => `<div class="planner-course">${c}</div>`)
-      .join('');
-
-    return `
-      <div class="planner-card">
-        <div class="planner-month-badge">${label}</div>
-        <div class="planner-courses">${coursesHtml}</div>
-        ${item.milestone ? `<div class="planner-milestone">🎯 ${item.milestone}</div>` : ''}
-      </div>`;
-  }).join('');
-
-  document.getElementById('monthlyPlannerGrid').innerHTML = html;
-}
-
-// ═══════════════════════════════════════════════════════
-//  PDF & RESET
-// ═══════════════════════════════════════════════════════
-function generatePDF() {
-  if (!analysisResult) return;
-  window.print();
-}
-
 function resetAll() {
-  selectedGoal   = '';
   selectedTrack  = '';
-  jobSpecificity = '';
   aiToolLevel    = 0;
   skillLevels    = {};
   analysisResult = null;
   document.getElementById('result').style.display = 'none';
-  document.getElementById('specificJobInput').style.display = 'none';
-  document.querySelectorAll('.goal-btn, .track-btn, .radio-card').forEach(b => b.classList.remove('selected'));
-  document.querySelectorAll('input[name="jobSpecificity"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('name').value = '';
+  document.getElementById('currentStatus').value = '';
+  document.getElementById('hoursPerWeek').value  = '';
   showSection(1);
 }
