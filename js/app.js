@@ -187,7 +187,6 @@ function buildUserInput() {
     student: '재학 중 대학생', employed: '재직 중', other: '기타'
   };
   const statusVal = document.getElementById('currentStatus').value;
-  const hours     = document.getElementById('hoursPerWeek').value || '미정';
 
   const skillStr = Object.entries(skillLevels)
     .map(([tool, val]) => `  - ${tool}: ${LEVEL_LABELS[val]}(${val}/4)`)
@@ -202,7 +201,6 @@ function buildUserInput() {
 - 이름: ${document.getElementById('name').value}
 - 현재 신분: ${statusMap[statusVal] || '미선택'}
 - 희망 트랙: ${TRACK_NAMES[selectedTrack]}
-- 주당 학습 가능 시간: ${hours}시간
 - AI 도구 활용: ${AI_TOOL_LEVELS[aiToolLevel]}
 
 [현재 툴 수준 (0=없음/1=독학/2=학원수강/3=자격증/4=실무경험)]
@@ -373,7 +371,22 @@ function renderAfterSection() {
         <div class="after-meta-label">🏢 주요 취업처</div>
         <div class="after-meta-value">${track.employers.join(', ')}</div>
       </div>
-    </div>`;
+    </div>
+    ${track.certSpecs ? `
+    <div class="after-extra-grid">
+      <div class="after-extra-block">
+        <div class="after-extra-label">🏅 주요 취업스펙</div>
+        <div class="after-extra-tags">
+          ${track.certSpecs.map(s => `<span class="after-spec-tag">${s}</span>`).join('')}
+        </div>
+      </div>
+      <div class="after-extra-block">
+        <div class="after-extra-label">📁 포트폴리오</div>
+        <div class="after-extra-tags">
+          ${track.portfolio.map(p => `<span class="after-spec-tag">${p}</span>`).join('')}
+        </div>
+      </div>
+    </div>` : ''}`;
 }
 
 // ── ② Before ─────────────────────────────────────────
@@ -473,15 +486,6 @@ function renderRoadmapSection(r, isAiFallback) {
       </div>`;
   }
 
-  // 주당 시간 기반 노트
-  const hours = parseInt(document.getElementById('hoursPerWeek').value) || 0;
-  const noteDiv = document.getElementById('durationNote');
-  if (hours > 0 && trackDur) {
-    const dailyHours = (hours / 5).toFixed(1);
-    noteDiv.textContent = `📌 주 ${hours}시간 (하루 약 ${dailyHours}시간) 학습 기준`;
-  } else {
-    noteDiv.textContent = '';
-  }
 }
 
 // ═══════════════════════════════════════════════════════

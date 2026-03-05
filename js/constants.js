@@ -154,7 +154,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['유튜브·SNS 숏폼 영상 편집', '광고·브랜드 영상 제작', '모션그래픽 소스 제작', '드라마·영화 후반 작업'],
     employers: ['방송국', '광고제작사', '기업 홍보팀', '유튜브 채널'],
     salary: { min: 2200, max: 2800 },
-    duration: { min: 10, max: 14 }
+    duration: { min: 10, max: 14 },
+    certSpecs: ['애프터이펙트 숙련', '시네마4D 활용', '프리미어프로', 'GTQ(우대)'],
+    portfolio: ['영상편집 5편 이상', '모션그래픽 소스', '3D 타이틀 시퀀스', 'SNS 숏폼 1편']
   },
   interior: {
     icon: '🏠', color: '#00875A', bg: 'linear-gradient(135deg,#00875A,#006644)',
@@ -162,7 +164,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['실내 공간 설계 및 도면 작성', '3D 시각화 및 렌더링', '인테리어 제안서 작성', '시공 관리 및 자재 선정'],
     employers: ['인테리어 회사', '건축설계사무소', '가구·건자재 회사', '부동산 개발사'],
     salary: { min: 2200, max: 2700 },
-    duration: { min: 10, max: 14 }
+    duration: { min: 10, max: 14 },
+    certSpecs: ['AutoCAD 활용', '스케치업', '3ds Max 렌더링', 'BIM(우대)'],
+    portfolio: ['평면·입면·단면 도면 1세트', '3D 투시도', '인테리어 렌더링 3장', '스타일보드']
   },
   visual_editing: {
     icon: '🎨', color: '#0052CC', bg: 'linear-gradient(135deg,#0052CC,#0041A3)',
@@ -170,7 +174,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['포스터·브로슈어·카탈로그 제작', 'SNS 콘텐츠 디자인', '브랜드 아이덴티티 개발', '패키지 디자인'],
     employers: ['디자인 에이전시', '광고회사', '기업 마케팅팀', '출판사'],
     salary: { min: 2100, max: 2700 },
-    duration: { min: 8, max: 12 }
+    duration: { min: 8, max: 12 },
+    certSpecs: ['GTQ 1급', '컴퓨터그래픽스기능사', '인디자인 숙련'],
+    portfolio: ['브랜드 아이덴티티 1건', 'SNS 콘텐츠 패키지', '패키지·브로슈어', '인포그래픽']
   },
   web: {
     icon: '🌐', color: '#7C3AED', bg: 'linear-gradient(135deg,#7C3AED,#6D28D9)',
@@ -178,7 +184,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['웹사이트·앱 화면 설계', 'UI/UX 기획 및 프로토타입', '반응형 웹 퍼블리싱', '사용자 경험 개선'],
     employers: ['IT기업', '스타트업', '웹 에이전시', '디자인 에이전시'],
     salary: { min: 2400, max: 3000 },
-    duration: { min: 8, max: 12 }
+    duration: { min: 8, max: 12 },
+    certSpecs: ['HTML/CSS/JS 구현력', 'Figma UI설계', '반응형 웹', '웹디자인기능사(우대)'],
+    portfolio: ['웹사이트 1~2개(반응형)', 'UI/UX 기획안', 'GitHub 코드 공개']
   },
   cg_maya: {
     icon: '🤖', color: '#6554C0', bg: 'linear-gradient(135deg,#6554C0,#403294)',
@@ -186,7 +194,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['3D 캐릭터·배경 모델링', '텍스처·렌더링 작업', 'VFX 특수효과 제작', '게임 리소스 제작'],
     employers: ['게임회사', 'VFX 스튜디오', '광고제작사', '영화제작사'],
     salary: { min: 2300, max: 3000 },
-    duration: { min: 12, max: 18 }
+    duration: { min: 12, max: 18 },
+    certSpecs: ['마야 모델링·리깅', 'ZBrush(우대)', '애프터이펙트', '렌더러(Arnold 등)'],
+    portfolio: ['캐릭터 모델링·리깅', '배경·소품 세트', '애니메이션 클립', '데모릴 1~2분']
   },
   it_programming: {
     icon: '💻', color: '#2B4492', bg: 'linear-gradient(135deg,#2B4492,#172B4D)',
@@ -194,7 +204,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['웹·앱 서비스 개발', '서버·데이터베이스 구축', 'API 개발 및 연동', '시스템 유지보수'],
     employers: ['IT기업', 'SI업체', '스타트업', '대기업 IT부서'],
     salary: { min: 2800, max: 3500 },
-    duration: { min: 12, max: 18 }
+    duration: { min: 12, max: 18 },
+    certSpecs: ['Java or Python', '정보처리기사(우대)', 'SQL/DB', 'AICE 자격증'],
+    portfolio: ['웹 서비스 1개(GitHub)', '앱 또는 API 구현', 'README 포함 코드']
   },
   ai: {
     icon: '✨', color: '#0079BF', bg: 'linear-gradient(135deg,#0079BF,#006298)',
@@ -202,7 +214,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['AI 이미지·영상 콘텐츠 제작', '프롬프트 엔지니어링', 'AI 기반 마케팅 콘텐츠 기획', 'AI 도구 활용 업무 자동화'],
     employers: ['AI 스타트업', '기업 디지털전환팀', '콘텐츠 제작사', '마케팅 에이전시'],
     salary: { min: 2800, max: 4000 },
-    duration: { min: 8, max: 12 }
+    duration: { min: 8, max: 12 },
+    certSpecs: ['AI 활용능력 자격증', '프롬프트 엔지니어링', 'ChatGPT·Midjourney 숙련'],
+    portfolio: ['AI 콘텐츠 제작물 10편 이상', 'AI 영상 1편', '프롬프트 북']
   },
   artwork: {
     icon: '🖌️', color: '#E91E8C', bg: 'linear-gradient(135deg,#E91E8C,#C2185B)',
@@ -210,7 +224,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['디지털 일러스트 제작', '캐릭터·IP 디자인', '웹툰 콘셉트 아트', 'AI 아트웍 활용 창작'],
     employers: ['게임회사', '엔터테인먼트사', '출판사', '프리랜서'],
     salary: { min: 2000, max: 2700 },
-    duration: { min: 10, max: 14 }
+    duration: { min: 10, max: 14 },
+    certSpecs: ['포토샵·일러스트 숙련', 'GTQ(우대)', '디지털 태블릿 활용'],
+    portfolio: ['캐릭터 시트(정면·측면)', '배경 일러스트 3장', '컨셉 아트·세계관']
   },
   certification: {
     icon: '📋', color: '#FF8B00', bg: 'linear-gradient(135deg,#FF8B00,#E07000)',
@@ -218,7 +234,9 @@ const TRACK_AFTER_DATA = {
     tasks: ['문서 작성 및 데이터 관리', '회계·세무 실무 처리', '디자인 자격증 활용 업무', 'CAD 도면 보조 작업'],
     employers: ['일반기업', '공공기관', '금융권', '회계사무소'],
     salary: { min: 2000, max: 2500 },
-    duration: { min: 8, max: 10 }
+    duration: { min: 8, max: 10 },
+    certSpecs: ['GTQ 1·2급', '컴활 1·2급', '전산회계 1급 or 전산세무 2급', 'ITQ'],
+    portfolio: ['자격증 취득 증서', '실무 문서 샘플(우대)']
   }
 };
 
