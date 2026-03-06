@@ -40,9 +40,7 @@
     .btn-start:hover { background: #6D28D9; }
 
     /* ── QUIZ PROGRESS ── */
-    .quiz-progress {
-      display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
-    }
+    .quiz-progress { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
     .q-counter { font-size: 13px; font-weight: 700; color: var(--primary); white-space: nowrap; }
     .progress-bar-wrap { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
     .progress-bar-fill { height: 100%; background: #7C3AED; border-radius: 3px; transition: width .4s ease; }
@@ -60,15 +58,11 @@
       background: #F3E8FF; color: #7C3AED;
     }
     .question-text {
-      font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.6;
-      margin-bottom: 0;
+      font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.6; margin-bottom: 0;
     }
 
     /* ── YES / NO BUTTONS ── */
-    .yn-wrap {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-      margin-top: 32px;
-    }
+    .yn-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
     .yn-btn {
       padding: 20px 12px; border-radius: 14px; border: 2.5px solid var(--border);
       background: white; cursor: pointer; font-size: 17px; font-weight: 800;
@@ -78,13 +72,8 @@
     }
     .yn-btn .yn-emoji { font-size: 26px; line-height: 1; }
     .yn-btn:hover { border-color: #7C3AED; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(124,58,237,.15); }
-    .yn-btn.selected-yes {
-      border-color: #00875A; background: #00875A; color: white;
-      box-shadow: 0 4px 14px rgba(0,135,90,.25);
-    }
-    .yn-btn.selected-no {
-      border-color: #97A0AF; background: #97A0AF; color: white;
-    }
+    .yn-btn.selected-yes { border-color: #00875A; background: #00875A; color: white; box-shadow: 0 4px 14px rgba(0,135,90,.25); }
+    .yn-btn.selected-no  { border-color: #97A0AF; background: #97A0AF; color: white; }
 
     /* ── QUIZ NAV ── */
     .quiz-nav { display: flex; justify-content: flex-start; }
@@ -108,67 +97,174 @@
       animation: spin 1s linear infinite; margin-bottom: 24px;
     }
 
-    /* ── TOP-2 RESULT CARDS ── */
-    .top2-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-      margin-bottom: 20px;
+    /* ════════════════════════════════════════
+       RESULT — 결과 화면 전체 재설계
+    ════════════════════════════════════════ */
+
+    /* ── 완료 배너 ── */
+    .result-done-banner {
+      background: linear-gradient(135deg, #1a1e3c, #2d1b4e);
+      border-radius: 16px; padding: 28px 32px; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 20px; color: white;
     }
-    .rank-card {
-      border-radius: 16px; padding: 24px 20px; color: white;
-      display: flex; flex-direction: column; gap: 6px;
+    .done-check {
+      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 900;
+    }
+    .done-copy { flex: 1; }
+    .done-title { font-size: 17px; font-weight: 900; margin-bottom: 4px; }
+    .done-meta  { font-size: 12px; opacity: 0.6; letter-spacing: 0.4px; }
+
+    /* ── 1순위 블록 ── */
+    .rank1-block {
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,.13);
+      margin-bottom: 16px;
+    }
+
+    /* 1순위 헤더 — 트랙 색상 배경 */
+    .rank1-hd {
+      padding: 32px 36px 28px; color: white;
       position: relative; overflow: hidden;
     }
-    .rank-card::before {
-      content: ''; position: absolute; top: -20px; right: -20px;
-      width: 80px; height: 80px; border-radius: 50%;
-      background: rgba(255,255,255,0.1);
+    .rank1-hd::after {
+      content: ''; position: absolute; bottom: -50px; right: -50px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(255,255,255,0.07); pointer-events: none;
     }
-    .rank-badge {
-      font-size: 10px; font-weight: 900; letter-spacing: 1.5px;
-      padding: 3px 10px; border-radius: 20px; width: fit-content;
-      background: rgba(255,255,255,0.25);
+    .r1-badge {
+      display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: 2px;
+      padding: 4px 12px; border-radius: 20px;
+      background: rgba(255,255,255,0.2); margin-bottom: 20px;
     }
-    .rank-icon { font-size: 32px; line-height: 1; margin: 4px 0; }
-    .rank-name { font-size: 18px; font-weight: 900; }
-    .rank-sub  { font-size: 11px; opacity: .85; line-height: 1.4; }
-    .rank-score-wrap { margin-top: auto; display: flex; align-items: baseline; gap: 4px; }
-    .rank-score-big { font-family: 'Bebas Neue', sans-serif; font-size: 44px; line-height: 1; }
-    .rank-score-unit { font-size: 12px; opacity: .8; }
-    .rank-card.rank2 { opacity: .88; }
+    .r1-row {
+      display: flex; align-items: center; gap: 18px;
+    }
+    .r1-icon { font-size: 48px; line-height: 1; flex-shrink: 0; }
+    .r1-info { flex: 1; min-width: 0; }
+    .r1-name { font-size: 30px; font-weight: 900; line-height: 1.15; }
+    .r1-sub  { font-size: 13px; opacity: 0.78; margin-top: 5px; line-height: 1.5; }
+    .r1-score-col { flex-shrink: 0; text-align: right; }
+    .r1-score-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 80px; line-height: 1; display: block;
+    }
+    .r1-score-denom { font-size: 13px; opacity: 0.7; display: block; text-align: center; }
 
-    /* ── AI REASON CARD ── */
-    .ai-reason-box {
-      background: linear-gradient(135deg, #EBF2FF, #F3E8FF);
-      border-radius: 12px; padding: 24px 28px;
-      border-left: 4px solid #7C3AED; font-size: 14px; line-height: 1.8; color: var(--text);
+    /* 1순위 AI 이유 */
+    .rank1-reason {
+      padding: 22px 32px; border-bottom: 1px solid var(--border);
+      background: #FAFAFE;
+    }
+    .rank1-reason-label {
+      font-size: 10px; font-weight: 900; color: #7C3AED;
+      letter-spacing: 1.5px; margin-bottom: 8px;
+    }
+    .rank1-reason-text {
+      font-size: 14px; line-height: 1.85; color: var(--text);
+    }
+
+    /* 1순위 커리어 그리드 */
+    .rank1-career {
+      padding: 28px 32px 0; display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .r1-career-col {
+      padding: 0 20px 28px 0;
+      border-right: 1px solid var(--border);
+    }
+    .r1-career-col:first-child { padding-left: 0; }
+    .r1-career-col:last-child  { border-right: none; padding-right: 0; padding-left: 20px; }
+    .r1-career-col:nth-child(2) { padding-left: 20px; }
+    .r1-col-label {
+      font-size: 10px; font-weight: 900; letter-spacing: 1.5px; color: var(--text-sub);
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .r1-col-items { display: flex; flex-direction: column; gap: 5px; }
+    .r1-col-item {
+      font-size: 13px; font-weight: 500; color: var(--text);
+      padding: 7px 10px; background: var(--bg); border-radius: 7px; line-height: 1.4;
+    }
+
+    /* 1순위 연봉 스트립 */
+    .rank1-salary-strip {
+      margin: 0 32px; padding: 14px 0;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .salary-icon { font-size: 16px; }
+    .salary-label { font-size: 11px; font-weight: 700; color: var(--text-sub); letter-spacing: 0.5px; }
+    .salary-value { font-size: 15px; font-weight: 700; color: var(--text); }
+    .salary-note  { font-size: 11px; color: var(--text-sub); margin-left: auto; }
+
+    /* 1순위 하단 여백 */
+    .rank1-footer { height: 20px; }
+
+    /* ── 구분선 ── */
+    .rank-divider {
+      display: flex; align-items: center; gap: 14px;
+      margin: 4px 0 16px;
+    }
+    .rank-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .rank-divider-text {
+      font-size: 11px; font-weight: 700; color: var(--text-sub);
+      letter-spacing: 1px; white-space: nowrap;
+    }
+
+    /* ── 2순위 블록 ── */
+    .rank2-block {
+      background: white; border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 16px rgba(0,0,0,.07);
       margin-bottom: 20px;
     }
-    .ai-reason-label {
-      font-size: 11px; font-weight: 700; color: #7C3AED;
-      letter-spacing: 1px; margin-bottom: 10px;
+    .rank2-hd {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 24px; color: white;
     }
-
-    /* ── CAREER CARD ── */
-    .career-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .career-box { background: var(--bg); border-radius: 10px; padding: 16px; }
-    .career-box-label { font-size: 11px; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; letter-spacing: 0.5px; }
-    .career-tag-list { display: flex; flex-wrap: wrap; gap: 5px; }
-    .career-tag {
-      font-size: 11px; background: white; border: 1px solid var(--border);
+    .r2-badge {
+      font-size: 9px; font-weight: 900; letter-spacing: 1.5px;
+      padding: 3px 9px; border-radius: 12px;
+      background: rgba(255,255,255,0.25); flex-shrink: 0;
+    }
+    .r2-icon { font-size: 22px; flex-shrink: 0; }
+    .r2-name { font-size: 16px; font-weight: 900; flex: 1; }
+    .r2-score {
+      font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; flex-shrink: 0;
+    }
+    .rank2-body {
+      padding: 18px 24px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .r2-row { display: flex; align-items: flex-start; gap: 10px; }
+    .r2-row-label {
+      font-size: 10px; font-weight: 900; color: var(--text-sub);
+      letter-spacing: 1px; width: 52px; flex-shrink: 0; padding-top: 4px;
+      text-transform: uppercase;
+    }
+    .r2-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .r2-tag {
+      font-size: 11px; background: var(--bg); border: 1px solid var(--border);
       border-radius: 20px; padding: 3px 9px; color: var(--text);
     }
-    /* rank2 career card subtle distinction */
-    #careerCard2 .career-box { background: #F0F4FF; }
-    #careerCard2 .career-tag { background: white; border-color: #C5D5FF; }
+    .r2-salary-val { font-size: 13px; font-weight: 700; color: var(--text); padding-top: 3px; }
 
-    /* ── MENTOR / LOW BOX ── */
+    /* ── 비정상 모드 (low / allHigh / neutral) ── */
+    .result-banner-fallback {
+      border-radius: 16px; padding: 32px; margin-bottom: 20px;
+      color: white; text-align: center;
+    }
+    .rfb-icon { font-size: 44px; margin-bottom: 12px; }
+    .rfb-name { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+    .rfb-sub  { font-size: 13px; opacity: 0.8; }
     .mentor-box {
       border-radius: 12px; padding: 20px 24px;
       border-left: 4px solid; margin-bottom: 16px;
     }
     .mentor-box p { font-size: 13px; color: var(--text); line-height: 1.7; }
 
-    /* ── ACTION BUTTONS ── */
+    /* ── 액션 버튼 ── */
     .action-row { display: flex; gap: 10px; margin-top: 8px; }
     .btn-gap {
       flex: 1; padding: 16px; background: var(--primary); color: white;
@@ -189,9 +285,20 @@
       .intro-card { padding: 36px 24px; }
       .question-card { padding: 28px 20px; }
       .question-text { font-size: 17px; }
-      .top2-grid { grid-template-columns: 1fr; }
-      .career-grid { grid-template-columns: 1fr; }
       .yn-btn { padding: 16px 8px; }
+      /* result mobile */
+      .result-done-banner { flex-direction: column; text-align: center; gap: 12px; }
+      .rank1-hd { padding: 24px 20px 20px; }
+      .r1-name { font-size: 22px; }
+      .r1-score-num { font-size: 58px; }
+      .rank1-reason { padding: 18px 20px; }
+      .rank1-career { padding: 20px 20px 0; grid-template-columns: 1fr; }
+      .r1-career-col { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 18px 0 !important; }
+      .r1-career-col:last-child { border-bottom: none; }
+      .rank1-salary-strip { margin: 0 20px; flex-wrap: wrap; }
+      .salary-note { margin-left: 0; }
+      .rank2-hd { padding: 14px 18px; }
+      .rank2-body { padding: 14px 18px; }
     }
   </style>
 </head>
@@ -247,22 +354,18 @@
     </div>
     <span class="q-time" id="qTime">약 2분 남음</span>
   </div>
-
   <div class="question-card">
     <span class="q-section-tag" id="qSectionTag">🌿 나를 만드는 것들</span>
     <p class="question-text" id="questionText">질문 내용</p>
     <div class="yn-wrap">
       <button class="yn-btn" id="btnYes" onclick="selectAnswer(1)">
-        <span class="yn-emoji">✓</span>
-        그렇다
+        <span class="yn-emoji">✓</span>그렇다
       </button>
       <button class="yn-btn" id="btnNo" onclick="selectAnswer(0)">
-        <span class="yn-emoji">✗</span>
-        아니다
+        <span class="yn-emoji">✗</span>아니다
       </button>
     </div>
   </div>
-
   <div class="quiz-nav">
     <button class="btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>← 이전</button>
   </div>
@@ -280,66 +383,48 @@
 <!-- ════════ RESULT ════════ -->
 <div id="resultScreen" style="display:none;" class="apt-main">
 
-  <!-- TOP-2 CARDS -->
-  <div class="top2-grid" id="top2Grid"></div>
+  <!-- 완료 배너 -->
+  <div class="result-done-banner" id="doneBanner" style="display:none">
+    <div class="done-check">✓</div>
+    <div class="done-copy">
+      <div class="done-title">검사 완료 — 당신의 길이 보입니다</div>
+      <div class="done-meta" id="doneMeta">30개 응답 분석 완료 · 9개 트랙 중 최적 매칭</div>
+    </div>
+  </div>
 
-  <!-- MENTOR / LOW BOX -->
-  <div id="mentorBox" class="mentor-box" style="display:none;">
+  <!-- 1순위 블록 -->
+  <div class="rank1-block" id="rank1Block" style="display:none">
+    <div class="rank1-hd" id="rank1Hd"></div>
+    <div class="rank1-reason" id="rank1Reason" style="display:none">
+      <div class="rank1-reason-label">🤖 AI ANALYSIS</div>
+      <div class="rank1-reason-text" id="rank1ReasonText"></div>
+    </div>
+    <div class="rank1-career" id="rank1Career"></div>
+    <div class="rank1-salary-strip" id="rank1Salary"></div>
+    <div class="rank1-footer"></div>
+  </div>
+
+  <!-- 구분선 -->
+  <div class="rank-divider" id="rankDivider" style="display:none">
+    <div class="rank-divider-line"></div>
+    <span class="rank-divider-text">함께 고려할 2순위 경로</span>
+    <div class="rank-divider-line"></div>
+  </div>
+
+  <!-- 2순위 블록 -->
+  <div class="rank2-block" id="rank2Block" style="display:none"></div>
+
+  <!-- 비정상 모드 배너 -->
+  <div id="fallbackBanner" style="display:none"></div>
+
+  <!-- 멘토 박스 -->
+  <div id="mentorBox" class="mentor-box" style="display:none">
     <p><strong id="mentorTitle"></strong><br/><span class="mentor-msg"></span></p>
   </div>
 
-  <!-- AI REASON -->
-  <div class="card" id="aiReasonCard" style="display:none;">
-    <div class="card-title"><span class="icon">🤖</span> AI 추천 이유</div>
-    <div class="ai-reason-box">
-      <div class="ai-reason-label">AI ANALYSIS</div>
-      <div id="aiReasonText"></div>
-    </div>
-  </div>
-
-  <!-- CAREER INFO — RANK 1 -->
-  <div class="card" id="careerCard" style="display:none;">
-    <div class="card-title"><span class="icon">💼</span> <span id="career1Title">1순위 진로 정보</span></div>
-    <div class="card-desc" id="career1Desc"></div>
-    <div class="career-grid">
-      <div class="career-box">
-        <div class="career-box-label">📜 관련 자격증</div>
-        <div class="career-tag-list" id="cert1List"></div>
-      </div>
-      <div class="career-box">
-        <div class="career-box-label">👤 주요 직업</div>
-        <div class="career-tag-list" id="job1List"></div>
-      </div>
-      <div class="career-box">
-        <div class="career-box-label">🏢 주요 취업처</div>
-        <div class="career-tag-list" id="employer1List"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CAREER INFO — RANK 2 -->
-  <div class="card" id="careerCard2" style="display:none;">
-    <div class="card-title"><span class="icon">🎯</span> <span id="career2Title">2순위 진로 정보</span></div>
-    <div class="card-desc" id="career2Desc"></div>
-    <div class="career-grid">
-      <div class="career-box">
-        <div class="career-box-label">📜 관련 자격증</div>
-        <div class="career-tag-list" id="cert2List"></div>
-      </div>
-      <div class="career-box">
-        <div class="career-box-label">👤 주요 직업</div>
-        <div class="career-tag-list" id="job2List"></div>
-      </div>
-      <div class="career-box">
-        <div class="career-box-label">🏢 주요 취업처</div>
-        <div class="career-tag-list" id="employer2List"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ACTION BUTTONS -->
+  <!-- 액션 버튼 -->
   <div class="action-row">
-    <button class="btn-gap" id="btnGoGap" style="display:none;" onclick="goToGap()">📊 GAP 분석 시작하기</button>
+    <button class="btn-gap" id="btnGoGap" style="display:none" onclick="goToGap()">📊 GAP 분석 시작하기</button>
     <button class="btn-retry" onclick="retryQuiz()">↺ 다시 하기</button>
   </div>
 
@@ -357,179 +442,152 @@ const TRACK_KEYS = ['motion','interior','visual_editing','web','cg_maya','it_pro
 
 const TRACKS = {
   motion: {
-    name: '영상/모션',       icon: '🎬', color: '#FF5630', bg: 'linear-gradient(135deg,#FF5630,#DE350B)',
+    name: '영상/모션', icon: '🎬', color: '#FF5630', bg: 'linear-gradient(135deg,#FF5630,#DE350B)',
     subtitle: '영상·모션으로 세상과 소통하는 세계',
     certs:     ['컴퓨터그래픽스운용기능사', 'GTQ(우대)'],
     jobs:      ['영상편집자', '모션그래퍼', '유튜브 크리에이터', '광고영상 제작자'],
-    employers: ['방송국', '광고제작사', '기업 홍보팀', '유튜브 채널']
+    employers: ['방송국', '광고제작사', '기업 홍보팀', '유튜브 채널'],
+    salary:    '신입 약 2,400 ~ 3,000만원'
   },
   interior: {
-    name: '건축/인테리어',   icon: '🏠', color: '#00875A', bg: 'linear-gradient(135deg,#00875A,#006644)',
+    name: '건축/인테리어', icon: '🏠', color: '#00875A', bg: 'linear-gradient(135deg,#00875A,#006644)',
     subtitle: '공간을 설계하고 아름답게 만드는 세계',
     certs:     ['실내건축기능사', '전산응용건축제도기능사', 'AutoCAD 활용'],
     jobs:      ['인테리어디자이너', '공간플래너', 'BIM 설계사'],
-    employers: ['인테리어회사', '건축설계사무소', '가구·건자재회사', '부동산개발사']
+    employers: ['인테리어회사', '건축설계사무소', '가구·건자재회사', '부동산개발사'],
+    salary:    '신입 약 2,400 ~ 3,000만원'
   },
   visual_editing: {
-    name: '시각/편집디자인',  icon: '🎨', color: '#0052CC', bg: 'linear-gradient(135deg,#0052CC,#0041A3)',
+    name: '시각/편집디자인', icon: '🎨', color: '#0052CC', bg: 'linear-gradient(135deg,#0052CC,#0041A3)',
     subtitle: '시각으로 브랜드와 메시지를 전달하는 세계',
     certs:     ['GTQ 1급', '컴퓨터그래픽스기능사', '시각디자인산업기사'],
     jobs:      ['그래픽디자이너', '편집디자이너', '브랜드디자이너'],
-    employers: ['디자인 에이전시', '광고회사', '기업 마케팅팀', '출판사']
+    employers: ['디자인 에이전시', '광고회사', '기업 마케팅팀', '출판사'],
+    salary:    '신입 약 2,600 ~ 3,200만원'
   },
   web: {
-    name: '웹디자인',         icon: '🌐', color: '#7C3AED', bg: 'linear-gradient(135deg,#7C3AED,#6D28D9)',
+    name: '웹디자인', icon: '🌐', color: '#7C3AED', bg: 'linear-gradient(135deg,#7C3AED,#6D28D9)',
     subtitle: 'UI/UX로 사용자 경험을 설계하는 세계',
     certs:     ['웹디자인기능사', 'GTQ(우대)', 'HTML/CSS/JS 구현'],
     jobs:      ['UI/UX디자이너', '웹디자이너', '퍼블리셔'],
-    employers: ['IT기업', '스타트업', '웹 에이전시', '디자인 에이전시']
+    employers: ['IT기업', '스타트업', '웹 에이전시', '디자인 에이전시'],
+    salary:    '신입 약 3,000 ~ 3,800만원'
   },
   cg_maya: {
-    name: 'CG/마야',          icon: '🤖', color: '#6554C0', bg: 'linear-gradient(135deg,#6554C0,#403294)',
+    name: 'CG/마야', icon: '🤖', color: '#6554C0', bg: 'linear-gradient(135deg,#6554C0,#403294)',
     subtitle: '3D로 가상 세계를 창조하는 세계',
     certs:     ['컴퓨터그래픽스운용기능사', '게임그래픽전문가'],
     jobs:      ['3D아티스트', 'VFX아티스트', '캐릭터모델러', '게임그래픽디자이너'],
-    employers: ['게임회사', 'VFX스튜디오', '광고제작사', '영화제작사']
+    employers: ['게임회사', 'VFX스튜디오', '광고제작사', '영화제작사'],
+    salary:    '신입 약 2,600 ~ 3,400만원'
   },
   it_programming: {
-    name: 'IT/프로그래밍',    icon: '💻', color: '#2B4492', bg: 'linear-gradient(135deg,#2B4492,#172B4D)',
+    name: 'IT/프로그래밍', icon: '💻', color: '#2B4492', bg: 'linear-gradient(135deg,#2B4492,#172B4D)',
     subtitle: '코드로 서비스와 세상을 만드는 세계',
     certs:     ['정보처리기사', 'AICE 자격증', 'SQLD'],
     jobs:      ['웹개발자', '앱개발자', '백엔드개발자', '풀스택개발자'],
-    employers: ['IT기업', '스타트업', 'SI업체', '대기업 IT부서']
+    employers: ['IT기업', '스타트업', 'SI업체', '대기업 IT부서'],
+    salary:    '신입 약 3,200 ~ 4,500만원'
   },
   ai: {
-    name: 'AI 크리에이터',    icon: '✨', color: '#0079BF', bg: 'linear-gradient(135deg,#0079BF,#006298)',
+    name: 'AI 크리에이터', icon: '✨', color: '#0079BF', bg: 'linear-gradient(135deg,#0079BF,#006298)',
     subtitle: 'AI 도구로 창작과 업무를 혁신하는 세계',
     certs:     ['AI 활용능력 자격증', '컴퓨터활용능력'],
     jobs:      ['AI 콘텐츠 크리에이터', '프롬프트 엔지니어', 'AI 마케터'],
-    employers: ['AI 스타트업', '기업 디지털전환팀', '콘텐츠 제작사', '마케팅 에이전시']
+    employers: ['AI 스타트업', '기업 디지털전환팀', '콘텐츠 제작사', '마케팅 에이전시'],
+    salary:    '신입 약 3,000 ~ 4,000만원'
   },
   artwork: {
-    name: '아트웍',            icon: '🖌️', color: '#E91E8C', bg: 'linear-gradient(135deg,#E91E8C,#C2185B)',
+    name: '아트웍', icon: '🖌️', color: '#E91E8C', bg: 'linear-gradient(135deg,#E91E8C,#C2185B)',
     subtitle: '디지털 드로잉으로 세계관을 만드는 세계',
     certs:     ['GTQ(우대)', '디지털드로잉 활용'],
     jobs:      ['일러스트레이터', '캐릭터디자이너', '웹툰작가', '컨셉아티스트'],
-    employers: ['게임회사', '엔터테인먼트사', '출판사', '프리랜서']
+    employers: ['게임회사', '엔터테인먼트사', '출판사', '프리랜서'],
+    salary:    '신입 약 2,200 ~ 2,800만원'
   },
   certification: {
-    name: '자격증 과정',       icon: '📋', color: '#FF8B00', bg: 'linear-gradient(135deg,#FF8B00,#E07000)',
+    name: '자격증 과정', icon: '📋', color: '#FF8B00', bg: 'linear-gradient(135deg,#FF8B00,#E07000)',
     subtitle: '자격증으로 빠르게 취업을 완성하는 세계',
     certs:     ['GTQ 1·2급', '컴활 1·2급', '전산회계 1급', 'ITQ'],
     jobs:      ['경영지원', '총무·행정', '회계사무원', '무역사무원'],
-    employers: ['일반기업', '공공기관', '금융권', '회계사무소']
+    employers: ['일반기업', '공공기관', '금융권', '회계사무소'],
+    salary:    '신입 약 2,200 ~ 2,800만원'
   }
 };
 
 // ═══════════════════════════════════════════════════════
 //  DATA — QUESTIONS (30개 · 간접 관찰형 · 다차원)
 // ═══════════════════════════════════════════════════════
-// 섹션 A: 나를 만드는 것들 (일상 관찰·감각 성향 · Q1~10)
-// 섹션 B: 나는 어떻게 살아가는가 (사고·작업 방식 · Q11~20)
-// 섹션 C: 나의 미래를 그린다면 (가치관·진로 비전 · Q21~30)
-// YES=가중치 적용 / NO=0
-
 const QUESTIONS = [
-
   // ── A. 나를 만드는 것들 (Q1~10) ──
-
   { section:'A', text: "길을 걷다 건물 외관, 간판 글씨체, 색 조합이 눈에 들어와 잠깐 멈춰 선 적 있다",
     scores: { visual_editing:0.7, interior:0.4, artwork:0.3 } },
-
   { section:'A', text: "영화나 드라마를 보고 나서, 줄거리보다 화면 색감이나 장면 전환이 더 오래 기억에 남는다",
     scores: { motion:0.9, visual_editing:0.4 } },
-
   { section:'A', text: "낯선 공간(카페, 전시장, 숍)에 들어가면 조명·가구 배치·동선이 자연스럽게 눈에 들어온다",
     scores: { interior:0.9, visual_editing:0.3 } },
-
   { section:'A', text: "만화, 소설, 게임 속 캐릭터나 세계관에 깊이 몰입해서 오래 상상해본 경험이 있다",
     scores: { artwork:0.8, cg_maya:0.5, motion:0.3 } },
-
   { section:'A', text: "스마트폰 앱이나 웹사이트를 쓰다가 '왜 이렇게 불편하게 만들었지?'라고 느낀 적이 여러 번 있다",
     scores: { web:0.9, visual_editing:0.3 } },
-
   { section:'A', text: "같은 작업을 반복하다 보면 '이걸 더 빠르게 자동화할 수 없을까'가 자연스럽게 떠오른다",
     scores: { it_programming:0.8, ai:0.5 } },
-
   { section:'A', text: "내가 느낀 감정이나 생각을 그림, 낙서, 도형으로 표현하고 싶다는 충동이 있다",
     scores: { artwork:0.9, visual_editing:0.3 } },
-
   { section:'A', text: "새로운 기술이나 디지털 도구 소식을 접하면 직접 써보고 싶다는 생각이 먼저 든다",
     scores: { ai:0.9, it_programming:0.3, web:0.2 } },
-
   { section:'A', text: "사진을 찍을 때 구도·빛·색감이 마음에 들 때까지 여러 번 찍어보는 편이다",
     scores: { visual_editing:0.8, motion:0.4, artwork:0.3 } },
-
   { section:'A', text: "물건 배치나 공간이 '뭔가 어색하다' 싶으면 직접 바꾸고 싶다는 충동이 생긴다",
     scores: { interior:0.8, visual_editing:0.3 } },
 
   // ── B. 나는 어떻게 살아가는가 (Q11~20) ──
-
   { section:'B', text: "공간이나 사물을 머릿속에서 입체적으로 돌려보며 생각하는 것이 자연스럽다",
     scores: { interior:0.9, cg_maya:0.8 } },
-
   { section:'B', text: "오류나 문제가 생기면 원인을 알아낼 때까지 끝까지 파고드는 편이다",
     scores: { it_programming:0.8, web:0.4 } },
-
   { section:'B', text: "무언가를 배울 때 전체 흐름보다 세세한 기술적 디테일에 먼저 집중하게 된다",
     scores: { cg_maya:0.6, it_programming:0.5, artwork:0.4 } },
-
   { section:'B', text: "혼자 조용히 집중해서 결과물을 완성해 나가는 것이 여럿이 의논하는 것보다 잘 맞는다",
     scores: { artwork:0.6, it_programming:0.5, cg_maya:0.4 } },
-
   { section:'B', text: "오타, 색 불일치, 여백 불균형 같은 시각적 어긋남을 다른 사람보다 먼저 발견하는 편이다",
     scores: { visual_editing:0.9, artwork:0.4, interior:0.3 } },
-
   { section:'B', text: "글보다 그림이나 도식으로 아이디어를 정리할 때 더 잘 이해되거나 전달된다",
     scores: { visual_editing:0.6, artwork:0.5, interior:0.3, web:0.3 } },
-
   { section:'B', text: "내가 만든 결과물이 완성되는 순간이 어떤 칭찬보다 더 뿌듯하다",
     scores: { artwork:0.6, motion:0.4, visual_editing:0.4, cg_maya:0.3 } },
-
   { section:'B', text: "새로운 소프트웨어를 처음 열면 설명서 없이 일단 눌러보며 스스로 파악하는 편이다",
     scores: { it_programming:0.5, web:0.4, ai:0.4, motion:0.2 } },
-
   { section:'B', text: "할 일 목록을 작성하거나 단계를 나누어 체계적으로 진행해야 마음이 편하다",
     scores: { certification:0.5, it_programming:0.4, interior:0.3 } },
-
   { section:'B', text: "끝내지 않은 일이 계속 머릿속에 맴돌아, 마무리할 때까지 다른 것에 집중하기 어렵다",
     scores: { artwork:0.5, visual_editing:0.4, it_programming:0.3, interior:0.3 } },
 
   // ── C. 나의 미래를 그린다면 (Q21~30) ──
-
   { section:'C', text: "10년 후, 내 이름이 붙은 무언가(작품·서비스·공간·기술)가 세상에 존재하면 좋겠다",
     scores: { artwork:0.6, motion:0.5, visual_editing:0.4, interior:0.3, web:0.3 } },
-
   { section:'C', text: "안정적인 사무직보다, 전문 기술로 포트폴리오가 쌓이는 직업이 나에게 더 맞는다",
     scores: { artwork:0.6, motion:0.5, cg_maya:0.5, visual_editing:0.4 } },
-
   { section:'C', text: "결과가 바로 보이지 않아도, 기초부터 단단하게 쌓아가는 방식을 믿고 따를 수 있다",
     scores: { cg_maya:0.6, it_programming:0.5, interior:0.4 } },
-
   { section:'C', text: "빠르게 자격증이나 스펙을 갖추고 취업에 집중하는 것이 나에게 현실적으로 맞는 길이다",
     scores: { certification:1.0 } },
-
   { section:'C', text: "미래의 내 모습을 상상할 때, 창작물이나 작품을 남기는 삶이 매력적으로 느껴진다",
     scores: { artwork:0.8, motion:0.5, visual_editing:0.3 } },
-
   { section:'C', text: "최신 기술이나 도구를 남들보다 빨리 익혀서 앞서가는 것이 경쟁력이라고 생각한다",
     scores: { ai:0.9, it_programming:0.5, web:0.3 } },
-
   { section:'C', text: "사람들이 실제로 생활하는 공간이 더 아름답고 기능적으로 바뀔 때 보람을 느낄 것 같다",
     scores: { interior:0.9, web:0.3 } },
-
   { section:'C', text: "감정이나 이야기를 말이나 글보다 시각적 이미지로 전달하는 것이 더 자연스럽다",
     scores: { artwork:0.8, visual_editing:0.5, motion:0.4 } },
-
   { section:'C', text: "디지털 도구로 아이디어를 구현해서 결과물을 만드는 과정 자체가 즐겁다",
     scores: { ai:0.7, it_programming:0.6, web:0.5, motion:0.4 } },
-
   { section:'C', text: "숫자, 표, 데이터를 다루는 작업이 크게 불편하지 않다",
     scores: { it_programming:0.6, certification:0.7, ai:0.3 } },
 ];
 
 // ═══════════════════════════════════════════════════════
-//  MAX SCORES — 런타임에 자동 계산
+//  MAX SCORES — 런타임 자동 계산
 // ═══════════════════════════════════════════════════════
 const MAX_SCORES = (function() {
   const max = {};
@@ -551,10 +609,9 @@ const SECTION_LABELS = {
 // ═══════════════════════════════════════════════════════
 let apiKey           = '';
 let currentQ         = 0;
-let answers          = new Array(QUESTIONS.length).fill(-1);  // -1=미답, 0=No, 1=Yes
+let answers          = new Array(QUESTIONS.length).fill(-1);
 let topTrackKey      = '';
 let autoAdvanceTimer = null;
-
 const LS_KEY = 'sbs_gemini_api_key';
 
 // ═══════════════════════════════════════════════════════
@@ -592,9 +649,7 @@ function renderQuestion(idx) {
   const q   = QUESTIONS[idx];
   const pct = Math.round((idx / QUESTIONS.length) * 100);
   const remSec = (QUESTIONS.length - idx) * 4;
-  const remStr = remSec >= 60
-    ? `약 ${Math.round(remSec/60)}분 남음`
-    : `약 ${remSec}초 남음`;
+  const remStr = remSec >= 60 ? `약 ${Math.round(remSec/60)}분 남음` : `약 ${remSec}초 남음`;
 
   document.getElementById('qCounter').textContent      = `Q${idx + 1} / ${QUESTIONS.length}`;
   document.getElementById('progressFill').style.width  = pct + '%';
@@ -606,25 +661,17 @@ function renderQuestion(idx) {
   const btnNo  = document.getElementById('btnNo');
   btnYes.className = 'yn-btn' + (answers[idx] === 1 ? ' selected-yes' : '');
   btnNo.className  = 'yn-btn' + (answers[idx] === 0 ? ' selected-no'  : '');
-
   document.getElementById('btnPrev').disabled = idx === 0;
 }
 
-function selectAnswer(val) {  // val: 1=Yes, 0=No
+function selectAnswer(val) {
   clearTimeout(autoAdvanceTimer);
   answers[currentQ] = val;
-
-  const btnYes = document.getElementById('btnYes');
-  const btnNo  = document.getElementById('btnNo');
-  btnYes.className = 'yn-btn' + (val === 1 ? ' selected-yes' : '');
-  btnNo.className  = 'yn-btn' + (val === 0 ? ' selected-no'  : '');
-
+  document.getElementById('btnYes').className = 'yn-btn' + (val === 1 ? ' selected-yes' : '');
+  document.getElementById('btnNo').className  = 'yn-btn' + (val === 0 ? ' selected-no'  : '');
   autoAdvanceTimer = setTimeout(() => {
-    if (currentQ < QUESTIONS.length - 1) {
-      renderQuestion(currentQ + 1);
-    } else {
-      submitQuiz();
-    }
+    if (currentQ < QUESTIONS.length - 1) { renderQuestion(currentQ + 1); }
+    else { submitQuiz(); }
   }, 400);
 }
 
@@ -641,9 +688,7 @@ function calcScores() {
   TRACK_KEYS.forEach(k => { raw[k] = 0; });
   QUESTIONS.forEach((q, i) => {
     if (answers[i] === 1) {
-      Object.entries(q.scores).forEach(([k, w]) => {
-        if (raw[k] !== undefined) raw[k] += w;
-      });
+      Object.entries(q.scores).forEach(([k, w]) => { if (raw[k] !== undefined) raw[k] += w; });
     }
   });
   const norm = {};
@@ -663,26 +708,20 @@ async function submitQuiz() {
   const scores = calcScores();
   const sorted = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
   topTrackKey  = sorted[0];
-  const top2Key = sorted[1];
   const avg    = Math.round(TRACK_KEYS.reduce((s, k) => s + scores[k], 0) / TRACK_KEYS.length);
 
   let commentary = '';
-  if (apiKey) {
-    commentary = await callGemini(scores, sorted[0], top2Key, avg);
-  }
+  if (apiKey) { commentary = await callGemini(scores, sorted[0], sorted[1], avg); }
 
   document.getElementById('loadingScreen').style.display = 'none';
   renderResult(scores, avg, commentary);
 }
 
 async function callGemini(scores, top1Key, top2Key, avg) {
-  const t1 = TRACKS[top1Key];
-  const t2 = TRACKS[top2Key];
-
+  const t1 = TRACKS[top1Key], t2 = TRACKS[top2Key];
   const yesA = QUESTIONS.filter((q,i) => q.section==='A' && answers[i]===1).length;
   const yesB = QUESTIONS.filter((q,i) => q.section==='B' && answers[i]===1).length;
   const yesC = QUESTIONS.filter((q,i) => q.section==='C' && answers[i]===1).length;
-
   const scoreLines = TRACK_KEYS.map(k => `  - ${TRACKS[k].name}: ${scores[k]}점`).join('\n');
 
   const prompt = `당신은 SBS 아카데미 진로 상담 전문가입니다.
@@ -725,8 +764,7 @@ ${scoreLines}
 // ═══════════════════════════════════════════════════════
 function getResultMode(scores, avg) {
   const sorted   = [...TRACK_KEYS].sort((a,b) => scores[b]-scores[a]);
-  const topScore = scores[sorted[0]];
-  const gap      = topScore - avg;
+  const gap      = scores[sorted[0]] - avg;
   if (avg < 20) return 'low';
   if (gap < 12 && avg > 65) return 'allHigh';
   if (gap < 12) return 'neutral';
@@ -739,108 +777,129 @@ function getResultMode(scores, avg) {
 function renderResult(scores, avg, commentary) {
   document.getElementById('resultScreen').style.display = 'block';
 
-  // 이전 결과 상태 초기화 (재진입 방어)
-  ['mentorBox','aiReasonCard','careerCard','careerCard2','btnGoGap'].forEach(id => {
+  // 이전 상태 초기화
+  ['doneBanner','rank1Block','rankDivider','rank2Block','fallbackBanner','mentorBox','btnGoGap','rank1Reason'].forEach(id => {
     document.getElementById(id).style.display = 'none';
   });
 
   const sorted = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
   const mode   = getResultMode(scores, avg);
 
-  // ── TOP-2 카드 ──
-  const grid = document.getElementById('top2Grid');
   if (mode === 'normal') {
-    const [k1, k2] = [sorted[0], sorted[1]];
-    const [t1, t2] = [TRACKS[k1], TRACKS[k2]];
-    grid.innerHTML = `
-      <div class="rank-card" style="background:${t1.bg}">
-        <span class="rank-badge">1순위 추천</span>
-        <div class="rank-icon">${t1.icon}</div>
-        <div class="rank-name">${t1.name}</div>
-        <div class="rank-sub">${t1.subtitle}</div>
-        <div class="rank-score-wrap">
-          <span class="rank-score-big">${scores[k1]}</span>
-          <span class="rank-score-unit">/ 100점</span>
-        </div>
-      </div>
-      <div class="rank-card rank2" style="background:${t2.bg}">
-        <span class="rank-badge">2순위 추천</span>
-        <div class="rank-icon">${t2.icon}</div>
-        <div class="rank-name">${t2.name}</div>
-        <div class="rank-sub">${t2.subtitle}</div>
-        <div class="rank-score-wrap">
-          <span class="rank-score-big">${scores[k2]}</span>
-          <span class="rank-score-unit">/ 100점</span>
-        </div>
-      </div>`;
-  } else {
-    const BANNERS = {
-      low:     { bg:'linear-gradient(135deg,#607D8B,#455A64)', icon:'🔍',
-                 name:'아직 방향 탐색 중', sub:'다양한 분야를 더 경험해보세요' },
-      allHigh: { bg:'linear-gradient(135deg,#FF8B00,#E07000)', icon:'⭐',
-                 name:'다방면 관심형', sub:'여러 분야에 골고루 관심이 높습니다' },
-      neutral: { bg:'linear-gradient(135deg,#5E35B1,#4527A0)', icon:'🧭',
-                 name:'방향 탐색 필요', sub:'담당 멘토와 상담을 권장드립니다' },
-    };
-    const b = BANNERS[mode];
-    grid.innerHTML = `
-      <div class="rank-card" style="background:${b.bg}; grid-column:1/-1;">
-        <div class="rank-icon">${b.icon}</div>
-        <div class="rank-name">${b.name}</div>
-        <div class="rank-sub">${b.sub}</div>
-      </div>`;
-  }
+    const k1 = sorted[0], k2 = sorted[1];
+    const t1 = TRACKS[k1], t2 = TRACKS[k2];
 
-  // ── 멘토 박스 (non-normal) ──
-  if (mode !== 'normal') {
+    // ── 완료 배너 ──
+    document.getElementById('doneBanner').style.display = 'flex';
+
+    // ── 1순위 블록 헤더 ──
+    document.getElementById('rank1Block').style.display = 'block';
+    const hd = document.getElementById('rank1Hd');
+    hd.style.background = t1.bg;
+    hd.innerHTML = `
+      <div class="r1-badge">1순위 추천 트랙</div>
+      <div class="r1-row">
+        <div class="r1-icon">${t1.icon}</div>
+        <div class="r1-info">
+          <div class="r1-name">${t1.name}</div>
+          <div class="r1-sub">${t1.subtitle}</div>
+        </div>
+        <div class="r1-score-col">
+          <span class="r1-score-num">${scores[k1]}</span>
+          <span class="r1-score-denom">/ 100점</span>
+        </div>
+      </div>`;
+
+    // ── AI 이유 ──
+    if (commentary) {
+      document.getElementById('rank1ReasonText').textContent = commentary;
+      document.getElementById('rank1Reason').style.display  = 'block';
+    }
+
+    // ── 커리어 그리드 (자격증 / 직업 / 취업처) ──
+    document.getElementById('rank1Career').innerHTML = `
+      <div class="r1-career-col">
+        <div class="r1-col-label">📜 관련 자격증</div>
+        <div class="r1-col-items">${t1.certs.map(c => `<div class="r1-col-item">${c}</div>`).join('')}</div>
+      </div>
+      <div class="r1-career-col">
+        <div class="r1-col-label">👤 주요 직업</div>
+        <div class="r1-col-items">${t1.jobs.map(j => `<div class="r1-col-item">${j}</div>`).join('')}</div>
+      </div>
+      <div class="r1-career-col">
+        <div class="r1-col-label">🏢 주요 취업처</div>
+        <div class="r1-col-items">${t1.employers.map(e => `<div class="r1-col-item">${e}</div>`).join('')}</div>
+      </div>`;
+
+    // ── 연봉 스트립 ──
+    document.getElementById('rank1Salary').innerHTML = `
+      <span class="salary-icon">💰</span>
+      <span class="salary-label">평균 연봉</span>
+      <span class="salary-value">${t1.salary}</span>
+      <span class="salary-note">※ 고용노동부·업계 평균 참고 기준</span>`;
+
+    // ── 구분선 ──
+    document.getElementById('rankDivider').style.display = 'flex';
+
+    // ── 2순위 블록 ──
+    const r2 = document.getElementById('rank2Block');
+    r2.style.display = 'block';
+    r2.innerHTML = `
+      <div class="rank2-hd" style="background:${t2.bg}">
+        <span class="r2-badge">2순위</span>
+        <span class="r2-icon">${t2.icon}</span>
+        <span class="r2-name">${t2.name}</span>
+        <span class="r2-score">${scores[k2]}</span>
+      </div>
+      <div class="rank2-body">
+        <div class="r2-row">
+          <span class="r2-row-label">자격증</span>
+          <div class="r2-tags">${t2.certs.map(c => `<span class="r2-tag">${c}</span>`).join('')}</div>
+        </div>
+        <div class="r2-row">
+          <span class="r2-row-label">직업</span>
+          <div class="r2-tags">${t2.jobs.map(j => `<span class="r2-tag">${j}</span>`).join('')}</div>
+        </div>
+        <div class="r2-row">
+          <span class="r2-row-label">취업처</span>
+          <div class="r2-tags">${t2.employers.map(e => `<span class="r2-tag">${e}</span>`).join('')}</div>
+        </div>
+        <div class="r2-row">
+          <span class="r2-row-label">연봉</span>
+          <span class="r2-salary-val">${t2.salary}</span>
+        </div>
+      </div>`;
+
+    // ── GAP 버튼 ──
+    const gap = document.getElementById('btnGoGap');
+    gap.style.display   = '';
+    gap.textContent     = `📊 [${t1.name}] GAP 분석 시작하기`;
+    topTrackKey = k1;
+
+  } else {
+    // ── 비정상 모드 ──
+    const FALLBACK = {
+      low:     { bg:'linear-gradient(135deg,#607D8B,#455A64)', icon:'🔍', name:'아직 방향 탐색 중', sub:'다양한 분야를 더 경험해보세요' },
+      allHigh: { bg:'linear-gradient(135deg,#FF8B00,#E07000)', icon:'⭐', name:'다방면 관심형',      sub:'여러 분야에 골고루 관심이 높습니다' },
+      neutral: { bg:'linear-gradient(135deg,#5E35B1,#4527A0)', icon:'🧭', name:'방향 탐색 필요',     sub:'담당 멘토와 상담을 권장드립니다' },
+    }[mode];
+    const fb = document.getElementById('fallbackBanner');
+    fb.style.display    = 'block';
+    fb.className        = 'result-banner-fallback';
+    fb.style.background = FALLBACK.bg;
+    fb.innerHTML        = `<div class="rfb-icon">${FALLBACK.icon}</div><div class="rfb-name">${FALLBACK.name}</div><div class="rfb-sub">${FALLBACK.sub}</div>`;
+
     const MENTOR = {
-      low:     { title:'현재 두드러지는 분야가 없습니다',
-                 msg:'아직 탐색 중인 단계일 수 있습니다. 담당 선생님과 1:1 상담을 통해 방향을 함께 찾아보세요.',
-                 bg:'#ECEFF1', border:'#607D8B' },
-      allHigh: { title:'멘토와의 상담을 권장드립니다',
-                 msg:'다양한 분야에 높은 관심을 보이고 있습니다. 담당 멘토와 1:1 상담으로 최적 과정을 함께 결정해 보세요.',
-                 bg:'#FFF8E1', border:'#FF8B00' },
-      neutral: { title:'멘토와의 상담을 권장드립니다',
-                 msg:'뚜렷한 선호가 아직 나타나지 않았습니다. 담당 선생님과의 상담을 통해 구체적인 방향을 잡아보시길 권장드립니다.',
-                 bg:'#E3F2FD', border:'#1565C0' },
+      low:     { title:'현재 두드러지는 분야가 없습니다', msg:'아직 탐색 중인 단계일 수 있습니다. 담당 선생님과 1:1 상담을 통해 방향을 함께 찾아보세요.', bg:'#ECEFF1', border:'#607D8B' },
+      allHigh: { title:'멘토와의 상담을 권장드립니다',    msg:'다양한 분야에 높은 관심을 보이고 있습니다. 담당 멘토와 1:1 상담으로 최적 과정을 함께 결정해 보세요.', bg:'#FFF8E1', border:'#FF8B00' },
+      neutral: { title:'멘토와의 상담을 권장드립니다',    msg:'뚜렷한 선호가 아직 나타나지 않았습니다. 담당 선생님과의 상담을 통해 구체적인 방향을 잡아보시길 권장드립니다.', bg:'#E3F2FD', border:'#1565C0' },
     }[mode];
     const mb = document.getElementById('mentorBox');
     mb.style.background  = MENTOR.bg;
     mb.style.borderColor = MENTOR.border;
+    mb.style.display     = 'block';
     document.getElementById('mentorTitle').textContent = MENTOR.title;
     mb.querySelector('.mentor-msg').textContent = MENTOR.msg;
-    mb.style.display = 'block';
-  }
-
-  // ── AI 추천 이유 ──
-  if (commentary) {
-    document.getElementById('aiReasonText').textContent = commentary;
-    document.getElementById('aiReasonCard').style.display = 'block';
-  }
-
-  // ── 진로 정보 (normal만) — 1순위 + 2순위 모두 ──
-  if (mode === 'normal') {
-    // 1순위
-    const tr1 = TRACKS[sorted[0]];
-    document.getElementById('career1Title').textContent    = `1순위: ${tr1.name} 진로 정보`;
-    document.getElementById('career1Desc').textContent     = `${tr1.name} 과정 이수 후 진출 가능한 분야입니다.`;
-    document.getElementById('cert1List').innerHTML         = tr1.certs.map(c => `<span class="career-tag">${c}</span>`).join('');
-    document.getElementById('job1List').innerHTML          = tr1.jobs.map(j => `<span class="career-tag">${j}</span>`).join('');
-    document.getElementById('employer1List').innerHTML     = tr1.employers.map(e => `<span class="career-tag">${e}</span>`).join('');
-    document.getElementById('careerCard').style.display   = 'block';
-
-    // 2순위
-    const tr2 = TRACKS[sorted[1]];
-    document.getElementById('career2Title').textContent    = `2순위: ${tr2.name} 진로 정보`;
-    document.getElementById('career2Desc').textContent     = `${tr2.name} 과정 이수 후 진출 가능한 분야입니다.`;
-    document.getElementById('cert2List').innerHTML         = tr2.certs.map(c => `<span class="career-tag">${c}</span>`).join('');
-    document.getElementById('job2List').innerHTML          = tr2.jobs.map(j => `<span class="career-tag">${j}</span>`).join('');
-    document.getElementById('employer2List').innerHTML     = tr2.employers.map(e => `<span class="career-tag">${e}</span>`).join('');
-    document.getElementById('careerCard2').style.display  = 'block';
-
-    // GAP 버튼 (1순위 기준)
-    document.getElementById('btnGoGap').style.display     = '';
-    document.getElementById('btnGoGap').textContent       = `📊 [${tr1.name}] GAP 분석 시작하기`;
   }
 }
 
@@ -854,11 +913,6 @@ function retryQuiz() {
   currentQ = 0;
   clearTimeout(autoAdvanceTimer);
   document.getElementById('resultScreen').style.display  = 'none';
-  document.getElementById('mentorBox').style.display     = 'none';
-  document.getElementById('aiReasonCard').style.display  = 'none';
-  document.getElementById('careerCard').style.display    = 'none';
-  document.getElementById('careerCard2').style.display   = 'none';
-  document.getElementById('btnGoGap').style.display      = 'none';
   document.getElementById('introScreen').style.display   = 'block';
   window.scrollTo(0, 0);
 }
