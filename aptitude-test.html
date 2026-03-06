@@ -98,157 +98,202 @@
     }
 
     /* ════════════════════════════════════════
-       RESULT — 결과 화면 전체 재설계
+       RESULT — 게임 클래스 카드 UI
     ════════════════════════════════════════ */
 
     /* ── 완료 배너 ── */
     .result-done-banner {
-      background: linear-gradient(135deg, #1a1e3c, #2d1b4e);
+      background: linear-gradient(135deg, #0d1117, #1a1e3c);
       border-radius: 16px; padding: 28px 32px; margin-bottom: 20px;
       display: flex; align-items: center; gap: 20px; color: white;
     }
     .done-check {
       width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
-      background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.25);
       display: flex; align-items: center; justify-content: center;
       font-size: 20px; font-weight: 900;
     }
     .done-copy { flex: 1; }
     .done-title { font-size: 17px; font-weight: 900; margin-bottom: 4px; }
-    .done-meta  { font-size: 12px; opacity: 0.6; letter-spacing: 0.4px; }
+    .done-meta  { font-size: 12px; opacity: 0.5; letter-spacing: 0.4px; }
 
     /* ── 1순위 블록 ── */
     .rank1-block {
       background: white; border-radius: 20px; overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,.13);
+      box-shadow: 0 16px 56px rgba(0,0,0,.18);
       margin-bottom: 16px;
     }
 
-    /* 1순위 헤더 — 트랙 색상 배경 */
+    /* 1순위 헤더 — 다크 오버레이 게임 카드 */
     .rank1-hd {
-      padding: 32px 36px 28px; color: white;
+      padding: 36px 36px 28px; color: white;
       position: relative; overflow: hidden;
     }
+    .rank1-hd::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(145deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.20) 100%);
+      pointer-events: none;
+    }
     .rank1-hd::after {
-      content: ''; position: absolute; bottom: -50px; right: -50px;
-      width: 180px; height: 180px; border-radius: 50%;
+      content: ''; position: absolute; top: -70px; right: -70px;
+      width: 240px; height: 240px; border-radius: 50%;
       background: rgba(255,255,255,0.07); pointer-events: none;
     }
-    .r1-badge {
-      display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: 2px;
-      padding: 4px 12px; border-radius: 20px;
-      background: rgba(255,255,255,0.2); margin-bottom: 20px;
+    .r1-inner { position: relative; z-index: 1; }
+    .r1-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
     }
-    .r1-row {
-      display: flex; align-items: center; gap: 18px;
+    .r1-rank-badge {
+      font-size: 10px; font-weight: 900; letter-spacing: 2px;
+      padding: 4px 14px; border-radius: 20px;
+      background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28);
     }
-    .r1-icon { font-size: 48px; line-height: 1; flex-shrink: 0; }
+    .r1-archetype {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      opacity: 0.65; text-transform: uppercase;
+    }
+    .r1-mid { display: flex; align-items: center; gap: 20px; }
+    .r1-icon { font-size: 54px; line-height: 1; flex-shrink: 0; }
     .r1-info { flex: 1; min-width: 0; }
-    .r1-name { font-size: 30px; font-weight: 900; line-height: 1.15; }
-    .r1-sub  { font-size: 13px; opacity: 0.78; margin-top: 5px; line-height: 1.5; }
-    .r1-score-col { flex-shrink: 0; text-align: right; }
-    .r1-score-num {
-      font-family: 'Bebas Neue', sans-serif; font-size: 80px; line-height: 1; display: block;
-    }
-    .r1-score-denom { font-size: 13px; opacity: 0.7; display: block; text-align: center; }
+    .r1-name { font-size: 34px; font-weight: 900; line-height: 1.1; margin-bottom: 14px; }
 
-    /* 1순위 AI 이유 */
+    /* 적성도 바 */
+    .r1-affinity-row   { display: flex; align-items: center; gap: 10px; }
+    .r1-affinity-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; opacity: 0.6; white-space: nowrap; }
+    .r1-affinity-track { flex: 1; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; overflow: hidden; }
+    .r1-affinity-fill  { height: 100%; background: white; border-radius: 2px; width: 0%; transition: width 1.4s cubic-bezier(0.4,0,0.2,1); }
+    .r1-affinity-pct   { font-size: 11px; font-weight: 700; opacity: 0.85; flex-shrink: 0; }
+
+    /* 점수 숫자 */
+    .r1-score-col { flex-shrink: 0; text-align: right; }
+    .r1-score-num { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 88px; line-height: 1; }
+    .r1-score-sub { display: block; font-size: 11px; opacity: 0.55; text-align: center; margin-top: 2px; }
+
+    /* Lore 텍스트 */
+    .r1-lore {
+      position: relative; z-index: 1;
+      font-size: 13px; line-height: 1.9; opacity: 0.78; font-style: italic;
+      margin-top: 22px; padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+
+    /* ── AI 분석 패널 ── */
     .rank1-reason {
-      padding: 22px 32px; border-bottom: 1px solid var(--border);
-      background: #FAFAFE;
+      padding: 20px 32px;
+      background: linear-gradient(135deg, #F5F0FF, #EDE8FF);
+      border-bottom: 1px solid #DDD5FF;
     }
     .rank1-reason-label {
-      font-size: 10px; font-weight: 900; color: #7C3AED;
-      letter-spacing: 1.5px; margin-bottom: 8px;
+      font-size: 10px; font-weight: 900; color: #6D28D9;
+      letter-spacing: 1.5px; margin-bottom: 10px;
     }
     .rank1-reason-text {
-      font-size: 14px; line-height: 1.85; color: var(--text);
+      font-size: 13.5px; line-height: 1.9; color: #2D2250;
     }
 
-    /* 1순위 커리어 그리드 */
-    .rank1-career {
-      padding: 28px 32px 0; display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
+    /* ── 스킬 그리드 ── */
+    .rank1-skills-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      padding: 28px 32px 24px;
     }
-    .r1-career-col {
-      padding: 0 20px 28px 0;
-      border-right: 1px solid var(--border);
+    .skill-col {
+      padding-right: 24px;
+      border-right: 1px solid #EDEFF2;
     }
-    .r1-career-col:first-child { padding-left: 0; }
-    .r1-career-col:last-child  { border-right: none; padding-right: 0; padding-left: 20px; }
-    .r1-career-col:nth-child(2) { padding-left: 20px; }
-    .r1-col-label {
-      font-size: 10px; font-weight: 900; letter-spacing: 1.5px; color: var(--text-sub);
-      text-transform: uppercase; margin-bottom: 12px;
+    .skill-col:last-child  { border-right: none; padding-right: 0; padding-left: 24px; }
+    .skill-col:nth-child(2){ padding-left: 24px; }
+    .skill-col-hd {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 10px; font-weight: 900; letter-spacing: 1.5px; color: #6B7280;
+      text-transform: uppercase; margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 2px solid #F0F2F5;
     }
-    .r1-col-items { display: flex; flex-direction: column; gap: 5px; }
-    .r1-col-item {
-      font-size: 13px; font-weight: 500; color: var(--text);
-      padding: 7px 10px; background: var(--bg); border-radius: 7px; line-height: 1.4;
+    .skill-col-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--tc, #7C3AED); flex-shrink: 0;
+    }
+    .skill-item {
+      font-size: 13px; font-weight: 500; color: #1A1F36;
+      padding: 7px 0; border-bottom: 1px solid #F3F5F7;
+      display: flex; align-items: flex-start; gap: 8px; line-height: 1.4;
+    }
+    .skill-item:last-child { border-bottom: none; }
+    .skill-arrow {
+      color: var(--tc, #7C3AED); font-weight: 900; font-size: 15px; flex-shrink: 0; line-height: 1.4;
     }
 
-    /* 1순위 연봉 스트립 */
+    /* ── 연봉 스트립 (다크) ── */
     .rank1-salary-strip {
-      margin: 0 32px; padding: 14px 0;
-      border-top: 1px solid var(--border);
-      display: flex; align-items: center; gap: 12px;
+      background: #12192A; padding: 18px 32px;
+      display: flex; align-items: center; gap: 16px; color: white;
     }
-    .salary-icon { font-size: 16px; }
-    .salary-label { font-size: 11px; font-weight: 700; color: var(--text-sub); letter-spacing: 0.5px; }
-    .salary-value { font-size: 15px; font-weight: 700; color: var(--text); }
-    .salary-note  { font-size: 11px; color: var(--text-sub); margin-left: auto; }
-
-    /* 1순위 하단 여백 */
-    .rank1-footer { height: 20px; }
+    .salary-ico  { font-size: 18px; }
+    .salary-info { flex: 1; }
+    .salary-lbl  { display: block; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; opacity: 0.5; margin-bottom: 3px; }
+    .salary-val  { font-size: 16px; font-weight: 700; }
+    .salary-note-txt { font-size: 10px; opacity: 0.35; }
 
     /* ── 구분선 ── */
     .rank-divider {
       display: flex; align-items: center; gap: 14px;
       margin: 4px 0 16px;
     }
-    .rank-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .rank-divider-line { flex: 1; height: 1px; background: #E1E4E8; }
     .rank-divider-text {
-      font-size: 11px; font-weight: 700; color: var(--text-sub);
+      font-size: 11px; font-weight: 700; color: #8B98A5;
       letter-spacing: 1px; white-space: nowrap;
     }
 
     /* ── 2순위 블록 ── */
     .rank2-block {
       background: white; border-radius: 16px; overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 16px rgba(0,0,0,.07);
+      border: 1px solid #E1E4E8;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
       margin-bottom: 20px;
     }
     .rank2-hd {
-      display: flex; align-items: center; gap: 12px;
-      padding: 16px 24px; color: white;
+      padding: 20px 24px; color: white;
+      position: relative; overflow: hidden;
+    }
+    .rank2-hd::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(145deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 100%);
+      pointer-events: none;
+    }
+    .r2-inner { position: relative; z-index: 1; }
+    .r2-top-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 10px;
     }
     .r2-badge {
       font-size: 9px; font-weight: 900; letter-spacing: 1.5px;
-      padding: 3px 9px; border-radius: 12px;
-      background: rgba(255,255,255,0.25); flex-shrink: 0;
+      padding: 3px 10px; border-radius: 12px;
+      background: rgba(255,255,255,0.22); border: 1px solid rgba(255,255,255,0.28);
     }
-    .r2-icon { font-size: 22px; flex-shrink: 0; }
-    .r2-name { font-size: 16px; font-weight: 900; flex: 1; }
-    .r2-score {
-      font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; flex-shrink: 0;
+    .r2-archetype {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px; opacity: 0.65; text-transform: uppercase;
     }
-    .rank2-body {
-      padding: 18px 24px; display: flex; flex-direction: column; gap: 10px;
+    .r2-main-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .r2-icon     { font-size: 24px; flex-shrink: 0; }
+    .r2-name     { font-size: 18px; font-weight: 900; flex: 1; }
+    .r2-score    { font-family: 'Bebas Neue', sans-serif; font-size: 38px; line-height: 1; flex-shrink: 0; }
+    .r2-lore {
+      font-size: 12px; line-height: 1.75; opacity: 0.72; font-style: italic;
+      padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.2);
     }
-    .r2-row { display: flex; align-items: flex-start; gap: 10px; }
-    .r2-row-label {
-      font-size: 10px; font-weight: 900; color: var(--text-sub);
-      letter-spacing: 1px; width: 52px; flex-shrink: 0; padding-top: 4px;
-      text-transform: uppercase;
+    .rank2-body { padding: 18px 24px; display: flex; flex-direction: column; gap: 10px; }
+    .r2-skill-row { display: flex; align-items: flex-start; gap: 10px; }
+    .r2-skill-label {
+      font-size: 10px; font-weight: 900; color: #6B7280;
+      letter-spacing: 0.8px; width: 52px; flex-shrink: 0; padding-top: 4px;
     }
-    .r2-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .r2-tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .r2-tag {
-      font-size: 11px; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 20px; padding: 3px 9px; color: var(--text);
+      font-size: 11px; background: #F4F6F8; border: 1px solid #E1E4E8;
+      border-radius: 20px; padding: 3px 10px; color: #344563; font-weight: 500;
     }
-    .r2-salary-val { font-size: 13px; font-weight: 700; color: var(--text); padding-top: 3px; }
+    .r2-salary-val { font-size: 13px; font-weight: 700; color: #1A1F36; padding-top: 3px; }
 
     /* ── 비정상 모드 (low / allHigh / neutral) ── */
     .result-banner-fallback {
@@ -289,15 +334,14 @@
       /* result mobile */
       .result-done-banner { flex-direction: column; text-align: center; gap: 12px; }
       .rank1-hd { padding: 24px 20px 20px; }
-      .r1-name { font-size: 22px; }
-      .r1-score-num { font-size: 58px; }
+      .r1-name { font-size: 24px; }
+      .r1-score-num { font-size: 60px; }
       .rank1-reason { padding: 18px 20px; }
-      .rank1-career { padding: 20px 20px 0; grid-template-columns: 1fr; }
-      .r1-career-col { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 18px 0 !important; }
-      .r1-career-col:last-child { border-bottom: none; }
-      .rank1-salary-strip { margin: 0 20px; flex-wrap: wrap; }
-      .salary-note { margin-left: 0; }
-      .rank2-hd { padding: 14px 18px; }
+      .rank1-skills-grid { padding: 20px 20px 18px; grid-template-columns: 1fr; }
+      .skill-col { border-right: none; border-bottom: 1px solid #EDEFF2; padding: 0 0 16px 0 !important; margin-bottom: 16px; }
+      .skill-col:last-child { border-bottom: none; margin-bottom: 0; }
+      .rank1-salary-strip { padding: 16px 20px; flex-wrap: wrap; }
+      .rank2-hd { padding: 18px 18px; }
       .rank2-body { padding: 14px 18px; }
     }
   </style>
@@ -447,7 +491,9 @@ const TRACKS = {
     certs:     ['컴퓨터그래픽스운용기능사', 'GTQ(우대)'],
     jobs:      ['영상편집자', '모션그래퍼', '유튜브 크리에이터', '광고영상 제작자'],
     employers: ['방송국', '광고제작사', '기업 홍보팀', '유튜브 채널'],
-    salary:    '신입 약 2,400 ~ 3,000만원'
+    salary:    '신입 약 2,400 ~ 3,000만원',
+    archetype: '스토리텔러',
+    lore: '움직임 하나로 사람의 감정을 움직이는 당신. 한 장면, 한 컷 안에 감동을 담아 스크린 너머 수천 명의 시선을 사로잡습니다.'
   },
   interior: {
     name: '건축/인테리어', icon: '🏠', color: '#00875A', bg: 'linear-gradient(135deg,#00875A,#006644)',
@@ -455,7 +501,9 @@ const TRACKS = {
     certs:     ['실내건축기능사', '전산응용건축제도기능사', 'AutoCAD 활용'],
     jobs:      ['인테리어디자이너', '공간플래너', 'BIM 설계사'],
     employers: ['인테리어회사', '건축설계사무소', '가구·건자재회사', '부동산개발사'],
-    salary:    '신입 약 2,400 ~ 3,000만원'
+    salary:    '신입 약 2,400 ~ 3,000만원',
+    archetype: '공간 설계자',
+    lore: '빈 공간을 삶이 담긴 장소로 변환하는 당신. 조명, 동선, 소재 하나하나에 의도를 심어 사람들이 꿈꾸던 환경을 현실로 만들어냅니다.'
   },
   visual_editing: {
     name: '시각/편집디자인', icon: '🎨', color: '#0052CC', bg: 'linear-gradient(135deg,#0052CC,#0041A3)',
@@ -463,7 +511,9 @@ const TRACKS = {
     certs:     ['GTQ 1급', '컴퓨터그래픽스기능사', '시각디자인산업기사'],
     jobs:      ['그래픽디자이너', '편집디자이너', '브랜드디자이너'],
     employers: ['디자인 에이전시', '광고회사', '기업 마케팅팀', '출판사'],
-    salary:    '신입 약 2,600 ~ 3,200만원'
+    salary:    '신입 약 2,600 ~ 3,200만원',
+    archetype: '비주얼 아티잔',
+    lore: '색과 형태로 브랜드의 첫인상을 결정하는 당신. 정렬 하나, 서체 하나에도 의미를 담아 시각으로 세상과 대화합니다.'
   },
   web: {
     name: '웹디자인', icon: '🌐', color: '#7C3AED', bg: 'linear-gradient(135deg,#7C3AED,#6D28D9)',
@@ -471,7 +521,9 @@ const TRACKS = {
     certs:     ['웹디자인기능사', 'GTQ(우대)', 'HTML/CSS/JS 구현'],
     jobs:      ['UI/UX디자이너', '웹디자이너', '퍼블리셔'],
     employers: ['IT기업', '스타트업', '웹 에이전시', '디자인 에이전시'],
-    salary:    '신입 약 3,000 ~ 3,800만원'
+    salary:    '신입 약 3,000 ~ 3,800만원',
+    archetype: '경험 설계자',
+    lore: '모든 클릭과 스크롤 뒤에 당신의 설계가 있습니다. 디지털 공간에서 사용자가 느끼는 모든 감각을 의도적으로 설계하는 UX 아키텍트입니다.'
   },
   cg_maya: {
     name: 'CG/마야', icon: '🤖', color: '#6554C0', bg: 'linear-gradient(135deg,#6554C0,#403294)',
@@ -479,7 +531,9 @@ const TRACKS = {
     certs:     ['컴퓨터그래픽스운용기능사', '게임그래픽전문가'],
     jobs:      ['3D아티스트', 'VFX아티스트', '캐릭터모델러', '게임그래픽디자이너'],
     employers: ['게임회사', 'VFX스튜디오', '광고제작사', '영화제작사'],
-    salary:    '신입 약 2,600 ~ 3,400만원'
+    salary:    '신입 약 2,600 ~ 3,400만원',
+    archetype: '세계 창조자',
+    lore: '현실에 존재하지 않는 세계를 만들어내는 당신. 3D 공간 안에서 물리법칙을 초월한 상상을 픽셀 하나하나로 구현해냅니다.'
   },
   it_programming: {
     name: 'IT/프로그래밍', icon: '💻', color: '#2B4492', bg: 'linear-gradient(135deg,#2B4492,#172B4D)',
@@ -487,7 +541,9 @@ const TRACKS = {
     certs:     ['정보처리기사', 'AICE 자격증', 'SQLD'],
     jobs:      ['웹개발자', '앱개발자', '백엔드개발자', '풀스택개발자'],
     employers: ['IT기업', '스타트업', 'SI업체', '대기업 IT부서'],
-    salary:    '신입 약 3,200 ~ 4,500만원'
+    salary:    '신입 약 3,200 ~ 4,500만원',
+    archetype: '코드 아키텍트',
+    lore: '당신이 작성한 한 줄 한 줄이 수많은 사람들의 일상을 바꿉니다. 논리와 구조로 세상을 움직이는 보이지 않는 엔지니어입니다.'
   },
   ai: {
     name: 'AI 크리에이터', icon: '✨', color: '#0079BF', bg: 'linear-gradient(135deg,#0079BF,#006298)',
@@ -495,7 +551,9 @@ const TRACKS = {
     certs:     ['AI 활용능력 자격증', '컴퓨터활용능력'],
     jobs:      ['AI 콘텐츠 크리에이터', '프롬프트 엔지니어', 'AI 마케터'],
     employers: ['AI 스타트업', '기업 디지털전환팀', '콘텐츠 제작사', '마케팅 에이전시'],
-    salary:    '신입 약 3,000 ~ 4,000만원'
+    salary:    '신입 약 3,000 ~ 4,000만원',
+    archetype: '혁신 선구자',
+    lore: '기술과 창의를 동시에 다루는 당신. AI라는 도구를 손에 쥐고 누구보다 빠르게 새로운 영역을 개척하며 미래를 선점합니다.'
   },
   artwork: {
     name: '아트웍', icon: '🖌️', color: '#E91E8C', bg: 'linear-gradient(135deg,#E91E8C,#C2185B)',
@@ -503,7 +561,9 @@ const TRACKS = {
     certs:     ['GTQ(우대)', '디지털드로잉 활용'],
     jobs:      ['일러스트레이터', '캐릭터디자이너', '웹툰작가', '컨셉아티스트'],
     employers: ['게임회사', '엔터테인먼트사', '출판사', '프리랜서'],
-    salary:    '신입 약 2,200 ~ 2,800만원'
+    salary:    '신입 약 2,200 ~ 2,800만원',
+    archetype: '세계관 창조자',
+    lore: '붓 하나로 캐릭터에 생명을 불어넣는 당신. 이야기와 이미지로 사람들의 마음속에 오래도록 살아남을 무언가를 남깁니다.'
   },
   certification: {
     name: '자격증 과정', icon: '📋', color: '#FF8B00', bg: 'linear-gradient(135deg,#FF8B00,#E07000)',
@@ -511,7 +571,9 @@ const TRACKS = {
     certs:     ['GTQ 1·2급', '컴활 1·2급', '전산회계 1급', 'ITQ'],
     jobs:      ['경영지원', '총무·행정', '회계사무원', '무역사무원'],
     employers: ['일반기업', '공공기관', '금융권', '회계사무소'],
-    salary:    '신입 약 2,200 ~ 2,800만원'
+    salary:    '신입 약 2,200 ~ 2,800만원',
+    archetype: '실무 전문가',
+    lore: '확실한 자격으로 빠르게 현장에 진입하는 당신. 자격증이라는 명확한 무기를 쥐고 안정적이면서도 전문적인 커리어를 만들어갑니다.'
   }
 };
 
@@ -792,23 +854,44 @@ function renderResult(scores, avg, commentary) {
     // ── 완료 배너 ──
     document.getElementById('doneBanner').style.display = 'flex';
 
-    // ── 1순위 블록 헤더 ──
-    document.getElementById('rank1Block').style.display = 'block';
+    // ── 1순위 블록 (게임 클래스 카드) ──
+    const r1Block = document.getElementById('rank1Block');
+    r1Block.style.display = 'block';
+    r1Block.style.setProperty('--tc', t1.color);
+
     const hd = document.getElementById('rank1Hd');
     hd.style.background = t1.bg;
     hd.innerHTML = `
-      <div class="r1-badge">1순위 추천 트랙</div>
-      <div class="r1-row">
-        <div class="r1-icon">${t1.icon}</div>
-        <div class="r1-info">
-          <div class="r1-name">${t1.name}</div>
-          <div class="r1-sub">${t1.subtitle}</div>
+      <div class="r1-inner">
+        <div class="r1-top">
+          <span class="r1-rank-badge">1순위 AFFINITY</span>
+          <span class="r1-archetype">${t1.archetype}</span>
         </div>
-        <div class="r1-score-col">
-          <span class="r1-score-num">${scores[k1]}</span>
-          <span class="r1-score-denom">/ 100점</span>
+        <div class="r1-mid">
+          <div class="r1-icon">${t1.icon}</div>
+          <div class="r1-info">
+            <div class="r1-name">${t1.name}</div>
+            <div class="r1-affinity-row">
+              <span class="r1-affinity-label">적성도</span>
+              <div class="r1-affinity-track">
+                <div class="r1-affinity-fill" id="r1AffinityFill"></div>
+              </div>
+              <span class="r1-affinity-pct">${scores[k1]}%</span>
+            </div>
+          </div>
+          <div class="r1-score-col">
+            <span class="r1-score-num">${scores[k1]}</span>
+            <span class="r1-score-sub">/ 100</span>
+          </div>
         </div>
+        <div class="r1-lore">${t1.lore}</div>
       </div>`;
+
+    // 적성도 바 애니메이션
+    setTimeout(() => {
+      const fill = document.getElementById('r1AffinityFill');
+      if (fill) fill.style.width = scores[k1] + '%';
+    }, 100);
 
     // ── AI 이유 ──
     if (commentary) {
@@ -816,56 +899,68 @@ function renderResult(scores, avg, commentary) {
       document.getElementById('rank1Reason').style.display  = 'block';
     }
 
-    // ── 커리어 그리드 (자격증 / 직업 / 취업처) ──
+    // ── 스킬 그리드 (자격증 / 직업 / 취업처) ──
     document.getElementById('rank1Career').innerHTML = `
-      <div class="r1-career-col">
-        <div class="r1-col-label">📜 관련 자격증</div>
-        <div class="r1-col-items">${t1.certs.map(c => `<div class="r1-col-item">${c}</div>`).join('')}</div>
-      </div>
-      <div class="r1-career-col">
-        <div class="r1-col-label">👤 주요 직업</div>
-        <div class="r1-col-items">${t1.jobs.map(j => `<div class="r1-col-item">${j}</div>`).join('')}</div>
-      </div>
-      <div class="r1-career-col">
-        <div class="r1-col-label">🏢 주요 취업처</div>
-        <div class="r1-col-items">${t1.employers.map(e => `<div class="r1-col-item">${e}</div>`).join('')}</div>
+      <div class="rank1-skills-grid">
+        <div class="skill-col">
+          <div class="skill-col-hd"><span class="skill-col-dot"></span>⚡ 취득 자격증</div>
+          ${t1.certs.map(c => `<div class="skill-item"><span class="skill-arrow">›</span>${c}</div>`).join('')}
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-hd"><span class="skill-col-dot"></span>🎯 진출 직업</div>
+          ${t1.jobs.map(j => `<div class="skill-item"><span class="skill-arrow">›</span>${j}</div>`).join('')}
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-hd"><span class="skill-col-dot"></span>🏛 주요 취업처</div>
+          ${t1.employers.map(e => `<div class="skill-item"><span class="skill-arrow">›</span>${e}</div>`).join('')}
+        </div>
       </div>`;
 
-    // ── 연봉 스트립 ──
+    // ── 연봉 스트립 (다크) ──
     document.getElementById('rank1Salary').innerHTML = `
-      <span class="salary-icon">💰</span>
-      <span class="salary-label">평균 연봉</span>
-      <span class="salary-value">${t1.salary}</span>
-      <span class="salary-note">※ 고용노동부·업계 평균 참고 기준</span>`;
+      <span class="salary-ico">💰</span>
+      <div class="salary-info">
+        <span class="salary-lbl">초봉 가이드</span>
+        <span class="salary-val">${t1.salary}</span>
+      </div>
+      <span class="salary-note-txt">※ 고용노동부·업계 평균 기준</span>`;
 
     // ── 구분선 ──
     document.getElementById('rankDivider').style.display = 'flex';
 
-    // ── 2순위 블록 ──
+    // ── 2순위 블록 (게임 카드 컴팩트) ──
     const r2 = document.getElementById('rank2Block');
     r2.style.display = 'block';
     r2.innerHTML = `
       <div class="rank2-hd" style="background:${t2.bg}">
-        <span class="r2-badge">2순위</span>
-        <span class="r2-icon">${t2.icon}</span>
-        <span class="r2-name">${t2.name}</span>
-        <span class="r2-score">${scores[k2]}</span>
+        <div class="r2-inner">
+          <div class="r2-top-row">
+            <span class="r2-badge">2순위</span>
+            <span class="r2-archetype">${t2.archetype}</span>
+          </div>
+          <div class="r2-main-row">
+            <span class="r2-icon">${t2.icon}</span>
+            <span class="r2-name">${t2.name}</span>
+            <span class="r2-score">${scores[k2]}</span>
+          </div>
+          <div class="r2-lore">${t2.lore}</div>
+        </div>
       </div>
       <div class="rank2-body">
-        <div class="r2-row">
-          <span class="r2-row-label">자격증</span>
+        <div class="r2-skill-row">
+          <span class="r2-skill-label">⚡ 자격증</span>
           <div class="r2-tags">${t2.certs.map(c => `<span class="r2-tag">${c}</span>`).join('')}</div>
         </div>
-        <div class="r2-row">
-          <span class="r2-row-label">직업</span>
+        <div class="r2-skill-row">
+          <span class="r2-skill-label">🎯 직업</span>
           <div class="r2-tags">${t2.jobs.map(j => `<span class="r2-tag">${j}</span>`).join('')}</div>
         </div>
-        <div class="r2-row">
-          <span class="r2-row-label">취업처</span>
+        <div class="r2-skill-row">
+          <span class="r2-skill-label">🏛 취업처</span>
           <div class="r2-tags">${t2.employers.map(e => `<span class="r2-tag">${e}</span>`).join('')}</div>
         </div>
-        <div class="r2-row">
-          <span class="r2-row-label">연봉</span>
+        <div class="r2-skill-row">
+          <span class="r2-skill-label">💰 연봉</span>
           <span class="r2-salary-val">${t2.salary}</span>
         </div>
       </div>`;
