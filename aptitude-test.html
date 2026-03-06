@@ -254,10 +254,10 @@
     <h1>적성검사</h1>
     <p class="intro-meta">24개 문항 · 약 4분 소요 · AI 분석 포함</p>
     <ul class="intro-features">
-      <li><span class="fi">✓</span> 성향·관심사 기반 6개 트랙 적합도 측정</li>
-      <li><span class="fi">✓</span> 내 점수와 평균의 비교 육각형 레이더 차트</li>
-      <li><span class="fi">✓</span> 추천 과정의 관련 직업·자격증 안내</li>
-      <li><span class="fi">✓</span> AI 맞춤 코멘트 및 다음 단계 제안</li>
+      <li><span class="fi">✓</span> 취업 목표 기반 9개 트랙 적합도 측정</li>
+      <li><span class="fi">✓</span> 내 점수와 평균의 비교 레이더 차트</li>
+      <li><span class="fi">✓</span> 추천 트랙의 직업·자격증·취업처 안내</li>
+      <li><span class="fi">✓</span> AI 맞춤 코멘트 및 GAP 분석 바로 연결</li>
     </ul>
     <button class="btn-start" onclick="startQuiz()">검사 시작하기 →</button>
   </div>
@@ -342,11 +342,11 @@
   <!-- RADAR CHART -->
   <div class="card">
     <div class="card-title"><span class="icon">📊</span> 트랙별 적합도 분석</div>
-    <div class="card-desc">6개 트랙의 적합도 점수와 평균을 비교한 결과입니다.</div>
+    <div class="card-desc">9개 트랙의 적합도 점수와 평균을 비교한 결과입니다.</div>
     <div id="radarContainer" style="margin-bottom:16px;"></div>
     <div class="avg-note">
       <span>📏</span>
-      <span id="avgNote">6개 트랙 평균: —점 | 평균 이상: <strong id="aboveList">—</strong></span>
+      <span id="avgNote">9개 트랙 평균: —점 | 평균 이상: <strong id="aboveList">—</strong></span>
     </div>
   </div>
 
@@ -399,80 +399,127 @@
 <script>
 
 // ═══════════════════════════════════════════════════════
-//  DATA — TRACKS
+//  DATA — TRACKS (9개, gap-analysis.html과 동일 키)
 // ═══════════════════════════════════════════════════════
-const TRACK_KEYS = ['artwork','design','video','interior','it','office'];
+const TRACK_KEYS = ['motion','interior','visual_editing','web','cg_maya','it_programming','ai','artwork','certification'];
 
 const TRACKS = {
-  artwork:  { name: '아트웍',       icon: '🎨', color: '#E91E8C', bg: 'linear-gradient(135deg,#E91E8C,#C2185B)',
-              subtitle: '감성과 표현의 세계',
-              certs:     ['GTQ (그래픽기술자격)', '웹디자인기능사', '일러스트레이터 자격증'],
-              jobs:      ['웹툰작가', '일러스트레이터', '캐릭터디자이너', '콘셉트아티스트'],
-              employers: ['게임회사', '출판사', '엔터테인먼트사', '프리랜서'] },
-
-  design:   { name: '디자인/편집',  icon: '🖥️', color: '#0052CC', bg: 'linear-gradient(135deg,#0052CC,#0041A3)',
-              subtitle: '시각으로 소통하는 세계',
-              certs:     ['GTQ', '시각디자인산업기사', '웹디자인기능사'],
-              jobs:      ['그래픽디자이너', '편집디자이너', 'UI/UX디자이너', '웹디자이너'],
-              employers: ['디자인 에이전시', '광고회사', '스타트업', '기업 마케팅팀'] },
-
-  video:    { name: '영상/CG',      icon: '🎬', color: '#FF5630', bg: 'linear-gradient(135deg,#FF5630,#DE350B)',
-              subtitle: '움직임과 공간의 세계',
-              certs:     ['컴퓨터그래픽스운용기능사', '게임그래픽전문가'],
-              jobs:      ['모션그래퍼', '3D아티스트', 'VFX아티스트', '영상편집자'],
-              employers: ['방송국', '광고제작사', '게임회사', '영화제작사'] },
-
-  interior: { name: '인테리어',     icon: '🏠', color: '#00875A', bg: 'linear-gradient(135deg,#00875A,#006644)',
-              subtitle: '공간을 디자인하는 세계',
-              certs:     ['실내건축기능사', '실내건축산업기사', '전산응용건축제도기능사'],
-              jobs:      ['인테리어디자이너', '공간디자이너', '인테리어플래너'],
-              employers: ['인테리어회사', '건축설계사무소', '가구/건자재회사', '프리랜서'] },
-
-  it:       { name: 'IT/프로그래밍', icon: '💻', color: '#6554C0', bg: 'linear-gradient(135deg,#6554C0,#403294)',
-              subtitle: '논리와 구조의 세계',
-              certs:     ['정보처리기사', 'SQLD', '컴퓨터활용능력'],
-              jobs:      ['웹개발자', '앱개발자', '데이터분석가', '시스템엔지니어'],
-              employers: ['IT기업', '스타트업', 'SI업체', '대기업 IT부서'] },
-
-  office:   { name: '사무직',       icon: '📋', color: '#FF8B00', bg: 'linear-gradient(135deg,#FF8B00,#E07000)',
-              subtitle: '효율과 정확의 세계',
-              certs:     ['컴퓨터활용능력 1·2급', 'MOS', 'ITQ', 'ERP정보관리사'],
-              jobs:      ['경영지원', '총무·행정', '영업관리', '무역사무원'],
-              employers: ['일반기업', '금융권', '관공서', '중소기업'] }
+  motion: {
+    name: '영상/모션',      icon: '🎬', color: '#FF5630', bg: 'linear-gradient(135deg,#FF5630,#DE350B)',
+    subtitle: '영상·모션으로 세상과 소통하는 세계',
+    certs:     ['컴퓨터그래픽스운용기능사', 'GTQ(우대)'],
+    jobs:      ['영상편집자', '모션그래퍼', '유튜브 크리에이터', '광고영상 제작자'],
+    employers: ['방송국', '광고제작사', '기업 홍보팀', '유튜브 채널']
+  },
+  interior: {
+    name: '건축/인테리어',  icon: '🏠', color: '#00875A', bg: 'linear-gradient(135deg,#00875A,#006644)',
+    subtitle: '공간을 설계하고 아름답게 만드는 세계',
+    certs:     ['실내건축기능사', '전산응용건축제도기능사', 'AutoCAD 활용'],
+    jobs:      ['인테리어디자이너', '공간플래너', 'BIM 설계사'],
+    employers: ['인테리어회사', '건축설계사무소', '가구·건자재회사', '부동산개발사']
+  },
+  visual_editing: {
+    name: '시각/편집디자인', icon: '🎨', color: '#0052CC', bg: 'linear-gradient(135deg,#0052CC,#0041A3)',
+    subtitle: '시각으로 브랜드와 메시지를 전달하는 세계',
+    certs:     ['GTQ 1급', '컴퓨터그래픽스기능사', '시각디자인산업기사'],
+    jobs:      ['그래픽디자이너', '편집디자이너', '브랜드디자이너'],
+    employers: ['디자인 에이전시', '광고회사', '기업 마케팅팀', '출판사']
+  },
+  web: {
+    name: '웹디자인',       icon: '🌐', color: '#7C3AED', bg: 'linear-gradient(135deg,#7C3AED,#6D28D9)',
+    subtitle: 'UI/UX로 사용자 경험을 설계하는 세계',
+    certs:     ['웹디자인기능사', 'GTQ(우대)', 'HTML/CSS/JS 구현'],
+    jobs:      ['UI/UX디자이너', '웹디자이너', '퍼블리셔'],
+    employers: ['IT기업', '스타트업', '웹 에이전시', '디자인 에이전시']
+  },
+  cg_maya: {
+    name: 'CG/마야',        icon: '🤖', color: '#6554C0', bg: 'linear-gradient(135deg,#6554C0,#403294)',
+    subtitle: '3D로 가상 세계를 창조하는 세계',
+    certs:     ['컴퓨터그래픽스운용기능사', '게임그래픽전문가'],
+    jobs:      ['3D아티스트', 'VFX아티스트', '캐릭터모델러', '게임그래픽디자이너'],
+    employers: ['게임회사', 'VFX스튜디오', '광고제작사', '영화제작사']
+  },
+  it_programming: {
+    name: 'IT/프로그래밍',  icon: '💻', color: '#2B4492', bg: 'linear-gradient(135deg,#2B4492,#172B4D)',
+    subtitle: '코드로 서비스와 세상을 만드는 세계',
+    certs:     ['정보처리기사', 'AICE 자격증', 'SQLD'],
+    jobs:      ['웹개발자', '앱개발자', '백엔드개발자', '풀스택개발자'],
+    employers: ['IT기업', '스타트업', 'SI업체', '대기업 IT부서']
+  },
+  ai: {
+    name: 'AI 크리에이터',  icon: '✨', color: '#0079BF', bg: 'linear-gradient(135deg,#0079BF,#006298)',
+    subtitle: 'AI 도구로 창작과 업무를 혁신하는 세계',
+    certs:     ['AI 활용능력 자격증', '컴퓨터활용능력'],
+    jobs:      ['AI 콘텐츠 크리에이터', '프롬프트 엔지니어', 'AI 마케터'],
+    employers: ['AI 스타트업', '기업 디지털전환팀', '콘텐츠 제작사', '마케팅 에이전시']
+  },
+  artwork: {
+    name: '아트웍',          icon: '🖌️', color: '#E91E8C', bg: 'linear-gradient(135deg,#E91E8C,#C2185B)',
+    subtitle: '디지털 드로잉으로 세계관을 만드는 세계',
+    certs:     ['GTQ(우대)', '디지털드로잉 활용'],
+    jobs:      ['일러스트레이터', '캐릭터디자이너', '웹툰작가', '컨셉아티스트'],
+    employers: ['게임회사', '엔터테인먼트사', '출판사', '프리랜서']
+  },
+  certification: {
+    name: '자격증 과정',     icon: '📋', color: '#FF8B00', bg: 'linear-gradient(135deg,#FF8B00,#E07000)',
+    subtitle: '자격증으로 빠르게 취업을 완성하는 세계',
+    certs:     ['GTQ 1·2급', '컴활 1·2급', '전산회계 1급', 'ITQ'],
+    jobs:      ['경영지원', '총무·행정', '회계사무원', '무역사무원'],
+    employers: ['일반기업', '공공기관', '금융권', '회계사무소']
+  }
 };
 
 // ═══════════════════════════════════════════════════════
-//  DATA — QUESTIONS (24개, 고정 순서)
+//  DATA — QUESTIONS (24개 · 취업 목표 중심)
 // ═══════════════════════════════════════════════════════
 const QUESTIONS = [
-  { text: "공간을 어떻게 배치하고 꾸밀지 머릿속으로 구상하는 것이 즐겁다",             scores: { interior:1.0, artwork:0.2 },                    aspiration:false },
-  { text: "나는 어릴 때부터 그림 그리기, 낙서, 스케치를 즐겨왔다",                    scores: { artwork:1.0, design:0.3 },                      aspiration:false },
-  { text: "나는 규칙과 패턴을 찾아서 문제를 해결하는 과정이 재미있다",                 scores: { it:1.0, office:0.2 },                           aspiration:false },
-  { text: "길을 걷다가 포스터·로고·브랜드 디자인이 자연스럽게 눈에 들어온다",          scores: { design:1.0, artwork:0.2 },                      aspiration:false },
-  { text: "5년 후 나는 내 이름으로 된 작품이나 포트폴리오를 갖고 싶다",               scores: { artwork:0.8, design:0.4, video:0.4 },           aspiration:true  },
-  { text: "영화 특수효과·유튜브 모션그래픽이 어떻게 만들어지는지 궁금하다",            scores: { video:1.0, it:0.2 },                            aspiration:false },
-  { text: "엑셀·PPT 같은 업무 도구를 잘 다뤄서 실무에서 인정받고 싶다",               scores: { office:1.0, it:0.2 },                           aspiration:false },
-  { text: "나만의 앱이나 웹서비스를 직접 만들어서 세상에 내놓고 싶다",                 scores: { it:1.0, design:0.3 },                           aspiration:true  },
-  { text: "나는 내가 만든 캐릭터나 일러스트로 나만의 세계를 표현하고 싶다",             scores: { artwork:1.0, video:0.3 },                       aspiration:false },
-  { text: "보기 좋고 정돈된 레이아웃·브랜드 감각 있는 디자인을 만들고 싶다",           scores: { design:1.0, artwork:0.2 },                      aspiration:false },
-  { text: "나는 영상·광고·방송 같은 미디어 산업에서 일하고 싶다",                      scores: { video:1.0, design:0.3 },                        aspiration:true  },
-  { text: "집·카페·상업공간을 보면 어떻게 바꾸면 더 좋을지 자연스럽게 생각하게 된다",  scores: { interior:1.0, design:0.2 },                     aspiration:false },
-  { text: "앱·웹사이트가 어떤 원리로 작동하는지 직접 만들어보고 싶다",                 scores: { it:1.0, design:0.2 },                           aspiration:false },
-  { text: "나는 눈에 보이는 공간을 직접 설계하고 변화시키는 일을 하고 싶다",           scores: { interior:1.0, artwork:0.2 },                    aspiration:true  },
-  { text: "나는 정적인 이미지보다 움직이는 콘텐츠를 만드는 것이 더 끌린다",            scores: { video:1.0, design:0.2 },                        aspiration:false },
-  { text: "지금 내게 가장 중요한 건 빠르게 실무에 쓸 수 있는 기술을 익히는 것이다",   scores: { office:1.0 },                                   aspiration:false },
-  { text: "나는 안정적인 직장에서 전문 소프트웨어를 능숙하게 다루는 사람이 되고 싶다", scores: { office:0.8, design:0.4, it:0.3 },               aspiration:true  },
-  { text: "나는 감각과 직관을 발휘하는 창의적인 일을 하고 싶다",                       scores: { artwork:0.8, design:0.5, video:0.3 },           aspiration:true  },
-  { text: "나는 한 작품을 완성도 높게 다듬는 과정이 즐겁다",                           scores: { artwork:1.0, video:0.3, interior:0.2 },         aspiration:false },
-  { text: "나는 SNS 콘텐츠·홍보물처럼 많은 사람에게 보여지는 결과물을 만들고 싶다",   scores: { design:1.0, video:0.3 },                        aspiration:false },
-  { text: "3D 모델링이나 입체적인 표현 방식에 관심이 있다",                             scores: { video:1.0, interior:0.3 },                      aspiration:false },
-  { text: "나는 도면·설계도를 보거나 수치를 다루는 작업에 거부감이 없다",              scores: { interior:1.0, it:0.2 },                         aspiration:false },
-  { text: "나는 반복적인 작업을 자동화하거나 더 효율적인 방법을 찾는 것이 좋다",       scores: { it:1.0, office:0.3 },                           aspiration:false },
-  { text: "나는 정해진 업무를 정확하고 빠르게 처리하는 것이 잘 맞는다",               scores: { office:1.0, it:0.2 },                           aspiration:false }
+  // ── 영상/모션 ──
+  { text: "유튜브·SNS·광고 영상을 직접 편집하는 영상편집자가 되고 싶다",                 scores: { motion:1.0 },                        aspiration:true  },
+  { text: "방송국·광고제작사에서 영상 콘텐츠를 만드는 것이 취업 목표다",                  scores: { motion:1.0 },                        aspiration:true  },
+  { text: "움직이는 그래픽(모션)·영상 합성·특수효과 작업이 해보고 싶다",                  scores: { motion:0.8, cg_maya:0.3 },           aspiration:false },
+  // ── 건축/인테리어 ──
+  { text: "카페·오피스·주거 공간을 설계하는 인테리어 디자이너가 되고 싶다",               scores: { interior:1.0 },                      aspiration:true  },
+  { text: "공간을 3D로 시각화하거나 인테리어 도면을 그리는 작업이 해보고 싶다",            scores: { interior:0.8, cg_maya:0.3 },         aspiration:false },
+  { text: "인테리어 회사·건축설계사무소에서 공간 디자인 업무를 하고 싶다",                 scores: { interior:1.0 },                      aspiration:true  },
+  // ── 시각/편집디자인 ──
+  { text: "포스터·브로슈어·패키지를 만드는 그래픽 디자이너가 되고 싶다",                  scores: { visual_editing:1.0 },                aspiration:true  },
+  { text: "디자인 에이전시나 기업 마케팅팀에서 비주얼 디자이너로 일하는 것이 목표다",      scores: { visual_editing:1.0 },                aspiration:true  },
+  { text: "길을 걷다 광고·로고·패키지 디자인이 눈에 들어오고 어떻게 만들었는지 궁금하다", scores: { visual_editing:0.8, artwork:0.3 },    aspiration:false },
+  // ── 웹디자인 ──
+  { text: "앱·웹사이트 화면을 기획하고 디자인하는 UI/UX 디자이너가 되고 싶다",            scores: { web:1.0 },                           aspiration:true  },
+  { text: "스타트업이나 IT기업에서 웹·앱 디자이너·퍼블리셔로 일하는 것이 목표다",         scores: { web:1.0 },                           aspiration:true  },
+  { text: "HTML/CSS로 웹페이지를 만들거나 Figma로 화면을 설계하는 것에 흥미가 있다",      scores: { web:0.8, it_programming:0.3 },       aspiration:false },
+  // ── CG/마야 ──
+  { text: "게임·영화·광고 속 3D 캐릭터나 배경을 만드는 3D 아티스트가 되고 싶다",          scores: { cg_maya:1.0 },                       aspiration:true  },
+  { text: "3D 모델링·리깅·렌더링 작업이 궁금하거나 직접 만들어보고 싶다",                  scores: { cg_maya:1.0 },                       aspiration:false },
+  // ── IT/프로그래밍 ──
+  { text: "직접 코드를 짜서 웹서비스나 앱을 만드는 개발자가 되고 싶다",                    scores: { it_programming:1.0 },                aspiration:true  },
+  { text: "IT기업·스타트업에서 백엔드·앱 개발자로 일하는 것이 목표다",                     scores: { it_programming:1.0 },                aspiration:true  },
+  { text: "프로그래밍으로 문제를 해결하거나 반복 작업을 자동화하는 것이 흥미롭다",         scores: { it_programming:0.8, ai:0.3 },        aspiration:false },
+  // ── AI 크리에이터 ──
+  { text: "AI 이미지·영상 도구로 콘텐츠를 만드는 AI 크리에이터가 되고 싶다",              scores: { ai:1.0 },                            aspiration:true  },
+  { text: "ChatGPT·미드저니 같은 AI 도구를 깊게 파고 업무에 활용하는 것이 흥미롭다",      scores: { ai:0.8, it_programming:0.2 },        aspiration:false },
+  // ── 아트웍 ──
+  { text: "나만의 캐릭터나 일러스트를 만드는 일러스트레이터·캐릭터 디자이너가 되고 싶다",  scores: { artwork:1.0 },                       aspiration:true  },
+  { text: "웹툰·게임·출판 분야에서 아티스트로 일하거나 프리랜서로 활동하고 싶다",          scores: { artwork:1.0 },                       aspiration:true  },
+  { text: "디지털 드로잉이나 캐릭터 일러스트 그리기가 즐겁거나 해보고 싶다",               scores: { artwork:0.8, visual_editing:0.2 },   aspiration:false },
+  // ── 자격증 과정 ──
+  { text: "GTQ·컴활·전산회계 자격증을 취득해 사무직에 빠르게 취업하고 싶다",              scores: { certification:1.0 },                 aspiration:true  },
+  { text: "기업·공공기관의 안정적인 사무·행정·회계 직무로 일하는 것이 목표다",             scores: { certification:1.0 },                 aspiration:true  }
 ];
 
-// 트랙별 최대 가능 원점수 (응답 최대=5 기준으로 사전 계산)
-const MAX_SCORES = { artwork:27, design:29, video:28, interior:22.5, it:25.5, office:21.5 };
+// 트랙별 최대 원점수 (max답=5 기준 사전 계산)
+const MAX_SCORES = {
+  motion:         14.0,   // Q1(1)+Q2(1)+Q3(0.8)          = 2.8 * 5
+  interior:       14.0,   // Q4(1)+Q5(0.8)+Q6(1)          = 2.8 * 5
+  visual_editing: 15.0,   // Q7(1)+Q8(1)+Q9(0.8)+Q22(0.2) = 3.0 * 5
+  web:            14.0,   // Q10(1)+Q11(1)+Q12(0.8)        = 2.8 * 5
+  cg_maya:        13.0,   // Q3(0.3)+Q5(0.3)+Q13(1)+Q14(1)= 2.6 * 5
+  it_programming: 16.5,   // Q12(0.3)+Q15(1)+Q16(1)+Q17(0.8)+Q19(0.2) = 3.3 * 5
+  ai:             10.5,   // Q17(0.3)+Q18(1)+Q19(0.8)     = 2.1 * 5
+  artwork:        15.5,   // Q9(0.3)+Q20(1)+Q21(1)+Q22(0.8)= 3.1 * 5
+  certification:  10.0    // Q23(1)+Q24(1)                 = 2.0 * 5
+};
 
 // ═══════════════════════════════════════════════════════
 //  STATE
@@ -573,10 +620,13 @@ function prevQuestion() {
 //  SCORE CALCULATION
 // ═══════════════════════════════════════════════════════
 function calcScores() {
-  const raw = { artwork:0, design:0, video:0, interior:0, it:0, office:0 };
+  const raw = {};
+  TRACK_KEYS.forEach(k => { raw[k] = 0; });
   QUESTIONS.forEach((q, i) => {
     const ans = answers[i] || 0;
-    Object.entries(q.scores).forEach(([track, w]) => { raw[track] += ans * w; });
+    Object.entries(q.scores).forEach(([track, w]) => {
+      if (raw[track] !== undefined) raw[track] += ans * w;
+    });
   });
   const norm = {};
   TRACK_KEYS.forEach(k => { norm[k] = Math.round((raw[k] / MAX_SCORES[k]) * 100); });
@@ -610,19 +660,19 @@ async function callGemini(scores, topKey, botKey, avg) {
   const botTrack = TRACKS[botKey];
   const scoreLines = TRACK_KEYS.map(k => `  - ${TRACKS[k].name}: ${scores[k]}점`).join('\n');
   const prompt = `당신은 SBS 아카데미 진로 상담 전문가입니다.
-아래는 적성검사 결과입니다.
+아래는 취업 목표 기반 적성검사 결과입니다.
 
-트랙별 적합도 (0~100점):
+트랙별 취업 적합도 (0~100점):
 ${scoreLines}
 
 평균: ${avg}점
-최고 적합 트랙: ${topTrack.name} (${scores[topKey]}점)
+최고 적합 트랙: ${topTrack.name} (${scores[topKey]}점) — ${topTrack.subtitle}
 최저 적합 트랙: ${botTrack.name} (${scores[botKey]}점)
 
 위 결과를 바탕으로 다음 내용을 3~5문장으로 작성해주세요:
-1. 검사자의 핵심 성향 한 문장
-2. 왜 '${topTrack.name}' 과정이 가장 적합한지 구체적인 근거 2문장
-3. 다음 단계로 GAP 분석을 추천하는 자연스러운 마무리 한 문장
+1. 검사자의 취업 방향성 핵심 한 문장
+2. 왜 '${topTrack.name}' 과정이 가장 적합한지 취업 관점에서 구체적인 근거 2문장
+3. GAP 분석으로 다음 단계를 안내하는 자연스러운 마무리 한 문장
 
 따뜻하고 격려하는 톤으로, JSON 없이 순수 텍스트로만 반환하세요.`;
 
@@ -715,7 +765,7 @@ function renderResult(scores, avg, commentary) {
   // 평균 노트
   const aboveAvg = TRACK_KEYS.filter(k => scores[k] >= avg).map(k => TRACKS[k].name).join(', ');
   document.getElementById('avgNote').innerHTML =
-    `6개 트랙 평균: <strong>${avg}점</strong> &nbsp;|&nbsp; 평균 이상: <strong>${aboveAvg || '없음'}</strong>`;
+    `9개 트랙 평균: <strong>${avg}점</strong> &nbsp;|&nbsp; 평균 이상: <strong>${aboveAvg || '없음'}</strong>`;
 
   // 점수 바
   const list = document.getElementById('scoreList');
@@ -762,10 +812,10 @@ function renderResult(scores, avg, commentary) {
 //  RADAR CHART (SVG) — 적성검사 전용
 // ═══════════════════════════════════════════════════════
 function drawAptitudeRadar(containerId, scores, avg) {
-  const W = 480, H = 420;
+  const W = 500, H = 480;
   const cx = W / 2, cy = H / 2 - 10;
-  const R = 130, MAX = 100, n = 6;
-  const labelDist = 38;
+  const R = 140, MAX = 100, n = TRACK_KEYS.length;
+  const labelDist = 42;
 
   const axes = TRACK_KEYS.map(k => TRACKS[k].icon + ' ' + TRACKS[k].name);
 
@@ -834,7 +884,7 @@ function drawAptitudeRadar(containerId, scores, avg) {
   `;
 
   document.getElementById(containerId).innerHTML = `
-    <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;margin:0 auto;max-width:480px">
+    <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;margin:0 auto;max-width:500px">
       ${bg}${axLines}${lvLabels}${avgPoly}${uPoly}${dots}${labels}${legend}
     </svg>`;
 }
@@ -842,7 +892,7 @@ function drawAptitudeRadar(containerId, scores, avg) {
 // ═══════════════════════════════════════════════════════
 //  ACTIONS
 // ═══════════════════════════════════════════════════════
-function goToGap() { location.href = 'gap-analysis.html'; }
+function goToGap() { location.href = 'gap-analysis.html?track=' + topTrackKey; }
 
 function retryQuiz() {
   answers  = new Array(QUESTIONS.length).fill(0);

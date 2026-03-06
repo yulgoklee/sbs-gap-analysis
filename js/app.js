@@ -34,6 +34,15 @@ function changeApiKey() {
 window.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem(LS_KEY);
   if (saved) { apiKey = saved; document.getElementById('apiModal').style.display = 'none'; }
+
+  // 적성검사(A)에서 트랙 파라미터로 넘어온 경우 자동 선택
+  const urlParams = new URLSearchParams(window.location.search);
+  const trackParam = urlParams.get('track');
+  if (trackParam && TRACK_NAMES[trackParam]) {
+    selectTrack(trackParam);
+    // 이름 입력창으로 포커스 이동
+    setTimeout(() => document.getElementById('name').focus(), 300);
+  }
 });
 
 // ═══════════════════════════════════════════════════════
