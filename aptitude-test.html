@@ -21,7 +21,7 @@
     .intro-meta { font-size: 13px; color: var(--text-sub); margin-bottom: 32px; }
     .intro-features {
       list-style: none; display: flex; flex-direction: column; gap: 10px;
-      margin: 0 auto 36px; max-width: 340px; text-align: left;
+      margin: 0 auto 36px; max-width: 360px; text-align: left;
     }
     .intro-features li {
       font-size: 14px; color: var(--text-sub);
@@ -148,26 +148,6 @@
       letter-spacing: 1px; margin-bottom: 10px;
     }
 
-    /* ── SCORE BARS ── */
-    .score-list { display: flex; flex-direction: column; gap: 10px; }
-    .score-item {
-      display: flex; align-items: center; gap: 12px; padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .score-item:last-child { border-bottom: none; }
-    .score-icon { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
-    .score-name { font-size: 13px; font-weight: 700; width: 100px; flex-shrink: 0; }
-    .score-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
-    .score-bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
-    .score-val { font-size: 13px; font-weight: 700; width: 36px; text-align: right; flex-shrink: 0; }
-    .rank-num-badge {
-      font-size: 10px; font-weight: 900; padding: 2px 7px; border-radius: 20px;
-      flex-shrink: 0; min-width: 28px; text-align: center;
-    }
-    .rank-num-badge.r1 { background: #7C3AED; color: white; }
-    .rank-num-badge.r2 { background: #E3ECFF; color: #7C3AED; }
-    .rank-num-badge.rn { background: var(--bg); color: var(--text-sub); }
-
     /* ── CAREER CARD ── */
     .career-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .career-box { background: var(--bg); border-radius: 10px; padding: 16px; }
@@ -177,6 +157,9 @@
       font-size: 11px; background: white; border: 1px solid var(--border);
       border-radius: 20px; padding: 3px 9px; color: var(--text);
     }
+    /* rank2 career card subtle distinction */
+    #careerCard2 .career-box { background: #F0F4FF; }
+    #careerCard2 .career-tag { background: white; border-color: #C5D5FF; }
 
     /* ── MENTOR / LOW BOX ── */
     .mentor-box {
@@ -244,12 +227,12 @@
   <div class="intro-card">
     <div class="intro-icon">🧭</div>
     <h1>적성검사</h1>
-    <p class="intro-meta">Yes / No · 30문항 · 약 2분 소요 · AI 분석 포함</p>
+    <p class="intro-meta">그렇다 / 아니다 · 30문항 · 약 2분 소요 · AI 분석 포함</p>
     <ul class="intro-features">
-      <li><span class="fi">✓</span> 일상·성향·가치관 기반 간접 측정 (직업 지식 불필요)</li>
+      <li><span class="fi">✓</span> 일상 관찰·사고 방식·가치관으로 나를 파악 (직업 지식 불필요)</li>
       <li><span class="fi">✓</span> 9개 트랙 중 나에게 맞는 1순위·2순위 추천</li>
       <li><span class="fi">✓</span> AI가 왜 이 트랙인지 이유를 설명해드립니다</li>
-      <li><span class="fi">✓</span> 추천 트랙의 직업·자격증·취업처 안내</li>
+      <li><span class="fi">✓</span> 두 트랙의 자격증·직업·취업처 안내</li>
     </ul>
     <button class="btn-start" onclick="startQuiz()">검사 시작하기 →</button>
   </div>
@@ -266,7 +249,7 @@
   </div>
 
   <div class="question-card">
-    <span class="q-section-tag" id="qSectionTag">💡 일상 관심사</span>
+    <span class="q-section-tag" id="qSectionTag">🌿 나를 만드는 것들</span>
     <p class="question-text" id="questionText">질문 내용</p>
     <div class="yn-wrap">
       <button class="yn-btn" id="btnYes" onclick="selectAnswer(1)">
@@ -290,7 +273,7 @@
   <div class="loading-apt">
     <div class="spinner-apt"></div>
     <p class="loading-text">AI가 적성을 분석하고 있습니다</p>
-    <p class="loading-sub" style="margin-top:6px">9개 트랙 점수 산출 및 추천 생성 중...</p>
+    <p class="loading-sub" style="margin-top:6px">응답 패턴 분석 및 트랙 매칭 중...</p>
   </div>
 </div>
 
@@ -314,29 +297,42 @@
     </div>
   </div>
 
-  <!-- SCORE BARS -->
-  <div class="card">
-    <div class="card-title"><span class="icon">📊</span> 9개 트랙 점수 분포</div>
-    <div class="card-desc" id="scoreBarDesc">응답 패턴 기반 트랙별 적합도입니다.</div>
-    <div class="score-list" id="scoreList"></div>
-  </div>
-
-  <!-- CAREER INFO (TOP 1 기준) -->
+  <!-- CAREER INFO — RANK 1 -->
   <div class="card" id="careerCard" style="display:none;">
-    <div class="card-title"><span class="icon">💼</span> 1순위 추천 과정 진로 정보</div>
-    <div class="card-desc" id="careerDesc"></div>
+    <div class="card-title"><span class="icon">💼</span> <span id="career1Title">1순위 진로 정보</span></div>
+    <div class="card-desc" id="career1Desc"></div>
     <div class="career-grid">
       <div class="career-box">
         <div class="career-box-label">📜 관련 자격증</div>
-        <div class="career-tag-list" id="certList"></div>
+        <div class="career-tag-list" id="cert1List"></div>
       </div>
       <div class="career-box">
         <div class="career-box-label">👤 주요 직업</div>
-        <div class="career-tag-list" id="jobList"></div>
+        <div class="career-tag-list" id="job1List"></div>
       </div>
       <div class="career-box">
         <div class="career-box-label">🏢 주요 취업처</div>
-        <div class="career-tag-list" id="employerList"></div>
+        <div class="career-tag-list" id="employer1List"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAREER INFO — RANK 2 -->
+  <div class="card" id="careerCard2" style="display:none;">
+    <div class="card-title"><span class="icon">🎯</span> <span id="career2Title">2순위 진로 정보</span></div>
+    <div class="card-desc" id="career2Desc"></div>
+    <div class="career-grid">
+      <div class="career-box">
+        <div class="career-box-label">📜 관련 자격증</div>
+        <div class="career-tag-list" id="cert2List"></div>
+      </div>
+      <div class="career-box">
+        <div class="career-box-label">👤 주요 직업</div>
+        <div class="career-tag-list" id="job2List"></div>
+      </div>
+      <div class="career-box">
+        <div class="career-box-label">🏢 주요 취업처</div>
+        <div class="career-tag-list" id="employer2List"></div>
       </div>
     </div>
   </div>
@@ -426,110 +422,114 @@ const TRACKS = {
 };
 
 // ═══════════════════════════════════════════════════════
-//  DATA — QUESTIONS (30개 · Yes/No · 간접 관찰형)
+//  DATA — QUESTIONS (30개 · 간접 관찰형 · 다차원)
 // ═══════════════════════════════════════════════════════
-// section: 'A'=일상관심사(1-10), 'B'=작업·학습스타일(11-20), 'C'=가치관·진로(21-30)
-// scores: YES=각 가중치 적용 / NO=0
+// 섹션 A: 나를 만드는 것들 (일상 관찰·감각 성향 · Q1~10)
+// 섹션 B: 나는 어떻게 살아가는가 (사고·작업 방식 · Q11~20)
+// 섹션 C: 나의 미래를 그린다면 (가치관·진로 비전 · Q21~30)
+// YES=가중치 적용 / NO=0
 
 const QUESTIONS = [
-  // ── A. 일상 관심사 (1~10) ──
-  { section:'A', text: "유튜브를 볼 때 영상 편집 방식, 자막 스타일, 화면 전환이 눈에 들어오는 편이다",
-    scores: { motion:1.0, visual_editing:0.3 } },
 
-  { section:'A', text: "카페나 매장에 들어가면 인테리어·가구 배치·조명이 먼저 눈에 띄는 편이다",
-    scores: { interior:1.0 } },
+  // ── A. 나를 만드는 것들 (Q1~10) ──
 
-  { section:'A', text: "거리나 SNS에서 광고 포스터, 로고, 패키지 디자인이 눈에 들어오고 어떻게 만들었는지 궁금하다",
-    scores: { visual_editing:1.0, artwork:0.3 } },
+  { section:'A', text: "길을 걷다 건물 외관, 간판 글씨체, 색 조합이 눈에 들어와 잠깐 멈춰 선 적 있다",
+    scores: { visual_editing:0.7, interior:0.4, artwork:0.3 } },
 
-  { section:'A', text: "앱이나 웹사이트를 쓸 때 화면 구성, 버튼 위치, 색상 배치가 불편하거나 잘 됐다고 느끼는 편이다",
-    scores: { web:1.0, visual_editing:0.3 } },
+  { section:'A', text: "영화나 드라마를 보고 나서, 줄거리보다 화면 색감이나 장면 전환이 더 오래 기억에 남는다",
+    scores: { motion:0.9, visual_editing:0.4 } },
 
-  { section:'A', text: "게임·영화·광고 속 3D 캐릭터나 배경이 어떻게 만들어졌는지 궁금하다",
-    scores: { cg_maya:1.0, motion:0.3 } },
+  { section:'A', text: "낯선 공간(카페, 전시장, 숍)에 들어가면 조명·가구 배치·동선이 자연스럽게 눈에 들어온다",
+    scores: { interior:0.9, visual_editing:0.3 } },
 
-  { section:'A', text: "SNS에서 일러스트나 캐릭터 작품을 보면 오래 구경하게 된다",
-    scores: { artwork:1.0, visual_editing:0.2 } },
+  { section:'A', text: "만화, 소설, 게임 속 캐릭터나 세계관에 깊이 몰입해서 오래 상상해본 경험이 있다",
+    scores: { artwork:0.8, cg_maya:0.5, motion:0.3 } },
 
-  { section:'A', text: "AI 관련 뉴스나 콘텐츠(ChatGPT, 미드저니 등)가 눈에 띄면 관심 있게 읽어보는 편이다",
-    scores: { ai:1.0, it_programming:0.2 } },
+  { section:'A', text: "스마트폰 앱이나 웹사이트를 쓰다가 '왜 이렇게 불편하게 만들었지?'라고 느낀 적이 여러 번 있다",
+    scores: { web:0.9, visual_editing:0.3 } },
 
-  { section:'A', text: "반복적인 작업을 하다가 '이거 자동화하면 편할 텐데'라고 생각해본 적 있다",
-    scores: { it_programming:1.0, ai:0.3 } },
+  { section:'A', text: "같은 작업을 반복하다 보면 '이걸 더 빠르게 자동화할 수 없을까'가 자연스럽게 떠오른다",
+    scores: { it_programming:0.8, ai:0.5 } },
 
-  { section:'A', text: "사진이나 영상을 직접 찍거나 편집해서 공유하는 것이 즐겁다",
-    scores: { motion:1.0, visual_editing:0.3 } },
+  { section:'A', text: "내가 느낀 감정이나 생각을 그림, 낙서, 도형으로 표현하고 싶다는 충동이 있다",
+    scores: { artwork:0.9, visual_editing:0.3 } },
 
-  { section:'A', text: "방 꾸미기, 가구 배치, 색 조합 등 공간을 꾸미는 것에 자연스럽게 관심이 간다",
-    scores: { interior:1.0, visual_editing:0.2 } },
+  { section:'A', text: "새로운 기술이나 디지털 도구 소식을 접하면 직접 써보고 싶다는 생각이 먼저 든다",
+    scores: { ai:0.9, it_programming:0.3, web:0.2 } },
 
-  // ── B. 작업·학습 스타일 (11~20) ──
-  { section:'B', text: "결과물이 화면에 시각적으로 나타나는 작업을 할 때 보람을 더 크게 느낄 것 같다",
-    scores: { motion:0.5, visual_editing:0.5, web:0.5, cg_maya:0.5, artwork:0.5 } },
+  { section:'A', text: "사진을 찍을 때 구도·빛·색감이 마음에 들 때까지 여러 번 찍어보는 편이다",
+    scores: { visual_editing:0.8, motion:0.4, artwork:0.3 } },
 
-  { section:'B', text: "새로운 소프트웨어나 디지털 도구를 배우는 것이 귀찮지 않고 오히려 흥미롭다",
-    scores: { web:0.5, it_programming:0.5, ai:0.5, motion:0.3 } },
+  { section:'A', text: "물건 배치나 공간이 '뭔가 어색하다' 싶으면 직접 바꾸고 싶다는 충동이 생긴다",
+    scores: { interior:0.8, visual_editing:0.3 } },
 
-  { section:'B', text: "그림을 그리거나 손으로 스케치하는 것을 좋아하거나 관심이 있다",
-    scores: { artwork:1.0, interior:0.5, visual_editing:0.3 } },
+  // ── B. 나는 어떻게 살아가는가 (Q11~20) ──
 
-  { section:'B', text: "복잡한 문제를 논리적으로 분석하고 단계적으로 해결하는 방식이 잘 맞는다",
-    scores: { it_programming:1.0, web:0.3, certification:0.3 } },
+  { section:'B', text: "공간이나 사물을 머릿속에서 입체적으로 돌려보며 생각하는 것이 자연스럽다",
+    scores: { interior:0.9, cg_maya:0.8 } },
 
-  { section:'B', text: "혼자 조용히 집중해서 완성도 높게 마무리하는 작업 스타일이 나와 잘 맞는다",
-    scores: { artwork:0.5, it_programming:0.5, cg_maya:0.5, interior:0.3 } },
+  { section:'B', text: "오류나 문제가 생기면 원인을 알아낼 때까지 끝까지 파고드는 편이다",
+    scores: { it_programming:0.8, web:0.4 } },
 
-  { section:'B', text: "여러 분야를 두루 배우는 것보다 한 분야를 깊게 파고드는 것이 더 좋다",
-    scores: { cg_maya:0.5, it_programming:0.5, interior:0.3 } },
+  { section:'B', text: "무언가를 배울 때 전체 흐름보다 세세한 기술적 디테일에 먼저 집중하게 된다",
+    scores: { cg_maya:0.6, it_programming:0.5, artwork:0.4 } },
 
-  { section:'B', text: "숫자, 표, 데이터를 다루는 작업이 크게 불편하지 않다",
-    scores: { it_programming:0.8, certification:0.8, ai:0.3 } },
+  { section:'B', text: "혼자 조용히 집중해서 결과물을 완성해 나가는 것이 여럿이 의논하는 것보다 잘 맞는다",
+    scores: { artwork:0.6, it_programming:0.5, cg_maya:0.4 } },
 
-  { section:'B', text: "빠른 취업을 위해 자격증 취득이나 실기 훈련에 집중하는 방향이 나에게 잘 맞는다",
+  { section:'B', text: "오타, 색 불일치, 여백 불균형 같은 시각적 어긋남을 다른 사람보다 먼저 발견하는 편이다",
+    scores: { visual_editing:0.9, artwork:0.4, interior:0.3 } },
+
+  { section:'B', text: "글보다 그림이나 도식으로 아이디어를 정리할 때 더 잘 이해되거나 전달된다",
+    scores: { visual_editing:0.6, artwork:0.5, interior:0.3, web:0.3 } },
+
+  { section:'B', text: "내가 만든 결과물이 완성되는 순간이 어떤 칭찬보다 더 뿌듯하다",
+    scores: { artwork:0.6, motion:0.4, visual_editing:0.4, cg_maya:0.3 } },
+
+  { section:'B', text: "새로운 소프트웨어를 처음 열면 설명서 없이 일단 눌러보며 스스로 파악하는 편이다",
+    scores: { it_programming:0.5, web:0.4, ai:0.4, motion:0.2 } },
+
+  { section:'B', text: "할 일 목록을 작성하거나 단계를 나누어 체계적으로 진행해야 마음이 편하다",
+    scores: { certification:0.5, it_programming:0.4, interior:0.3 } },
+
+  { section:'B', text: "끝내지 않은 일이 계속 머릿속에 맴돌아, 마무리할 때까지 다른 것에 집중하기 어렵다",
+    scores: { artwork:0.5, visual_editing:0.4, it_programming:0.3, interior:0.3 } },
+
+  // ── C. 나의 미래를 그린다면 (Q21~30) ──
+
+  { section:'C', text: "10년 후, 내 이름이 붙은 무언가(작품·서비스·공간·기술)가 세상에 존재하면 좋겠다",
+    scores: { artwork:0.6, motion:0.5, visual_editing:0.4, interior:0.3, web:0.3 } },
+
+  { section:'C', text: "안정적인 사무직보다, 전문 기술로 포트폴리오가 쌓이는 직업이 나에게 더 맞는다",
+    scores: { artwork:0.6, motion:0.5, cg_maya:0.5, visual_editing:0.4 } },
+
+  { section:'C', text: "결과가 바로 보이지 않아도, 기초부터 단단하게 쌓아가는 방식을 믿고 따를 수 있다",
+    scores: { cg_maya:0.6, it_programming:0.5, interior:0.4 } },
+
+  { section:'C', text: "빠르게 자격증이나 스펙을 갖추고 취업에 집중하는 것이 나에게 현실적으로 맞는 길이다",
     scores: { certification:1.0 } },
 
-  { section:'B', text: "코딩이나 프로그래밍을 배워본 적이 있거나, 앞으로 배워보고 싶다",
-    scores: { it_programming:1.0, web:0.5, ai:0.3 } },
-
-  { section:'B', text: "캐릭터나 그림을 직접 그려본 적이 있거나, 앞으로 그려보고 싶다",
-    scores: { artwork:1.0, visual_editing:0.3 } },
-
-  // ── C. 가치관·진로 선호 (21~30) ──
-  { section:'C', text: "내가 만든 것을 다른 사람이 보고 좋아하거나 감탄하면 큰 보람을 느낄 것 같다",
-    scores: { motion:0.5, visual_editing:0.5, artwork:0.5, web:0.3, interior:0.3 } },
-
-  { section:'C', text: "안정적인 사무직보다 전문 기술을 가진 직업으로 승부하고 싶다",
-    scores: { motion:0.5, cg_maya:0.5, artwork:0.5, it_programming:0.3, ai:0.3 } },
-
-  { section:'C', text: "트렌드에 빠르게 반응하고 새로운 것을 먼저 시도해보는 편이다",
-    scores: { ai:0.8, web:0.5, motion:0.3 } },
-
-  { section:'C', text: "IT기업이나 스타트업처럼 기술 중심의 회사에서 일하는 것이 매력적으로 느껴진다",
-    scores: { it_programming:1.0, web:0.5, ai:0.5 } },
-
-  { section:'C', text: "프리랜서로 독립적으로 일하거나 나만의 작업 공간을 갖고 싶다",
+  { section:'C', text: "미래의 내 모습을 상상할 때, 창작물이나 작품을 남기는 삶이 매력적으로 느껴진다",
     scores: { artwork:0.8, motion:0.5, visual_editing:0.3 } },
 
-  { section:'C', text: "고객(클라이언트)의 요청을 받아 결과물을 만들어주는 방식의 일이 괜찮다",
-    scores: { visual_editing:0.5, interior:0.5, motion:0.3, web:0.3 } },
+  { section:'C', text: "최신 기술이나 도구를 남들보다 빨리 익혀서 앞서가는 것이 경쟁력이라고 생각한다",
+    scores: { ai:0.9, it_programming:0.5, web:0.3 } },
 
-  { section:'C', text: "자격증을 단계적으로 취득하며 경력을 쌓아가는 방향이 나에게 잘 맞을 것 같다",
-    scores: { certification:1.0, it_programming:0.2 } },
+  { section:'C', text: "사람들이 실제로 생활하는 공간이 더 아름답고 기능적으로 바뀔 때 보람을 느낄 것 같다",
+    scores: { interior:0.9, web:0.3 } },
 
-  { section:'C', text: "공간을 직접 설계하고 꾸미는 인테리어 관련 직업이 멋있어 보인다",
-    scores: { interior:1.0 } },
+  { section:'C', text: "감정이나 이야기를 말이나 글보다 시각적 이미지로 전달하는 것이 더 자연스럽다",
+    scores: { artwork:0.8, visual_editing:0.5, motion:0.4 } },
 
-  { section:'C', text: "AI·최신 기술을 활용해 콘텐츠를 만들거나 업무를 혁신하는 것이 흥미롭다",
-    scores: { ai:1.0, motion:0.3, it_programming:0.3 } },
+  { section:'C', text: "디지털 도구로 아이디어를 구현해서 결과물을 만드는 과정 자체가 즐겁다",
+    scores: { ai:0.7, it_programming:0.6, web:0.5, motion:0.4 } },
 
-  { section:'C', text: "게임, 영화, 방송 등 엔터테인먼트 분야에서 일하고 싶다",
-    scores: { cg_maya:1.0, motion:0.5, artwork:0.3 } },
+  { section:'C', text: "숫자, 표, 데이터를 다루는 작업이 크게 불편하지 않다",
+    scores: { it_programming:0.6, certification:0.7, ai:0.3 } },
 ];
 
 // ═══════════════════════════════════════════════════════
-//  MAX SCORES (Yes=weight, No=0 기준 합산)
-//  motion:6.0 interior:4.9 visual_editing:4.7 web:4.4
-//  cg_maya:4.0 it_programming:7.3 ai:5.0 artwork:6.4 certification:3.1
+//  MAX SCORES — 런타임에 자동 계산
 // ═══════════════════════════════════════════════════════
 const MAX_SCORES = (function() {
   const max = {};
@@ -540,7 +540,11 @@ const MAX_SCORES = (function() {
   return max;
 })();
 
-const SECTION_LABELS = { A: '💡 일상 관심사', B: '🛠 작업·학습 스타일', C: '💼 가치관·진로 선호' };
+const SECTION_LABELS = {
+  A: '🌿 나를 만드는 것들',
+  B: '⚙️ 나는 어떻게 살아가는가',
+  C: '✦ 나의 미래를 그린다면'
+};
 
 // ═══════════════════════════════════════════════════════
 //  STATE
@@ -570,7 +574,6 @@ function changeApiKey() {
 window.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem(LS_KEY);
   if (saved) { apiKey = saved; document.getElementById('apiModal').style.display = 'none'; }
-  // 적성검사(A)에서 트랙 파라미터로 넘어온 경우 (gap-analysis.html에서 역진입 X, 미사용)
 });
 
 // ═══════════════════════════════════════════════════════
@@ -588,7 +591,6 @@ function renderQuestion(idx) {
   currentQ = idx;
   const q   = QUESTIONS[idx];
   const pct = Math.round((idx / QUESTIONS.length) * 100);
-  // 3~5초/문항 기준 남은 시간 추정
   const remSec = (QUESTIONS.length - idx) * 4;
   const remStr = remSec >= 60
     ? `약 ${Math.round(remSec/60)}분 남음`
@@ -600,7 +602,6 @@ function renderQuestion(idx) {
   document.getElementById('qSectionTag').textContent   = SECTION_LABELS[q.section];
   document.getElementById('questionText').textContent  = q.text;
 
-  // Yes/No 버튼 상태 복원
   const btnYes = document.getElementById('btnYes');
   const btnNo  = document.getElementById('btnNo');
   btnYes.className = 'yn-btn' + (answers[idx] === 1 ? ' selected-yes' : '');
@@ -618,7 +619,6 @@ function selectAnswer(val) {  // val: 1=Yes, 0=No
   btnYes.className = 'yn-btn' + (val === 1 ? ' selected-yes' : '');
   btnNo.className  = 'yn-btn' + (val === 0 ? ' selected-no'  : '');
 
-  // 400ms 뒤 자동 다음 문항
   autoAdvanceTimer = setTimeout(() => {
     if (currentQ < QUESTIONS.length - 1) {
       renderQuestion(currentQ + 1);
@@ -640,7 +640,7 @@ function calcScores() {
   const raw = {};
   TRACK_KEYS.forEach(k => { raw[k] = 0; });
   QUESTIONS.forEach((q, i) => {
-    if (answers[i] === 1) {  // Yes만 가중치 적용
+    if (answers[i] === 1) {
       Object.entries(q.scores).forEach(([k, w]) => {
         if (raw[k] !== undefined) raw[k] += w;
       });
@@ -679,7 +679,6 @@ async function callGemini(scores, top1Key, top2Key, avg) {
   const t1 = TRACKS[top1Key];
   const t2 = TRACKS[top2Key];
 
-  // 응답 패턴 요약 (Yes 답변 섹션 분포)
   const yesA = QUESTIONS.filter((q,i) => q.section==='A' && answers[i]===1).length;
   const yesB = QUESTIONS.filter((q,i) => q.section==='B' && answers[i]===1).length;
   const yesC = QUESTIONS.filter((q,i) => q.section==='C' && answers[i]===1).length;
@@ -687,12 +686,12 @@ async function callGemini(scores, top1Key, top2Key, avg) {
   const scoreLines = TRACK_KEYS.map(k => `  - ${TRACKS[k].name}: ${scores[k]}점`).join('\n');
 
   const prompt = `당신은 SBS 아카데미 진로 상담 전문가입니다.
-아래는 수강생의 적성검사 결과입니다. 검사는 Yes/No 형식으로 일상 관심사, 작업 스타일, 가치관을 측정한 것입니다.
+아래는 수강생의 적성검사 결과입니다. 검사는 Yes/No 형식으로 일상 관찰 성향, 사고·작업 방식, 가치관·진로 비전을 간접적으로 측정한 것입니다.
 
 [응답 패턴]
-- 일상 관심사(10문항) 중 '그렇다': ${yesA}개
-- 작업·학습 스타일(10문항) 중 '그렇다': ${yesB}개
-- 가치관·진로 선호(10문항) 중 '그렇다': ${yesC}개
+- 나를 만드는 것들 (10문항) 중 '그렇다': ${yesA}개
+- 나는 어떻게 살아가는가 (10문항) 중 '그렇다': ${yesB}개
+- 나의 미래를 그린다면 (10문항) 중 '그렇다': ${yesC}개
 
 [트랙별 적합도 (0~100점)]
 ${scoreLines}
@@ -703,9 +702,9 @@ ${scoreLines}
 전체 평균: ${avg}점
 
 위 결과를 바탕으로 아래 내용을 자연스러운 한국어로 4~5문장으로 작성해주세요:
-1. 이 사람의 성향·관심사를 한 문장으로 요약
+1. 이 사람의 성향·사고방식을 한 문장으로 요약
 2. 1순위 '${t1.name}'이 왜 잘 맞는지 응답 패턴 근거로 2문장
-3. 2순위 '${t2.name}'도 고려할 만한 이유 한 문장
+3. 2순위 '${t2.name}'도 함께 고려할 만한 이유 한 문장
 4. 다음 단계(GAP 분석 또는 상담)로 자연스럽게 유도하는 마무리 문장
 
 따뜻하고 격려하는 톤으로, JSON 없이 순수 텍스트로만 반환하세요.`;
@@ -739,6 +738,11 @@ function getResultMode(scores, avg) {
 // ═══════════════════════════════════════════════════════
 function renderResult(scores, avg, commentary) {
   document.getElementById('resultScreen').style.display = 'block';
+
+  // 이전 결과 상태 초기화 (재진입 방어)
+  ['mentorBox','aiReasonCard','careerCard','careerCard2','btnGoGap'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
 
   const sorted = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
   const mode   = getResultMode(scores, avg);
@@ -814,37 +818,29 @@ function renderResult(scores, avg, commentary) {
     document.getElementById('aiReasonCard').style.display = 'block';
   }
 
-  // ── 점수 바 (전체, 순위 표시) ──
-  const list = document.getElementById('scoreList');
-  list.innerHTML = '';
-  sorted.forEach((k, rank) => {
-    const t = TRACKS[k];
-    const s = scores[k];
-    let badgeCls = 'rn', badgeTxt = `${rank+1}위`;
-    if (rank === 0) { badgeCls = 'r1'; badgeTxt = '1순위'; }
-    if (rank === 1) { badgeCls = 'r2'; badgeTxt = '2순위'; }
-    list.innerHTML += `
-      <div class="score-item">
-        <span class="score-icon">${t.icon}</span>
-        <span class="score-name">${t.name}</span>
-        <div class="score-bar-wrap">
-          <div class="score-bar-fill" style="width:${s}%; background:${rank < 2 ? t.color : '#DFE1E6'}"></div>
-        </div>
-        <span class="score-val" style="color:${rank < 2 ? t.color : 'var(--text-sub)'}">${s}</span>
-        <span class="rank-num-badge ${badgeCls}">${badgeTxt}</span>
-      </div>`;
-  });
-
-  // ── 진로 정보 & GAP 버튼 (normal만) ──
+  // ── 진로 정보 (normal만) — 1순위 + 2순위 모두 ──
   if (mode === 'normal') {
-    const tr = TRACKS[sorted[0]];
-    document.getElementById('careerDesc').textContent     = `${tr.name} 과정 이수 후 진출 가능한 분야입니다.`;
-    document.getElementById('certList').innerHTML         = tr.certs.map(c => `<span class="career-tag">${c}</span>`).join('');
-    document.getElementById('jobList').innerHTML          = tr.jobs.map(j => `<span class="career-tag">${j}</span>`).join('');
-    document.getElementById('employerList').innerHTML     = tr.employers.map(e => `<span class="career-tag">${e}</span>`).join('');
-    document.getElementById('careerCard').style.display  = 'block';
-    document.getElementById('btnGoGap').style.display    = '';
-    document.getElementById('btnGoGap').textContent      = `📊 [${tr.name}] GAP 분석 시작하기`;
+    // 1순위
+    const tr1 = TRACKS[sorted[0]];
+    document.getElementById('career1Title').textContent    = `1순위: ${tr1.name} 진로 정보`;
+    document.getElementById('career1Desc').textContent     = `${tr1.name} 과정 이수 후 진출 가능한 분야입니다.`;
+    document.getElementById('cert1List').innerHTML         = tr1.certs.map(c => `<span class="career-tag">${c}</span>`).join('');
+    document.getElementById('job1List').innerHTML          = tr1.jobs.map(j => `<span class="career-tag">${j}</span>`).join('');
+    document.getElementById('employer1List').innerHTML     = tr1.employers.map(e => `<span class="career-tag">${e}</span>`).join('');
+    document.getElementById('careerCard').style.display   = 'block';
+
+    // 2순위
+    const tr2 = TRACKS[sorted[1]];
+    document.getElementById('career2Title').textContent    = `2순위: ${tr2.name} 진로 정보`;
+    document.getElementById('career2Desc').textContent     = `${tr2.name} 과정 이수 후 진출 가능한 분야입니다.`;
+    document.getElementById('cert2List').innerHTML         = tr2.certs.map(c => `<span class="career-tag">${c}</span>`).join('');
+    document.getElementById('job2List').innerHTML          = tr2.jobs.map(j => `<span class="career-tag">${j}</span>`).join('');
+    document.getElementById('employer2List').innerHTML     = tr2.employers.map(e => `<span class="career-tag">${e}</span>`).join('');
+    document.getElementById('careerCard2').style.display  = 'block';
+
+    // GAP 버튼 (1순위 기준)
+    document.getElementById('btnGoGap').style.display     = '';
+    document.getElementById('btnGoGap').textContent       = `📊 [${tr1.name}] GAP 분석 시작하기`;
   }
 }
 
@@ -861,6 +857,7 @@ function retryQuiz() {
   document.getElementById('mentorBox').style.display     = 'none';
   document.getElementById('aiReasonCard').style.display  = 'none';
   document.getElementById('careerCard').style.display    = 'none';
+  document.getElementById('careerCard2').style.display   = 'none';
   document.getElementById('btnGoGap').style.display      = 'none';
   document.getElementById('introScreen').style.display   = 'block';
   window.scrollTo(0, 0);
