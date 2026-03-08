@@ -98,46 +98,55 @@
     </div>
   </div>
 
-  <!-- 페르소나 블록 -->
-  <div class="persona-block" id="personaBlock" style="display:none">
-    <div class="persona-header">
-      <span class="persona-badge">✦ MY PERSONA</span>
-      <div class="persona-name" id="personaName"></div>
-      <div class="persona-combo" id="personaCombo"></div>
-    </div>
-    <div class="persona-body">
-      <div class="persona-section">
-        <span class="persona-section-label persona-trait-label">✦ 특징</span>
-        <p class="persona-section-text" id="personaTrait"></p>
+  <!-- 결과 그리드: 좌-페르소나 / 우-1순위+2순위 -->
+  <div class="result-grid" id="resultGrid" style="display:none">
+
+    <!-- 좌: 페르소나 -->
+    <div class="persona-block" id="personaBlock" style="display:none">
+      <div class="persona-header">
+        <span class="persona-badge">✦ MY PERSONA</span>
+        <div class="persona-name" id="personaName"></div>
+        <div class="persona-combo" id="personaCombo"></div>
       </div>
-      <div class="persona-section">
-        <span class="persona-section-label persona-ai-label">🤖 AI 시너지</span>
-        <p class="persona-section-text" id="personaAi"></p>
+      <div class="persona-body">
+        <div class="persona-section">
+          <span class="persona-section-label persona-trait-label">✦ 특징</span>
+          <p class="persona-section-text" id="personaTrait"></p>
+        </div>
+        <div class="persona-section">
+          <span class="persona-section-label persona-ai-label">🤖 AI 시너지</span>
+          <p class="persona-section-text" id="personaAi"></p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- 1순위 블록 -->
-  <div class="rank1-block" id="rank1Block" style="display:none">
-    <div class="rank1-hd" id="rank1Hd"></div>
-    <div class="rank1-reason" id="rank1Reason" style="display:none">
-      <div class="rank1-reason-label">🤖 AI ANALYSIS</div>
-      <div class="rank1-reason-text" id="rank1ReasonText"></div>
-    </div>
-    <div class="rank1-career" id="rank1Career"></div>
-    <div class="rank1-salary-strip" id="rank1Salary"></div>
-    <div class="rank1-footer"></div>
-  </div>
+    <!-- 우: 1순위 + 2순위 스택 -->
+    <div class="result-ranks" id="resultRanks">
 
-  <!-- 구분선 -->
-  <div class="rank-divider" id="rankDivider" style="display:none">
-    <div class="rank-divider-line"></div>
-    <span class="rank-divider-text">함께 고려할 2순위 경로</span>
-    <div class="rank-divider-line"></div>
-  </div>
+      <!-- 1순위 블록 -->
+      <div class="rank1-block" id="rank1Block" style="display:none">
+        <div class="rank1-hd" id="rank1Hd"></div>
+        <div class="rank1-reason" id="rank1Reason" style="display:none">
+          <div class="rank1-reason-label">🤖 AI ANALYSIS</div>
+          <div class="rank1-reason-text" id="rank1ReasonText"></div>
+        </div>
+        <div class="rank1-career" id="rank1Career"></div>
+        <div class="rank1-salary-strip" id="rank1Salary"></div>
+        <div class="rank1-footer"></div>
+      </div>
 
-  <!-- 2순위 블록 -->
-  <div class="rank2-block" id="rank2Block" style="display:none"></div>
+      <!-- 구분선 -->
+      <div class="rank-divider" id="rankDivider" style="display:none">
+        <div class="rank-divider-line"></div>
+        <span class="rank-divider-text">함께 고려할 2순위 경로</span>
+        <div class="rank-divider-line"></div>
+      </div>
+
+      <!-- 2순위 블록 -->
+      <div class="rank2-block" id="rank2Block" style="display:none"></div>
+
+    </div><!-- /result-ranks -->
+  </div><!-- /result-grid -->
 
   <!-- 비정상 모드 배너 -->
   <div id="fallbackBanner" style="display:none"></div>

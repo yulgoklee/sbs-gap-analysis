@@ -513,9 +513,10 @@ function renderResult(scores, avg, commentary) {
   document.getElementById('resultScreen').style.display = 'block';
 
   // 이전 상태 초기화
-  ['doneBanner','personaBlock','rank1Block','rankDivider','rank2Block','fallbackBanner','mentorBox','btnGoGap','rank1Reason'].forEach(id => {
+  ['doneBanner','resultGrid','personaBlock','rank1Block','rankDivider','rank2Block','fallbackBanner','mentorBox','btnGoGap','rank1Reason'].forEach(id => {
     document.getElementById(id).style.display = 'none';
   });
+  document.getElementById('resultGrid').classList.remove('has-persona');
 
   const sorted = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
   const mode   = getResultMode(scores, avg);
@@ -527,10 +528,15 @@ function renderResult(scores, avg, commentary) {
     // ── 완료 배너 ──
     document.getElementById('doneBanner').style.display = 'flex';
 
+    // ── 결과 그리드 표시 ──
+    const grid       = document.getElementById('resultGrid');
+    grid.style.display = 'grid';
+
     // ── 페르소나 블록 ──
     const personaKey = k1 + '|' + k2;
     const persona    = PERSONAS[personaKey];
     if (persona) {
+      grid.classList.add('has-persona');
       document.getElementById('personaBlock').style.display = 'block';
       document.getElementById('personaName').textContent    = persona.name;
       document.getElementById('personaCombo').textContent   = persona.combo;
