@@ -73,9 +73,11 @@ sbs-gap-analysis/
 │   ├── style.css           # 전체 공통 스타일 (반응형 + 인쇄용 포함)
 │   └── aptitude.css        # 시나리오 A 전용 스타일
 ├── js/
-│   ├── app.js              # GAP 분석 앱 로직 (폼 흐름, API 호출, 결과 렌더링)
-│   ├── constants.js        # 트랙 메타데이터, 상수 정의
-│   └── aptitude.js         # 시나리오 A 전용 데이터·로직 (트랙, 문항, 페르소나, 렌더링)
+│   ├── shared.js           # 공통 모듈 (Gemini API 키 관리 — 양 페이지 공유)
+│   ├── constants.js        # 트랙 통합 데이터 (TRACKS·TRACK_KEYS·커리큘럼·상수)
+│   ├── app.js              # GAP 분석 로직 (폼 흐름, API 호출, 결과 렌더링)
+│   ├── aptitude-data.js    # 시나리오 A 정적 데이터 (PERSONAS·QUESTIONS·MAX_SCORES)
+│   └── aptitude.js         # 시나리오 A 로직 (퀴즈 흐름, 점수 계산, 결과 렌더링)
 ├── data/
 │   ├── academy.json        # 학원 기본 정보
 │   ├── common-courses.json # 공통 기초 과목 데이터
@@ -236,9 +238,39 @@ https://yulgoklee.github.io/sbs-gap-analysis/ 접속 확인
 
 ---
 
+## 스크립트 로딩 순서
+
+| 페이지 | 로딩 순서 |
+|---|---|
+| `gap-analysis.html` | `shared.js` → `constants.js` → `app.js` |
+| `aptitude-test.html` | `shared.js` → `constants.js` → `aptitude-data.js` → `aptitude.js` |
+
+---
+
 ## 버전 히스토리
 
-### v1.6.0 (현재)
+### v1.7.0 (현재)
+
+**토큰 최적화 및 코드 리팩토링**
+
+- [x] **Gemini API 호출 최적화**
+  - `aptitude.js` `callGemini()`에 `maxOutputTokens: 350` 추가 (기존 무제한 → 제한)
+  - `app.js` `maxOutputTokens: 3000` → `1500` 축소
+  - `buildUserInput()` 스테이지 문자열 압축 (`표준 2개월` → `/2M`, 구분자 `·` 등)
+  - 적성검사 AI 점수 전송 범위: 전체 9트랙 → **상위 3트랙만** 전송
+- [x] **공통 모듈 분리 — `js/shared.js` 신규**
+  - `saveApiKey()`, `changeApiKey()`, API 키 로드 DOMContentLoaded 핸들러를 `shared.js`로 추출
+  - `app.js`와 `aptitude.js`의 중복 코드 완전 제거
+- [x] **트랙 데이터 단일화 — `constants.js` 통합**
+  - `aptitude.js`의 `TRACKS` (아이콘·색상·lore 등) + `constants.js`의 `TRACK_AFTER_DATA` (직업·커리큘럼·연봉) → 단일 `TRACKS` 객체로 병합
+  - `TRACK_KEYS` 배열 `constants.js`로 이전
+  - `salary` 표현 통일: 문자열 → `{ min, max }` 객체
+  - `app.js`의 `TRACK_NAMES` 제거 → `TRACKS[key].name` 직접 참조
+- [x] **`aptitude.js` 데이터/로직 분리 — `js/aptitude-data.js` 신규**
+  - `PERSONAS` (16가지 조합), `QUESTIONS` (25문항), `MAX_SCORES`, `SECTION_LABELS` → `aptitude-data.js`로 분리
+  - `aptitude.js`는 퀴즈 흐름·점수 계산·결과 렌더링 **로직만** 보유
+
+### v1.6.0
 - [x] **적성검사 문항 재설계** — 30문항 → **25문항** 3섹션 (감각의 예민도·사고의 습관·가치와 비전)
 - [x] **결과지 페르소나 블록 추가** — 1순위+2순위 조합 기반 16가지 페르소나 (이름·특징·AI 시너지)
 - [x] **HTML 리팩토링** — `aptitude-test.html` 단일 파일 → `css/aptitude.css` + `js/aptitude.js` + `aptitude-test.html` 3파일 분리
@@ -298,7 +330,7 @@ https://yulgoklee.github.io/sbs-gap-analysis/ 접속 확인
 
 ## 다음 버전 예정 작업
 
-### v1.6.0 - 피드백 반영 및 기능 추가
+### v1.8.0 - 피드백 반영 및 기능 추가
 - [ ] 사람 테스트 피드백 기반 UI/UX 개선
 - [ ] API 에러 핸들링 강화
 - [ ] 상담 이력 저장 기능
@@ -310,7 +342,7 @@ https://yulgoklee.github.io/sbs-gap-analysis/ 접속 확인
 
 ```
 이 README를 참고해서 작업을 이어가줘.
-현재 버전: v1.5.0
+현재 버전: v1.7.0
 배포 URL: https://yulgoklee.github.io/sbs-gap-analysis/
 작업할 내용: [여기에 작업 내용 입력]
 ```

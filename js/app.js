@@ -1,46 +1,20 @@
 // ═══════════════════════════════════════════════════════
-//  STATE
+//  STATE  (apiKey · LS_KEY · saveApiKey · changeApiKey → shared.js)
 // ═══════════════════════════════════════════════════════
-let apiKey        = '';
 let selectedTrack = '';
 let aiToolLevel   = 0;
 let skillLevels   = {};
 let analysisResult = null;
 
-const TRACK_NAMES = {
-  motion: '모션/영상', interior: '건축/인테리어', visual_editing: '시각/편집디자인',
-  web: '웹디자인', cg_maya: 'CG/마야', it_programming: 'IT/프로그래밍',
-  ai: 'AI', artwork: '아트웍', certification: '자격증 과정'
-};
+// TRACK_NAMES → TRACKS[key].name (constants.js 참조)
 
 // ═══════════════════════════════════════════════════════
-//  API KEY
+//  INIT — 적성검사(A)에서 트랙 파라미터로 넘어온 경우 자동 선택
 // ═══════════════════════════════════════════════════════
-const LS_KEY = 'sbs_gemini_api_key';
-
-function saveApiKey() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key) { alert('API 키를 입력해주세요.'); return; }
-  apiKey = key;
-  localStorage.setItem(LS_KEY, key);
-  document.getElementById('apiModal').style.display = 'none';
-}
-
-function changeApiKey() {
-  document.getElementById('apiKeyInput').value = localStorage.getItem(LS_KEY) || '';
-  document.getElementById('apiModal').style.display = 'flex';
-}
-
 window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem(LS_KEY);
-  if (saved) { apiKey = saved; document.getElementById('apiModal').style.display = 'none'; }
-
-  // 적성검사(A)에서 트랙 파라미터로 넘어온 경우 자동 선택
-  const urlParams = new URLSearchParams(window.location.search);
-  const trackParam = urlParams.get('track');
-  if (trackParam && TRACK_NAMES[trackParam]) {
+  const trackParam = new URLSearchParams(window.location.search).get('track');
+  if (trackParam && TRACKS[trackParam]) {
     selectTrack(trackParam);
-    // 이름 입력창으로 포커스 이동
     setTimeout(() => document.getElementById('name').focus(), 300);
   }
 });
@@ -203,13 +177,13 @@ function buildUserInput() {
 
   const radarConfig = TRACK_RADAR_CONFIG[selectedTrack] || TRACK_RADAR_CONFIG.certification;
   const stagesStr   = (TRACK_ROADMAP_STAGES[selectedTrack] || [])
-    .map((s, i) => `  ${i+1}. [${s.stage}] ${s.courses.join(', ')} → ${s.outcome} (표준 ${s.months}개월)`)
+    .map((s, i) => `${i+1}.[${s.stage}/${s.months}M] ${s.courses.join('·')}→${s.outcome}`)
     .join('\n');
 
   return `[고객 정보]
 - 이름: ${document.getElementById('name').value}
 - 현재 신분: ${statusMap[statusVal] || '미선택'}
-- 희망 트랙: ${TRACK_NAMES[selectedTrack]}
+- 희망 트랙: ${TRACKS[selectedTrack].name}
 - AI 도구 활용: ${AI_TOOL_LEVELS[aiToolLevel]}
 
 [현재 툴 수준 (0=없음/1=독학/2=학원수강/3=자격증/4=실무경험)]
@@ -269,7 +243,7 @@ async function callGemini(userInput, systemPrompt) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: systemPrompt + '\n\n' + userInput }] }],
-        generationConfig: { temperature: 0.5, maxOutputTokens: 3000 }
+        generationConfig: { temperature: 0.5, maxOutputTokens: 1500 }
       })
     }
   );
@@ -313,7 +287,7 @@ function calcFallbackAnalysis() {
   return {
     strong_points: strong.length ? strong : ['학습 준비 완료 — 기초부터 체계적으로 시작 가능'],
     weak_points:   weak,
-    gap_description: `${TRACK_NAMES[selectedTrack]} 트랙의 표준 커리큘럼에 따라 학습을 시작합니다.`
+    gap_description: `${TRACKS[selectedTrack].name} 트랙의 표준 커리큘럼에 따라 학습을 시작합니다.`
   };
 }
 
@@ -328,7 +302,7 @@ function renderResult(r, isAiFallback) {
   // 헤더
   document.getElementById('resultTitle').textContent   = `${name}님의 GAP 분석 결과`;
   document.getElementById('resultSubtitle').textContent =
-    `${TRACK_NAMES[selectedTrack]} 트랙 · ${new Date().toLocaleDateString('ko-KR')} 기준`;
+    `${TRACKS[selectedTrack].name} 트랙 · ${new Date().toLocaleDateString('ko-KR')} 기준`;
 
   // ① After 섹션
   renderAfterSection();
@@ -345,7 +319,7 @@ function renderResult(r, isAiFallback) {
 
 // ── ① After ──────────────────────────────────────────
 function renderAfterSection() {
-  const track = TRACK_AFTER_DATA[selectedTrack];
+  const track = TRACKS[selectedTrack];
   if (!track) return;
 
   const card = document.getElementById('afterCard');
@@ -355,7 +329,7 @@ function renderAfterSection() {
     <div class="after-card-top">
       <div class="after-track-icon">${track.icon}</div>
       <div>
-        <div class="after-track-label">${TRACK_NAMES[selectedTrack].toUpperCase()} TRACK</div>
+        <div class="after-track-label">${TRACKS[selectedTrack].name.toUpperCase()} TRACK</div>
         <div class="after-job-title">${track.jobTitle}</div>
       </div>
     </div>
@@ -450,7 +424,7 @@ function renderRoadmapSection(r, isAiFallback) {
     ? r.roadmap_stages
     : TRACK_ROADMAP_STAGES[selectedTrack] || [];
 
-  const track = TRACK_AFTER_DATA[selectedTrack];
+  const track = TRACKS[selectedTrack];
   const accentColor = track ? track.color : 'var(--primary)';
 
   document.getElementById('stageTimeline').innerHTML = stages.map((s, i) => `
@@ -471,7 +445,7 @@ function renderRoadmapSection(r, isAiFallback) {
 
   // 기간 요약
   const dur = (!isAiFallback && r && r.total_duration) ? r.total_duration : null;
-  const trackDur = TRACK_AFTER_DATA[selectedTrack]?.duration;
+  const trackDur = TRACKS[selectedTrack]?.duration;
   const durationEl = document.getElementById('durationSummary');
 
   if (dur && dur.personalized_min && dur.personalized_min !== dur.standard_months) {
