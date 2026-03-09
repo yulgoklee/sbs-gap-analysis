@@ -188,19 +188,31 @@ function renderResult(scores, avg, commentary) {
   // 일러스트 렌더링
   const illEl = document.getElementById('personaIllust');
   if (illEl && persona) {
-    const subs = (persona.illSubs || []).map(e =>
-      `<span class="ill-sub">${e}</span>`
-    ).join('');
-    illEl.innerHTML = `
-      <div class="ill-bg" style="background:${persona.illBg}">
-        <div class="ill-pattern"></div>
-        <div class="ill-content">
+    if (persona.illImg) {
+      // 이미지 파일 경로를 URL 인코딩 (한글·공백 처리)
+      const imgSrc = persona.illImg.split('/').map(encodeURIComponent).join('/');
+      illEl.innerHTML = `
+        <div class="ill-bg ill-bg--img" style="background:${persona.illBg}">
+          <div class="ill-pattern"></div>
+          <img class="ill-img" src="${imgSrc}" alt="${persona.name}" />
           <span class="ill-tag">${persona.illTag || ''}</span>
-          <div class="ill-main-icon">${persona.illIcon || '🎨'}</div>
-          <div class="ill-subs">${subs}</div>
-        </div>
-        <div class="ill-glow" style="background:${persona.illBg}"></div>
-      </div>`;
+        </div>`;
+    } else {
+      // 이미지 없을 때 이모지 폴백
+      const subs = (persona.illSubs || []).map(e =>
+        `<span class="ill-sub">${e}</span>`
+      ).join('');
+      illEl.innerHTML = `
+        <div class="ill-bg" style="background:${persona.illBg}">
+          <div class="ill-pattern"></div>
+          <div class="ill-content">
+            <span class="ill-tag">${persona.illTag || ''}</span>
+            <div class="ill-main-icon">${persona.illIcon || '🎨'}</div>
+            <div class="ill-subs">${subs}</div>
+          </div>
+          <div class="ill-glow" style="background:${persona.illBg}"></div>
+        </div>`;
+    }
   }
 
   if (persona) {

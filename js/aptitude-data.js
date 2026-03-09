@@ -14,9 +14,8 @@ const PERSONAS = {
     trait: '손끝의 감각이 뛰어나며 나만의 화풍을 만드는 데 집중합니다.',
     ai:   '생성형 AI(Midjourney 등)를 활용해 아이디어 스케치 시간을 단축합니다.',
     illBg: 'linear-gradient(135deg,#7c3aed,#a855f7,#c084fc)',
-    illIcon: '🎨',
-    illSubs: ['✏️','🖼️','✨'],
-    illTag: 'DIGITAL ARTIST'
+    illIcon: '🎨', illSubs: ['✏️','🖼️','✨'], illTag: 'DIGITAL ARTIST',
+    illImg: 'image/persona/1. 디지털캔버스예술가.png'
   },
   'artwork|cg_maya': {
     name: '게임 컨셉 아티스트',
@@ -24,9 +23,8 @@ const PERSONAS = {
     trait: '상상 속 세계관과 캐릭터를 구체화하는 일에 희열을 느낍니다.',
     ai:   'AI로 질감(Texture) 소스를 생성하여 작업의 디테일을 높입니다.',
     illBg: 'linear-gradient(135deg,#6d28d9,#4f46e5,#7c3aed)',
-    illIcon: '🎮',
-    illSubs: ['🖌️','⚔️','🌌'],
-    illTag: 'CONCEPT ARTIST'
+    illIcon: '🎮', illSubs: ['🖌️','⚔️','🌌'], illTag: 'CONCEPT ARTIST',
+    illImg: 'image/persona/2. 게임컨셉아티스트.png'
   },
   'visual_editing|artwork': {
     name: '브랜드 크리에이티브 디렉터',
@@ -34,9 +32,8 @@ const PERSONAS = {
     trait: '기업의 정체성을 시각적으로 정립하고 로고부터 패키지까지 총괄합니다.',
     ai:   'AI 브랜딩 도구로 수백 개의 시안을 초고속으로 검토합니다.',
     illBg: 'linear-gradient(135deg,#0052cc,#2563eb,#3b82f6)',
-    illIcon: '✒️',
-    illSubs: ['🏷️','🎯','💡'],
-    illTag: 'CREATIVE DIRECTOR'
+    illIcon: '✒️', illSubs: ['🏷️','🎯','💡'], illTag: 'CREATIVE DIRECTOR',
+    illImg: 'image/persona/3. 브랜드크리에이티브디렉터.png'
   },
   'visual_editing|web': {
     name: '올라운드 광고 디자이너',
@@ -44,9 +41,8 @@ const PERSONAS = {
     trait: '온·오프라인을 넘나드는 상업 디자인의 실무 최강자입니다.',
     ai:   '광고 카피라이팅 AI와 결합해 기획부터 디자인까지 1인 제작을 실현합니다.',
     illBg: 'linear-gradient(135deg,#1d4ed8,#0369a1,#0284c7)',
-    illIcon: '📐',
-    illSubs: ['🖥️','📣','💎'],
-    illTag: 'AD DESIGNER'
+    illIcon: '📐', illSubs: ['🖥️','📣','💎'], illTag: 'AD DESIGNER',
+    illImg: 'image/persona/4. 에디토리얼디자인전문가.png'
   },
   'web|it_programming': {
     name: '사용자 경험(UX) 설계자',
@@ -54,9 +50,8 @@ const PERSONAS = {
     trait: '사용자의 마음을 읽고 가장 편리한 디지털 서비스의 흐름을 설계합니다.',
     ai:   'AI 분석 도구로 사용자 데이터를 파악해 최적의 UI를 자동 제안받습니다.',
     illBg: 'linear-gradient(135deg,#0891b2,#0e7490,#164e63)',
-    illIcon: '🖥️',
-    illSubs: ['⚡','🔗','📱'],
-    illTag: 'UX DESIGNER'
+    illIcon: '🖥️', illSubs: ['⚡','🔗','📱'], illTag: 'UX DESIGNER',
+    illImg: 'image/persona/5. UX설계자.png'
   },
   'web|motion': {
     name: '디지털 미디어 아티스트',
@@ -64,9 +59,8 @@ const PERSONAS = {
     trait: '정적인 웹을 넘어 생동감 있게 움직이는 인터랙티브 웹을 구축합니다.',
     ai:   'AI 코딩 보조로 복잡한 인터랙션 구현 시간을 획기적으로 줄입니다.',
     illBg: 'linear-gradient(135deg,#0369a1,#7c3aed,#a855f7)',
-    illIcon: '🌐',
-    illSubs: ['✨','🎭','💫'],
-    illTag: 'MEDIA ARTIST'
+    illIcon: '🌐', illSubs: ['✨','🎭','💫'], illTag: 'MEDIA ARTIST',
+    illImg: 'image/persona/6. 인터렉티브웹아티스트.png'
   },
   'motion|visual_editing': {
     name: '시네마틱 영상 연출가',
@@ -74,9 +68,8 @@ const PERSONAS = {
     trait: '영상의 리듬과 연출력을 활용해 강렬한 메시지를 전달합니다.',
     ai:   'AI 영상 편집 도구로 컷 편집과 자막 작업을 자동화하고 연출에만 집중합니다.',
     illBg: 'linear-gradient(135deg,#dc2626,#b91c1c,#7f1d1d)',
-    illIcon: '🎬',
-    illSubs: ['🎞️','🎥','🌟'],
-    illTag: 'FILM DIRECTOR'
+    illIcon: '🎬', illSubs: ['🎞️','🎥','🌟'], illTag: 'FILM DIRECTOR',
+    illImg: 'image/persona/7. 모션그래픽스토리텔러.png'
   },
   'motion|cg_maya': {
     name: '하이브리드 모션 디렉터',
@@ -84,9 +77,8 @@ const PERSONAS = {
     trait: '그래픽 움직임을 넘어 입체적인 공간감까지 다루는 고숙련 영상가입니다.',
     ai:   'AI 업스케일링 기술로 저화질 소스를 고화질 영상으로 즉시 변환합니다.',
     illBg: 'linear-gradient(135deg,#c2410c,#ea580c,#f97316)',
-    illIcon: '🎬',
-    illSubs: ['🌀','💥','🔮'],
-    illTag: 'MOTION DIRECTOR'
+    illIcon: '🎬', illSubs: ['🌀','💥','🔮'], illTag: 'MOTION DIRECTOR',
+    illImg: 'image/persona/8. 방송영상편집 전문가.png'
   },
   'cg_maya|interior': {
     name: '가상 현실 빌더',
@@ -94,9 +86,8 @@ const PERSONAS = {
     trait: '현실보다 더 실제 같은 3D 공간과 건축물을 가상 세계에 구현합니다.',
     ai:   'AI 렌더링 최적화 기술로 무거운 작업도 빠르게 결과물을 뽑아냅니다.',
     illBg: 'linear-gradient(135deg,#0f766e,#0d9488,#14b8a6)',
-    illIcon: '🏛️',
-    illSubs: ['🌐','🔷','✨'],
-    illTag: 'VR BUILDER'
+    illIcon: '🏛️', illSubs: ['🌐','🔷','✨'], illTag: 'VR BUILDER',
+    illImg: 'image/persona/9. 시네마틱VFX마스터.png'
   },
   'cg_maya|motion': {
     name: 'VFX 특수효과 전문가',
@@ -104,9 +95,8 @@ const PERSONAS = {
     trait: '영화나 게임의 시각적 완성도를 결정짓는 화려한 특수효과를 창조합니다.',
     ai:   'AI 로토스코핑(배경 분리) 기술로 단순 노가다 작업을 자동 해결합니다.',
     illBg: 'linear-gradient(135deg,#7c3aed,#dc2626,#f97316)',
-    illIcon: '💥',
-    illSubs: ['✨','🎇','🔥'],
-    illTag: 'VFX ARTIST'
+    illIcon: '💥', illSubs: ['✨','🎇','🔥'], illTag: 'VFX ARTIST',
+    illImg: 'image/persona/10. 3D캐릭터모델러.png'
   },
   'interior|cg_maya': {
     name: '감성 공간 디자이너',
@@ -114,9 +104,8 @@ const PERSONAS = {
     trait: '심미적인 아름다움과 공간의 공기를 디자인하는 예술가형 설계자입니다.',
     ai:   'AI로 평면도를 3D 공간으로 즉시 변환해 클라이언트 미팅 효율을 높입니다.',
     illBg: 'linear-gradient(135deg,#059669,#10b981,#34d399)',
-    illIcon: '🛋️',
-    illSubs: ['💡','🪴','🏡'],
-    illTag: 'SPACE DESIGNER'
+    illIcon: '🛋️', illSubs: ['💡','🪴','🏡'], illTag: 'SPACE DESIGNER',
+    illImg: 'image/persona/11. 공간시나리오기획자.png'
   },
   'interior|certification': {
     name: '공간 실무 기술자',
@@ -124,9 +113,8 @@ const PERSONAS = {
     trait: '도면 설계부터 현장 관리, 자격증까지 겸비한 실무형 전문가입니다.',
     ai:   'AI 적산 프로그램을 통해 자재량과 공사 비용을 오차 없이 계산합니다.',
     illBg: 'linear-gradient(135deg,#047857,#065f46,#064e3b)',
-    illIcon: '📐',
-    illSubs: ['🏗️','🔧','📋'],
-    illTag: 'SPACE ENGINEER'
+    illIcon: '📐', illSubs: ['🏗️','🔧','📋'], illTag: 'SPACE ENGINEER',
+    illImg: 'image/persona/12. VMD및전시디자이너.png'
   },
   'it_programming|web': {
     name: '풀스택 웹 엔지니어',
@@ -134,9 +122,8 @@ const PERSONAS = {
     trait: '보이지 않는 서버의 논리와 보이는 디자인의 연결을 완벽히 이해합니다.',
     ai:   'GitHub Copilot 같은 AI 비서를 활용해 코드 에러를 실시간으로 교정합니다.',
     illBg: 'linear-gradient(135deg,#1e40af,#1d4ed8,#2563eb)',
-    illIcon: '💻',
-    illSubs: ['🔗','⚙️','🚀'],
-    illTag: 'FULLSTACK ENGINEER'
+    illIcon: '💻', illSubs: ['🔗','⚙️','🚀'], illTag: 'FULLSTACK ENGINEER',
+    illImg: 'image/persona/13. 풀스택웹엔지니어.png'
   },
   'it_programming|certification': {
     name: '논리적 시스템 분석가',
@@ -144,9 +131,8 @@ const PERSONAS = {
     trait: '복잡한 데이터를 다루고 안정적인 시스템을 구축하는 문제 해결사입니다.',
     ai:   'AI 데이터 분석 기능을 통해 복잡한 비즈니스 로직을 자동화합니다.',
     illBg: 'linear-gradient(135deg,#1e3a8a,#1e40af,#3730a3)',
-    illIcon: '⚙️',
-    illSubs: ['📊','🔍','🧩'],
-    illTag: 'SYSTEMS ANALYST'
+    illIcon: '⚙️', illSubs: ['📊','🔍','🧩'], illTag: 'SYSTEMS ANALYST',
+    illImg: 'image/persona/14. 데이터시각화전문가.png'
   },
   'certification|it_programming': {
     name: '스마트 비즈니스 운영자',
@@ -154,9 +140,8 @@ const PERSONAS = {
     trait: '오피스 툴과 데이터 관리 능력을 바탕으로 기업의 운영 효율을 높입니다.',
     ai:   'ChatGPT를 활용해 복잡한 문서 요약, 보고서 작성, 메일 응대를 자동화합니다.',
     illBg: 'linear-gradient(135deg,#b45309,#d97706,#f59e0b)',
-    illIcon: '📋',
-    illSubs: ['💼','📈','🖥️'],
-    illTag: 'BIZ OPERATOR'
+    illIcon: '📋', illSubs: ['💼','📈','🖥️'], illTag: 'BIZ OPERATOR',
+    illImg: 'image/persona/15. 스마트비즈니스운영자.png'
   },
   'certification|visual_editing': {
     name: '디자인 실무 행정가',
@@ -164,9 +149,8 @@ const PERSONAS = {
     trait: '행정 업무는 물론, 간단한 홍보물 제작까지 가능한 멀티플레이어입니다.',
     ai:   'Canva/Adobe Express AI로 전문 디자이너 없이도 고퀄리티 홍보물을 만듭니다.',
     illBg: 'linear-gradient(135deg,#92400e,#b45309,#d97706)',
-    illIcon: '📄',
-    illSubs: ['🎨','✉️','📌'],
-    illTag: 'DESIGN ADMIN'
+    illIcon: '📄', illSubs: ['🎨','✉️','📌'], illTag: 'DESIGN ADMIN',
+    illImg: 'image/persona/16. 콘텐츠전략매니저.jpg'
   },
 };
 

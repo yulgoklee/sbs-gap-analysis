@@ -208,6 +208,12 @@
   position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
 }
+/* 이미지 모드: 높이 확장 */
+.ill-bg--img {
+  height: 220px;
+  align-items: flex-end;
+  justify-content: center;
+}
 .ill-pattern {
   position: absolute; inset: 0;
   background-image:
@@ -217,6 +223,17 @@
       transparent, transparent 24px,
       rgba(255,255,255,0.02) 24px, rgba(255,255,255,0.02) 25px);
   pointer-events: none;
+}
+/* 페르소나 이미지 */
+.ill-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 8px 8px 0;
+  box-sizing: border-box;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.45));
+  animation: ill-float 5s ease-in-out infinite;
 }
 .ill-glow {
   position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%);
@@ -231,11 +248,15 @@
 }
 .ill-tag {
   font-size: 8px; font-weight: 900; letter-spacing: 2.5px;
-  color: rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px; padding: 3px 10px;
+  color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px; padding: 4px 12px;
   text-transform: uppercase;
+  /* 이미지 모드에서 하단 오버레이 배지 */
+  position: relative; z-index: 3;
+  margin-bottom: 10px;
+  backdrop-filter: blur(6px);
 }
 .ill-main-icon {
   font-size: 54px; line-height: 1;
@@ -590,6 +611,7 @@
   .result-grid { grid-template-columns: 1fr !important; }
   .persona-block { position: static; }
   .ill-bg { height: 140px; }
+  .ill-bg--img { height: 180px; }
   .ill-main-icon { font-size: 44px; }
   .persona-header { padding: 16px 18px 12px; }
   .persona-name   { font-size: 18px; }
