@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>결과 미리보기 | 적성검사</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/aptitude.css" />
+  <style>
+    .preview-bar {
+      background: #0d1117;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 64px;
+      z-index: 90;
+    }
+    .preview-bar-label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #7C3AED;
+      white-space: nowrap;
+      padding: 3px 10px;
+      border: 1px solid rgba(124,58,237,0.4);
+      border-radius: 20px;
+    }
+    .preview-bar select {
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
+      color: white;
+      font-size: 13px;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+    }
+    .preview-bar select option { background: #1a1e3c; color: white; }
+    .preview-bar label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.45);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .preview-bar-field { display: flex; flex-direction: column; }
+    .btn-preview {
+      padding: 9px 22px;
+      background: #7C3AED;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      transition: background .2s;
+      margin-left: 4px;
+    }
+    .btn-preview:hover { background: #6D28D9; }
+    .preview-hint {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      margin-left: auto;
+    }
+    #noResultMsg {
+      text-align: center;
+      padding: 80px 24px;
+      color: rgba(255,255,255,0.3);
+      font-size: 14px;
+    }
+    #noResultMsg .nr-icon { font-size: 48px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div style="display:flex; align-items:center; gap:16px">
+    <a href="aptitude-test.html" style="color:rgba(255,255,255,0.7); text-decoration:none; font-size:13px; display:flex; align-items:center; gap:4px; opacity:0.8; transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">← 검사</a>
+    <div>
+      <div class="logo-text">SBS ACADEMY</div>
+      <div class="subtitle">컴퓨터아트학원 수원점 · 결과 미리보기</div>
+    </div>
+  </div>
+  <div class="badge">🛠 PREVIEW</div>
+</header>
+
+<!-- 컨트롤 바 -->
+<div class="preview-bar">
+  <span class="preview-bar-label">🛠 PREVIEW MODE</span>
+
+  <div class="preview-bar-field">
+    <label>1순위 트랙</label>
+    <select id="track1Select"></select>
+  </div>
+  <div class="preview-bar-field">
+    <label>2순위 트랙</label>
+    <select id="track2Select"></select>
+  </div>
+  <div class="preview-bar-field">
+    <label>1순위 점수</label>
+    <select id="score1Select">
+      <option value="95">95점</option>
+      <option value="85">85점</option>
+      <option value="75" selected>75점</option>
+      <option value="65">65점</option>
+      <option value="55">55점</option>
+    </select>
+  </div>
+  <div class="preview-bar-field">
+    <label>2순위 점수</label>
+    <select id="score2Select">
+      <option value="70">70점</option>
+      <option value="60">60점</option>
+      <option value="55" selected>55점</option>
+      <option value="45">45점</option>
+    </select>
+  </div>
+  <div class="preview-bar-field">
+    <label>AI 코멘트</label>
+    <select id="commentSelect">
+      <option value="mock">목 텍스트 사용</option>
+      <option value="none">없음</option>
+    </select>
+  </div>
+
+  <button class="btn-preview" onclick="showPreview()">▶ 결과 보기</button>
+  <span class="preview-hint">검사 없이 결과 화면만 확인</span>
+</div>
+
+<!-- 결과 없을 때 안내 -->
+<div id="noResultMsg">
+  <div class="nr-icon">🎯</div>
+  트랙과 점수를 선택하고 <strong>결과 보기</strong>를 눌러주세요
+</div>
+
+<!-- ════════ RESULT ════════ -->
+<div id="resultScreen" style="display:none;" class="apt-main">
+
+  <!-- 완료 배너 -->
+  <div class="result-done-banner" id="doneBanner" style="display:none">
+    <div class="done-check">✓</div>
+    <div class="done-copy">
+      <div class="done-title">검사 완료 — 당신의 길이 보입니다</div>
+      <div class="done-meta" id="doneMeta">25개 응답 분석 완료 · 9개 트랙 중 최적 매칭</div>
+    </div>
+  </div>
+
+  <!-- 결과 그리드: 좌-페르소나 / 우-1순위+2순위 -->
+  <div class="result-grid" id="resultGrid" style="display:none">
+
+    <!-- 좌: 페르소나 -->
+    <div class="persona-block" id="personaBlock" style="display:none">
+      <div class="persona-header">
+        <span class="persona-badge">✦ MY PERSONA</span>
+        <div class="persona-name" id="personaName"></div>
+        <div class="persona-combo" id="personaCombo"></div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-section">
+          <span class="persona-section-label persona-trait-label">✦ 특징</span>
+          <p class="persona-section-text" id="personaTrait"></p>
+        </div>
+        <div class="persona-section">
+          <span class="persona-section-label persona-ai-label">🤖 AI 시너지</span>
+          <p class="persona-section-text" id="personaAi"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 우: 1순위 + 2순위 스택 -->
+    <div class="result-ranks" id="resultRanks">
+
+      <!-- 1순위 블록 -->
+      <div class="rank1-block" id="rank1Block" style="display:none">
+        <div class="rank1-hd" id="rank1Hd"></div>
+        <div class="rank1-reason" id="rank1Reason" style="display:none">
+          <div class="rank1-reason-label">🤖 AI ANALYSIS</div>
+          <div class="rank1-reason-text" id="rank1ReasonText"></div>
+        </div>
+        <div class="rank1-career" id="rank1Career"></div>
+        <div class="rank1-salary-strip" id="rank1Salary"></div>
+        <div class="rank1-footer"></div>
+      </div>
+
+      <!-- 구분선 -->
+      <div class="rank-divider" id="rankDivider" style="display:none">
+        <div class="rank-divider-line"></div>
+        <span class="rank-divider-text">함께 고려할 2순위 경로</span>
+        <div class="rank-divider-line"></div>
+      </div>
+
+      <!-- 2순위 블록 -->
+      <div class="rank2-block" id="rank2Block" style="display:none"></div>
+
+    </div>
+  </div>
+
+  <!-- 비정상 모드 배너 -->
+  <div id="fallbackBanner" style="display:none"></div>
+
+  <!-- 멘토 박스 -->
+  <div id="mentorBox" class="mentor-box" style="display:none">
+    <p><strong id="mentorTitle"></strong><br/><span class="mentor-msg"></span></p>
+  </div>
+
+  <!-- 액션 버튼 -->
+  <div class="action-row">
+    <button class="btn-gap" id="btnGoGap" style="display:none">📊 GAP 분석 시작하기</button>
+    <button class="btn-retry" onclick="resetPreview()">↺ 초기화</button>
+  </div>
+
+</div>
+
+<!-- shared.js 대신 목 선언 -->
+<!-- apiKey: aptitude.js가 참조, shared.js가 원래 선언함 -->
+<!-- topTrackKey: aptitude.js 내부에서 let으로 선언 → 여기서 중복 선언 금지 -->
+<script>
+var apiKey = null; // aptitude.js에서 let 선언 없음 (shared.js 담당) → var OK
+function saveApiKey() {}
+function changeApiKey() {}
+function goToGap() { alert('GAP 분석은 실제 검사 페이지에서 연결됩니다.'); }
+</script>
+<script src="js/constants.js"></script>
+<script src="js/aptitude-data.js"></script>
+<script src="js/aptitude.js"></script>
+<script>
+// aptitude.js의 retryQuiz 오버라이드
+function retryQuiz() { resetPreview(); }
+
+// 트랙 셀렉트 초기화
+window.addEventListener('DOMContentLoaded', () => {
+  const t1el = document.getElementById('track1Select');
+  const t2el = document.getElementById('track2Select');
+
+  TRACK_KEYS.forEach((k, i) => {
+    const name = TRACKS[k].name;
+    const o1 = new Option(name, k, i === 7, i === 7); // artwork 기본
+    const o2 = new Option(name, k, i === 2, i === 2); // visual_editing 기본
+    t1el.add(o1);
+    t2el.add(o2);
+  });
+});
+
+function showPreview() {
+  const k1 = document.getElementById('track1Select').value;
+  const k2 = document.getElementById('track2Select').value;
+  const s1 = parseInt(document.getElementById('score1Select').value);
+  const s2 = parseInt(document.getElementById('score2Select').value);
+  const commentMode = document.getElementById('commentSelect').value;
+
+  if (k1 === k2) {
+    alert('1순위와 2순위는 서로 다른 트랙을 선택해주세요.');
+    return;
+  }
+
+  // 테스트용 점수 빌드
+  const scores = {};
+  TRACK_KEYS.forEach(k => { scores[k] = 18; });
+  scores[k1] = s1;
+  scores[k2] = s2;
+
+  const avg = Math.round(TRACK_KEYS.reduce((s, k) => s + scores[k], 0) / TRACK_KEYS.length);
+
+  const mockComment = commentMode === 'mock'
+    ? `[미리보기] 감각적인 관찰력과 창의적인 사고력이 돋보이는 당신은 시각적 표현에서 탁월한 잠재력을 보이고 있어요. ${TRACKS[k1].name} 분야에서 당신의 섬세한 감각이 빛을 발할 수 있습니다. ${TRACKS[k2].name}과의 조합으로 더욱 넓은 활동 범위를 기대해볼 수 있어요. SBS 아카데미에서 첫걸음을 함께 시작해봐요!`
+    : '';
+
+  document.getElementById('noResultMsg').style.display = 'none';
+  renderResult(scores, avg, mockComment);
+
+  // 결과 화면으로 스크롤
+  setTimeout(() => {
+    document.getElementById('resultScreen').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+function resetPreview() {
+  document.getElementById('resultScreen').style.display = 'none';
+  document.getElementById('noResultMsg').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
