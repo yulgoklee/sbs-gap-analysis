@@ -79,6 +79,28 @@ function calcScores() {
 }
 
 // ═══════════════════════════════════════════════════════
+//  16가지 고정 결과 스냅 로직
+//  → 점수가 어떻게 나와도 반드시 16개 PERSONAS 중 하나로 귀결
+// ═══════════════════════════════════════════════════════
+function snapToValidPersona(scores) {
+  const validKeys = Object.keys(PERSONAS);
+  let bestKey   = validKeys[0];
+  let bestScore = -1;
+
+  validKeys.forEach(key => {
+    const [a, b] = key.split('|');
+    // 1순위 트랙 점수에 가중치를 줘서 1순위 중심으로 매칭
+    const s = (scores[a] || 0) * 1.5 + (scores[b] || 0);
+    if (s > bestScore) {
+      bestScore = s;
+      bestKey   = key;
+    }
+  });
+
+  return bestKey.split('|'); // [k1, k2]
+}
+
+// ═══════════════════════════════════════════════════════
 //  SUBMIT & API
 // ═══════════════════════════════════════════════════════
 async function submitQuiz() {
@@ -86,24 +108,22 @@ async function submitQuiz() {
   document.getElementById('loadingScreen').style.display = 'block';
 
   const scores = calcScores();
-  const sorted = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
-  topTrackKey  = sorted[0];
   const avg    = Math.round(TRACK_KEYS.reduce((s, k) => s + scores[k], 0) / TRACK_KEYS.length);
 
   let commentary = '';
-  if (apiKey) { commentary = await callGemini(scores, sorted[0], sorted[1], avg); }
+  if (apiKey) { commentary = await callGemini(scores, avg); }
 
   document.getElementById('loadingScreen').style.display = 'none';
   renderResult(scores, avg, commentary);
 }
 
-async function callGemini(scores, top1Key, top2Key, avg) {
+async function callGemini(scores, avg) {
+  const [top1Key, top2Key] = snapToValidPersona(scores);
   const t1 = TRACKS[top1Key], t2 = TRACKS[top2Key];
   const yesA = QUESTIONS.filter((q,i) => q.section==='A' && answers[i]===1).length;
   const yesB = QUESTIONS.filter((q,i) => q.section==='B' && answers[i]===1).length;
   const yesC = QUESTIONS.filter((q,i) => q.section==='C' && answers[i]===1).length;
 
-  // 상위 3개 트랙만 전송 (전체 9개 불필요)
   const top3 = [...TRACK_KEYS].sort((a,b) => scores[b]-scores[a]).slice(0, 3);
   const scoreLines = top3.map(k => `${TRACKS[k].name}:${scores[k]}점`).join(', ');
 
@@ -136,199 +156,276 @@ JSON 없이 순수 텍스트만 반환.`;
 }
 
 // ═══════════════════════════════════════════════════════
-//  RESULT MODE
-// ═══════════════════════════════════════════════════════
-function getResultMode(scores, avg) {
-  const sorted = [...TRACK_KEYS].sort((a,b) => scores[b]-scores[a]);
-  const gap    = scores[sorted[0]] - avg;
-  if (avg < 20) return 'low';
-  if (gap < 12 && avg > 65) return 'allHigh';
-  if (gap < 12) return 'neutral';
-  return 'normal';
-}
-
-// ═══════════════════════════════════════════════════════
 //  RESULT RENDERING
 // ═══════════════════════════════════════════════════════
 function renderResult(scores, avg, commentary) {
   document.getElementById('resultScreen').style.display = 'block';
 
   // 이전 상태 초기화
-  ['doneBanner','resultGrid','personaBlock','rank1Block','rankDivider','rank2Block','fallbackBanner','mentorBox','btnGoGap','rank1Reason'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-  });
+  ['doneBanner','resultGrid','personaBlock','rank1Block','rankDivider',
+   'rank2Block','fallbackBanner','mentorBox','btnGoGap','rank1Reason'
+  ].forEach(id => { document.getElementById(id).style.display = 'none'; });
   document.getElementById('resultGrid').classList.remove('has-persona');
 
-  const sorted = [...TRACK_KEYS].sort((a, b) => scores[b] - scores[a]);
-  const mode   = getResultMode(scores, avg);
+  // ── 무조건 16가지 중 하나로 스냅 ──
+  const [k1, k2] = snapToValidPersona(scores);
+  const t1 = TRACKS[k1], t2 = TRACKS[k2];
 
-  if (mode === 'normal') {
-    const k1 = sorted[0], k2 = sorted[1];
-    const t1 = TRACKS[k1], t2 = TRACKS[k2];
+  // ── 완료 배너 ──
+  document.getElementById('doneBanner').style.display = 'flex';
 
-    // ── 완료 배너 ──
-    document.getElementById('doneBanner').style.display = 'flex';
+  // ── 결과 그리드 ──
+  const grid = document.getElementById('resultGrid');
+  grid.style.display = 'grid';
 
-    // ── 결과 그리드 표시 ──
-    const grid       = document.getElementById('resultGrid');
-    grid.style.display = 'grid';
+  // ── 페르소나 블록 ──
+  const personaKey = k1 + '|' + k2;
+  const persona    = PERSONAS[personaKey];
 
-    // ── 페르소나 블록 ──
-    const personaKey = k1 + '|' + k2;
-    const persona    = PERSONAS[personaKey];
-    if (persona) {
-      grid.classList.add('has-persona');
-      document.getElementById('personaBlock').style.display = 'block';
-      document.getElementById('personaName').textContent    = persona.name;
-      document.getElementById('personaCombo').textContent   = persona.combo;
-      document.getElementById('personaTrait').textContent   = persona.trait;
-      document.getElementById('personaAi').textContent      = persona.ai;
-    }
+  grid.classList.add('has-persona');
+  document.getElementById('personaBlock').style.display = 'block';
 
-    // ── 1순위 블록 (게임 클래스 카드) ──
-    const r1Block = document.getElementById('rank1Block');
-    r1Block.style.display = 'block';
-    r1Block.style.setProperty('--tc', t1.color);
-
-    const hd = document.getElementById('rank1Hd');
-    hd.style.background = t1.bg;
-    hd.innerHTML = `
-      <div class="r1-inner">
-        <div class="r1-top">
-          <span class="r1-rank-badge">1순위 AFFINITY</span>
-          <span class="r1-archetype">${t1.archetype}</span>
+  // 일러스트 렌더링
+  const illEl = document.getElementById('personaIllust');
+  if (illEl && persona) {
+    const subs = (persona.illSubs || []).map(e =>
+      `<span class="ill-sub">${e}</span>`
+    ).join('');
+    illEl.innerHTML = `
+      <div class="ill-bg" style="background:${persona.illBg}">
+        <div class="ill-pattern"></div>
+        <div class="ill-content">
+          <span class="ill-tag">${persona.illTag || ''}</span>
+          <div class="ill-main-icon">${persona.illIcon || '🎨'}</div>
+          <div class="ill-subs">${subs}</div>
         </div>
-        <div class="r1-mid">
-          <div class="r1-icon">${t1.icon}</div>
-          <div class="r1-info">
-            <div class="r1-name">${t1.name}</div>
-            <div class="r1-affinity-row">
-              <span class="r1-affinity-label">적성도</span>
-              <div class="r1-affinity-track">
-                <div class="r1-affinity-fill" id="r1AffinityFill"></div>
-              </div>
-              <span class="r1-affinity-pct">${scores[k1]}%</span>
-            </div>
-          </div>
-          <div class="r1-score-col">
-            <span class="r1-score-num">${scores[k1]}</span>
-            <span class="r1-score-sub">/ 100</span>
-          </div>
-        </div>
-        <div class="r1-lore">${t1.lore}</div>
+        <div class="ill-glow" style="background:${persona.illBg}"></div>
       </div>`;
-
-    // 적성도 바 애니메이션
-    setTimeout(() => {
-      const fill = document.getElementById('r1AffinityFill');
-      if (fill) fill.style.width = scores[k1] + '%';
-    }, 100);
-
-    // ── AI 이유 ──
-    if (commentary) {
-      document.getElementById('rank1ReasonText').textContent = commentary;
-      document.getElementById('rank1Reason').style.display  = 'block';
-    }
-
-    // ── 직업 아이덴티티 + 작업물 쇼케이스 ──
-    document.getElementById('rank1Career').innerHTML = `
-      <div class="rank1-jobs">
-        <div class="rank1-jobs-title">이런 사람이 돼</div>
-        <div class="job-cards">
-          ${t1.jobCards.map(j => `
-            <div class="job-card">
-              <div class="job-card-icon">${j.icon}</div>
-              <div class="job-card-title">${j.title}</div>
-              <div class="job-card-desc">${j.desc}</div>
-            </div>`).join('')}
-        </div>
-      </div>
-      <div class="rank1-works">
-        ${t1.works.map(w => `
-          <div class="work-card" style="background:${w.color}">
-            <div class="work-card-inner">
-              <span class="work-card-icon">${w.icon}</span>
-              <div class="work-card-title">${w.title}</div>
-            </div>
-          </div>`).join('')}
-      </div>`;
-
-    // ── 연봉 스트립 (다크) ──
-    document.getElementById('rank1Salary').innerHTML = `
-      <span class="salary-ico">💰</span>
-      <div class="salary-info">
-        <span class="salary-lbl">초봉 가이드</span>
-        <span class="salary-val">신입 약 ${t1.salary.min.toLocaleString()}~${t1.salary.max.toLocaleString()}만원</span>
-      </div>
-      <span class="salary-note-txt">※ 고용노동부·업계 평균 기준</span>`;
-
-    // ── 구분선 ──
-    document.getElementById('rankDivider').style.display = 'flex';
-
-    // ── 2순위 블록 (게임 카드 컴팩트) ──
-    const r2 = document.getElementById('rank2Block');
-    r2.style.display = 'block';
-    r2.innerHTML = `
-      <div class="rank2-hd" style="background:${t2.bg}">
-        <div class="r2-inner">
-          <div class="r2-top-row">
-            <span class="r2-badge">2순위</span>
-            <span class="r2-archetype">${t2.archetype}</span>
-          </div>
-          <div class="r2-main-row">
-            <span class="r2-icon">${t2.icon}</span>
-            <span class="r2-name">${t2.name}</span>
-            <span class="r2-score">${scores[k2]}</span>
-          </div>
-          <div class="r2-lore">${t2.lore}</div>
-        </div>
-      </div>
-      <div class="rank2-body">
-        <div class="r2-skill-row">
-          <span class="r2-skill-label">🎯 직업</span>
-          <div class="r2-tags">${t2.jobs.map(j => `<span class="r2-tag">${j}</span>`).join('')}</div>
-        </div>
-        <div class="r2-skill-row">
-          <span class="r2-skill-label">🏛 취업처</span>
-          <div class="r2-tags">${t2.employers.map(e => `<span class="r2-tag">${e}</span>`).join('')}</div>
-        </div>
-        <div class="r2-skill-row">
-          <span class="r2-skill-label">💰 연봉</span>
-          <span class="r2-salary-val">신입 약 ${t2.salary.min.toLocaleString()}~${t2.salary.max.toLocaleString()}만원</span>
-        </div>
-      </div>`;
-
-    // ── GAP 버튼 ──
-    const gap = document.getElementById('btnGoGap');
-    gap.style.display = '';
-    gap.textContent   = `📊 [${t1.name}] GAP 분석 시작하기`;
-    topTrackKey = k1;
-
-  } else {
-    // ── 비정상 모드 ──
-    const FALLBACK = {
-      low:     { bg:'linear-gradient(135deg,#607D8B,#455A64)', icon:'🔍', name:'아직 방향 탐색 중', sub:'다양한 분야를 더 경험해보세요' },
-      allHigh: { bg:'linear-gradient(135deg,#FF8B00,#E07000)', icon:'⭐', name:'다방면 관심형',      sub:'여러 분야에 골고루 관심이 높습니다' },
-      neutral: { bg:'linear-gradient(135deg,#5E35B1,#4527A0)', icon:'🧭', name:'방향 탐색 필요',     sub:'담당 멘토와 상담을 권장드립니다' },
-    }[mode];
-    const fb = document.getElementById('fallbackBanner');
-    fb.style.display    = 'block';
-    fb.className        = 'result-banner-fallback';
-    fb.style.background = FALLBACK.bg;
-    fb.innerHTML        = `<div class="rfb-icon">${FALLBACK.icon}</div><div class="rfb-name">${FALLBACK.name}</div><div class="rfb-sub">${FALLBACK.sub}</div>`;
-
-    const MENTOR = {
-      low:     { title:'현재 두드러지는 분야가 없습니다', msg:'아직 탐색 중인 단계일 수 있습니다. 담당 선생님과 1:1 상담을 통해 방향을 함께 찾아보세요.', bg:'#ECEFF1', border:'#607D8B' },
-      allHigh: { title:'멘토와의 상담을 권장드립니다',    msg:'다양한 분야에 높은 관심을 보이고 있습니다. 담당 멘토와 1:1 상담으로 최적 과정을 함께 결정해 보세요.', bg:'#FFF8E1', border:'#FF8B00' },
-      neutral: { title:'멘토와의 상담을 권장드립니다',    msg:'뚜렷한 선호가 아직 나타나지 않았습니다. 담당 선생님과의 상담을 통해 구체적인 방향을 잡아보시길 권장드립니다.', bg:'#E3F2FD', border:'#1565C0' },
-    }[mode];
-    const mb = document.getElementById('mentorBox');
-    mb.style.background  = MENTOR.bg;
-    mb.style.borderColor = MENTOR.border;
-    mb.style.display     = 'block';
-    document.getElementById('mentorTitle').textContent = MENTOR.title;
-    mb.querySelector('.mentor-msg').textContent = MENTOR.msg;
   }
+
+  if (persona) {
+    document.getElementById('personaName').textContent  = persona.name;
+    document.getElementById('personaCombo').textContent = persona.combo;
+    document.getElementById('personaTrait').textContent = persona.trait;
+    document.getElementById('personaAi').textContent    = persona.ai;
+  }
+
+  // ── 1순위 블록 ──
+  const r1Block = document.getElementById('rank1Block');
+  r1Block.style.display = 'block';
+  r1Block.style.setProperty('--tc', t1.color);
+
+  const hd = document.getElementById('rank1Hd');
+  hd.style.background = t1.bg;
+  hd.innerHTML = `
+    <div class="r1-inner">
+      <div class="r1-top">
+        <span class="r1-rank-badge">1순위 AFFINITY</span>
+        <span class="r1-archetype">${t1.archetype}</span>
+      </div>
+      <div class="r1-mid">
+        <div class="r1-icon">${t1.icon}</div>
+        <div class="r1-info">
+          <div class="r1-name">${t1.name}</div>
+          <div class="r1-affinity-row">
+            <span class="r1-affinity-label">적성도</span>
+            <div class="r1-affinity-track">
+              <div class="r1-affinity-fill" id="r1AffinityFill"></div>
+            </div>
+            <span class="r1-affinity-pct">${scores[k1]}%</span>
+          </div>
+        </div>
+        <div class="r1-score-col">
+          <span class="r1-score-num" id="r1ScoreNum">0</span>
+          <span class="r1-score-sub">/ 100</span>
+        </div>
+      </div>
+      <div class="r1-lore">${t1.lore}</div>
+    </div>`;
+
+  // ── AI 이유 ──
+  if (commentary) {
+    document.getElementById('rank1ReasonText').textContent = commentary;
+    document.getElementById('rank1Reason').style.display  = 'block';
+  }
+
+  // ── 직업 카드 + 작업물 ──
+  document.getElementById('rank1Career').innerHTML = `
+    <div class="rank1-jobs">
+      <div class="rank1-jobs-title">이런 사람이 돼</div>
+      <div class="job-cards">
+        ${t1.jobCards.map(j => `
+          <div class="job-card">
+            <div class="job-card-icon">${j.icon}</div>
+            <div class="job-card-title">${j.title}</div>
+            <div class="job-card-desc">${j.desc}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="rank1-works">
+      ${t1.works.map(w => `
+        <div class="work-card" style="background:${w.color}">
+          <div class="work-card-inner">
+            <span class="work-card-icon">${w.icon}</span>
+            <div class="work-card-title">${w.title}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+
+  // ── 연봉 스트립 ──
+  document.getElementById('rank1Salary').innerHTML = `
+    <span class="salary-ico">💰</span>
+    <div class="salary-info">
+      <span class="salary-lbl">초봉 가이드</span>
+      <span class="salary-val">신입 약 ${t1.salary.min.toLocaleString()}~${t1.salary.max.toLocaleString()}만원</span>
+    </div>
+    <span class="salary-note-txt">※ 고용노동부·업계 평균 기준</span>`;
+
+  // ── 구분선 ──
+  document.getElementById('rankDivider').style.display = 'flex';
+
+  // ── 2순위 블록 ──
+  const r2 = document.getElementById('rank2Block');
+  r2.style.display = 'block';
+  r2.innerHTML = `
+    <div class="rank2-hd" style="background:${t2.bg}">
+      <div class="r2-inner">
+        <div class="r2-top-row">
+          <span class="r2-badge">2순위</span>
+          <span class="r2-archetype">${t2.archetype}</span>
+        </div>
+        <div class="r2-main-row">
+          <span class="r2-icon">${t2.icon}</span>
+          <span class="r2-name">${t2.name}</span>
+          <span class="r2-score">${scores[k2]}</span>
+        </div>
+        <div class="r2-lore">${t2.lore}</div>
+      </div>
+    </div>
+    <div class="rank2-body">
+      <div class="r2-skill-row">
+        <span class="r2-skill-label">🎯 직업</span>
+        <div class="r2-tags">${t2.jobs.map(j => `<span class="r2-tag">${j}</span>`).join('')}</div>
+      </div>
+      <div class="r2-skill-row">
+        <span class="r2-skill-label">🏛 취업처</span>
+        <div class="r2-tags">${t2.employers.map(e => `<span class="r2-tag">${e}</span>`).join('')}</div>
+      </div>
+      <div class="r2-skill-row">
+        <span class="r2-skill-label">💰 연봉</span>
+        <span class="r2-salary-val">신입 약 ${t2.salary.min.toLocaleString()}~${t2.salary.max.toLocaleString()}만원</span>
+      </div>
+    </div>`;
+
+  // ── GAP 버튼 ──
+  const gap = document.getElementById('btnGoGap');
+  gap.style.display = '';
+  gap.textContent   = `📊 [${t1.name}] GAP 분석 시작하기`;
+  topTrackKey = k1;
+
+  // ── 애니메이션 시퀀스 시작 ──
+  _runResultAnimation(scores[k1], scores[k2]);
+}
+
+// ═══════════════════════════════════════════════════════
+//  ANIMATION SYSTEM — 순차적 리포트 생성 효과
+// ═══════════════════════════════════════════════════════
+function _runResultAnimation(score1, score2) {
+  // 모든 요소 초기화 (숨김 상태)
+  const animEls = document.querySelectorAll(
+    '.result-done-banner, .persona-block, .rank1-block, .rank-divider, .rank2-block, .action-row'
+  );
+  animEls.forEach(el => {
+    el.classList.remove('apt-reveal');
+    el.classList.add('apt-hidden');
+  });
+
+  // 개별 하위 요소도 초기화
+  document.querySelectorAll('.job-card, .work-card').forEach(el => {
+    el.classList.remove('apt-reveal');
+    el.classList.add('apt-hidden');
+  });
+
+  const seq = [
+    // [지연ms, 선택자, 전체 여부]
+    [0,    '.result-done-banner', false],
+    [180,  '.persona-block',      false],
+    [360,  '.rank1-block',        false],
+  ];
+
+  seq.forEach(([delay, sel, _]) => {
+    setTimeout(() => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.classList.remove('apt-hidden');
+        el.classList.add('apt-reveal');
+      });
+    }, delay);
+  });
+
+  // 점수 카운트업 애니메이션
+  setTimeout(() => {
+    _countUp('r1ScoreNum', score1, 900);
+  }, 500);
+
+  // 적성도 바 애니메이션
+  setTimeout(() => {
+    const fill = document.getElementById('r1AffinityFill');
+    if (fill) fill.style.width = score1 + '%';
+  }, 550);
+
+  // 직업 카드 순차 등장
+  setTimeout(() => {
+    const cards = document.querySelectorAll('.job-card');
+    cards.forEach((card, i) => {
+      setTimeout(() => {
+        card.classList.remove('apt-hidden');
+        card.classList.add('apt-reveal');
+      }, i * 100);
+    });
+  }, 750);
+
+  // 작업물 카드 순차 등장
+  setTimeout(() => {
+    const works = document.querySelectorAll('.work-card');
+    works.forEach((card, i) => {
+      setTimeout(() => {
+        card.classList.remove('apt-hidden');
+        card.classList.add('apt-reveal');
+      }, i * 80);
+    });
+  }, 950);
+
+  // 구분선 + 2순위 블록
+  setTimeout(() => {
+    document.querySelectorAll('.rank-divider, .rank2-block').forEach(el => {
+      el.classList.remove('apt-hidden');
+      el.classList.add('apt-reveal');
+    });
+  }, 1150);
+
+  // 액션 버튼
+  setTimeout(() => {
+    document.querySelectorAll('.action-row').forEach(el => {
+      el.classList.remove('apt-hidden');
+      el.classList.add('apt-reveal');
+    });
+  }, 1400);
+}
+
+// 숫자 카운트업 유틸
+function _countUp(elId, target, duration) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const start    = Date.now();
+  const from     = 0;
+  const easeOut  = t => 1 - Math.pow(1 - t, 3);
+
+  (function tick() {
+    const elapsed = Date.now() - start;
+    const progress = Math.min(elapsed / duration, 1);
+    el.textContent = Math.round(from + (target - from) * easeOut(progress));
+    if (progress < 1) requestAnimationFrame(tick);
+  })();
 }
 
 // ═══════════════════════════════════════════════════════
